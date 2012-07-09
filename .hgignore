@@ -1,0 +1,5 @@
+syntax: glob
+*~
+*.py[co]
+maint
+comedyhub/settings/local.py
