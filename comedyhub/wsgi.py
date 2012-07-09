@@ -5,6 +5,7 @@ import subprocess
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_PATH = os.path.dirname(PROJECT_PATH)
+VIRTUAL_ENV = os.environ['VIRTUAL_ENV']
 
 # Add the virtualenv packages to the site directory. This uses the technique
 # described at http://code.google.com/p/modwsgi/wiki/VirtualEnvironments
@@ -14,7 +15,7 @@ prev_sys_path = list(sys.path)
 
 # Get the path to the env's site-packages directory
 site_packages = subprocess.check_output([
-                    os.path.join(REPO_PATH, 'env/bin/python'),
+                    os.path.join(VIRTUAL_ENV, 'bin/python'),
                     '-c',
                     'from distutils.sysconfig import get_python_lib;'
                     'print get_python_lib(),'
@@ -39,6 +40,3 @@ sys.path.append(os.path.join(PROJECT_PATH, 'apps'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'comedyhub.settings.development'
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
-
-
-
