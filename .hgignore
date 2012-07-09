@@ -2,4 +2,6 @@ syntax: glob
 *~
 *.py[co]
 maint
+conf
 comedyhub/settings/local.py
+
