@@ -3,7 +3,7 @@ from django.db import models
 
 class Collection(models.Model):
     ROLE_CHOICES = (
-        '0', 'performer',
+        '0', 'comedian',
         '1', 'show',
         '2', 'movie',
     )
