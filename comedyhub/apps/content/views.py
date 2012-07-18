@@ -8,13 +8,13 @@ class HomeView(TemplateView):
 class AboutView(TemplateView):
     template_name = 'content/about.html'
 
-class ComedianView(ListView):
+class ComediansView(ListView):
     context_object_list = 'collection_list'
     queryset = Collection.objects.filter(role=0)
     template_name = 'content/collection_list.html'
 
-class ShowView(ComedianView):
+class ShowsView(ComediansView):
     queryset = Collection.objects.filter(role=1)
 
-class MovieView(ComedianView):
+class MoviesView(ComediansView):
     queryset = Collection.objects.filter(role=2)
