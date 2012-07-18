@@ -8,6 +8,7 @@ class Collection(models.Model):
         '2', 'movie',
     )
     name = models.CharField(max_length=255)
+    picture = models.ImageField()
     description = models.TextField()
     connections = models.ManyToManyField('self', related_name='siblings')
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
