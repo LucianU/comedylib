@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 class Collection(models.Model):
@@ -17,5 +16,3 @@ class Video(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField()
     collection = models.ForeignKey(Collection, related_name='videos')
-    fans = models.ManyToManyField(User, related_name='likes')
-    admirers = models.ManyToManyField(User, related_name='favorites')
