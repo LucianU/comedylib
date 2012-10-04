@@ -5,10 +5,10 @@ from content.models import Video
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    likes = models.ManyToManyField(Video, related_name='profiles')
-    playlists = models.ManyToManyField(Video, related_name='profiles',
-                                   through='Playlist')
-    photo = models.ImageField()
+    likes = models.ManyToManyField(Video, related_name='fans', null=True)
+    playlists = models.ManyToManyField(Video, related_name='list_makers',
+                                       through='Playlist', null=True)
+    picture = models.ImageField(upload_to='profiles')
     description = models.TextField()
 
 class Playlist(models.Model):
