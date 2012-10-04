@@ -121,8 +121,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'easy_thumbnails',
     'south',
+
+    'content',
+    'profiles',
 )
 
 AUTHENTICATION_BACKENDS = (
