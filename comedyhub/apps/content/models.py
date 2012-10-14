@@ -1,6 +1,7 @@
 from django.db import models
 
-class Collection(models.Model):
+from comedyhub.mixins import CreatedMixin
+class Collection(CreatedMixin):
     ROLE_CHOICES = (
         (0, u'comedian'),
         (1, u'show'),
@@ -16,7 +17,7 @@ class Collection(models.Model):
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
 
-class Video(models.Model):
+class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
     collection = models.ForeignKey(Collection, related_name='videos')
