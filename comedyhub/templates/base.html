@@ -1,27 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Language" content="en-us" />
-    <title>{% block title %}{% endblock %}</title>
-    <meta name="ROBOTS" content="ALL" />
-    <meta http-equiv="imagetoolbar" content="no" />
-    <meta name="MSSmartTagsPreventParsing" content="true" />
-    <meta name="Copyright" content="comedyhub.com" />
-    <meta name="keywords" content="Comedians, series, movies" />
-    <meta name="description" content="This is a database with most of the comedians on the planet" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/static/css/main.css" />
-  
-  </head>
- <body>
-<div id="wrapper">
-<div id="header">
-</div>
-<div id="container">
-    {% block content %}
-    {% endblock %}
-</div>
-</div>
-</body>
-</html>
+{% include "header.html" %}
+<div class="cleared reset-box"></div>
+<div id="overcontent" >
+
+<div id="content">
+{% block content %}
+{% endblock %}
+</div> <!--end content-->
+</div> <!--end overcontent-->
+{% include "footer.html" %}
