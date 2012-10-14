@@ -10,7 +10,7 @@ class Collection(models.Model):
     picture = models.ImageField(upload_to='collections')
     description = models.TextField()
     connections = models.ManyToManyField('self', related_name='connections',
-                                         null=True)
+                                         blank=True)
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
 
 class Video(models.Model):
