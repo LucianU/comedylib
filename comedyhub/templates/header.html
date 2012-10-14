@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="ROBOTS" content="ALL" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="Copyright" content="comedyhub.com" />
+    <meta name="keywords" content="Comedians, series, movies" />
+    <meta name="description" content="This is a database with most of the comedians on the planet" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+  
+  </head>
+<body>
+<div id="main">
+  <div class="cleared reset-box"></div>
+    <div class="header">
+	<div class="header-position">
+	
+	 <div class="cleared reset-box"></div>
+                <div class="header-inner">
+				
+	<div id="title"> <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
+		</div>
+		<div id="search">
+		{% include "search.html" %}
+		</div>
+		<div id="register">	
+		<a href="/login">Login</a>
+          </div> <!--end register-->
+    <div id="menu">	
+		<div id="nav">
+    <ul class="nav">
+        <li><a href="/comedians">Comedians</a></li>
+        <li><a href="/shows">Shows</a></li>
+        <li><a href="/movies">Movies</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+	</div> <!--end nav-->
+	  <div class="cleared reset-box"></div>
+	</div> <!--end menu-->
+	{% block alphabetnav %}{% endblock %}
+	</div> <!--end header-inner-->
+	</div><!--end header-position-->
+	</div><!--end header-->
+	<div class="cleared reset-box"></div>
