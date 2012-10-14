@@ -11,7 +11,14 @@ class Profile(models.Model):
     picture = models.ImageField(upload_to='profiles')
     description = models.TextField()
 
+    def __unicode__(self):
+        return u"%s: %s playlists" % (self.user.username,
+                                      self.playlists.all().count())
+
 class Playlist(models.Model):
     profile = models.ForeignKey(Profile)
     video = models.ForeignKey(Video)
     title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return u"%s: %s videos" % (self.title, self.profile.username)
