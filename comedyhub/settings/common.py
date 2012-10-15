@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'easy_thumbnails',
+    'registration',
     'social_auth',
     'south',
 
@@ -137,9 +138,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# Used by social_auth
 LOGIN_REDIRECT_URL = '/'
 GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
+
+# Used by registration
+ACCOUNT_ACTIVATION_DAYS = 3
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
