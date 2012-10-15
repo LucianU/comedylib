@@ -1,6 +1,7 @@
 from django.db import models
 
 from comedyhub.mixins import CreatedMixin
+
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
         (0, u'comedian'),
@@ -20,6 +21,8 @@ class Collection(CreatedMixin):
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
+    duration = models.IntegerField(help_text="Expressed in seconds")
+    views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
 
     def __unicode__(self):
