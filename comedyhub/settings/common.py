@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'easy_thumbnails',
+    'social_auth',
     'south',
 
     'content',
@@ -131,8 +132,14 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.facebook.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGIN_REDIRECT_URL = '/'
+GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
