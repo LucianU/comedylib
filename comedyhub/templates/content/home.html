@@ -1,28 +1,329 @@
 {% extends "base.html" %}
 {% block title %} Home {% endblock %}
 {% block content %}
-<div id="firstpage">
-     <!-- #Left Column -->
-	 <div id="left-column">
-<div class="sidebar2">
-<p>Welcome! We're building things right now, so that you have a place where you find comedy that you enjoy. Stay tuned!</p>
-</div> 
+<!-- #playlists -->
+<div id="playlistcontent">
+	<div class="featured">
+		<!--<div class="title">
+		<p>Featured</p>
+		</div> -->
+		<div class="comedian">
+			<div class="ribbon"></div>
+			<div class="title">
+			<a href="/">Discover more...</a>
+			</div>
+			<div class="content">
+			<img src="{{ STATIC_URL }}img/featured/featuredcomedian.jpg" alt=""  >
+			</div>
+		</div>
+		<div class="show">
+		<div class="ribbon"></div>
+		<div class="title">
+		<a href="/">Discover more...</a>
+			</div>
+			<div class="content">
+			<img src="{{ STATIC_URL }}img/featured/featuredshow.jpg" alt=""  >
+			</div>
+		</div>
+		<div class="movie">
+		<div class="ribbon"></div>
+		<div class="title">
+		<a href="/">Discover more...</a>
+			</div>
+			<div class="content">
+			<img src="{{ STATIC_URL }}img/featured/featuredmovie.jpg" alt=""  >
+			</div>
+		</div>
 	</div>
-
-	<!-- #Center Column -->
-	<div id="center-column">
-<div class="sidebar3">
-
-</div>  
+	<div class="playlistfeature">
+	{% include "playslider.html" %}
 	</div>
-
-	<!-- #Right Column -->
-	<div id="right-column">
-<div class="sidebar4">
-
-</div> 
+	<div class="playlistuser">
+		<div class="title">
+		<p>User playlists</p>
+		</div>
+		<div class="moreplay">
+		<a href="/">See more...</a>
+		</div>
+		<div class="scrollcontent">
+			<ul class="playlist">  
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image1-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs dasda aslkdjal ksajdl alksjda laksjd laksjd fsdf sdf sdfs fsd fsdf sdf sdf sdf sdf sdf sdfl</a></div>
+						<div class="user"><a href="/">another.partisan </a></div>
+						<p class="nvideo">8 videos</p>
+					</div>
+				</li>
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image2-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs </a></div>
+						<div class="user"><a href="/">stef </a></div>
+						<p class="nvideo">120 videos</p>
+					</div>
+				</li> 
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image3-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs sdf sdfl</a></div>
+						<div class="user"><a href="/">luci </a></div>
+						<p class="nvideo">12 videos</p>
+					</div>
+				</li> 
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image4-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs dasda aslkdjal kssdf sdf sdf sdfl</a></div>
+						<div class="user"><a href="/">ap </a></div>
+						<p class="nvideo">2 videos</p>
+					</div>
+				</li> 
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image3-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs </a></div>
+						<div class="user"><a href="/">lucas </a></div>
+						<p class="nvideo">5 videos</p>
+					</div>
+				</li> 
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image2-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs dasda asl</a></div>
+						<div class="user"><a href="/">another.partisan </a></div>
+						<p class="nvideo">12 videos</p>
+					</div>
+				</li> 				
+				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image1-small.jpg" alt="" /></a>
+					<div class="itemcontent">
+						<div class="playtitle">
+						<a href="/playlist">15+ Excellent High Speed Photographs dasda asl</a></div>
+						<div class="user"><a href="/">lucas </a></div>
+						<p class="nvideo">12 videos</p>
+					</div>
+				</li> 			
+			</ul>  
+		</div>
 	</div>
-    
+	<div class="newestvideos">
+			<div class="vids">
+				<div class="titlelatestvid">
+					<p>Latest Videos</p>
+				</div>	
+				<div class="morelatestvid">
+					<a href="/">See more videos</a>
+				</div>		
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								4 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+							
+							<div id="v1" class="divvid">
+							<div id="thumbvid">
+							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
+							</div>
+							<div class="titlevid">
+							<a href="/">titlu 1</a>
+							</div>
+							<div id="lengthtime">
+								3 days ago 
+							</div>
+							<div id="nviews">
+								100000000 views
+							</div>
+							</div>
+				
+				
+				
+				</div> <!-- End of Tab Divs -->
+			<div class="ratedsocial">
+				<div class="rated">
+					<div class="title">
+					<p>Top Rated</p>
+					</div>	
+				</div>	
+				<div class="social">
+					<img src="{{ STATIC_URL }}img/fbsocial.jpg" alt=""  >
+				</div>	
+			</div>	
+	</div>
 </div>
+
+<div class="cleared"></div>
+
+    <script type="text/javascript">
+function tab(tab) {
+document.getElementById('tab1').style.display = 'none';
+document.getElementById('tab2').style.display = 'none';
+document.getElementById('tab3').style.display = 'none';
+document.getElementById('li_tab1').setAttribute("class", "");
+document.getElementById('li_tab2').setAttribute("class", "");
+document.getElementById('li_tab3').setAttribute("class", "");
+document.getElementById(tab).style.display = 'block';
+document.getElementById('li_'+tab).setAttribute("class", "active");
+}
+</script>
+   
 
 {% endblock %}

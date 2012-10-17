@@ -1,0 +1,281 @@
+navlogin ul {
+  z-index:9999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: right;
+  background: #eee;
+  border-bottom: 1px solid #fff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;    
+}
+
+navlogin li {
+  float: left;          
+}
+
+navlogin #login {
+  border-right: 1px solid #ddd;
+  -moz-box-shadow: 1px 0 0 #fff;
+  -webkit-box-shadow: 1px 0 0 #fff;
+  box-shadow: 1px 0 0 #fff;  
+  color:#333;
+}
+
+navlogin #login-trigger,
+navlogin #signup a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  padding: 0 8px;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 #fff; 
+}
+
+navlogin #signup a {
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+
+navlogin #login-trigger {
+  -moz-border-radius: 3px 0 0 3px;
+  -webkit-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+navlogin #login-trigger:hover,
+navlogin #login .active,
+navlogin #signup a:hover {
+  background: #fff;
+}
+
+navlogin #login-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 9999;    
+  background: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+  background-image: -webkit-linear-gradient(top, #fff, #eee);
+  background-image: -moz-linear-gradient(top, #fff, #eee);
+  background-image: -ms-linear-gradient(top, #fff, #eee);
+  background-image: -o-linear-gradient(top, #fff, #eee);
+  background-image: linear-gradient(top, #fff, #eee);  
+  padding: 15px;
+  -moz-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  -webkit-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  -moz-border-radius: 3px 0 3px 3px;
+  -webkit-border-radius: 3px 0 3px 3px;
+  border-radius: 3px 0 3px 3px;
+}
+
+navlogin li #login-content {
+  right: 0;
+  width: 260px; 
+ z-index: 9999;
+ 
+}
+
+/*--------------------*/
+
+#inputs input {
+  background: #f1f1f1;
+  padding: 6px 5px;
+  margin: 0 0 5px 0;
+  width: 238px;
+  border: 1px solid #ccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 1px 1px #ccc inset;
+  -webkit-box-shadow: 0 1px 1px #ccc inset;
+  box-shadow: 0 1px 1px #ccc inset;
+}
+
+#inputs input:focus {
+  background-color: #fff;
+  border-color: #e8c291;
+  outline: none;
+  -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+  -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+  box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+/*--------------------*/
+
+#login #actions {
+  margin: 10px 0 0 0;
+}
+
+#login #submit {		
+-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffbe73), color-stop(1, #ff8800) );
+	background:-moz-linear-gradient( center top, #ffbe73 5%, #ff8800 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbe73', endColorstr='#ff8800');
+	background-color:#ffbe73;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #bf7c30;
+	display:inline-block;
+	color:#eee;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+	
+}
+
+#login #submit:hover,
+#login #submit:focus {		
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff8800), color-stop(1, #ffbe73) );
+	background:-moz-linear-gradient( center top, #ff8800 5%, #ffbe73 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8800', endColorstr='#ffbe73');
+	background-color:#ff8800;
+}	
+
+#login #submit:active {		
+position:relative;
+	top:1px;		
+}
+
+#login #submit::-moz-focus-inner {
+  border: none;
+}
+
+#login label {
+  float: right;
+  line-height: 30px;
+
+}
+
+#login label input {
+  position: relative;
+  top: 2px;
+  right: 2px;
+}
+#login-content .center {
+text-align: center;
+padding:10px;
+}
+#login-content .center .socialsign {
+/*border:1px solid #ccc;*/
+width:100%;
+padding:3px;
+align:left;
+}
+#login-content .lthru {
+text-decoration: line-through;
+color: #ccc;
+}
+#login-content .or {
+font-size: 93%;
+font-weight: bold;
+}
+
+/*--------------------------Login TAB------------*/
+navlogin #login #login-content #loginregistermenu ul {
+list-style: none;
+    padding: 0px 0 0px 0;
+    margin: -5px 0px 0 -5px;
+    font: bold 14px  Arial, Helvetica, sans-serif;
+	float:left;
+}
+
+navlogin #login #login-content #loginregistermenu ul li {
+ display: table;
+ float:left;
+ 
+}
+
+navlogin #login #login-content #loginregistermenu ul li a {
+ text-transform: uppercase;
+display: table-cell;
+color:#650337;
+ border: 1px solid #ccc;
+    padding: 5px 5px;
+	text-align:center;
+    text-decoration: none;
+    background-color: #eeeeee;
+  border-bottom: none;
+    outline: none;
+    border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+
+
+
+}
+
+navlogin #login #login-content #loginregistermenu ul li a:hover {
+ background-color: #dddddd;
+    padding: 5px 5px;
+	color: #000;
+
+
+}
+navlogin #login #login-content #loginregistermenu ul li.active a {
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    padding: 5px 5px 5px 5px;
+    border-bottom: none;
+	color: #000;
+
+
+	
+}
+navlogin #login #login-content #loginregistermenu ul li.active a:hover {
+    background-color: #eeeeee;
+    padding: 5px 5px 5px 5px;
+    border-bottom: none;
+	background: #fff; /* Old browsers */
+
+
+}
+
+navlogin #login #login-content #loginregistermenu #Content_Area_loginregister { /*// this is the css class for the content displayed in each tab*/
+border: 1px solid #ccc;
+ /* border-top: none;*/
+   	margin-left:-5px;
+	margin-top:-1px;
+	width: 270px;
+	height:270px;
+	display:block;
+	float:left;
+background: /*#e893c0; /* Old browsers */
+
+}
+
+navlogin #login #login-content #loginregistermenu p { 
+font: 12px Arial, Helvetica, sans-serif;
+padding: 5px; 
+padding-top:10px;
+color:#099502;
+}
+navlogin #login #login-content #loginregistermenu #Content_Area_loginregister #tab7{
+padding:5px;
+
+}
+navlogin #login #login-content #loginregistermenu #Content_Area_loginregister #tab8{
+padding:5px;
+}
+navlogin #login #login-content #loginregistermenu #Content_Area_loginregister h2{ /*// this is the css class for the content displayed in each tab*/
+padding:5px 5px 10px 5px;
+color: #333;
+}
+
+
+/*88888888888888888888888888888888888888888888888888888888888888888888888*/

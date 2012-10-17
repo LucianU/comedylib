@@ -1,0 +1,99 @@
+<navlogin>
+	<ul>
+		<li id="login">
+			<a id="login-trigger" href="#">
+				Log in | Register <span>?</span>
+			</a>
+			<div id="login-content">
+				<div id="loginregistermenu">
+					<ul>
+						<li id="li_tab7" class="active" onclick="tab2('tab7')" ><a>Login</a></li>
+						<li id="li_tab8" onclick="tab2('tab8')"><a>Register</a></li>
+					</ul>
+					<div id="Content_Area_loginregister">
+							<div id="tab7">
+								<h2>Sign In</h2>
+									<form>
+										<fieldset id="inputs">
+											<input id="username" type="email" name="Email" placeholder="Your email address" required>   
+											<input id="password" type="password" name="Password" placeholder="Password" required>
+										</fieldset>
+										<fieldset id="actions">
+											<input type="submit" id="submit" value="Log in">
+											<label><input type="checkbox" checked="checked"> Keep me signed in</label>
+										</fieldset>
+									</form>
+								<div class="cleared"></div>
+								<div class="center">
+									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span class="or">&nbsp; OR &nbsp;</span>
+									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<div class="cleared"></div>
+									<a href="#" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
+									<a href="#" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
+								</div>
+							</div>
+
+							<div id="tab8" style="display: none;"> 
+								<h2>Register</h2>
+									<form>
+										<fieldset id="inputs">
+											<input id="name" type="text" name="Name" placeholder="Your Name" required>  
+											<input id="username" type="email" name="Email" placeholder="Your email address" required>   
+											<input id="password" type="password" name="Password" placeholder="Password" required>
+											<input id="passwordrepeat" type="password" name="PasswordRepeat" placeholder="Repeat Password" required>
+										</fieldset>
+										<div class="center">
+											<fieldset id="actions">
+												<input type="submit" id="submit" value="Register">
+											</fieldset>
+										</div>
+										
+									</form>
+								<div class="cleared"></div>
+								</div>
+								
+					</div> <!-- End of Content_Area Div -->
+				</div> <!-- End of Tab Divs -->
+			</div>                     
+		</li>
+		<li id="signup">
+			<p></p>
+			</li>
+	</ul>
+</navlogin>
+<script>
+var mouse_is_inside = false;
+$(document).ready(function(){
+	$('#login-trigger').click(function(){
+		var loginBox = $("#login-content");
+        if (loginBox.is(":visible"))
+            loginBox.fadeOut("fast");
+        else
+            loginBox.fadeIn("fast");
+        return false;	
+		})
+	   $("#login-content").hover(function(){ 
+        mouse_is_inside=true; 
+    }, function(){ 
+        mouse_is_inside=false; 
+    });	
+	 $("body").click(function(){
+        if(! mouse_is_inside) $("#login-content").fadeOut("fast");
+    });	
+});
+</script>
+<script type="text/javascript">
+function tab2(tab) {
+document.getElementById('tab7').style.display = 'none';
+document.getElementById('tab8').style.display = 'none';
+document.getElementById('li_tab7').setAttribute("class", "");
+document.getElementById('li_tab8').setAttribute("class", "");
+document.getElementById(tab).style.display = 'block';
+document.getElementById('li_'+tab).setAttribute("class", "active");
+}
+</script>
+
+     
+      
+
