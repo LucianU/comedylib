@@ -9,4 +9,4 @@ urlpatterns = patterns('',
     url(r'^a/', include('captcha.backends.default.urls')),
     url(r'^a/', include('registration.backends.default.urls')),
     url(r'^u/', include('social_auth.urls')),
-)
+	)
