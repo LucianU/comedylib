@@ -49,12 +49,12 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(os.path.dirname(SITE_ROOT), 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'easy_thumbnails',
+    'registration',
+    'social_auth',
     'south',
 
     'content',
@@ -131,8 +133,18 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.facebook.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# Used by social_auth
+LOGIN_REDIRECT_URL = '/'
+GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
+
+# Used by registration
+ACCOUNT_ACTIVATION_DAYS = 3
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

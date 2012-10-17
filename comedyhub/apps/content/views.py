@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from content.models import Collection
 
@@ -18,3 +18,7 @@ class ShowsView(ComediansView):
 
 class MoviesView(ComediansView):
     queryset = Collection.objects.filter(role=2)
+
+class CollectionView(DetailView):
+    context_object_name = 'collection'
+    model = Collection
