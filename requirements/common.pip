@@ -3,6 +3,7 @@ psycopg2==2.4.5
 pillow==1.7.7
 
 # Django apps
+django-recaptcha==0.0.4
 django-registration==0.8
 django-social-auth==0.7.6
 easy_thumbnails==1.0.3
