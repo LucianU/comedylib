@@ -35,27 +35,30 @@
 	</div>
 {% endblock %}
 <div id="firstpage">
+<p>{{ page_title }}</p>
      <!-- #Left Column albums -->
 	 <div id="album-column">
-<div class="albumside">
-<h1>{{ page_title }}</h1>
-{% for collection in collection_list %}
-  <a href="{{ collection.get_absolute_url }}">
-    <img src="{{ collection.picture.url }}" />
-  </a>
-  <a href="{{ collection.get_absolute_url }}">
-    <h3>{{ collection.name }}</h3>
-  </a>
-{% endfor %}
-</div> 
+	 {% for collection in collection_list %}
+	<div class="collection-content">
+		<div class="coll-pic-content">
+			<a href="{{ collection.get_absolute_url }}">
+				<img src="{{ collection.picture.url }}"></a>
+		</div>
+		<div class="coll-name-content">
+			 <a href="{{ collection.get_absolute_url }}">
+					{{ collection.name }}</a>
+			<p>3 videos</p>		
+		</div>
 	</div>
+	{% endfor %}
+</div> 
 
 		<!-- #Right Column -->
-	<div id="sidebar-column">
+	<!--	<div id="sidebar-column">
 <div class="sidebar">
 
 </div> 
-	</div>
+	</div> -->
     
 </div>
 {% endblock %}
