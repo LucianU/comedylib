@@ -18,6 +18,10 @@ class Collection(CreatedMixin):
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('content:%s' % self.get_role_display(), [self.id])
+
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
