@@ -19,6 +19,6 @@ class ShowsView(ComediansView):
 class MoviesView(ComediansView):
     queryset = Collection.objects.filter(role=2)
 
-class CollectionView(DetailView):
+class CollectionDetailView(DetailView):
     context_object_name = 'collection'
     model = Collection
