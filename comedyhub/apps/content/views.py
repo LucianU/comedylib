@@ -8,16 +8,12 @@ class HomeView(TemplateView):
 class AboutView(TemplateView):
     template_name = 'content/about.html'
 
-class ComediansView(ListView):
+class CollectionListView(ListView):
     context_object_list = 'collection_list'
-    queryset = Collection.objects.filter(role=0)
     template_name = 'content/collection_list.html'
 
-class ShowsView(ComediansView):
-    queryset = Collection.objects.filter(role=1)
-
-class MoviesView(ComediansView):
-    queryset = Collection.objects.filter(role=2)
+    def get_queryset(self):
+        return Collection.objects.filter(**self.kwargs)
 
 class CollectionDetailView(DetailView):
     context_object_name = 'collection'
