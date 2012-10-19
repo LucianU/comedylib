@@ -45,9 +45,10 @@
 				<img src="{{ collection.picture.url }}"></a>
 		</div>
 		<div class="coll-name-content">
-			 <a href="{{ collection.get_absolute_url }}">
-					{{ collection.name }}</a>
-			<p>3 videos</p>		
+            <a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a>
+            {% with videos=collection.videos.count %}
+                <p>{{ videos }} video{{ videos|pluralize }}</p>
+            {% endwith %}
 		</div>
 	</div>
 	{% endfor %}
