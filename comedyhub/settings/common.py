@@ -147,6 +147,9 @@ GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
 # Used by registration
 ACCOUNT_ACTIVATION_DAYS = 3
 
+RECAPTCHA_PUBLIC_KEY = '6Lf-99cSAAAAAHLcXUNp14Jxhqg1AbaGvOas_uVt'
+RECAPTCHA_PRIVATE_KEY = '6Lf-99cSAAAAAHLcXUNp14Jxhqg1AbaGvOas_uVt'
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
