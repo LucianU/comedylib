@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from comedyhub.mixins import CreatedMixin
 
@@ -14,13 +15,19 @@ class Collection(CreatedMixin):
     connections = models.ManyToManyField('self', related_name='connections',
                                          blank=True)
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
+    slug = models.SlugField(max_length=100)
 
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
 
     @models.permalink
     def get_absolute_url(self):
-        return ('content:%s' % self.get_role_display(), [self.id])
+        return ('content:%s' % self.get_role_display(), (self.slug, self.id))
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+            super(Collection, self).save(*args, **kwargs)
 
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
