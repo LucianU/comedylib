@@ -6,8 +6,10 @@ pillow==1.7.7
 django-recaptcha==0.0.4
 django-registration==0.8
 django-social-auth==0.7.6
+django-pagination==1.0.7
 easy_thumbnails==1.0.3
 south==0.7.5
+
 
 # Infrastructure
 #supervisor==3.0a12
