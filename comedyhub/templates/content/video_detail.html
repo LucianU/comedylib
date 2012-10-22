@@ -4,17 +4,34 @@
 
 {% block content %}
 <div id="video_detail">
-	<div class="info">
-		<div class="image">
-		
+	<div class="video">
+		<div class="topvideo">
+			<div class="previous"><a href="#">Previous</a></div>
+			<div class="title"><h1>{{ video.title }}</h1></div>
+			<div class="next"><a href="#">Next</a></div>
 		</div>
-		<div class="basic">
-		
+		<div class="mediaplayer">
+			<div id='mediaplayer'></div>
+				<script type="text/javascript">
+				  jwplayer('mediaplayer').setup({
+					'flashplayer': '{{ STATIC_URL }}mediaplayer/player.swf',
+					'id': 'playerID',
+					'width': '750',
+					'height': '422',
+					'file': '{{ video.url }}'
+				  });
+				</script>
 		</div>
-	</div> <!-- end info-->
-<div class="videos">
-</div><!-- end videos-->
-</div> <!-- end collection detail-->
-<h1>{{ video.title }}</h1>
+	</div> <!-- end video-->
+	<div class="affiliate">
+		affiliate
+	</div><!-- end affiliate -->
+	<div class="social">
+		social
+	</div><!-- end social -->
+</div> <!-- end video detail-->
+	<div class="comment">
+		Comments
+	</div><!-- end comments -->
 {% endblock %}
 

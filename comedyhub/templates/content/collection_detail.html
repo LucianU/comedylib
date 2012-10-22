@@ -19,11 +19,11 @@
 {% for video in collection.videos.all %}
 	<div class="collection-content">
 		<div class="coll-pic-content">
-			<a href="{{ collection.videos.get_absolute_url }}">
+			<a href="{{ video.get_absolute_url }}">
 				<img src="{{ video.picture.url }}"></a>
 		</div>
 		<div class="coll-name-content">
-            <a href="{{ collection.videos.get_absolute_url }}">{{ video.title }}</a>
+            <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
             </div>
 	</div>
 	{% endfor %}
