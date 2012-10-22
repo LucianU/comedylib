@@ -15,7 +15,7 @@ class Collection(CreatedMixin):
     connections = models.ManyToManyField('self', related_name='connections',
                                          blank=True)
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, blank=True)
 
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
