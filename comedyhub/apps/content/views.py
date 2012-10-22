@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView, DetailView
 
-from content.models import Collection
+from content.models import Collection, Video
 
 class HomeView(TemplateView):
     template_name = 'content/home.html'
@@ -18,3 +18,7 @@ class CollectionListView(ListView):
 class CollectionDetailView(DetailView):
     context_object_name = 'collection'
     model = Collection
+
+class VideoDetailView(DetailView):
+    context_object_name = 'video'
+    model = Video

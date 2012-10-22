@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -39,3 +40,8 @@ class Video(CreatedMixin):
     def __unicode__(self):
         return u"%s:%s" % (self.title, "%s..." % self.url[:50]
                            if len(self.url) > 50 else self.url)
+
+    def get_absolute_url(self):
+        coll_url = reverse('content:%s' % self.collection.get_role_display(),
+                           args=[self.collection.slug, self.collection.id])
+        return '%s/%s' % (coll_url, self.id)
