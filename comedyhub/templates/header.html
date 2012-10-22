@@ -51,6 +51,17 @@
 	  <div class="cleared reset-box"></div>
 	</div> <!--end menu-->
 	{% block alphabetnav %}{% endblock %}
+  <div id="breadcrumbs">
+    <p>
+    {% for breadcrumb in request.breadcrumbs %}
+      {% if not forloop.last %}
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> &raquo;
+      {% else %}
+        {{ breadcrumb.name }}
+      {% endif %}
+    {% endfor %}
+    </p>
+  </div>
 	</div> <!--end header-inner-->
 	</div><!--end header-position-->
 	</div><!--end header-->
