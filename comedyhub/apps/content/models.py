@@ -27,7 +27,7 @@ class Collection(CreatedMixin):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-            super(Collection, self).save(*args, **kwargs)
+        super(Collection, self).save(*args, **kwargs)
 
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
