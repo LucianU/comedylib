@@ -5,11 +5,11 @@ navlogin ul {
   list-style: none;
   position: relative;
   float: right;
-  background: #eee;
-  border-bottom: 1px solid #fff;
+ 
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px;    
+  border-radius: 3px; 
+background: none;
 }
 
 navlogin li {
@@ -17,11 +17,7 @@ navlogin li {
 }
 
 navlogin #login {
-  border-right: 1px solid #ddd;
-  -moz-box-shadow: 1px 0 0 #fff;
-  -webkit-box-shadow: 1px 0 0 #fff;
-  box-shadow: 1px 0 0 #fff;  
-  color:#333;
+   color:#333;
 }
 
 navlogin #login-trigger,
@@ -34,26 +30,29 @@ navlogin #signup a {
   font-weight: bold;
   padding: 0 8px;
   text-decoration: none;
-  color: #444;
-  text-shadow: 0 1px 0 #fff; 
+  color: #fff;
+  
 }
 
-navlogin #signup a {
+navlogin #signup p {
   -moz-border-radius: 0 3px 3px 0;
   -webkit-border-radius: 0 3px 3px 0;
   border-radius: 0 3px 3px 0;
-}
+  }
 
 navlogin #login-trigger {
-  -moz-border-radius: 3px 0 0 3px;
-  -webkit-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+
 }
 
+
 navlogin #login-trigger:hover,
-navlogin #login .active,
-navlogin #signup a:hover {
-  background: #fff;
+navlogin #login .active a:hover {
+  color: #ddd;
+  background: #222;
+border:1px solid #333;  
 }
 
 navlogin #login-content {
@@ -63,12 +62,6 @@ navlogin #login-content {
   right: 0;
   z-index: 9999;    
   background: #fff;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
-  background-image: -webkit-linear-gradient(top, #fff, #eee);
-  background-image: -moz-linear-gradient(top, #fff, #eee);
-  background-image: -ms-linear-gradient(top, #fff, #eee);
-  background-image: -o-linear-gradient(top, #fff, #eee);
-  background-image: linear-gradient(top, #fff, #eee);  
   padding: 15px;
   -moz-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
   -webkit-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
@@ -82,6 +75,7 @@ navlogin li #login-content {
   right: 0;
   width: 260px; 
  z-index: 9999;
+ 
  
 }
 
@@ -189,57 +183,61 @@ font-weight: bold;
 navlogin #login #login-content #loginregistermenu ul {
 list-style: none;
     padding: 0px 0 0px 0;
-    margin: -5px 0px 0 -5px;
+    margin: -5px 0px 0px -5px;
     font: bold 14px  Arial, Helvetica, sans-serif;
 	float:left;
+	border-bottom:none;
+	background:none;
 }
 
 navlogin #login #login-content #loginregistermenu ul li {
  display: table;
  float:left;
- 
+ margin-right:3px;
 }
 
 navlogin #login #login-content #loginregistermenu ul li a {
  text-transform: uppercase;
 display: table-cell;
 color:#650337;
- border: 1px solid #ccc;
-    padding: 5px 5px;
+ border: 1px solid #A52D00;
+    padding: 5px 10px 3px 10px;
 	text-align:center;
     text-decoration: none;
     background-color: #eeeeee;
-  border-bottom: none;
-    outline: none;
-    border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    -webkit-border-top-left-radius: 4px;
-    -webkit-border-top-right-radius: 4px;
-
+     outline: none;
+  
+ border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
 
 
 }
 
 navlogin #login #login-content #loginregistermenu ul li a:hover {
  background-color: #dddddd;
-    padding: 5px 5px;
+     padding: 5px 10px 3px 10px;
 	color: #000;
 
 
 }
 navlogin #login #login-content #loginregistermenu ul li.active a {
-    border-bottom: 1px solid #fff;
+    z-index:100;
+	border-bottom: none;
     background: #fff;
-    padding: 5px 5px 5px 5px;
-    border-bottom: none;
-	color: #000;
-
+    padding: 5px 10px 7px 10px;
+   	color: #000;
+ border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
 
 	
 }
 navlogin #login #login-content #loginregistermenu ul li.active a:hover {
-    background-color: #eeeeee;
-    padding: 5px 5px 5px 5px;
+    z-index:100;
+	background-color: #eeeeee;
+    padding: 5px 10px 7px 10px;
     border-bottom: none;
 	background: #fff; /* Old browsers */
 
@@ -247,7 +245,8 @@ navlogin #login #login-content #loginregistermenu ul li.active a:hover {
 }
 
 navlogin #login #login-content #loginregistermenu #Content_Area_loginregister { /*// this is the css class for the content displayed in each tab*/
-border: 1px solid #ccc;
+z-index:50;
+border: 1px solid #A52D00;
  /* border-top: none;*/
    	margin-left:-5px;
 	margin-top:-1px;
@@ -255,7 +254,7 @@ border: 1px solid #ccc;
 	height:270px;
 	display:block;
 	float:left;
-background: /*#e893c0; /* Old browsers */
+/*#e893c0; /* Old browsers */
 
 }
 
