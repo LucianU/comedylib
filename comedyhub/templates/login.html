@@ -13,13 +13,15 @@
 					<div id="Content_Area_loginregister">
 							<div id="tab7">
 								<h2>Sign In</h2>
-									<form>
+									<form method="post" action="">
+{% csrf_token %}
 										<fieldset id="inputs">
-											<input id="username" type="email" name="Email" placeholder="Your email address" required>   
-											<input id="password" type="password" name="Password" placeholder="Password" required>
+											<input id="form.username" type="email" name="Email" placeholder="Your email address" required>   
+											<input id="form.password" type="password" name="Password" placeholder="Password" required>
 										</fieldset>
 										<fieldset id="actions">
 											<input type="submit" id="submit" value="Log in">
+											<input type="hidden" name="next" value="{{ next }}" />
 											<label><input type="checkbox" checked="checked"> Keep me signed in</label>
 										</fieldset>
 									</form>
