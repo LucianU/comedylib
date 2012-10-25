@@ -221,7 +221,7 @@ position:relative;
     width: 300px;
     }
 /*end search*/	
-.logincontent {
+.logincontent-nouser {
 float:right;
 width:129px;
 height:56px;
@@ -233,7 +233,6 @@ margin-right:5px;
     -moz-border-bottom-right-radius: 10px;
     border-bottom-right-radius: 10px;
 background: #000;
-
 }
 .why {
 float:right;
@@ -253,6 +252,19 @@ color:#3CA0D0;
 color:#235D79;
 }
 
+.logincontent-user {
+float:right;
+width:300px;
+height:56px;
+margin-right:5px;
+-webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+background: #000;
+}
 #register{
 z-index:9999;
 position:relative;

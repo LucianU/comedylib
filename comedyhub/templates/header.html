@@ -36,14 +36,20 @@
 				{% include "search.html" %}
 			</div> <!--end search-->
 		</div>
-		<div class="logincontent">
-			<div id="register">	
-				{% include "login.html" %}
-			</div> <!--end register-->
-			<div class="why">
-				<a href="#">Why register?</a>
-			</div>
-		</div>
+		{% if request.user.is_authenticated %}
+			<div class="logincontent-user">
+				
+			</div> <!--end logincontent-nouser-->
+		{% else %}
+			<div class="logincontent-nouser">
+				<div id="register">	
+					{% include "login.html" %}
+				</div> <!--end register-->
+				<div class="why">
+					<a href="#">Why register?</a>
+				</div>
+			</div> <!--end logincontent-nouser-->
+		{% endif %}
 	</div>
 	<div class="headnav">
 		<div id="nav">
