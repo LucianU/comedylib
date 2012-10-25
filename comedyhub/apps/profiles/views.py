@@ -1,9 +1,10 @@
 #-*- coding: utf-8 -*-
 import urlparse
-from django.contrib.auth import REDIRECT_FIELD_NAME, login, logout as auth_logout
+from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import logout as auth_logout
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -85,5 +86,4 @@ class LoginView(FormView):
             return self.form_invalid(form)
 
 def logout(request):
-    auth_logout(request)
-    return redirect('content:home')
+    return auth_logout(request, next_page=reverse('content:home'))

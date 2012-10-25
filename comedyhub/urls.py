@@ -8,9 +8,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^', include('content.urls', namespace='content')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^a/', include('profiles.urls', namespace='profiles')),
     url(r'^a/', include('captcha.backends.default.urls')),
     url(r'^a/', include('registration.backends.default.urls')),
-    url(r'^a/', include('profiles.urls', namespace='profiles')),
     url(r'^u/', include('social_auth.urls')),
 )
 
