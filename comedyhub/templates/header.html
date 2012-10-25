@@ -27,42 +27,58 @@
   <div class="cleared reset-box"></div>
     <div class="header">
 	<div class="header-position">
-	
-	 <div class="cleared reset-box"></div>
-                <div class="header-inner">
-				
-	<div id="title"> <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
+	<div class="headtitlelogin">
+		<div class="titlecontent"> 
+			<h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
 		</div>
-		<div id="search">
-		{% include "search.html" %}
+		<div class="searchcontent">
+			<div id="search">
+				{% include "search.html" %}
+			</div> <!--end search-->
 		</div>
-		<div id="register">	
-		{% include "login.html" %}
-          </div> <!--end register-->
-    <div id="menu">	
+		<div class="logincontent">
+			<div id="register">	
+				{% include "login.html" %}
+			</div> <!--end register-->
+			<div class="why">
+				<a href="#">Why register?</a>
+			</div>
+		</div>
+	</div>
+	<div class="headnav">
 		<div id="nav">
-    <ul class="nav">
-        <li><a href="/comedians">Comedians</a></li>
-        <li><a href="/shows">Shows</a></li>
-        <li><a href="/movies">Movies</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
-	</div> <!--end nav-->
+			<ul class="nav">
+				<li><a href="/comedians">Comedians</a></li>
+				<li><a href="/shows">Shows</a></li>
+				<li><a href="/movies">Movies</a></li>
+				<li class="end"><a href="/playlists">Playlists</a></li>
+			</ul>
+		</div> <!--end nav-->
+	</div>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<p>
+		{% for breadcrumb in request.breadcrumbs %}
+		  {% if not forloop.last %}
+			<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span>&raquo;</span>
+		  {% else %}
+			{{ breadcrumb.name }}
+		  {% endif %}
+		{% endfor %}
+		</p>
+	</div>
+		<!--<div class="header-inner"> -->
+				
+	<!-- <div id="title"> <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
+		</div>
+		
+<!--    <div id="menu">	
+		
+<!--	  <div class="cleared reset-box"></div>
+<!--	</div> <!--end menu-->
+<!--	{% block alphabetnav %}{% endblock %}
 	  <div class="cleared reset-box"></div>
-	</div> <!--end menu-->
-	{% block alphabetnav %}{% endblock %}
-  <div id="breadcrumbs">
-    <p>
-    {% for breadcrumb in request.breadcrumbs %}
-      {% if not forloop.last %}
-        <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> &raquo;
-      {% else %}
-        {{ breadcrumb.name }}
-      {% endif %}
-    {% endfor %}
-    </p>
-  </div>
-	</div> <!--end header-inner-->
+   -->
+	<!-- </div> <!--end header-inner-->
 	</div><!--end header-position-->
 	</div><!--end header-->
 	<div class="cleared reset-box"></div>
