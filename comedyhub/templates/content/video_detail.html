@@ -5,19 +5,19 @@
 {% block content %}
 <div id="video_detail">
 	<div class="video">
-		<div class="topvideo">
+		<!--<div class="topvideo">
 			<div class="previous"><a href="#">Previous</a></div>
 			<div class="title"><h1>{{ video.title }}</h1></div>
 			<div class="next"><a href="#">Next</a></div>
-		</div>
+		</div>-->
 		<div class="mediaplayer">
 			<div id='mediaplayer'></div>
 				<script type="text/javascript">
 				  jwplayer('mediaplayer').setup({
 					'flashplayer': '{{ STATIC_URL }}mediaplayer/player.swf',
 					'id': 'playerID',
-					'width': '750',
-					'height': '422',
+					'width': '990',
+					'height': '500',
 					'file': '{{ video.url }}'
 				  });
 				</script>

@@ -27,18 +27,21 @@
             </div>
 	</div>
 	{% endfor %}
-
+<div class="detail-pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </span>
+    </div>
 </div><!-- end videos-->
 </div> <!-- end collection detail-->
-<!-- 
-<script>
-  $(function () {
-            $('div.description_content').expander({
-                slicePoint: 200,
-                expandText: 'Read More...',
-                userCollapseText: 'Close'
-            });
-        });
-</script>-->
+
 {% endblock %}
 
