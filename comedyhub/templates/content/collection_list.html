@@ -37,7 +37,7 @@
 <div id="firstpage">
     <p>{{ page_title }}</p>
      <!-- #Left Column albums -->
-	 <div id="album-column">
+	 <div class="album-column">
 	 {% for collection in collection_list %}
 	<div class="collection-content">
 		<div class="coll-pic-content">
@@ -52,17 +52,8 @@
 		</div>
 	</div>
 	{% endfor %}
-    <div class="pagination">
+    <div class="album-pagination">
         {% include "pagination.html" %}
-    </div>
-</div> 
-
-		<!-- #Right Column -->
-	<!--	<div id="sidebar-column">
-<div class="sidebar">
-
-</div> 
-	</div> -->
-    
+    </div>    
 </div>
 {% endblock %}

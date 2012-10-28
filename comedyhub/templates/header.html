@@ -38,11 +38,20 @@
 		</div>
 		{% if request.user.is_authenticated %}
 			<div class="logincontent-user">
-				
+				<div class="userthumb">
+				<a href=""><img src="/static/img/logo.jpg"></a>
+				</div>
+				<div class="logout">
+					<a href="/a/logout">Logout</a>
+				</div>
 			</div> <!--end logincontent-nouser-->
 		{% else %}
 			<div class="logincontent-nouser">
 				<div id="register">	
+					<!--<ul>
+						<li><a href="/a/login">Login</a></li>
+						<li><a href="/a/register">Register</a></li>
+					</ul>-->
 					{% include "login.html" %}
 				</div> <!--end register-->
 				<div class="why">
