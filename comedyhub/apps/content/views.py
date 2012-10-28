@@ -48,6 +48,12 @@ class VideoDetailView(DetailView):
     context_object_name = 'video'
     model = Video
 
+    def get_object(self, queryset=None):
+        video = super(VideoDetailView, self).get_object(queryset)
+        video.views += 1
+        video.save()
+        return video
+
     def render_to_response(self, context, **response_kwargs):
         breadcrumbs = [(context['video'].title, "")]
         collection = context['video'].collection
