@@ -9,7 +9,7 @@ class Profile(models.Model):
     unlikes = models.ManyToManyField(Video, related_name='haters', null=True)
     playlists = models.ManyToManyField(Video, related_name='list_makers',
                                        through='Playlist', null=True)
-    picture = models.ImageField(upload_to='profiles')
+    picture = models.ImageField(upload_to='profiles', blank=True, null=True)
     description = models.TextField()
 
     def __unicode__(self):
