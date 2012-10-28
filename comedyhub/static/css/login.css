@@ -46,6 +46,10 @@ navlogin #login-trigger {
   border-radius: 3px 3px 3px 3px;
 
 }
+navlogin #login-trigger span{
+  font:11px Arial, Helvetica, sans-serif;
+
+}
 
 
 navlogin #login-trigger:hover,
