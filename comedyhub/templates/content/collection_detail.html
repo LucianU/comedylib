@@ -16,7 +16,7 @@
 		</div>
 	</div> <!-- end info-->
 <div class="videos">
-{% for video in collection.videos.all %}
+{% for video in videos %}
 	<div class="collection-content">
 		<div class="coll-pic-content">
 			<a href="{{ video.get_absolute_url }}">
@@ -27,6 +27,9 @@
             </div>
 	</div>
 	{% endfor %}
+<div class="pagination">
+    {% include "pagination.html" %}
+</div>
 
 </div><!-- end videos-->
 </div> <!-- end collection detail-->
