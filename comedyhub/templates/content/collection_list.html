@@ -2,7 +2,7 @@
 {% block content %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block alphabetnav %}
-<div id="alphabet">	
+<div id="alphabet">
 		<ul class="nav_alphabet">
 			<li><a href="/">A</a></li>
 			<li><a href="/">B</a></li>
@@ -52,20 +52,8 @@
 		</div>
 	</div>
 	{% endfor %}
-    </div> 
-	<div class="album-pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
-            <span class="current">
-                Page {{ page_obj.number }} of {{ paginator.num_pages }}
-            </span>
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            {% endif %}
-        </span>
-    </div>
-		    
+    <div class="album-pagination">
+        {% include "pagination.html" %}
+    </div>    
 </div>
 {% endblock %}

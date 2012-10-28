@@ -1,3 +1,4 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, ListView, DetailView
 
@@ -32,6 +33,22 @@ class CollectionDetailView(DetailView):
     context_object_name = 'collection'
     model = Collection
 
+    def get_context_data(self, **kwargs):
+        context = super(CollectionDetailView, self).get_context_data(**kwargs)
+        collection = context['collection']
+        videos_list = collection.videos.all()
+        paginator = Paginator(videos_list, 2)
+        page = self.request.GET.get('page')
+        try:
+            videos = paginator.page(page)
+        except PageNotAnInteger:
+            videos = paginator.page(1)
+        except EmptyPage:
+            videos = paginator.page(paginator.num_pages)
+        context.update({'videos': videos, 'paginator': paginator,
+                        'page_obj': videos})
+        return context
+
     def render_to_response(self, context, **response_kwargs):
         collection = context['collection']
         breadcrumbs = [(collection.name, "")]
@@ -47,6 +64,12 @@ class CollectionDetailView(DetailView):
 class VideoDetailView(DetailView):
     context_object_name = 'video'
     model = Video
+
+    def get_object(self, queryset=None):
+        video = super(VideoDetailView, self).get_object(queryset)
+        video.views += 1
+        video.save()
+        return video
 
     def render_to_response(self, context, **response_kwargs):
         breadcrumbs = [(context['video'].title, "")]
