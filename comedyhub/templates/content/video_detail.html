@@ -16,22 +16,35 @@
 				  jwplayer('mediaplayer').setup({
 					'flashplayer': '{{ STATIC_URL }}mediaplayer/player.swf',
 					'id': 'playerID',
-					'width': '990',
-					'height': '500',
+					'autostart': 'false',
+					'volume': '80',
+					'width': '700',
+					'height': '400',
+					'skin': '{{ STATIC_URL }}mediaplayer/skins/modieus.zip',
 					'file': '{{ video.url }}'
 				  });
 				</script>
 		</div>
 	</div> <!-- end video-->
+	<div class="video-related">
+		related
+	</div><!-- end video-related -->
 	<div class="affiliate">
 		affiliate
 	</div><!-- end affiliate -->
 	<div class="social">
-		social
+		<div class="likerating">
+			<a href="#" class="uplike">
+				<span >Like</span
+			</a>
+			<div class="ratingbar"></div>
+			<a href="#" class="downlike"></a>
+		</div>
 	</div><!-- end social -->
-</div> <!-- end video detail-->
 	<div class="comment">
 		Comments
 	</div><!-- end comments -->
+</div> <!-- end video detail-->
+	
 {% endblock %}
 

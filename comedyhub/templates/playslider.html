@@ -9,12 +9,20 @@
     </ul>  
 	<!-- First Content -->
 	<div id="fragment-1" class="ui-tabs-panel" style="">
-		<img src="/static/img/playslider/image1.jpg" alt="" />
-		<div class="info" >
-		<h2><a href="#" >15+ Excellent High Speed Photographs</a></h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam....<a href="#" >read more</a></p>
+		<div id='mediaplayer'></div>
+				<script type="text/javascript">
+				  jwplayer('mediaplayer').setup({
+					'flashplayer': '{{ STATIC_URL }}mediaplayer/player.swf',
+					'id': 'playerID',
+					'volume': '80',
+					'width': '735',
+					'height': '390',
+					'skin': '{{ STATIC_URL }}mediaplayer/skins/modieus.zip',
+					'file': '{{ STATIC_URL }}mediaplayer/video.mp4'
+				  });
+				</script>
+		
 		</div>
-	</div>
 	<!-- Second Content -->
 	<div id="fragment-2" class="ui-tabs-panel ui-tabs-hide" style="">
 		<img src="/static/img/playslider/image2.jpg" alt="" />
@@ -58,14 +66,14 @@
 </div>
 <script>
 $(document).ready(function(){
-$("#featured").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true);
+$("#featured").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 0, true);
 $("#featured").hover(
 function() {
 $("#featured").tabs("rotate",0,true);
 },
 function() {
-$("#featured").tabs("rotate",5000,true);
+$("#featured").tabs("rotate",0,true);
 }
 );
 });
-</script>
+</script> 

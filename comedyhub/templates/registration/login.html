@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div class="userloginpage">
+<div class="center">
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -18,9 +19,11 @@
     <td>{{ form.password }}</td>
 </tr>
 </table>
-
-<input type="submit" value="login" />
+<div class="submit">
+<input type="submit" id="submit" value="Login" />
+</div>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+</div> <!-- end center-->
+</div
 {% endblock %}

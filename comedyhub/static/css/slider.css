@@ -69,7 +69,7 @@ color: #F6C162;
 /*---------Playlist Slider--------------------*/
 #featured{ 
 	margin:5px;
-	width:335px; 
+	width:730px; 
 	padding-right:250px; 
 	position:relative; 
 	height:390px;
@@ -79,7 +79,7 @@ color: #F6C162;
 /* The navigation tabs are absolutely positioned to the right with following styles:*/
 #featured ul.ui-tabs-nav{ 
 	position:absolute; 
-	top:0; left:330px; 
+	top:0; left:725px; 
 	list-style:none; 
 	padding:0px; 
 	margin:0; 
@@ -99,7 +99,7 @@ margin-right:3px;
 }
 /*The content panels are given following styles so as to fit them inside featured div container. The ui-tabs-hide class is essential to working of this script as it decides which content panels are hidden and which is displayed.*/
 #featured .ui-tabs-panel{ 
-	width:340px; height:389px; 
+	width:735px; height:389px; 
 	background:#FFD573; 
 	position:relative;
         overflow:hidden;
