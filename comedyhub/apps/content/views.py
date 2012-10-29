@@ -1,6 +1,12 @@
+import json
+
+from django.core.exceptions import SuspiciousOperation
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.http import HttpResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.generic import View, TemplateView, ListView, DetailView
 
 from content.models import Collection, Video
 
@@ -65,6 +71,10 @@ class VideoDetailView(DetailView):
     context_object_name = 'video'
     model = Video
 
+    @method_decorator(ensure_csrf_cookie)
+    def dispatch(self, *args, **kwargs):
+        return super(VideoDetailView, self).dispatch(*args, **kwargs)
+
     def get_object(self, queryset=None):
         video = super(VideoDetailView, self).get_object(queryset)
         video.views += 1
@@ -87,3 +97,24 @@ class VideoDetailView(DetailView):
         self.request.breadcrumbs(breadcrumbs)
         return super(VideoDetailView, self).render_to_response(context,
                                                                   **response_kwargs)
+
+class VideoLikeView(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        video_id = request.POST.get('id')
+        like = request.POST.get('status')
+        try:
+            video = Video.objects.get(id=video_id)
+        except Video.ObjectDoesNotExist:
+            raise SuspiciousOperation
+
+        if like == 'L':
+            profile.likes.add(video)
+        elif like == 'D':
+            profile.dislikes.add(video)
+        else:
+            raise SuspiciousOperation
+
+        profile.save()
+        return HttpResponse(json.dumps({'status': 'OK'}))
+
