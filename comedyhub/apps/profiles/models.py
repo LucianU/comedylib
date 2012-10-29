@@ -6,7 +6,7 @@ from content.models import Video
 class Profile(models.Model):
     user = models.OneToOneField(User)
     likes = models.ManyToManyField(Video, related_name='fans', null=True)
-    unlikes = models.ManyToManyField(Video, related_name='haters', null=True)
+    dislikes = models.ManyToManyField(Video, related_name='haters', null=True)
     playlists = models.ManyToManyField(Video, related_name='list_makers',
                                        through='Playlist', null=True)
     picture = models.ImageField(upload_to='profiles', blank=True, null=True)
