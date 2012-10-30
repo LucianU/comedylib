@@ -20,11 +20,24 @@
 	<div class="collection-content">
 		<div class="coll-pic-content">
 			<a href="{{ video.get_absolute_url }}">
-				<img src="{{ video.picture.url }}"></a>
+				<img src="{{ video.picture.url }}">
+            </a>
 		</div>
 		<div class="coll-name-content">
             <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+        </div>
+        <div class="coll-detail-content">
+            <div class="vlength">
+            <p>{{ video.duration }}</p> <span>Length</span>
             </div>
+            <div class="nviews">
+                <p>{{ profile.views }}</p> <span>Views</span>
+            </div>
+            <div class="rating">
+            <p>78%</p>
+            <span>Rating</span>
+            </div>
+        </div>
 	</div>
 	{% endfor %}
 

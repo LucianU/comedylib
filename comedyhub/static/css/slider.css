@@ -72,21 +72,28 @@ color: #F6C162;
 	width:730px; 
 	padding-right:250px; 
 	position:relative; 
-	height:390px;
+	min-height:395px;
+
 	/*background:#fff;
 	border:5px solid #ccc;*/
 }
 /* The navigation tabs are absolutely positioned to the right with following styles:*/
 #featured ul.ui-tabs-nav{ 
-	position:absolute; 
-	top:0; left:725px; 
+	margin-top:0px;
+    float:left;	
 	list-style:none; 
-	padding:0px; 
+	padding-top:3px; 
+    padding-bottom:5px;
 	margin:0; 
-	width:255px; 
+	width:980px; 
+   /* border:1px solid #fff;*/
 }
 #featured ul.ui-tabs-nav li{ 
-	padding:1px 0; padding-left:13px;  
+float:left;
+width:194px;
+height:44px;
+	padding:1px 0; 
+    padding-left:2px;  
 	font-size:12px; 
 	color:#666; 
 	
@@ -99,68 +106,48 @@ margin-right:3px;
 }
 /*The content panels are given following styles so as to fit them inside featured div container. The ui-tabs-hide class is essential to working of this script as it decides which content panels are hidden and which is displayed.*/
 #featured .ui-tabs-panel{ 
-	width:735px; height:389px; 
-	background:#FFD573; 
+	width:979px; height:389px; 
+	background:#181919; 
 	position:relative;
         overflow:hidden;
+    border:1px solid #444;
 }
 #featured .ui-tabs-hide{ 
 	display:none; 
 }
 /*And the selected tab is given a background image with a left arrow. Here are the styles for selected tab.*/
 #featured li.ui-tabs-nav-item a{/*On Hover Style*/ 
+float:left;
 	display:block; 
-	height:62px; 
-	color:#333;  
+    width:194px;
+	height:44px; 
+	color:#bbb;  
 	line-height:20px;
 	outline:none;
-background: #ffd573; /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2ZmZDU3MyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmM2NDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top,  #ffd573 1%, #ffc640 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffd573), color-stop(100%,#ffc640)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #ffd573 1%,#ffc640 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #ffd573 1%,#ffc640 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #ffd573 1%,#ffc640 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #ffd573 1%,#ffc640 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd573', endColorstr='#ffc640',GradientType=0 ); /* IE6-8 */
+background: #333; /* Old browsers */
+
 
 }
 #featured li.ui-tabs-nav-item a:hover{ 
-background: #ff9973; /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmOTk3MyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjczNDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top,  #ff9973 0%, #ff7340 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9973), color-stop(100%,#ff7340)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #ff9973 0%,#ff7340 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #ff9973 0%,#ff7340 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #ff9973 0%,#ff7340 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #ff9973 0%,#ff7340 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9973', endColorstr='#ff7340',GradientType=0 ); /* IE6-8 */
+background: #555; /* Old browsers */
 
 }
 #featured li.ui-tabs-selected{ /*Selected tab style*/
 	/*background:url('/static/img/playslider/selected-item.gif') top left no-repeat;  */
 }
 #featured ul.ui-tabs-nav li.ui-tabs-selected a{ 
-	background: #63add0; /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzYWRkMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzY2EwZDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top,  #63add0 0%, #3ca0d0 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#63add0), color-stop(100%,#3ca0d0)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #63add0 0%,#3ca0d0 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #63add0 0%,#3ca0d0 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #63add0 0%,#3ca0d0 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #63add0 0%,#3ca0d0 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63add0', endColorstr='#3ca0d0',GradientType=0 ); /* IE6-8 */
-
-	padding:3px;
+	background: #FFD573; /* Old browsers */
+    color:#333;
+	
 }
 /*Since i used small thumbnail images in the navigation tabs, i applied following styles to them.*/
 #featured ul.ui-tabs-nav li img{ 
-	float:left; margin:2px 5px; 
-	background:#fff; 
-	padding:2px; 
+	float:left; 
+    margin:2px; 
+	background:#eee; 
+	padding:1px; 
+    width:45px;
+    height:35px;
 	border:1px solid #eee;
 }
 /*Also, in the content panel which is displayed, it has one image of size 400px x 250px and some relavent title and description inside the div with class info. To display .info div over the image i absolutely positioned it over the image with a transparent background to add some eye-candy.*/
