@@ -149,7 +149,7 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.facebook.FacebookBackend',
-    'comedyhub.backends.EmailAuthBackend',
+    'profiles.backends.EmailAuthBackend',
 )
 
 # social_auth

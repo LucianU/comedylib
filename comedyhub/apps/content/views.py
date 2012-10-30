@@ -10,18 +10,18 @@ from django.views.generic import View, TemplateView, ListView, DetailView
 
 from content.models import Collection, Video
 
-class HomeView(TemplateView):
+class Home(TemplateView):
     template_name = 'content/home.html'
 
-class AboutView(TemplateView):
+class About(TemplateView):
     template_name = 'content/about.html'
 
     def render_to_response(self, context, **response_kwargs):
         self.request.breadcrumbs("About", self.request.path)
-        return super(AboutView, self).render_to_response(context,
-                                                         **response_kwargs)
+        return super(About, self).render_to_response(context,
+                                                     **response_kwargs)
 
-class CollectionListView(ListView):
+class CollectionList(ListView):
     context_object_list = 'collection_list'
     template_name = 'content/collection_list.html'
     paginate_by = 10
@@ -32,15 +32,15 @@ class CollectionListView(ListView):
     def render_to_response(self, context, **response_kwargs):
         self.request.breadcrumbs("%s" % self.request.path.strip('/').title(),
                                  "")
-        return super(CollectionListView, self).render_to_response(context,
-                                                                  **response_kwargs)
+        return super(CollectionList, self).render_to_response(context,
+                                                              **response_kwargs)
 
-class CollectionDetailView(DetailView):
+class CollectionDetail(DetailView):
     context_object_name = 'collection'
     model = Collection
 
     def get_context_data(self, **kwargs):
-        context = super(CollectionDetailView, self).get_context_data(**kwargs)
+        context = super(CollectionDetail, self).get_context_data(**kwargs)
         collection = context['collection']
         videos_list = collection.videos.all()
         paginator = Paginator(videos_list, 20)
@@ -64,19 +64,19 @@ class CollectionDetailView(DetailView):
         ))
         breadcrumbs.reverse()
         self.request.breadcrumbs(breadcrumbs)
-        return super(CollectionDetailView, self).render_to_response(context,
-                                                                    **response_kwargs)
+        return super(CollectionDetail, self).render_to_response(context,
+                                                                **response_kwargs)
 
-class VideoDetailView(DetailView):
+class VideoDetail(DetailView):
     context_object_name = 'video'
     model = Video
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
-        return super(VideoDetailView, self).dispatch(*args, **kwargs)
+        return super(VideoDetail, self).dispatch(*args, **kwargs)
 
     def get_object(self, queryset=None):
-        video = super(VideoDetailView, self).get_object(queryset)
+        video = super(VideoDetail, self).get_object(queryset)
         video.views += 1
         video.save()
         return video
@@ -95,10 +95,10 @@ class VideoDetailView(DetailView):
         ))
         breadcrumbs.reverse()
         self.request.breadcrumbs(breadcrumbs)
-        return super(VideoDetailView, self).render_to_response(context,
-                                                                  **response_kwargs)
+        return super(VideoDetail, self).render_to_response(context,
+                                                           **response_kwargs)
 
-class VideoLikeView(View):
+class VideoLike(View):
     def post(self, request, *args, **kwargs):
         profile = request.user.profile
         video_id = request.POST.get('id')
@@ -117,4 +117,3 @@ class VideoLikeView(View):
 
         profile.save()
         return HttpResponse(json.dumps({'status': 'OK'}))
-

@@ -63,7 +63,7 @@ class CustomAuthForm(forms.Form):
         super(CustomAuthForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        email = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
 
         if email and password:
