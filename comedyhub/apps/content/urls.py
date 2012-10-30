@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import patterns, url
 
 from content.views import (HomeView, AboutView, CollectionListView,
-                           CollectionDetailView, VideoDetailView)
+                           CollectionDetailView, VideoDetailView,
+                           VideoLikeView)
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='home'),
@@ -18,4 +19,5 @@ urlpatterns = patterns('',
     url(r'^movies/(?P<slug>[a-z-])-(?P<pk>\d+)$', CollectionDetailView.as_view(), name='movie'),
     url(r'^(?:comedians|shows|movies)/.*?/(?P<pk>\d+)',
         VideoDetailView.as_view(), name='video'),
+    url(r'^v/like', VideoLikeView.as_view(), name='video_like'),
 )

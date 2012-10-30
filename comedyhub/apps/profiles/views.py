@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import urlparse
+
 from django.contrib.auth import REDIRECT_FIELD_NAME, login
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import logout as auth_logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView
 from django.conf import settings
 
+from profiles.forms import CustomAuthForm
 
 class LoginView(FormView):
     """
@@ -25,7 +26,7 @@ class LoginView(FormView):
                 name="login"),
 
     """
-    form_class = AuthenticationForm
+    form_class = CustomAuthForm
     redirect_field_name = REDIRECT_FIELD_NAME
     template_name = 'registration/login.html'
 
@@ -79,6 +80,8 @@ class LoginView(FormView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
+            if not form.data.get('remember', None):
+                request.session.set_expiry(0)
             self.check_and_delete_test_cookie()
             return self.form_valid(form)
         else:
