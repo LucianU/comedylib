@@ -12,5 +12,5 @@ urlpatterns = patterns('',
         register,
         {'backend': 'registration.backends.default.DefaultBackend',
          'form_class': SignUpForm},
-        name='registration_register'),
+        name='register'),
 )
