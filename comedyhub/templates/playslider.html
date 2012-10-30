@@ -1,12 +1,5 @@
 <div id="featured" >
-	<ul class="ui-tabs-nav">  
-        <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><img src="/static/img/playslider/image1-small.jpg" alt="" /><span>15+ Excellent High Speed Photographs</span></a></li>  
-        <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><img src="/static/img/playslider/image2-small.jpg" alt="" /><span>20 Beautiful Long Exposure Photographs</span></a></li>  
-        <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><img src="/static/img/playslider/image3-small.jpg" alt="" /><span>35 Amazing Logo Designs</span></a></li>  
-        <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
-		<li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
-		<li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
-    </ul>  
+
 	<!-- First Content -->
 	<div id="fragment-1" class="ui-tabs-panel" style="">
 		<div id='mediaplayer'></div>
@@ -15,11 +8,13 @@
 					'flashplayer': '{{ STATIC_URL }}mediaplayer/player.swf',
 					'id': 'playerID',
 					'volume': '80',
-					'width': '735',
+					'width': '979',
 					'height': '390',
 					'skin': '{{ STATIC_URL }}mediaplayer/skins/modieus.zip',
-					'file': '{{ STATIC_URL }}mediaplayer/video.mp4'
+					'file': '{{ STATIC_URL }}mediaplayer/video.mp4',
+                    'playlist.position': 'right',     'playlist.size': '320',     'playlist': [         {            'file': 'http://www.youtube.com/watch?v=Yc21JzQTxcs',            'title': 'Hallelujah',            'duration': '434',            'description': 'set 2, 11th song'         },         {            'file': 'http://www.youtube.com/watch?v=hX2bSDEGxVA',            'title': 'Waiting for the miracle',            'duration': '451',            'description': 'For the Miracle to Come -  set 1. 13th song'         },        {            'file': 'http://www.youtube.com/watch?v=KgSgMqwBWp0',            'title': 'The Night Comes On',            'duration': '341',            'description': 'Comes On - set 2. 3rd song'         },  {            'file': 'http://www.youtube.com/watch?v=vbr_GfVOz-0',            'title': 'Save the Last Dance for Me',            'duration': '184',            'description': 'Last Dance for Me - encore. 3rd song'         }, {            'file': 'http://www.youtube.com/watch?v=Na7XUJhsx1Y',            'title': 'Who By Fire',            'duration': '312',            'description': 'Fire - set 1. 5th song'         }, {            'file': 'http://www.youtube.com/watch?v=8vegiRQ5VcY',            'title': 'Hey, That s No Way to Say Goodbye',            'duration': '205',            'description': ' No Way To Say Goodbye - set 1. 8th song'         }, {            'file': 'http://www.youtube.com/watch?v=Sx6Lad9zSTA',            'title': 'Everybody Knows',            'duration': '339',            'description': 'Knows - set 1. 4th song'         }, {            'file': 'https://www.youtube.com/watch?v=1fBWhc4NoQ4',            'title': 'In My Secret Life',            'duration': '280',            'description': ' Secret Life - set 1. 11th song'         }, {            'file': 'https://www.youtube.com/watch?v=vbEJ2Pixms8',            'title': 'Alexandra Leaving',            'duration': '159',            'description': ' Leaving - set 2. 9th song'         }, {            'file': 'https://www.youtube.com/watch?v=-Xn5RADHUqw',            'title': 'Suzanne',            'duration': '255',            'description': ' set 2. 2nd song'         }, {            'file': 'https://www.youtube.com/watch?v=7GYiifMXny4',            'title': 'The Partisan',            'duration': '279',            'description': 'Partisan - set 2. 6th song'         }, {            'file': 'http://www.youtube.com/watch?v=o6VdsHKLpmI',            'title': 'Snippets ',            'duration': '1455',            'description': 'from the concert'         }     ] , repeat: 'list' 
 				  });
+                 
 				</script>
 		
 		</div>
@@ -63,6 +58,19 @@
 		<p>Quisque sed orci ut lacus viverra interdum ornare sed est. Donec porta, erat eu pretium luctus, leo augue sodales....<a href="#" >read more</a></p>
 	    </div>
 	</div>
+    	<ul class="ui-tabs-nav">  
+        <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><img src="/static/img/playslider/image1-small.jpg" alt="" /><span>15+ Excellent High Speed Photographs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><img src="/static/img/playslider/image2-small.jpg" alt="" /><span>20 Beautiful Long Exposure Photographs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><img src="/static/img/playslider/image3-small.jpg" alt="" /><span>35 Amazing Logo Designs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
+		<li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
+		<li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
+         <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><img src="/static/img/playslider/image1-small.jpg" alt="" /><span>15+ Excellent High Speed Photographs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><img src="/static/img/playslider/image2-small.jpg" alt="" /><span>20 Beautiful Long Exposure Photographs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><img src="/static/img/playslider/image3-small.jpg" alt="" /><span>35 Amazing Logo Designs</span></a></li>  
+        <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="/static/img/playslider/image4-small.jpg" alt="" /><span>Create a Vintage Photograph in Photoshop</span></a></li>  
+		
+    </ul>  
 </div>
 <script>
 $(document).ready(function(){
