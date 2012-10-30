@@ -13,7 +13,7 @@
 					<div id="Content_Area_loginregister">
 							<div id="tab7">
 								<h2>Sign In</h2>
-									<form method="post" action="/a/login/">
+									<form method="post" action="{% url profiles:login %}">
 {% csrf_token %}
 										<fieldset id="inputs">
 											<input id="id_username" type="text" name="username" placeholder="Your username" required>   

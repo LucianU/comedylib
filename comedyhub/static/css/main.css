@@ -254,7 +254,7 @@ color:#235D79;
 
 .logincontent-user {
 float:right;
-width:302px;
+width:220px;
 height:56px;
 margin-right:5px;
 -webkit-border-bottom-left-radius: 10px;
@@ -278,11 +278,11 @@ width:45px;
 height:35px;
 }
 .welcome {
-margin:8px 3px 0px 0px;
+margin:8px 8px 0px 0px;
 float:right;
-width:125px;
-height:38px;
-/*border: 1px solid #fff;*/
+width:145px;
+height:40px;
+
 }
 .welcome p{
 font: 12px Arial, Helvetica, sans-serif;
@@ -290,7 +290,7 @@ padding:3px;
 text-align:right;
 float:right;
 height:12px;
-width:118px;
+width:145px;
 }
 .welcome span{
 color: #63ADD0;
@@ -1431,10 +1431,11 @@ border-radius: 10px;
 }
 #collection_detail .videos{
 	width: 664px;
+	height:670px;
 	float: left;
 	clear: none;
-	/*border:1px solid #fff;*/
-	min-height:200px;
+	border:1px solid #fff;
+	
 	/* margin:4px 0px 0px 1px;*/
 }
 #video_detail{
@@ -1598,6 +1599,17 @@ text-align:center;
 	border:1px solid #fff;
 	margin:1px 0px 0px 5px;*/
 }
+#video_detail .comments{
+	width: 690px;
+	min-height:60px;
+	float: left;
+	clear: none;
+	padding:5px;
+	/*background:#181919;*/
+	/*box-shadow: 0px 0px 20px #333;*/
+	border:1px solid #fff;
+	margin:1px 0px 0px 5px;*/
+}
 #video_detail .social{
 	width: 690px;
 	height:50px;
@@ -1610,51 +1622,54 @@ padding:5px;
 	 border:1px solid #fff;
 	/* margin:4px 0px 0px 1px;*/
 }
-#video_detail .social .likerating{
-float:left;
-width:300px;
-height:30px;
+
+#sociallist{position:relative;}
+#sociallist .social-share{
+width:200px;
+height:33px;
 border:1px solid #fff;
+}
+#sociallist li{
+float:left;
+margin-right:0px;
 padding:0;
-}
+list-style:none;
 
-#video_detail .social .likerating .uplike  {
+top:0;
+}
+#sociallist li a{
+
+height:33px;
 display:block;
-background:url(/static/img/likesprite.png) no-repeat 0 30px;
-height:19px;
-width:19px;
-display:block;
-color:#555555;
-font-weight:bold;
-line-height:29px;
-	text-indent: -9999px;
-text-decoration:none;
+background-image: url(/static/img/navsprites.png);
+}
+#sociallist .like a{
+background-position:0px 0px;
+width:82px;
+}
+#sociallist .like a:hover{
+background-position:0px -34px;
+}
+#sociallist .dislike a{
+background-position:100px 0px;
+width:38px;
+}
+#sociallist .dislike a:hover{
+background-position:100px -34px;
+width:38px;
+}
+#sociallist .playlist a{
+background-position:0px -67px;
+width:120px;
+}
+#sociallist .playlist a:hover{
+background-position:0px -100px;
+width:120px;
+}
+.leftmargin20{
+margin-left:20px;
 }
 
-#video_detail .social .likerating .uplike span{
-
-color:#eee;
-text-transform:uppercase;
-height:19px;
-width:19px;
-text-indent:30px;
-display:block;
-}
-
-#video_detail .social .likerating .ratingbar{
-}
-#video_detail .social .likerating .downlike{
-}
-#video_detail .comment{
-margin-top:2px;
-	width: 690px;
-	height:90px;
-	float: left;
-	clear: none;
-	margin-left:5px;
-	padding:5px;	
-	border:1px solid #fff;
-}
 
 .clear {
 	clear:both;
@@ -1969,11 +1984,11 @@ width: 990px;
 }
 .detail-pagination{
 width: 664px;
-	float: left;
+	float: right;
 	clear: none;
 	margin:0;
 	text-align:center;
-	padding:10px 5px 5px 5px;
+	padding:10px 0px 5px 0px;
 }
 
 .collection-content{

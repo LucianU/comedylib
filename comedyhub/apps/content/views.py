@@ -43,7 +43,7 @@ class CollectionDetailView(DetailView):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
         collection = context['collection']
         videos_list = collection.videos.all()
-        paginator = Paginator(videos_list, 2)
+        paginator = Paginator(videos_list, 20)
         page = self.request.GET.get('page')
         try:
             videos = paginator.page(page)

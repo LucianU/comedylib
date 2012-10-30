@@ -42,8 +42,8 @@
 					<a href=""><img src="/static/img/logo.jpg"></a>
 				</div>
 				<div class="welcome">
-					
-					<p>Howdy, <span> First Name </span></p>
+					{% include "profilemenu.html" %}
+				<!--	<p>Howdy, <span> First Name </span></p>
 					
 					<div class="logout">
 						<a href="/a/logout">Logout</a>
@@ -51,9 +51,9 @@
 					<div class="separator">|</div>
 					<div class="settings">
 						<a href="/settings">Settings</a>
-					</div>
+					</div> -->
 				</div>
-				<div class="tools">
+				<!--<div class="tools">
 					<div class="notifications">
 					
 					</div>
@@ -64,7 +64,7 @@
 					
 					</div>
 					
-				</div>
+				</div>  -->
 				
 			</div> <!--end logincontent-nouser-->
 		{% else %}
@@ -74,7 +74,7 @@
 						<li><a href="/a/login">Login</a></li>
 						<li><a href="/a/register">Register</a></li>
 					</ul>-->
-					{% include "login.html" %}
+					{% include "logindrop.html" %}
 				</div> <!--end register-->
 				<div class="why">
 					<a href="#">Why register?</a>
