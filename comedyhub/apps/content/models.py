@@ -33,7 +33,8 @@ class Collection(CreatedMixin):
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
-    duration = models.IntegerField(help_text="Expressed in seconds")
+    duration = models.CharField(max_length=20,
+                                help_text='Format hh:mm:ss or mm:ss')
     views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
 
