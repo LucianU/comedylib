@@ -38,6 +38,9 @@ class Video(CreatedMixin):
     views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
 
+    class Meta:
+        ordering =['-created']
+
     def __unicode__(self):
         return u"%s:%s" % (self.title, "%s..." % self.url[:50]
                            if len(self.url) > 50 else self.url)
