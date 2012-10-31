@@ -12,17 +12,17 @@
 					</ul>
 					<div id="Content_Area_loginregister">
 							<div id="tab7">
-								<h2>Sign In</h2>
+								<h2> </h2>
 									<form method="post" action="{% url profiles:login %}">
 {% csrf_token %}
 										<fieldset id="inputs">
-											<input id="id_username" type="text" name="username" placeholder="Your username" required>   
+											<input id="id_email" type="text" name="email" placeholder="Your email" required>   
 											<input id="id_password" type="password" name="password" placeholder="Password" required>
 										</fieldset>
 										<fieldset id="actions">
 											<input type="submit" id="submit" value="Log in">
 											<input type="hidden" name="next" value="" />
-											<label><input type="checkbox" checked="checked" value="remember"> Keep me signed in</label>
+											<label><input type="checkbox" value="remember"> Keep me signed in</label>
 										</fieldset>
 									</form>
 								<div class="cleared"></div>
@@ -37,7 +37,7 @@
 							</div>
 
 							<div id="tab8" style="display: none;"> 
-								<h2>Register</h2>
+								<h2> </h2>
 									<form>
 										<fieldset id="inputs">
 											<input id="name" type="text" name="Name" placeholder="Your Name" required>  

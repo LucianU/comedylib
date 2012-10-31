@@ -36,89 +36,18 @@
 		</div>
 	</div>
 	<div class="playlistfeature">
-    <h1>Playlists</h1>
-    
-	{% include "playslider.html" %}
-    
-	</div>
-	<!-- <div class="playlistuser">
-		<div class="title">
-		<p>User playlists</p>
-		</div>
-		<div class="moreplay">
-		<a href="/">See more...</a>
-		</div>
-		<div class="scrollcontent">
-			<ul class="playlist">  
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image1-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs dasda aslkdjal ksajdl alksjda laksjd laksjd fsdf sdf sdfs fsd fsdf sdf sdf sdf sdf sdf sdfl</a></div>
-						<div class="user"><a href="/">another.partisan </a></div>
-						<p class="nvideo">8 videos</p>
-					</div>
-				</li>
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image2-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs </a></div>
-						<div class="user"><a href="/">stef </a></div>
-						<p class="nvideo">120 videos</p>
-					</div>
-				</li> 
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image3-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs sdf sdfl</a></div>
-						<div class="user"><a href="/">luci </a></div>
-						<p class="nvideo">12 videos</p>
-					</div>
-				</li> 
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image4-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs dasda aslkdjal kssdf sdf sdf sdfl</a></div>
-						<div class="user"><a href="/">ap </a></div>
-						<p class="nvideo">2 videos</p>
-					</div>
-				</li> 
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image3-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs </a></div>
-						<div class="user"><a href="/">lucas </a></div>
-						<p class="nvideo">5 videos</p>
-					</div>
-				</li> 
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image2-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs dasda asl</a></div>
-						<div class="user"><a href="/">another.partisan </a></div>
-						<p class="nvideo">12 videos</p>
-					</div>
-				</li> 				
-				<li class="playlist-item" ><a href="/playlist"><img src="/static/img/playslider/image1-small.jpg" alt="" /></a>
-					<div class="itemcontent">
-						<div class="playtitle">
-						<a href="/playlist">15+ Excellent High Speed Photographs dasda asl</a></div>
-						<div class="user"><a href="/">lucas </a></div>
-						<p class="nvideo">12 videos</p>
-					</div>
-				</li> 			
-			</ul>  
-		</div>
-	</div>
-	-->
+		<h1>Playlists</h1>
+    	{% include "playslider.html" %}
+    </div>
 	<div class="newestvideos">
-			<div class="vids">
-				<div class="titlelatestvid">
+		<div class="vids">
+			<div class="titlelatestvid">
 					<p>Latest Videos</p>
-				</div>	
-				<div class="morelatestvid">
-					<a href="/">See more videos</a>
-				</div>		
-							<div id="v1" class="divvid">
+			</div>	
+			<div class="morelatestvid">
+				<a href="/">See more videos</a>
+			</div>		
+						<!--	<div id="v1" class="divvid">
 							<div id="thumbvid">
 							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
 							</div>
@@ -131,176 +60,36 @@
 							<div id="nviews">
 								100000000 views
 							</div>
+							</div> -->
+				{% for newvideo in videos %}
+					<div class="collection-content">
+						<div class="coll-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+								<img src="{{ newvideo.picture.url }}">
+							</a>
+						</div>
+						<div class="coll-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">{{ newvideo.title }}</a>
+						</div>
+						<div class="coll-detail-content">
+							<div class="vlength">
+							<p>{{ newvideo.duration }}</p> <span>Length</span>
 							</div>
+							<div class="nviews">
+								<p>{{ newvideo.views }}</p> <span>Views</span>
+							</div>
+							<div class="rating">
+							<p>78%</p>
+							<span>Rating</span>
+							</div>
+						</div>
+					</div>
+				{% endfor %}		
 							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								4 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
-							
-							<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div>
 				
 				
 				
-				</div> <!-- End of Tab Divs -->
+			</div> <!-- End of Tab Divs -->
 			<div class="ratedsocial">
 				<div class="rated">
 					<div class="title">
