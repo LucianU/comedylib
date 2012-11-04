@@ -38,9 +38,8 @@ class CustomAuthForm(forms.Form):
     Using this custom form to perform authentication with e-mail
     instead of username and also to add a 'remember' field
     """
-    email = forms.CharField(initial='Your email', max_length=254)
-    password = forms.CharField(initial='Your password', label="Password",
-                               widget=forms.PasswordInput)
+    email = forms.CharField(max_length=254)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)
     remember = forms.BooleanField(label='Keep me signed in', required=False)
 
     error_messages = {
