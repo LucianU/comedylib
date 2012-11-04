@@ -37,6 +37,7 @@ class Video(CreatedMixin):
                                 help_text='Format hh:mm:ss or mm:ss')
     views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
+    picture = models.ImageField(upload_to='videos', null=True, blank=True)
 
     class Meta:
         ordering =['-created']
