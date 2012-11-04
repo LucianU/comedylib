@@ -45,7 +45,7 @@
 				<!--	<p>Howdy, <span> First Name </span></p>
 					
 					<div class="logout">
-						<a href="/a/logout">Logout</a>
+            <a href="{% url accounts_logout %}">Logout</a>
 					</div>
 					<div class="separator">|</div>
 					<div class="settings">
@@ -70,8 +70,8 @@
 			<div class="logincontent-nouser">
 				<div id="register">	
 					<!--<ul>
-						<li><a href="/a/login">Login</a></li>
-						<li><a href="/a/register">Register</a></li>
+            <li><a href="{% url accounts_login %}">Login</a></li>
+            <li><a href="{% url registration_register %}">Register</a></li>
 					</ul>-->
 					{% include "logindrop.html" %}
 				</div> <!--end register-->
