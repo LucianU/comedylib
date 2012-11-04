@@ -30,11 +30,22 @@
 		<div class="titlecontent"> 
 			<h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
 		</div>
+		<div class="headnav">
+			<div id="nav">
+				<ul class="nav">
+					<li><a href="/comedians">Comedians</a></li>
+					<li><a href="/shows">Shows</a></li>
+					<li><a href="/movies">Movies</a></li>
+					<li class="end"><a href="/playlists">Playlists</a></li>
+				</ul>
+			</div> <!--end nav-->
+		</div>
 		<div class="searchcontent">
 			<div id="search">
 				{% include "search.html" %}
 			</div> <!--end search-->
 		</div>
+		
 		{% if request.user.is_authenticated %}
 			<div class="logincontent-user">
 				<div class="avatar">
@@ -73,7 +84,7 @@
             <li><a href="{% url accounts_login %}">Login</a></li>
             <li><a href="{% url registration_register %}">Register</a></li>
 					</ul>-->
-					{% include "logindrop.html" %}
+					{% include "registration/logindrop.html" %}
 				</div> <!--end register-->
 				<div class="why">
 					<a href="#">Why register?</a>
@@ -81,16 +92,7 @@
 			</div> <!--end logincontent-nouser-->
 		{% endif %}
 	</div>
-	<div class="headnav">
-		<div id="nav">
-			<ul class="nav">
-				<li><a href="/comedians">Comedians</a></li>
-				<li><a href="/shows">Shows</a></li>
-				<li><a href="/movies">Movies</a></li>
-				<li class="end"><a href="/playlists">Playlists</a></li>
-			</ul>
-		</div> <!--end nav-->
-	</div>
+	
 	<div class="breadcrumbs" id="breadcrumbs">
 		<p>
 		{% for breadcrumb in request.breadcrumbs %}

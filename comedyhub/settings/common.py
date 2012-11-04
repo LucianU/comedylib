@@ -105,7 +105,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
-    "profiles.context_processors.accounts_forms",
+    "accounts.context_processors.accounts_forms",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -150,7 +150,7 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.facebook.FacebookBackend',
-    'profiles.backends.EmailAuthBackend',
+    'accounts.backends.EmailAuthBackend',
 )
 
 # social_auth
