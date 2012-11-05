@@ -7,7 +7,7 @@
 <div class="form-error">Your username and password didn't match. Please try again.</div>
 {% endif %}
 
-<form method="post" action="{% url profiles:login %}">
+<form method="post" action="{% url accounts_login %}">
 {% csrf_token %}
 <table>
 <tr>

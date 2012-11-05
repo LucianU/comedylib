@@ -105,7 +105,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
-    "profiles.context_processors.accounts_forms",
+    "accounts.context_processors.accounts_forms",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'social_auth',
     'south',
 
+    'accounts',
     'content',
     'profiles',
 )
@@ -149,14 +150,25 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.facebook.FacebookBackend',
-    'profiles.backends.EmailAuthBackend',
+    'accounts.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # social_auth
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details',
+)
 # registration
 ACCOUNT_ACTIVATION_DAYS = 3
 

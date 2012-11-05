@@ -1,8 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
 from comedyhub.mixins import CreatedMixin
+from content.utils import set_video_thumb
 
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
@@ -37,6 +40,7 @@ class Video(CreatedMixin):
                                 help_text='Format hh:mm:ss or mm:ss')
     views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
+    picture = models.ImageField(upload_to='videos', null=True, blank=True)
 
     class Meta:
         ordering =['-created']
@@ -49,3 +53,11 @@ class Video(CreatedMixin):
         coll_url = reverse('content:%s' % self.collection.get_role_display(),
                            args=[self.collection.slug, self.collection.id])
         return '%s/%s' % (coll_url, self.id)
+
+
+@receiver(post_save, sender=Video)
+def set_thumbnail(sender, **kwargs):
+    video = kwargs.get('instance')
+    if video.picture.name is None:
+        thumbed_vid = set_video_thumb(video)
+        thumbed_vid.save()

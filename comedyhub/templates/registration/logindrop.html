@@ -13,7 +13,7 @@
 					<div id="Content_Area_loginregister">
 							<div id="tab7">
 								<h2> </h2>
-									<form method="post" action="{% url profiles:login %}">
+									<form method="post" action="{% url accounts_login %}">
 {% csrf_token %}
 										<fieldset id="inputs">
 											<input id="id_email" type="text" name="email" placeholder="Your email" required>   
@@ -31,8 +31,8 @@
 									<span class="or">&nbsp; OR &nbsp;</span>
 									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<div class="cleared"></div>
-									<a href="#" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
-									<a href="#" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
+                  <a href="{% url socialauth_begin 'facebook' %}" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
+                  <a href="{% url socialauth_begin 'google-oauth2' %}" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
 								</div>
 							</div>
 
