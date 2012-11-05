@@ -20,8 +20,17 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-tabs-rotate.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
     <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
+	
   </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=222979954499652";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="main">
   <div class="cleared reset-box"></div>
     <div class="header">

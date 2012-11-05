@@ -22,6 +22,7 @@ navlogin #login {
 
 navlogin #login-trigger,
 navlogin #signup a {
+  font:1em Arial, Helvetica, sans-serif;
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -47,7 +48,7 @@ navlogin #login-trigger {
 
 }
 navlogin #login-trigger span{
-  font:11px Arial, Helvetica, sans-serif;
+  font:0.688em Arial, Helvetica, sans-serif;
 
 }
 
@@ -129,7 +130,7 @@ navlogin li #login-content {
 	display:inline-block;
 	color:#eee;
 	font-family:arial;
-	font-size:15px;
+	font-size:0.938em;
 	font-weight:bold;
 	padding:6px 20px;
 	text-decoration:none;
@@ -188,7 +189,7 @@ navlogin #login #login-content #loginregistermenu ul {
 list-style: none;
     padding: 0px 0 0px 0;
     margin: -5px 0px 0px -5px;
-    font: bold 14px  Arial, Helvetica, sans-serif;
+    font: bold 1.125em  Arial, Helvetica, sans-serif;
 	float:left;
 	border-bottom:none;
 	background:none;
@@ -263,7 +264,7 @@ border: 1px solid #A52D00;
 }
 
 navlogin #login #login-content #loginregistermenu p { 
-font: 12px Arial, Helvetica, sans-serif;
+font: 0.75em Arial, Helvetica, sans-serif;
 padding: 5px; 
 padding-top:10px;
 color:#099502;
@@ -330,7 +331,7 @@ margin:3px;
 width:135px;
  padding:5px;
   text-align:left;
-   font: bold 1.1em Arial, Helvetica, sans-serif;
+   font: bold 1.125em Arial, Helvetica, sans-serif;
   }
 
 navprofile #menu-trigger {
@@ -378,41 +379,59 @@ navprofile li #menu-content {
 
   right: 0;
   width: 145px; 
-   min-height:63px;
+   min-height:108px; /*63*/
  z-index: 9999;
 }
 navprofile li #menu-content a{
+display:block;
+width:145px;
+height:30px;
 text-align:left;
-text-indent:10px;
+text-indent:35px;
 font: bold 1em Arial, Helvetica, sans-serif;
 margin-left:0px;
-padding:9px 0 9px 3px;
+padding:2px 0 0 0;
 float:right;
 clear:both;
-width:145px;
-
+/*border:1px solid #000;*/
 text-transform:uppercase;
 color:#3CA0D0;
 }
-navprofile li #menu-content a:hover{
+navprofile li #menu-content a span{
+color:#3CA0D0;
+}
 
+navprofile li #menu-content a:hover{
  color:#FFC640;
 }
+navprofile li #menu-content a:hover span{
+ color:#FFC640;
+}
+
+.profile-icon{
+padding:0;list-style:none;position:absolute;
+background:url(/static/img/menutrigger.png) 95px 30px;
+height:30px;
+line-height:30px;
+width:30px;
+
+display:block;
+}
 .settings-icon{
-padding:0;list-style:none;position:absolute;top:0;
-background:url(/static/img/menutrigger.png) 45px 0px;
+padding:0;list-style:none;position:absolute;
+background:url(/static/img/menutrigger.png) 95px 0px;
 height:30px;
 line-height:27px;
 width:27px;
-text-indent:30px;
+
 display:block;
 }
 .logout-icon{
 padding:0;list-style:none;position:absolute;
-background:url(/static/img/menutrigger.png) 45px 30px;
+background:url(/static/img/menutrigger.png) 64px 0px;
 height:30px;
 line-height:27px;
 width:27px;
-text-indent:30px;
+
 display:block;
 }
