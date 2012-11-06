@@ -13,7 +13,7 @@
 					<div id="Content_Area_loginregister">
 							<div id="tab7">
 								<h2> </h2>
-									<form method="post" action="{% url accounts_login %}">
+                  <form method="post" action="{% url accounts_login %}">
 {% csrf_token %}
 										<fieldset id="inputs">
 											<input id="id_email" type="text" name="email" placeholder="Your email" required>   
@@ -21,7 +21,7 @@
 										</fieldset>
 										<fieldset id="actions">
 											<input type="submit" id="submit" value="Log in">
-											<input type="hidden" name="next" value="" />
+                      <input type="hidden" name="next" value="{{ request.path }}" />
 											<label><input type="checkbox" value="remember"> Keep me signed in</label>
 										</fieldset>
 									</form>
@@ -31,8 +31,8 @@
 									<span class="or">&nbsp; OR &nbsp;</span>
 									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<div class="cleared"></div>
-                  <a href="{% url socialauth_begin 'facebook' %}" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
-                  <a href="{% url socialauth_begin 'google-oauth2' %}" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
+                  <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
+                  <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
 								</div>
 							</div>
 
