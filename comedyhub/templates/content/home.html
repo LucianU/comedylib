@@ -4,9 +4,6 @@
 <!-- #playlists -->
 <div id="playlistcontent">
 	<div class="featured">
-		<!--<div class="title">
-		<p>Featured</p>
-		</div> -->
 		<div class="comedian">
 			<div class="ribbon"></div>
 			<div class="title">
@@ -14,6 +11,13 @@
 			</div>
 			<div class="content">
 			<img src="{{ STATIC_URL }}img/featured/featuredcomedian.jpg" alt=""  >
+			<div class="info">
+								<h1>Nume Comic</h1>
+								<p class="description">
+									This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+								</p>
+								
+							</div>
 			</div>
 		</div>
 		<div class="show">
@@ -35,18 +39,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="playlistfeature">
-		<h1>Playlists</h1>
-    	{% include "playslider.html" %}
-    </div>
-	<div class="newestvideos">
-		<div class="vids">
-			<div class="titlelatestvid">
-					<p>Latest Videos</p>
+
+	<div class="randoms">
+		<div class="playlists">
+			<div class="randomplay">
+					<p>Random <span>Playlists</span></p>
 			</div>	
-			<div class="morelatestvid">
-				<a href="/">See more videos</a>
-			</div>		
+					
 						<!--	<div id="v1" class="divvid">
 							<div id="thumbvid">
 							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
@@ -61,45 +60,214 @@
 								100000000 views
 							</div>
 							</div> -->
-				{% for newvideo in videos %}
-					<div class="collection-content">
-						<div class="coll-pic-content">
+				<!-- for newvideo in videos %} -->
+					<div class="playlist-content">
+						<div class="play-pic-content">
 							<a href="{{ newvideo.get_absolute_url }}">
-								<img src="{{ newvideo.picture.url }}">
+								<img src="/static/img/playlistimage.jpg">
 							</a>
 						</div>
-						<div class="coll-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">{{ newvideo.title }}</a>
-						</div>
-						<div class="coll-detail-content">
-							<div class="vlength">
-							<p>{{ newvideo.duration }}</p> <span>Length</span>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
 							</div>
-							<div class="nviews">
-								<p>{{ newvideo.views }}</p> <span>Views</span>
-							</div>
-							<div class="rating">
-							<p>78%</p>
-							<span>Rating</span>
-							</div>
-						</div>
-					</div>
-				{% endfor %}		
+							<div class="user">
+							<span>User</span><a href="#">username</p>
 							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+						</div>
+						
+					</div>
+				<!-- endfor %}	-->	
+				<div class="playlist-content">
+						<div class="play-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+								<img src="/static/img/playlistimage.jpg">
+							</a>
+						</div>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
+							</div>
+							<div class="user">
+							<span>User</span><a href="#">username</p>
+							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+						</div>
+						
+					</div>
+						<div class="playlist-content">
+						<div class="play-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+								<img src="/static/img/playlistimage.jpg">
+							</a>
+						</div>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
+							</div>
+							<div class="user">
+							<span>User</span><a href="#">username</p>
+							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+						</div>
+						
+					</div>
+					<div class="playlist-content">
+						<div class="play-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+							<img src="/static/img/playlistimage.jpg">
+							</a>
+						</div>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
+							</div>
+							<div class="user">
+							<span>User</span><a href="#">username</p>
+							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe </a>
+						</div>
+						
+					</div>
+						<div class="playlist-content">
+						<div class="play-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+								<img src="/static/img/playlistimage.jpg">
+							</a>
+						</div>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
+							</div>
+							<div class="user">
+							<span>User</span><a href="#">username</p>
+							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+						</div>
+						
+					</div>
+					<div class="playlist-content">
+						<div class="play-pic-content">
+							<a href="{{ newvideo.get_absolute_url }}">
+								<img src="/static/img/playlistimage.jpg">
+							</a>
+						</div>
+						<div class="play-detail-content">
+							<div class="nvideo">
+							<span>Videos</span><div class="paragraph">8</div> 
+							</div>
+							<div class="user">
+							<span>User</span><a href="#">username</p>
+							
+							</div>
+						</div>
+						<div class="play-name-content">
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe </a>
+						</div>
+			
+					</div> <!-- End of Tab Divs -->
+			
 				
-				
-				
-			</div> <!-- End of Tab Divs -->
-			<div class="ratedsocial">
-				<div class="rated">
-					<div class="title">
-					<p>Top Rated</p>
-					</div>	
-				</div>	
-				<div class="social">
-					<img src="{{ STATIC_URL }}img/fbsocial.jpg" alt=""  >
-				</div>	
-			</div>	
+		</div>
+		<div class="social">
+					<div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="251" data-height="307" data-colorscheme="dark" data-show-faces="true" data-border-color="#444444" data-stream="false" data-header="false"></div>
+		</div>	
+	</div>
+	<div class="toprated">
+	<p><span>Top Rated </span>Videos</p>
+		<div class="comedian">
+		<p>Comedians</p>
+			<ul>
+				<li>
+					<a href="/c"> 
+						<div class="content">
+							<img src="/static/img/playlistimage.jpg" alt="/">
+							<div class="info">
+								<h1>Nume Comic</h1>
+								<div class="videos">
+									<span>Videos</span>12
+								</div>
+								<div class="ratings">
+									<span>Rating</span>75% based on 1250 votes
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+
+			</ul>
+		
+		</div>
+		
+		<div class="shows">
+		<p>Shows</p>
+		<ul>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+
+			</ul>
+		</div>
+		
+		<div class="movies">
+		<p>Movies</p>
+		<ul>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+				<li>
+					<a href=""> 
+					
+					</a>
+				</li>
+
+			</ul>
+		</div>
 	</div>
 </div>
 
