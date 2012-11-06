@@ -28,30 +28,91 @@
 		affiliate
 	</div><!-- end affiliate -->
 	<div class="social">
-	<ul id="sociallist">
-		<li class="like"><a href="" ></a></li>
-		<li class="dislike"><a href="" ></a></li>
-		<li class="playlist leftmargin20"><a href="#" ></a></li>
-		<li><div class="social-share leftmargin20">
-			<p><span>Share</span> this video</p>
-			<div class="faceb">
+	
+		<div class="rating">
+			<div class="like" title="Like">
+			{% if request.user.is_authenticated %}
+				<a href="/a"></a>
+				{% else %}
+				<a class="fancybox" href="#loginerror"></a>
+				{% endif %}
+			</div>
+			<div class="rateholder">
+				<span class="average">78%</span>
+				<span class="nvotes">99999 votes</span>
+			</div>	
+			<div class="dislike" title="Not like">
+				{% if request.user.is_authenticated %}
+				<a href="/b"></a>
+				{% else %}
+				<a class="fancybox" href="#loginerror"></a>
+				{% endif %}
+			</div>
+		</div>
 			
-			</div>
-			<div class="google">
-				
-			</div>
-			<div class="redd">
+		
+		<!-- verify auth to enable rating-->
+		<ul id="sociallist" >
+			{% if request.user.is_authenticated %}
+				<li id="addplay-btn" class="playlist leftmargin20">
+					<a href="#" title="Add this video to a playlist">Add to Playlist</a>
+				</li>
+			{% else %}
+				<li class="playlist leftmargin20">
+					<a class="fancybox" href="#loginerror" title="Add this video to a playlist">Add to Playlist</a>
+				</li>
+			{% endif %}
+			<li>
+				<div class="social-share leftmargin20">
+					<p><span>Share</span> this video</p>
+					
+					<a href="/c" class="faceb" title="Share to Facebook"></a>
+					
+						<a href="/d" class="google" title="Share to Google+"></a>
+					
+					<a href="/e" class="redd" title="Share to Reddit"></a>
+					
+				</div>
+			</li>
+		</ul > 
+		<div id="addtoplaycontent" class="addtoplaylist">
+		Here Will be the list of playlists where you can add this video. Also, here should be created new playlists
+		</div>
+		<div id="loginerror" style="width:300px;display: none;">
+		<h3>Error</h3>
+		<p>
+			Not logged in.
 			
-			</div>
-		</div></li>
-	</ul > 
-		<!--<div class="likerating">
-			<a href="#" class="uplike">
-				<span >Like</span
-			</a>
-			<div class="ratingbar"></div>
-			<a href="#" class="downlike"></a>
-		</div> -->
+		</p>
+		</div>
+<script type="text/javascript">
+
+(function($) {
+    $("#addplay-btn").click(function() {
+        if ( $("#addtoplaycontent").is(":hidden") ) {
+            $("#addtoplaycontent").slideDown("normal"); 
+			 } else {
+            $("#addtoplaycontent").slideUp("normal");
+        }
+    });
+})(jQuery);
+$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 400,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
 	</div><!-- end social -->
 	<div class="comments">
 		Comments
