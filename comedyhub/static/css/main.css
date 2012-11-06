@@ -1480,7 +1480,9 @@ float:left;
 #sociallist{position:relative;}
 
 #sociallist .social-share{
-width:385px;
+
+margin-left:10px;
+width:285px;
 height:33px;
 /*border:1px solid #444;*/
 }
@@ -1496,8 +1498,9 @@ font: bold 1em Arial, Helvetica, Sans-serif;
 color: #FFC640;
 }
 #sociallist .social-share .google {
-background-image: url(/static/img/social-sprite.png);
-background-position:142px 142px;
+z-index:100;
+/*background-image: url(/static/img/social-sprite.png);
+background-position:142px 142px;*/
 margin:4px;
 margin-top:0px;
 float:left;
@@ -1507,6 +1510,7 @@ height:33px;
 }
 
 #sociallist .social-share .faceb {
+z-index:100;
 background-image: url(/static/img/social-sprite.png);
 background-position:107px 176px;
 margin:4px;
@@ -1517,6 +1521,7 @@ height:33px;
 /*border:1px solid #fff;*/
 }
 #sociallist .social-share .redd {
+z-index:200;
 background-image: url(/static/img/social-sprite.png);
 background-position:107px 107px;
 margin:4px;
@@ -1632,6 +1637,24 @@ text-shadow: 1px 1px #111;
 border:1px solid #333;
 background:#222;
 width:120px;
+}
+#sociallist .bookmark a{
+margin-left:10px;
+text-transform:uppercase;
+text-align:center;
+line-height:33px;
+font-size:12px;
+color:#eee;
+background:#333;
+border:1px solid #555;
+width:80px;
+text-shadow: 1px 1px #111;
+}
+#sociallist .bookmark a:hover{
+/*background-position:0px -100px;*/
+border:1px solid #333;
+background:#222;
+width:80px;
 }
 .leftmargin20{
 margin-left:20px;

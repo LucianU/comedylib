@@ -3,6 +3,7 @@
 {% block title %}{{ video.title }}{% endblock %}
 
 {% block content %}
+
 <div id="video_detail">
 	<div class="video">
 		<div class="mediaplayer">
@@ -57,21 +58,48 @@
 				<li id="addplay-btn" class="playlist leftmargin20">
 					<a href="#" title="Add this video to a playlist">Add to Playlist</a>
 				</li>
+				<li class="bookmark">
+					<a href="#" title="Save this video to watch later">Bookmark</a>
+				</li>
 			{% else %}
 				<li class="playlist leftmargin20">
 					<a class="fancybox" href="#loginerror" >Add to Playlist</a>
 				</li>
+				<li class="bookmark">
+					<a class="fancybox" href="#loginerror" >Bookmark</a>
+				</li>
 			{% endif %}
 			<li>
-				<div class="social-share leftmargin20">
+				<div class="social-share">
 					<p><span>Share</span> this video</p>
-					
-					<a href="/c" class="faceb" title="Share to Facebook"></a>
-					
-						<a href="/d" class="google" title="Share to Google+"></a>
-					
-					<a href="/e" class="redd" title="Share to Reddit"></a>
-					
+					<!-- Facebook button-->
+					<a href="#" class="faceb" id="fb_share_btn" title="Share to Facebook"></a>
+					<!-- Google button-->
+					<a href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="google"><img
+  src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/>
+					</a>
+					<!-- Reddit button-->				
+					<a href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=550');return false;" class="redd" title="Share to Reddit"></a>
+				
+						<script type="text/javascript">
+							$(document).ready(function(){
+							$('#fb_share_btn').click(function(e){
+							e.preventDefault();
+							FB.ui(
+							{
+							method: 'feed',
+							name: '{{video.collection.name}} - {{ video.title}}',
+							link: '{{ request.get_host }}{{ request.path }}',
+							picture: '{{ request.get_host }}{{ video.picture.url }}',
+							caption: '{{ request.get_host }}{{ request.path }}',
+							description: 'Watch more {{video.collection.name}} videos at {{ request.get_host }}, the biggest comedy collection.',
+							message: ''
+							});
+							});
+							});
+						</script>
 				</div>
 			</li>
 		</ul > 
@@ -80,11 +108,21 @@
 		</div>
 		<div id="loginerror" style="width:300px;display: none;">
 		<h3>Error</h3>
-		<p>
-			Not logged in.
+		
+			{% if form.errors %}
+			<div class="form-error">Your username and password didn't match. Please try again.</div>
+			{% endif %}
+
+			<form method="post" action="{% url accounts_login %}">
+			{% csrf_token %}
+			{{login_form}}
+			<div class="submit">
+			<input type="submit" id="submit" value="Login" />
+			</div>
+			<input type="hidden" name="next" value="{{ request.path }}" />
+			</form>
+		</div> <!-- end loginerror-->
 			
-		</p>
-		</div>
 <script type="text/javascript">
 
 (function($) {
