@@ -22,8 +22,17 @@
 				</script>
 		</div>
 	</div> <!-- end video-->
+    <h4>Related</h4>
 	<div class="video-related">
-		related
+        {% load thumbnail %}
+        <ul>
+        {% for rel_video in related_videos %}
+            <li> <a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 50x50 crop %}" /></a>
+                 <a href="{{ rel_video.get_absolute_url }}">{{ rel_video.title }}</a></li>
+        {% empty %}
+            <p>No related videos</p>
+        {% endfor %}
+        </ul>
 	</div><!-- end video-related -->
 	<div class="affiliate">
 		affiliate

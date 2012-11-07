@@ -199,3 +199,7 @@ LOGGING = {
         },
     }
 }
+
+# Specifies the number of related videos that should be
+# displayed on the page
+RELATED_VIDS_NO = 12
