@@ -6,7 +6,9 @@
 <div id="collection_detail">
 	<div class="info"id="info">
 		<div class="image">
-			<img src="{{ collection.picture.url }}" width="300px" height="200px">
+		{% load thumbnail %}
+				<img src="{% thumbnail collection.picture 300x200 crop %}">
+			<!-- <img src="{ collection.picture.url }" width="300px" height="200px">-->
 		</div>
 		<div class="basic">
 			<h1>{{ collection.name }}</h1>
