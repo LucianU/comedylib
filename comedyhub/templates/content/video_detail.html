@@ -22,8 +22,17 @@
 				</script>
 		</div>
 	</div> <!-- end video-->
+    <h4>Related</h4>
 	<div class="video-related">
-		related
+        {% load thumbnail %}
+        <ul>
+        {% for rel_video in related_videos %}
+            <li> <a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 50x50 crop %}" /></a>
+                 <a href="{{ rel_video.get_absolute_url }}">{{ rel_video.title }}</a></li>
+        {% empty %}
+            <p>No related videos</p>
+        {% endfor %}
+        </ul>
 	</div><!-- end video-related -->
 	<div class="affiliate">
 		affiliate
@@ -154,6 +163,28 @@ $(document).ready(function() {
 	</div><!-- end social -->
 	<div class="comments">
 		Comments
+        {% load comments %}
+        {% get_comment_count for video as comment_count %}
+        {% if comment_count %}
+            <span>{{ comment_count }} comments</span>
+        {% endif %}
+        {% render_comment_list for video %}
+        {% if request.user.is_authenticated %}
+            {% get_comment_form for video as comm_form %}
+            <form action="{% comment_form_target %}" method="POST">
+                {% csrf_token %}
+                {{ comm_form.comment }}
+                {{ comm_form.honeypot }}
+                {{ comm_form.content_type }}
+                {{ comm_form.object_pk }}
+                {{ comm_form.timestamp }}
+                {{ comm_form.security_hash }}
+                <input type="hidden" name="next" value="{{ video.get_absolute_url }}" />
+                <input type="submit" value="Add comment" id="id_submit" />
+            </form>
+        {% else %}
+            <p>Please <a href="{% url accounts_login %}?next={{ request.path }}">log in</a> to leave a comment.</p>
+        {% endif %}
 	</div><!-- end comments -->
 </div> <!-- end video detail-->
 	

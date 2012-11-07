@@ -129,6 +129,7 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.admin',
+    'django.contrib.comments',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -198,3 +199,7 @@ LOGGING = {
         },
     }
 }
+
+# Specifies the number of related videos that should be
+# displayed on the page
+RELATED_VIDS_NO = 12

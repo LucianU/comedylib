@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^a/', include('accounts.urls')),
     url(r'^u/', include('profiles.urls')),
+    url(r'^c/', include('django.contrib.comments.urls')),
     url(r'^', include('content.urls', namespace='content')),
 )
 

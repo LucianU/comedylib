@@ -1,14 +1,18 @@
 import json
+import random
 
+from django.conf import settings
 from django.core.exceptions import SuspiciousOperation
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View, TemplateView, ListView, DetailView
 
 from content.models import Collection, Video
+from profiles.models import Playlist
 
 class Home(TemplateView):
     template_name = 'content/home.html'
@@ -80,6 +84,25 @@ class VideoDetail(DetailView):
         video.views += 1
         video.save()
         return video
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoDetail, self).get_context_data(**kwargs)
+        video = context['video']
+        # If we are in a playlist, we send all the other videos
+        # belonging to this playlist
+        if 'pl' in kwargs:
+            playlist = get_object_or_404(Playlist, id=kwargs['pl'])
+            collection_vids = playlist.videos.all().exclude(id=video.id)
+            context['related_videos'] = collection_vids
+        else:
+            collection = video.collection
+            collection_vids = collection.videos.all().exclude(id=video.id)
+            if len(collection_vids) < settings.RELATED_VIDS_NO:
+                context['related_videos'] = collection_vids
+            else:
+                context['related_videos'] = random.sample(collection_vids, 12)
+
+        return context
 
     def render_to_response(self, context, **response_kwargs):
         breadcrumbs = [(context['video'].title, "")]
