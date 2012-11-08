@@ -30,9 +30,10 @@
 									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<span class="or">&nbsp; OR &nbsp;</span>
 									<span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-									<div class="cleared"></div>
-                  <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" id="fbtnlnk" class="socialsign"><img src="/static/img/fbsign.jpg"></a>
-                  <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" id="gbtnlnk" class="socialsign"><img src="/static/img/googlesign.jpg"></a>
+									<div class="centersocial">
+		<a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" id="fbtnlnk" class="socialsign"><img src="/static/img/fbbtn.png"></a>
+		<a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" id="gbtnlnk" class="socialsign"><img src="/static/img/gbtn.png"></a>
+	</div>
 								</div>
 							</div>
 
