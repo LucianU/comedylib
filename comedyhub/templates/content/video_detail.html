@@ -22,13 +22,25 @@
 				</script>
 		</div>
 	</div> <!-- end video-->
-    <h4>Related</h4>
+    
 	<div class="video-related">
+	<h4>Related</h4>
         {% load thumbnail %}
         <ul>
         {% for rel_video in related_videos %}
-            <li> <a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 50x50 crop %}" /></a>
-                 <a href="{{ rel_video.get_absolute_url }}">{{ rel_video.title }}</a></li>
+            <li>
+				
+					<div class="image">
+						<a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 90x60 crop %}" /></a>
+					</div>
+					<div class="title">
+						<a href="{{ rel_video.get_absolute_url }}">{{ rel_video.title }}</a>
+					</div>
+					<div class="nviews">
+						<p>{{ rel_video.views }} <span>views</span></p>
+					</div>
+				
+			</li>
         {% empty %}
             <p>No related videos</p>
         {% endfor %}
@@ -64,14 +76,14 @@
 		<!-- verify auth to enable rating-->
 		<ul id="sociallist" >
 			{% if request.user.is_authenticated %}
-				<li id="addplay-btn" class="playlist leftmargin20">
+				<li id="addplay-btn" class="playlist ">
 					<a href="#" title="Add this video to a playlist">Add to Playlist</a>
 				</li>
 				<li class="bookmark">
 					<a href="#" title="Save this video to watch later">Bookmark</a>
 				</li>
 			{% else %}
-				<li class="playlist leftmargin20">
+				<li class="playlist ">
 					<a class="fancybox" href="#loginerror" >Add to Playlist</a>
 				</li>
 				<li class="bookmark">
@@ -80,7 +92,7 @@
 			{% endif %}
 			<li>
 				<div class="social-share">
-					<p><span>Share</span> this video</p>
+					<p><span>Share</span> video</p>
 					<!-- Facebook button-->
 					<a href="#" class="faceb" id="fb_share_btn" title="Share to Facebook"></a>
 					<!-- Google button-->
@@ -115,22 +127,7 @@
 		<div id="addtoplaycontent" class="addtoplaylist">
 		Here Will be the list of playlists where you can add this video. Also, here should be created new playlists
 		</div>
-		<div id="loginerror" style="width:300px;display: none;">
-		<h3>Error</h3>
-		
-			{% if form.errors %}
-			<div class="form-error">Your username and password didn't match. Please try again.</div>
-			{% endif %}
-
-			<form method="post" action="{% url accounts_login %}">
-			{% csrf_token %}
-			{{login_form}}
-			<div class="submit">
-			<input type="submit" id="submit" value="Login" />
-			</div>
-			<input type="hidden" name="next" value="{{ request.path }}" />
-			</form>
-		</div> <!-- end loginerror-->
+	
 			
 <script type="text/javascript">
 
@@ -160,17 +157,20 @@ $(document).ready(function() {
 	});
 });
 </script>
+		<div class="nviews">
+			<p>{{ video.views }} <span>views</span></p>
+		</div>
 	</div><!-- end social -->
 	<div class="comments">
-		Comments
+		<h1>Comments</h1>
         {% load comments %}
         {% get_comment_count for video as comment_count %}
         {% if comment_count %}
             <span>{{ comment_count }} comments</span>
         {% endif %}
-        {% render_comment_list for video %}
-        {% if request.user.is_authenticated %}
+		 {% if request.user.is_authenticated %}
             {% get_comment_form for video as comm_form %}
+			<div class="commentform">
             <form action="{% comment_form_target %}" method="POST">
                 {% csrf_token %}
                 {{ comm_form.comment }}
@@ -182,11 +182,29 @@ $(document).ready(function() {
                 <input type="hidden" name="next" value="{{ video.get_absolute_url }}" />
                 <input type="submit" value="Add comment" id="id_submit" />
             </form>
+			</div>
         {% else %}
-            <p>Please <a href="{% url accounts_login %}?next={{ request.path }}">log in</a> to leave a comment.</p>
+            <p>Please <a class="fancybox" href="#loginerror">log in</a> to leave a comment.</p>
         {% endif %}
+		<div class="commentlist">
+		{% get_comment_list for video as comments %}
+		<ul>
+		{% for comment in comments %}
+			<li>
+				<p>{{comment.comment}}</p> 
+				<div class="head">
+					<a href="{{comment.user_url}}">{{comment.user_name}}</a>
+					{{comment.submit_date}}
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
+       </div>
 	</div><!-- end comments -->
 </div> <!-- end video detail-->
-	
+		<div id="loginerror" style="width:292px;display: none;">
+		<h3>You must be logged in to have access to this option</h3>
+			{% include "registration/login-er.html" %}
+			</div> <!-- end loginerror-->
 {% endblock %}
 
