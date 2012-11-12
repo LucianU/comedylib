@@ -125,15 +125,15 @@ class VideoLike(View):
     def post(self, request, *args, **kwargs):
         profile = request.user.profile
         video_id = request.POST.get('id')
-        like = request.POST.get('status')
+        feeling = request.POST.get('feeling')
         try:
             video = Video.objects.get(id=video_id)
         except Video.ObjectDoesNotExist:
             raise SuspiciousOperation
 
-        if like == 'L':
+        if feeling == 'L':
             profile.likes.add(video)
-        elif like == 'D':
+        elif feeling == 'D':
             profile.dislikes.add(video)
         else:
             raise SuspiciousOperation
