@@ -88,6 +88,17 @@ class VideoDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(VideoDetail, self).get_context_data(**kwargs)
         video = context['video']
+
+        # We check if this video is liked or disliked by the user
+        if self.request.user.is_authenticated():
+            profile = self.request.user.profile
+            if profile.likes.filter(id=video.id):
+                context['feeling'] = 'L'
+            elif profile.dislikes.filter(id=video.id):
+                context['feeling'] = 'D'
+            else:
+                context['feeling'] = None
+
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist
         if 'pl' in kwargs:
