@@ -46,7 +46,7 @@ class Playlists(Home):
 class VideoFeeling(View):
     def post(self, request, *args, **kwargs):
         profile = request.user.profile
-        video_id = request.POST.get('id')
+        video_id = request.POST.get('vid')
         feeling = request.POST.get('feeling')
         try:
             video = Video.objects.get(id=video_id)
