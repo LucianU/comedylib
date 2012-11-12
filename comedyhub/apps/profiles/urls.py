@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
-from profiles.views import Home, Playlists, VideoFeeling, AddToPlaylist
+from profiles.views import (Home, Playlists, VideoFeeling, AddToPlaylist,
+                            BookmarkPost)
 
 urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='own_home'),
@@ -9,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\w+)/playlists/$', Playlists.as_view(), name='user_playlists'),
     url(r'^vfeel$', VideoFeeling.as_view(), name='vid_feel'),
     url(r'^addtopl$', AddToPlaylist.as_view(), name='add_to_playlist'),
+    url(r'^bookmark$', BookmarkPost.as_view(), name='bookmark'),
 )

@@ -1,6 +1,8 @@
 import datetime
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -34,6 +36,16 @@ class Feeling(models.Model):
     video = models.ForeignKey(Video)
     name = models.CharField(max_length=5)
     timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
+
+
+class Bookmark(models.Model):
+    profile = models.ForeignKey(Profile, related_name='bookmarks')
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    post = generic.GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        return u"%s: %s" % (self.profile.user.username, self.post)
 
 
 @receiver(post_save, sender=User)

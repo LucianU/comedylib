@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, View
 
 from content.models import Video
-from profiles.models import Profile, Feeling, Playlist
+from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 class Home(TemplateView):
     template_name = 'profiles/home.html'
@@ -71,4 +71,21 @@ class AddToPlaylist(View):
 
         playlist.videos.add(video)
         playlist.save()
+        return HttpResponse(json.dumps({'status': 'OK'}))
+
+
+class BookmarkPost(View):
+    def post(self, request, *args, **kwargs):
+        objs = {
+            'V': Video,
+            'P': Playlist,
+        }
+        profile = request.user.profile
+        obj_id = request.POST.get('id')
+        try:
+            obj_model = objs[request.POST['obj']]
+        except KeyError:
+            raise SuspiciousOperation
+        obj = get_object_or_404(obj_model, id=obj_id)
+        Bookmark.objects.create(profile=profile, post=obj)
         return HttpResponse(json.dumps({'status': 'OK'}))
