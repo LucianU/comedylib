@@ -5,14 +5,13 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from comedyhub.mixins import CreatedMixin
 from content.models import Video
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
     feelings = models.ManyToManyField(Video, related_name='feelers',
                                       through='Feeling', null=True)
-    playlists = models.ManyToManyField(Video, related_name='list_makers',
-                                       through='Playlist', null=True)
     picture = models.ImageField(upload_to='profiles', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -21,9 +20,9 @@ class Profile(models.Model):
                                       self.playlists.all().count())
 
 
-class Playlist(models.Model):
-    profile = models.ForeignKey(Profile)
-    video = models.ForeignKey(Video)
+class Playlist(CreatedMixin):
+    profile = models.ForeignKey(Profile, related_name='playlists')
+    videos = models.ManyToManyField(Video, related_name='playlists', null=True)
     title = models.CharField(max_length=255)
 
     def __unicode__(self):
