@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, View
 
 from content.models import Video
-from profiles.models import Profile, Feeling
+from profiles.models import Profile, Feeling, Playlist
 
 class Home(TemplateView):
     template_name = 'profiles/home.html'
@@ -45,4 +45,18 @@ class VideoFeeling(View):
             raise SuspiciousOperation
 
         Feeling.objects.create(profile=profile, video=video, name=feeling)
+        return HttpResponse(json.dumps({'status': 'OK'}))
+
+
+class AddToPlaylist(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        video_id = request.POST.get('vid')
+        playlist_id = request.POST.get('pid')
+
+        video = get_object_or_404(Video, id=video_id)
+        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
+
+        playlist.videos.add(video)
+        playlist.save()
         return HttpResponse(json.dumps({'status': 'OK'}))
