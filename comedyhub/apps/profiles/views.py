@@ -1,8 +1,13 @@
 #-*- coding: utf-8 -*-
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+import json
 
-from profiles.models import Profile
+from django.core.exceptions import SuspiciousOperation
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, View
+
+from content.models import Video
+from profiles.models import Profile, Feeling
 
 class Home(TemplateView):
     template_name = 'profiles/home.html'
@@ -25,3 +30,19 @@ class Playlists(Home):
         context['playlists'] = context['profile'].playlists.all()
         return context
 
+
+class VideoFeeling(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        video_id = request.POST.get('id')
+        feeling = request.POST.get('feeling')
+        try:
+            video = Video.objects.get(id=video_id)
+        except Video.ObjectDoesNotExist:
+            raise SuspiciousOperation
+
+        if feeling not in ['L', 'D']:
+            raise SuspiciousOperation
+
+        Feeling.objects.create(profile=profile, video=video, name=feeling)
+        return HttpResponse(json.dumps({'status': 'OK'}))
