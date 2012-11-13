@@ -1,15 +1,12 @@
-import json
 import random
 
 from django.conf import settings
-from django.core.exceptions import SuspiciousOperation
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.views.generic import View, TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from content.models import Collection, Video
 from profiles.models import Playlist
@@ -88,6 +85,17 @@ class VideoDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(VideoDetail, self).get_context_data(**kwargs)
         video = context['video']
+
+        # We check if this video is liked or disliked by the user
+        if self.request.user.is_authenticated():
+            profile = self.request.user.profile
+            if profile.likes.filter(id=video.id):
+                context['feeling'] = 'L'
+            elif profile.dislikes.filter(id=video.id):
+                context['feeling'] = 'D'
+            else:
+                context['feeling'] = None
+
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist
         if 'pl' in kwargs:
@@ -120,23 +128,3 @@ class VideoDetail(DetailView):
         self.request.breadcrumbs(breadcrumbs)
         return super(VideoDetail, self).render_to_response(context,
                                                            **response_kwargs)
-
-class VideoLike(View):
-    def post(self, request, *args, **kwargs):
-        profile = request.user.profile
-        video_id = request.POST.get('id')
-        like = request.POST.get('status')
-        try:
-            video = Video.objects.get(id=video_id)
-        except Video.ObjectDoesNotExist:
-            raise SuspiciousOperation
-
-        if like == 'L':
-            profile.likes.add(video)
-        elif like == 'D':
-            profile.dislikes.add(video)
-        else:
-            raise SuspiciousOperation
-
-        profile.save()
-        return HttpResponse(json.dumps({'status': 'OK'}))
