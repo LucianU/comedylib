@@ -39,7 +39,10 @@ class Playlists(Home):
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
-        context['playlists'] = context['profile'].playlists.all()
+        if kwargs.get('g'):
+            context['playlists'] = Playlist.objects.all()
+        else:
+            context['playlists'] = context['profile'].playlists.all()
         return context
 
 
