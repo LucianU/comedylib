@@ -9,7 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView, ListView, DetailView
 
 from content.models import Collection, Video
-from profiles.models import Playlist
+from profiles.models import Playlist, Feeling
 
 class Home(TemplateView):
     template_name = 'content/home.html'
@@ -89,12 +89,12 @@ class VideoDetail(DetailView):
         # We check if this video is liked or disliked by the user
         if self.request.user.is_authenticated():
             profile = self.request.user.profile
-            if profile.likes.filter(id=video.id):
-                context['feeling'] = 'L'
-            elif profile.dislikes.filter(id=video.id):
-                context['feeling'] = 'D'
+            try:
+                feeling = Feeling.objects.get(profile=profile, video=video)
+            except Feeling.DoesNotExist:
+                context['vid_feel'] = None
             else:
-                context['feeling'] = None
+                context['vid_feel'] = feeling.name
 
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist
