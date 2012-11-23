@@ -1,0 +1,74 @@
+ {% extends "base.html" %}
+{% block content %}
+{% block title %}{{ page_title }}{% endblock %}
+ <script>
+    $(function() {
+        $( "#tabs" ).tabs();
+		 });
+    </script>
+<div id="firstpage">
+   	 <div class="user-sidebar">
+		<div class="user-header">
+			<div class="foto">
+			<img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil">
+			</div>
+			
+			<div id="tabs1" class="foto-menu">
+				<ul>
+					<li><a href="#tabs-5">Public profile</a></li>
+					<li><a href="#tabs-6">Profile settings</a></li>
+					<li><a href="#tabs-7">Account settings</a></li>
+					<li><a href="#tabs-8">Messages</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="tabs2" class="user-tabs">
+			<ul>
+				<li><a href="#tabs-1">My Playlists</a></li>
+				<p>My bookmarks</p>
+				<li><a href="#tabs-2">Videos</a></li>
+				<li><a href="#tabs-3">Playlists</a></li>
+				<p>Likes</p>
+				<li><a href="#tabs-4">Videos</a></li>
+			</ul>
+		
+		</div>
+	 </div>
+	 
+	<div class="user-content">
+		<div id="tabs-1" class="my-playlist">
+		<p>my playlists</p>
+		</div>
+		
+		<div id="tabs-2" class="my-playlist">
+		<p>bookmark video</p>
+		</div>
+
+		<div id="tabs-3" class="my-playlist">
+		<p>bookmark playlist</p>
+		</div>
+		
+		<div id="tabs-4" class="my-playlist">
+		<p>Like videos</p>
+		</div>
+		
+		<div id="tabs-5" class="my-playlist">
+		<p>public profile</p>
+		</div>
+		
+		<div id="tabs-6" class="my-playlist">
+		<p>profile settings</p>
+		</div>
+		
+		<div id="tabs-7" class="my-playlist">
+		<p>Account settings</p>
+		</div>
+		
+		<div id="tabs-8" class="my-playlist">
+		<p>Messages</p>
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

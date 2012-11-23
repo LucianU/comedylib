@@ -58,15 +58,16 @@
 				{% else %}
 				<a class="fancybox" href="#loginerror"></a>
 				{% endif %}
-                {% if vid_feel == 'L' %}
-                    <p>You like this video</p>
-                {% else %}
-                    {% if vid_feel == 'D' %}
-                        <p>You don't like this video</p>
-                    {% else %}
-                        <p>You have no opinion of this video</p>
-                    {% endif %}
-                {% endif %}
+				
+               <!-- { if vid_feel == 'L' %}
+                    <p>You like</p>
+                { else %}
+                    { if vid_feel == 'D' %}
+                        <p>don't like </p>
+                    { else %}
+                        <p> no opinion</p>
+                    { endif %} 
+                { endif %}-->
 			</div>
 			<div class="rateholder">
 				<span class="average">78%</span>

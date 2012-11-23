@@ -1,0 +1,27 @@
+ {% extends "base.html" %}
+{% block content %}
+{% block title %}{{ page_title }}{% endblock %}
+<div id="firstpage">
+    <p>{{ page_title }}</p>
+     <!-- #Left Column albums -->
+	 <div class="album-column">
+	 {% for collection in collection_list %}
+	<div class="collection-content">
+		<div class="coll-pic-content">
+			<a href="{{ collection.get_absolute_url }}">
+			{% load thumbnail %}
+				<img src="{% thumbnail collection.picture 144x110 crop %}"></a>
+		</div>
+		<div class="coll-name-content">
+            <a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a>
+            {% with videos=collection.videos.count %}
+                <p>{{ videos }} video{{ videos|pluralize }}</p>
+            {% endwith %}
+		</div>
+	</div>
+	{% endfor %}
+    <div class="album-pagination">
+        {% include "pagination.html" %}
+    </div>    
+</div>
+{% endblock %}
