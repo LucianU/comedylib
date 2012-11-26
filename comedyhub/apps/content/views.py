@@ -1,6 +1,7 @@
 import random
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -103,8 +104,9 @@ class VideoDetail(DetailView):
         context = super(VideoDetail, self).get_context_data(**kwargs)
         video = context['video']
 
-        # We check if this video is liked or disliked by the user
+        # We do some extra checks when the user is authenticated
         if self.request.user.is_authenticated():
+            # If the user has expressed a feeling for the video
             profile = self.request.user.profile
             try:
                 feeling = Feeling.objects.get(profile=profile, video=video)
@@ -112,6 +114,12 @@ class VideoDetail(DetailView):
                 context['vid_feel'] = None
             else:
                 context['vid_feel'] = feeling.name
+
+            # If he has bookmarked the video
+            video_type = ContentType.objects.get(app_name='content', model='video')
+            bookmarked = profile.bookmarks.filter(content_type=video_type,
+                                                  object_id=video.id).exists()
+            context['bookmarked'] = bookmarked
 
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist
