@@ -34,15 +34,17 @@ class Home(TemplateView):
         return context
 
 
-class Playlists(Home):
+class Playlists(TemplateView):
     template_name = 'profiles/playlists.html'
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
-        if kwargs.get('g'):
-            context['playlists'] = Playlist.objects.all()
+        if 'pk' in kwargs:
+            profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
         else:
-            context['playlists'] = context['profile'].playlists.all()
+            profile = self.request.user.profile
+        context['playlists'] = profile.playlists.all()
+        context['profile'] = profile
         return context
 
 
