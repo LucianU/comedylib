@@ -40,7 +40,7 @@ class About(TemplateView):
                                                      **response_kwargs)
 
 class CollectionList(ListView):
-    context_object_list = 'collection_list'
+    context_object_name = 'collection_list'
     template_name = 'content/collection_list.html'
     paginate_by = 10
 
