@@ -2,6 +2,7 @@
 import json
 
 from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -49,6 +50,29 @@ class Playlists(ListView):
         context['playlists'] = profile.playlists.all()
         context['profile'] = profile
         return context
+
+
+class Bookmarks(ListView):
+    template_name = 'profiles/bookmarks.html'
+    context_object_name = 'bookmarks'
+    paginate_by = 20
+
+    def get_queryset(self):
+        post_types_meta = {
+            'video': {'app_label': 'content', 'model': 'video'},
+            'playlist': {'app_label': 'profiles', 'model': 'playlists'},
+        }
+        bookmarks = self.request.user.profile.bookmarks.all()
+        post = self.request.GET.get('post')
+        if post is not None:
+            try:
+                post_type_meta = post_types_meta[post]
+            except KeyError:
+                raise SuspiciousOperation
+            else:
+                post_type = ContentType.objects.get(**post_type_meta)
+                bookmarks = bookmarks.filter(content_type=post_type)
+        return bookmarks
 
 
 class VideoFeeling(View):
