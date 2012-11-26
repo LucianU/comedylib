@@ -5,7 +5,7 @@ from django.contrib.comments.models import Comment
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 
 from content.models import Video
 from profiles.models import Profile, Feeling, Playlist, Bookmark
@@ -34,8 +34,11 @@ class Home(TemplateView):
         return context
 
 
-class Playlists(TemplateView):
+class Playlists(ListView):
     template_name = 'profiles/playlists.html'
+    context_object_name = 'playlists'
+    queryset = Playlist.objects.all()
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
