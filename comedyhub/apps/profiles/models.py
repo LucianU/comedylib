@@ -32,9 +32,13 @@ class Playlist(CreatedMixin):
 
 
 class Feeling(models.Model):
+    NAME_CHOICES = (
+        ('L', 'like'),
+        ('D', 'dislike'),
+    )
     profile = models.ForeignKey(Profile)
     video = models.ForeignKey(Video)
-    name = models.CharField(max_length=5)
+    name = models.CharField(max_length=5, choices=NAME_CHOICES)
     timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
 
 
