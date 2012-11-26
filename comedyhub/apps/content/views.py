@@ -8,11 +8,28 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView, ListView, DetailView
 
-from content.models import Collection, Video
+from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
 
 class Home(TemplateView):
     template_name = 'content/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Home, self).get_context_data(**kwargs)
+        recent_videos = self._get_recent_videos()
+        for collection, vids in recent_videos.iteritems():
+            context['%s_videos' % collection] = vids
+        context['playlists'] = Playlist.objects.all()[:10]
+        featured = Featured.objects.get()
+        for role_id, role_name in Collection.ROLE_CHOICES:
+            context['feat_%s' % role_name] = getattr(featured, role_name)
+        return context
+
+    def _get_recent_videos(self):
+        videos = {}
+        for role_id, role_name in Collection.ROLE_CHOICES:
+            videos[role_name] = Video.objects.filter(collection__role=role_id)[:3]
+        return videos
 
 class About(TemplateView):
     template_name = 'content/about.html'
