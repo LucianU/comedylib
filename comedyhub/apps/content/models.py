@@ -1,3 +1,7 @@
+import datetime
+import random
+
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -54,6 +58,32 @@ class Video(CreatedMixin):
                            args=[self.collection.slug, self.collection.id])
         return '%s/%s' % (coll_url, self.id)
 
+class Featured(models.Model):
+    comedian = models.OneToOneField(Collection, related_name='+')
+    show = models.OneToOneField(Collection, related_name='+')
+    movie = models.OneToOneField(Collection, related_name='+')
+    updated = models.DateTimeField(blank=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Featured, self).__init__(*args, **kwargs)
+
+        # If we're just creating the featured instance or the
+        # collections have been featured for longer than the
+        # specified duration, we set new ones
+        now = datetime.datetime.utcnow()
+        featured_td = datetime.timedelta(days=settings.FEATURED_DURATION)
+
+        if self.updated is None or ((now - self.updated) > featured_td):
+            for role_id, role_name in Collection.ROLE_CHOICES:
+                curr_obj_id = getattr(self, role_name).id
+                new_objs = (Collection.objects.filter(role=role_id)
+                                              .exclude(id=curr_obj_id))
+                setattr(self, role_name, random.choice(new_objs))
+            self.save()
+
+    def save(self, *args, **kwargs):
+        self.updated = datetime.datetime.utcnow()
+        return super(Featured, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=Video)
 def set_thumbnail(sender, **kwargs):
