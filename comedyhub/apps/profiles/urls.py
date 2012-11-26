@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
 from profiles.views import (Home, Playlists, VideoFeeling, AddToPlaylist,
-                            BookmarkPost)
+                            BookmarkPost, Bookmarks)
 
 urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='own_home'),
