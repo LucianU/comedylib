@@ -82,12 +82,12 @@ background:url(/static/img/pixelbkg.png);
 a:link, a:visited{
 font-family: 0.688em Arial, Helvetica, sans-serif;
     text-decoration: none; 
-    color: #FFD573;
+    color: #eee;
 }
  
 a:hover{
 font-family:0.688em Arial, Helvetica, sans-serif;
-    color: #FF9973;
+    color: #ccc;
 }
  
 h1 {
@@ -2758,4 +2758,59 @@ float:left;
 width:780px;
 height:690px;
 /*background:#f00;*/
+}
+.playlist-list{
+line-style-type:none;
+}
+.playlist-list li{
+float:left;
+position:relative;
+font: 0.75em Arial, Helvetica, sans-serif;
+width:380px;
+height:60px;
+margin: 5px 0px 5px 5px;
+background:#222;
+border:1px solid #444;
+}
+
+.playlist-list-title{
+float:left;
+display:table;
+width:150px;
+height:40px;
+margin:5px;
+}
+.playlist-list-title a{
+display:table-cell;
+vertical-align:middle;
+
+padding:5px;
+text-align:center;
+
+}
+
+.playlist-list-images{
+float:left;
+display:block;
+width:200px;
+height:40px;
+padding:5px;
+margin:5px 0;
+background:url(/static/img/playlistimagedemo.png) no-repeat;
+border:1px solid #333;
+}
+.bookmark-button {
+position:absolute;
+z-index:10;
+top:40px;
+left:76px;
+opacity:0.15;
+filter:alpha(opacity=15); /* For IE8 and earlier */
+padding:2px;
+}
+.bookmark-button:hover{
+opacity:0.8;
+background:#000;
+filter:alpha(opacity=80); /* For IE8 and earlier */
+border:1px solid #444;
 }
