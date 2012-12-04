@@ -2,10 +2,11 @@
 import json
 
 from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 
 from content.models import Video
 from profiles.models import Profile, Feeling, Playlist, Bookmark
@@ -34,16 +35,44 @@ class Home(TemplateView):
         return context
 
 
-class Playlists(Home):
+class Playlists(ListView):
     template_name = 'profiles/playlists.html'
+    context_object_name = 'playlists'
+    queryset = Playlist.objects.all()
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
-        if kwargs.get('g'):
-            context['playlists'] = Playlist.objects.all()
+        if 'pk' in kwargs:
+            profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
         else:
-            context['playlists'] = context['profile'].playlists.all()
+            profile = self.request.user.profile
+        context['playlists'] = profile.playlists.all()
+        context['profile'] = profile
         return context
+
+
+class Bookmarks(ListView):
+    template_name = 'profiles/bookmarks.html'
+    context_object_name = 'bookmarks'
+    paginate_by = 20
+
+    def get_queryset(self):
+        post_types_meta = {
+            'video': {'app_label': 'content', 'model': 'video'},
+            'playlist': {'app_label': 'profiles', 'model': 'playlists'},
+        }
+        bookmarks = self.request.user.profile.bookmarks.all()
+        post = self.request.GET.get('post')
+        if post is not None:
+            try:
+                post_type_meta = post_types_meta[post]
+            except KeyError:
+                raise SuspiciousOperation
+            else:
+                post_type = ContentType.objects.get(**post_type_meta)
+                bookmarks = bookmarks.filter(content_type=post_type)
+        return bookmarks
 
 
 class VideoFeeling(View):

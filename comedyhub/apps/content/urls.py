@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
 from content.views import (Home, About, CollectionList,
-                           CollectionDetail, VideoDetail)
+                           CollectionDetail, VideoDetail, Playlists)
 
 urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='home'),
@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^movies/(?P<slug>[a-z-]+)-(?P<pk>\d+)$', CollectionDetail.as_view(), name='movie'),
     url(r'^(?:comedians|shows|movies)/.*?/(?P<pk>\d+)',
         VideoDetail.as_view(), name='video'),
+    url(r'^playlists/$', Playlists.as_view(), name='playlists'),
 )

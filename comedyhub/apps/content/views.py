@@ -128,3 +128,10 @@ class VideoDetail(DetailView):
         self.request.breadcrumbs(breadcrumbs)
         return super(VideoDetail, self).render_to_response(context,
                                                            **response_kwargs)
+
+
+class Playlists(ListView):
+    context_object_name = 'playlists'
+    template_name = 'content/playlists.html'
+    paginate_by = 20
+    queryset = Playlist.objects.all()

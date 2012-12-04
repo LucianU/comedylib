@@ -3,8 +3,6 @@ from django.conf.urls.defaults import patterns, url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from profiles.views import Playlists
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,8 +11,6 @@ urlpatterns = patterns('',
     url(r'^u/', include('profiles.urls')),
     url(r'^c/', include('django.contrib.comments.urls')),
     url(r'^', include('content.urls', namespace='content')),
-    url(r'^playlists/$', Playlists.as_view(), {'g': True},
-        name='playlists'),
 )
 
 if settings.DEBUG:
