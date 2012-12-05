@@ -6,9 +6,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, View, ListView
+from django.views.generic import TemplateView, View, ListView, FormView
 
 from content.models import Video
+from profiles.forms import PlaylistForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 class Home(TemplateView):
@@ -121,3 +122,13 @@ class BookmarkPost(View):
         obj = get_object_or_404(obj_model, id=obj_id)
         Bookmark.objects.create(profile=profile, post=obj)
         return HttpResponse(json.dumps({'status': 'OK'}))
+
+
+class CreatePlaylist(FormView):
+    template_name = 'profiles/create_playlist.html'
+    form_class = PlaylistForm
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.profile = self.request.user.profile
+        self.object.save()
