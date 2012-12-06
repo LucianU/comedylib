@@ -57,6 +57,20 @@ class Video(CreatedMixin):
                            args=[self.collection.slug, self.collection.id])
         return '%s/%s' % (coll_url, self.id)
 
+    @property
+    def likes(self):
+        return self.feelings.filter(name='L').count()
+
+    @property
+    def dislikes(self):
+        return self.feelings.filter(name='D').count()
+
+    @property
+    def rating(self):
+        likes = self.likes
+        dislikes = self.dislikes
+        return (100 * likes) / (likes + dislikes)
+
 class FeaturedManager(models.Manager):
     """
     Overrides the default manager's `get` method, to create
