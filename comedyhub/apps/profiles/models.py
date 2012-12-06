@@ -36,8 +36,8 @@ class Feeling(models.Model):
         ('L', 'like'),
         ('D', 'dislike'),
     )
-    profile = models.ForeignKey(Profile)
-    video = models.ForeignKey(Video)
+    profile = models.ForeignKey(Profile, related_name='feelings')
+    video = models.ForeignKey(Video, related_name='feelings')
     name = models.CharField(max_length=5, choices=NAME_CHOICES)
     timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
 
