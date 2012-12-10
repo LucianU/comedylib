@@ -61,8 +61,8 @@ class Bookmarks(ListView):
 
     def get_queryset(self):
         post_types_meta = {
-            'video': {'app_label': 'content', 'model': 'video'},
-            'playlist': {'app_label': 'profiles', 'model': 'playlists'},
+            'V': {'app_label': 'content', 'model': 'video'},
+            'P': {'app_label': 'profiles', 'model': 'playlist'},
         }
         bookmarks = self.request.user.profile.bookmarks.all()
         post = self.request.GET.get('post')

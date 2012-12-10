@@ -12,8 +12,7 @@ from content.models import Video
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    feelings = models.ManyToManyField(Video, related_name='feelers',
-                                      through='Feeling', null=True)
+    feelings = models.ManyToManyField(Video, through='Feeling', null=True)
     picture = models.ImageField(upload_to='profiles', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -36,7 +35,7 @@ class Feeling(models.Model):
         ('L', 'like'),
         ('D', 'dislike'),
     )
-    profile = models.ForeignKey(Profile, related_name='feelings')
+    profile = models.ForeignKey(Profile)
     video = models.ForeignKey(Video, related_name='feelings')
     name = models.CharField(max_length=5, choices=NAME_CHOICES)
     timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
