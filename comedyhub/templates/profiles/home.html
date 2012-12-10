@@ -30,7 +30,7 @@
 				<li><a href="#video-bookmark">Videos</a></li>
 				<li><a href="#playlist-bookmark">Playlists</a></li>
 				<p>Likes</p>
-				<li><a href="#liked-videos">Videos</a></li>
+				<li><a href="#liked-videos"id="lv_btn">Videos</a></li>
 			</ul>
 		
 		</div>
@@ -85,7 +85,15 @@
 		
 		<div id="liked-videos" class="my-playlist">
 		<p>Like videos</p>
-		</div>
+        <script>
+ $('#lv_btn').click(function() { 
+  $('#liked-videos').load('/u?post=video', function() {
+  alert('Load was performed.');
+});
+      
+		 });
+ </script>
+        </div>
 		
 		<div id="public" class="my-playlist">
 		<p>public profile</p>

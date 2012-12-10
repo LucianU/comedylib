@@ -52,9 +52,10 @@
 	<div class="social">
 	
 		<div class="rating">
-			<div class="like" title="Like">
+			<div id="likecontent" class="like" title="Like">
 			{% if request.user.is_authenticated %}
-				<a href="/a"></a>
+				<a href="#" id="like_btn">
+                </a>
 				{% else %}
 				<a class="fancybox" href="#loginerror"></a>
 				{% endif %}
@@ -70,12 +71,12 @@
                 { endif %}-->
 			</div>
 			<div class="rateholder">
-				<span class="average">78%</span>
-				<span class="nvotes">99999 votes</span>
+				<span class="average">{{ video.rating }} %</span>
+				<span class="nvotes">{{video.likes}} + {{video.dislikes}} votes</span>
 			</div>	
 			<div class="dislike" title="Not like">
 				{% if request.user.is_authenticated %}
-				<a href="/b"></a>
+				<a href="#" id="dislike_btn"></a>
 				{% else %}
 				<a class="fancybox" href="#loginerror"></a>
 				{% endif %}
@@ -89,9 +90,14 @@
 				<li id="addplay-btn" class="playlist ">
 					<a href="#" title="Add this video to a playlist">Add to Playlist</a>
 				</li>
-				<li class="bookmark">
-					<a href="#" title="Save this video to watch later">Bookmark</a>
-				</li>
+                {% if vid_feel == 'D' %}
+                    <li class="bookmark">
+                        <a href="#" id="bookmark_btn" title="Save this video to watch later">Bookmark</a>
+                    </li>
+                {% else %}
+                    `
+                {% endif %}
+                    
 			{% else %}
 				<li class="playlist ">
 					<a class="fancybox" href="#loginerror" >Add to Playlist</a>
@@ -217,5 +223,45 @@ $(document).ready(function() {
 		<h3>You must be logged in to have access to this option</h3>
 			{% include "registration/login-er.html" %}
 			</div> <!-- end loginerror-->
+            
+ <script>
+ $(document).ready(function() { 
+  $('#like_btn').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/u/vfeel',
+      data: {'vid': {{ video.id }}, 'feeling': 'L'},
+      success: function() {
+       alert('OK');
+  }
+    }).error (function(){
+    alert('Eroare');
+    });
+  });
+   $('#dislike_btn').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/u/vfeel',
+      data: {'vid': {{ video.id }}, 'feeling': 'D'},
+      success: function() {
+    $('.dislike').html(data);
+    alert('Load was performed.');
+  }
+    });
+  });
+  $('#bookmark_btn').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/u/bookmark',
+      data: {'id': {{ video.id }}, 'obj': 'V'},
+      success: function() {
+       alert('OK');
+  }
+    }).error (function(){
+    alert('Eroare');
+    });
+  });
+ });
+ </script>
 {% endblock %}
 

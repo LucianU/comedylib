@@ -116,7 +116,7 @@ class VideoDetail(DetailView):
                 context['vid_feel'] = feeling.name
 
             # If he has bookmarked the video
-            video_type = ContentType.objects.get(app_name='content', model='video')
+            video_type = ContentType.objects.get(app_label='content', model='video')
             bookmarked = profile.bookmarks.filter(content_type=video_type,
                                                   object_id=video.id).exists()
             context['bookmarked'] = bookmarked
