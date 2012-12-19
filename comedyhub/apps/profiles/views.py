@@ -86,10 +86,17 @@ class VideoFeeling(View):
         except Video.ObjectDoesNotExist:
             raise SuspiciousOperation
 
-        if feeling not in ['L', 'D']:
+        if feeling not in ['L', 'D', 'U']:
             raise SuspiciousOperation
 
-        Feeling.objects.create(profile=profile, video=video, name=feeling)
+        # Undoing the like or the dislike
+        if feeling == 'U':
+            Feeling.objects.get(profile=profile, video=video).delete()
+        else:
+            # Making sure the user doesn't like or dislike the same
+            # video twice
+            Feeling.objects.get_or_create(profile=profile, video=video,
+                                          name=feeling)
         return HttpResponse(json.dumps({'status': 'OK'}))
 
 
@@ -119,8 +126,16 @@ class BookmarkPost(View):
             obj_model = objs[request.POST['obj']]
         except KeyError:
             raise SuspiciousOperation
-        obj = get_object_or_404(obj_model, id=obj_id)
-        Bookmark.objects.create(profile=profile, post=obj)
+
+        # We're not using the object, but we are testing to
+        # make sure that it exists before bookmarking it, thus
+        # avoiding an error at that later stage
+        get_object_or_404(obj_model, id=obj_id)
+
+        obj_type = ContentType.objects.get_for_model(obj_model)
+        # Making sure that we don't bookmark the same post twice
+        Bookmark.objects.get_or_create(profile=profile, content_type=obj_type,
+                                       object_id=obj_id)
         return HttpResponse(json.dumps({'status': 'OK'}))
 
 
