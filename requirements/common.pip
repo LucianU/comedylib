@@ -10,8 +10,3 @@ django-registration==0.8
 django-social-auth==0.7.6
 easy_thumbnails==1.0.3
 south==0.7.5
-
-
-# Infrastructure
-#supervisor==3.0a12
-#uwsgi==1.2.4
