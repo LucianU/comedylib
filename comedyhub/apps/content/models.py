@@ -3,12 +3,9 @@ import random
 
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
 from comedyhub.mixins import CreatedMixin
-from content.utils import set_video_thumb
 
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
@@ -100,10 +97,3 @@ class Featured(models.Model):
     def save(self, *args, **kwargs):
         self.updated = datetime.datetime.utcnow()
         super(Featured, self).save(*args, **kwargs)
-
-@receiver(post_save, sender=Video)
-def set_thumbnail(sender, **kwargs):
-    video = kwargs.get('instance')
-    if video.picture.name is None:
-        thumbed_vid = set_video_thumb(video)
-        thumbed_vid.save()
