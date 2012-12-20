@@ -9,8 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
-)
-
+) 
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -139,6 +138,7 @@ INSTALLED_APPS = (
     'breadcrumbs',
     'captcha',
     'easy_thumbnails',
+    'haystack',
     'registration',
     'social_auth',
     'south',
@@ -203,3 +203,7 @@ LOGGING = {
 # Specifies the number of related videos that should be
 # displayed on the page
 RELATED_VIDS_NO = 12
+
+HAYSTACK_SITECONF = 'comedyhub.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SOLR_URL = 'http://localhost:8983/solr'
