@@ -72,11 +72,17 @@
 			</div>
 			<div class="rateholder">
 				<span class="average">{{ video.rating }} %</span>
-				<span class="nvotes">{{video.likes}} + {{video.dislikes}} votes</span>
+				<span class="nvotes">{{video.likes }}+ {{video.dislikes}} votes</span>
 			</div>	
 			<div class="dislike" title="Not like">
 				{% if request.user.is_authenticated %}
-				<a href="#" id="dislike_btn"></a>
+                    {% if vid_feel == 'D' %}
+                        <a href="#" id="dislike_btn"></a>
+                        {% else %}
+                        <a href="#" id="dislike_btn"></a>
+                    {% endif %}
+                
+                
 				{% else %}
 				<a class="fancybox" href="#loginerror"></a>
 				{% endif %}
@@ -90,13 +96,11 @@
 				<li id="addplay-btn" class="playlist ">
 					<a href="#" title="Add this video to a playlist">Add to Playlist</a>
 				</li>
-                {% if vid_feel == 'D' %}
+               
                     <li class="bookmark">
                         <a href="#" id="bookmark_btn" title="Save this video to watch later">Bookmark</a>
                     </li>
-                {% else %}
-                    `
-                {% endif %}
+            
                     
 			{% else %}
 				<li class="playlist ">
