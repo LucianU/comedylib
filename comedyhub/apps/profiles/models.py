@@ -40,12 +40,18 @@ class Feeling(models.Model):
     name = models.CharField(max_length=5, choices=NAME_CHOICES)
     timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
 
+    class Meta:
+        unique_together = ('profile', 'video')
+
 
 class Bookmark(models.Model):
     profile = models.ForeignKey(Profile, related_name='bookmarks')
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     post = generic.GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        unique_together = ('profile', 'content_type', 'object_id')
 
     def __unicode__(self):
         return u"%s: %s" % (self.profile.user.username, self.post)

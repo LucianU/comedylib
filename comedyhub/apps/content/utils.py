@@ -22,5 +22,5 @@ def set_video_thumb(instance):
 
     ident = querydict['v'][0]
     thumb = sources[source](ident)
-    instance.picture.save(ident, ContentFile(thumb))
+    instance.picture.save('%s+%s' % (source, ident), ContentFile(thumb))
     return instance

@@ -57,7 +57,8 @@
 				<a href="#" id="like_btn">
                 </a>
 				{% else %}
-				<a class="fancybox" href="#loginerror"></a>
+				<a href="#" id="like_btn">
+                </a>
 				{% endif %}
 				
                <!-- { if vid_feel == 'L' %}
@@ -71,7 +72,7 @@
                 { endif %}-->
 			</div>
 			<div class="rateholder">
-				<span class="average">{{ video.rating }} %</span>
+				<span class="average">{ video.rating } %</span>
 				<span class="nvotes">{{video.likes }}+ {{video.dislikes}} votes</span>
 			</div>	
 			<div class="dislike" title="Not like">
