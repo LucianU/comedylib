@@ -60,6 +60,8 @@ class Video(CreatedMixin):
     def rating(self):
         likes = self.likes
         dislikes = self.dislikes
+        if (likes + dislikes) == 0:
+            return 0
         return (100 * likes) / (likes + dislikes)
 
     @property
