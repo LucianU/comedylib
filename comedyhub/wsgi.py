@@ -3,6 +3,9 @@ import sys
 import site
 import subprocess
 
+import djcelery
+djcelery.setup_loader()
+
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_PATH = os.path.dirname(PROJECT_PATH)
 VIRTUAL_ENV = os.environ['VIRTUAL_ENV']

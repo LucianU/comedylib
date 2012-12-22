@@ -96,9 +96,14 @@ class VideoFeeling(View):
             Feeling.objects.get(profile=profile, video=video).delete()
         else:
             # Making sure the user doesn't like or dislike the same
-            # video twice
-            Feeling.objects.get_or_create(profile=profile, video=video,
-                                          name=feeling)
+            # video twice.
+            obj, created = Feeling.objects.get_or_create(profile=profile,
+                                                         video=video)
+            # If the feeling has changed, we save this change
+            if obj.name != feeling:
+                obj.name = feeling
+                obj.save()
+
         return HttpResponse(json.dumps({'status': 'OK'}))
 
 

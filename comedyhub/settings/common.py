@@ -1,5 +1,9 @@
 import os
 
+# Setting up django-celery
+import djcelery
+djcelery.setup_loader()
+
 SITE_ROOT = os.path.dirname(os.path.dirname(
     os.path.abspath(__file__),
 ))
@@ -137,6 +141,7 @@ INSTALLED_APPS = (
 
     'breadcrumbs',
     'captcha',
+    'djcelery',
     'easy_thumbnails',
     'haystack',
     'registration',
