@@ -67,6 +67,41 @@ background:url(/static/img/pixelbkg.png);
    background-position: top left;
 	
 	}
+/* For the "inset" look only */
+html {
+    overflow: auto;
+}
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+::-webkit-scrollbar-track-piece {
+    background:rgba(20,20,20,1);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: rgba(254,70,0,1); 
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(254,70,0,0.4); 
+}    
+    
+    
+    
+    
 #main
 {
    position: relative;
@@ -1672,6 +1707,9 @@ border-radius: 3px;
 #video_detail .social .rating .like a:hover{
 background-position:0px 33px;
 }
+#video_detail .social .rating .like a.active{
+background-position:0px 33px;
+}
 #video_detail .social .rating .dislike {
 z-index:2;
 float:right;
@@ -1691,6 +1729,11 @@ border-radius: 3px;
 background-position:146px 33px;
 
 }
+#video_detail .social .rating .dislike a.active{
+background-position:146px 33px;
+}
+
+
 #video_detail .social .nviews{
 z-index:1000;
 float:right;

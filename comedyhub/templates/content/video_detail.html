@@ -48,46 +48,53 @@
 	</div><!-- end video-related -->
 	<div class="affiliate">
 		affiliate
+        
 	</div><!-- end affiliate -->
 	<div class="social">
 	
 		<div class="rating">
-			<div id="likecontent" class="like" title="Like">
-			{% if request.user.is_authenticated %}
-				<a href="#" id="like_btn">
-                </a>
-				{% else %}
-				<a href="#" id="like_btn">
-                </a>
-				{% endif %}
+        {% if request.user.is_authenticated %}
+			{% if vid_feel == 'L' %} 
+                <div id="likecontent" class="like" title="Like">
+                    <a href="#" id="like_btn1" class="active"></a>
+                </div>
+            {% else %} 
+                <div id="likecontent" class="like" title="Like">
+                    <a href="#" id="like_btn"></a>
+                </div>
+                 {% endif %}   
+
+           {% else %}
+                <div id="likecontent" class="like" title="Like">
+                    <a class="fancybox" href="#loginerror"></a>
+                </div>
+            {% endif %}
 				
-               <!-- { if vid_feel == 'L' %}
-                    <p>You like</p>
-                { else %}
-                    { if vid_feel == 'D' %}
-                        <p>don't like </p>
-                    { else %}
-                        <p> no opinion</p>
-                    { endif %} 
-                { endif %}-->
-			</div>
+			
 			<div class="rateholder">
-				<span class="average">{ video.rating } %</span>
-				<span class="nvotes">{{video.likes }}+ {{video.dislikes}} votes</span>
+            {% if video.rating == 0 %} 
+                <span class="average">N/A</span>
+            {% else %}
+                <span class="average">{{ video.rating }} %</span>
+            {% endif %}
+				<span class="nvotes">{{video.total_votes}} votes</span>
 			</div>	
-			<div class="dislike" title="Not like">
-				{% if request.user.is_authenticated %}
-                    {% if vid_feel == 'D' %}
+            {% if request.user.is_authenticated %}
+                {% if vid_feel == 'D' %}   
+                    <div id="dislikecontent" class="dislike" title="Not like">
+                        <a href="#" id="dislike_btn1"class="active"></a>
+                    </div>    
+                {% else %}
+                    <div id="dislikecontent" class="dislike" title="Not like">
                         <a href="#" id="dislike_btn"></a>
-                        {% else %}
-                        <a href="#" id="dislike_btn"></a>
-                    {% endif %}
-                
-                
-				{% else %}
-				<a class="fancybox" href="#loginerror"></a>
+                    </div>
+                {% endif %}
+                {% else %}
+                <div id="dislikecontent" class="dislike" title="Not like">
+                    <a class="fancybox" href="#loginerror"></a>
+                </div>
 				{% endif %}
-			</div>
+			
 		</div>
 			
 		
@@ -237,10 +244,24 @@ $(document).ready(function() {
       url: '/u/vfeel',
       data: {'vid': {{ video.id }}, 'feeling': 'L'},
       success: function() {
-       alert('OK');
-  }
+      $('#like_btn').addClass("active");
+    
+       }
     }).error (function(){
-    alert('Eroare');
+    alert('Ooops! Something went wrong.');
+    });
+  });
+  $('#like_btn1').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/u/vfeel',
+      data: {'vid': {{ video.id }}, 'feeling': 'U'},
+      success: function() {
+      $('#like_btn1').removeClass("active");
+     
+       }
+    }).error (function(){
+    alert('Ooops! Something went wrong.');
     });
   });
    $('#dislike_btn').click(function() {
@@ -249,9 +270,24 @@ $(document).ready(function() {
       url: '/u/vfeel',
       data: {'vid': {{ video.id }}, 'feeling': 'D'},
       success: function() {
-    $('.dislike').html(data);
-    alert('Load was performed.');
+    $('#dislike_btn').addClass("active");
+   
   }
+  }).error (function(){
+    alert('Ooops! Something went wrong.');
+    });
+  });
+    $('#dislike_btn1').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/u/vfeel',
+      data: {'vid': {{ video.id }}, 'feeling': 'U'},
+      success: function() {
+    $('#dislike_btn1').removeClass("active");
+    
+  }
+  }).error (function(){
+    alert('Ooops! Something went wrong.');
     });
   });
   $('#bookmark_btn').click(function() {
