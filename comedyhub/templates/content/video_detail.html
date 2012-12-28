@@ -56,13 +56,14 @@
         {% if request.user.is_authenticated %}
 			{% if vid_feel == 'L' %} 
                 <div id="likecontent" class="like" title="Like">
-                    <a href="#" id="like_btn1" class="active"></a>
+                    <a href="#" id="like_btn" class="active"></a>
+                   
                 </div>
             {% else %} 
                 <div id="likecontent" class="like" title="Like">
-                    <a href="#" id="like_btn"></a>
+                    <a href="#" id="like_btn1"></a>
                 </div>
-                 {% endif %}   
+                {% endif %}   
 
            {% else %}
                 <div id="likecontent" class="like" title="Like">
@@ -82,12 +83,15 @@
             {% if request.user.is_authenticated %}
                 {% if vid_feel == 'D' %}   
                     <div id="dislikecontent" class="dislike" title="Not like">
-                        <a href="#" id="dislike_btn1"class="active"></a>
+                        <a href="#" id="dislike_btn" class="active"></a>
                     </div>    
+                    
+                    
                 {% else %}
                     <div id="dislikecontent" class="dislike" title="Not like">
-                        <a href="#" id="dislike_btn"></a>
+                        <a href="#" id="dislike_btn1"></a>
                     </div>
+                   
                 {% endif %}
                 {% else %}
                 <div id="dislikecontent" class="dislike" title="Not like">
@@ -238,58 +242,65 @@ $(document).ready(function() {
             
  <script>
  $(document).ready(function() { 
-  $('#like_btn').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/u/vfeel',
-      data: {'vid': {{ video.id }}, 'feeling': 'L'},
-      success: function() {
-      $('#like_btn').addClass("active");
-    
-       }
-    }).error (function(){
-    alert('Ooops! Something went wrong.');
-    });
-  });
-  $('#like_btn1').click(function() {
+ 
+$('#like_btn1').click(function() {
+$.ajax({
+  type: 'POST',
+  url: '/u/vfeel',
+  data: {'vid': {{ video.id }}, 'feeling': 'L'},
+  success: function() {
+   $('#likecontent').h('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn" class="active"></a></div>');
+    $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn1"></a></div>');
+   }
+}).error (function(){
+alert('Ooops! Something went wrong.');
+});
+});
+
+    $('#like_btn').click(function() {
     $.ajax({
       type: 'POST',
       url: '/u/vfeel',
       data: {'vid': {{ video.id }}, 'feeling': 'U'},
       success: function() {
-      $('#like_btn1').removeClass("active");
+      $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn1"></a></div>');
      
-       }
+          }
     }).error (function(){
     alert('Ooops! Something went wrong.');
     });
-  });
-   $('#dislike_btn').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/u/vfeel',
-      data: {'vid': {{ video.id }}, 'feeling': 'D'},
-      success: function() {
-    $('#dislike_btn').addClass("active");
-   
-  }
-  }).error (function(){
-    alert('Ooops! Something went wrong.');
     });
-  });
+  
     $('#dislike_btn1').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/u/vfeel',
-      data: {'vid': {{ video.id }}, 'feeling': 'U'},
-      success: function() {
-    $('#dislike_btn1').removeClass("active");
-    
-  }
-  }).error (function(){
-    alert('Ooops! Something went wrong.');
-    });
-  });
+        $.ajax({
+          type: 'POST',
+          url: '/u/vfeel',
+          data: {'vid': {{ video.id }}, 'feeling': 'D'},
+          success: function() {
+      $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn" class="active"></a></div>');
+   $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn1"></a></div>');
+     
+      }
+      }).error (function(){
+        alert('Ooops! Something went wrong.');
+        });
+      });
+
+    $('#dislike_btn').click(function() {
+        $.ajax({
+          type: 'POST',
+          url: '/u/vfeel',
+          data: {'vid': {{ video.id }}, 'feeling': 'U'},
+          success: function() {
+        $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn1"></a></div>');
+        
+      }
+      }).error (function(){
+        alert('Ooops! Something went wrong.');
+        });
+      });  
+      
+  
   $('#bookmark_btn').click(function() {
     $.ajax({
       type: 'POST',
