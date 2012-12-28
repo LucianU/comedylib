@@ -249,7 +249,7 @@ $.ajax({
   url: '/u/vfeel',
   data: {'vid': {{ video.id }}, 'feeling': 'L'},
   success: function() {
-   $('#likecontent').h('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn" class="active"></a></div>');
+   $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn" class="active"></a></div>');
     $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn1"></a></div>');
    }
 }).error (function(){
