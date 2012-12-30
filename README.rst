@@ -1,5 +1,19 @@
 A kickass comedy library
 
+Dependencies
+============
+#. ubuntu 12.04
+
+#. memcached 1.4.15
+#. nginx 1.2.6
+#. python 2.7.3
+#. python-dev 2.7.3
+#. postgresql 9.2.2
+#. postgresql-server-dev 9.1
+#. rabbitmq 3.0.1
+#. solr 4.0.0
+
+
 TODO
 ====
 - Put in install and deployment instructions
