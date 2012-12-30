@@ -12,6 +12,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
 
+
 class Home(TemplateView):
     template_name = 'content/home.html'
 
@@ -28,9 +29,10 @@ class Home(TemplateView):
 
     def _get_recent_videos(self):
         videos = {}
-        for role_id, role_name in Collection.ROLE_CHOICES:
-            videos[role_name] = Video.objects.filter(collection__role=role_id)[:3]
+        for r_id, r_name in Collection.ROLE_CHOICES:
+            videos[r_name] = Video.objects.filter(collection__role=r_id)[:3]
         return videos
+
 
 class About(TemplateView):
     template_name = 'content/about.html'
@@ -39,6 +41,7 @@ class About(TemplateView):
         self.request.breadcrumbs("About", self.request.path)
         return super(About, self).render_to_response(context,
                                                      **response_kwargs)
+
 
 class CollectionList(ListView):
     context_object_name = 'collection_list'
@@ -53,6 +56,7 @@ class CollectionList(ListView):
                                  "")
         return super(CollectionList, self).render_to_response(context,
                                                               **response_kwargs)
+
 
 class CollectionDetail(DetailView):
     context_object_name = 'collection'
@@ -83,8 +87,11 @@ class CollectionDetail(DetailView):
         ))
         breadcrumbs.reverse()
         self.request.breadcrumbs(breadcrumbs)
-        return super(CollectionDetail, self).render_to_response(context,
-                                                                **response_kwargs)
+        return super(CollectionDetail, self).render_to_response(
+            context,
+            **response_kwargs
+        )
+
 
 class VideoDetail(DetailView):
     context_object_name = 'video'

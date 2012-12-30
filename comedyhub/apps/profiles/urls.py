@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^createpl$', CreatePlaylist.as_view(), name='create_playlist'),
     url(r'^bookmark$', BookmarkPost.as_view(), name='bookmark'),
     url(r'^(?P<pk>\w+)$', Home.as_view(), name='user_home'),
-    url(r'^(?P<pk>\w+)/playlists/$', Playlists.as_view(), name='user_playlists'),
+    url(r'^(?P<pk>\w+)/playlists/$', Playlists.as_view(),
+        name='user_playlists'),
 )

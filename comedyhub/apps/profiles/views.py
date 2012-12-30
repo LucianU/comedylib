@@ -13,6 +13,7 @@ from content.models import Video
 from profiles.forms import PlaylistForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
+
 class Home(TemplateView):
     template_name = 'profiles/home.html'
 
@@ -21,12 +22,12 @@ class Home(TemplateView):
         if 'pk' in kwargs:
             profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
             context['profile'] = profile
-            recent_comms = Comment.objects.filter(user=profile.user).\
-                                            order_by('-submit_date')[:5]
-            recent_likes = Feeling.objects.filter(profile=profile, name='L').\
-                                            order_by('-created')[:5]
-            recent_pls = Playlist.objects.filter(profile=profile).\
-                                            order_by('-created')[:5]
+            recent_comms = (Comment.objects.filter(user=profile.user)
+                                           .order_by('-submit_date')[:5])
+            recent_likes = (Feeling.objects.filter(profile=profile, name='L')
+                                           .order_by('-created')[:5])
+            recent_pls = (Playlist.objects.filter(profile=profile)
+                                          .order_by('-created')[:5])
             context.update({
                 'recent_comments': recent_comms,
                 'recent_likes': recent_likes,

@@ -3,6 +3,7 @@ from django.core.management.base import NoArgsCommand
 from content.models import Video
 from content.utils import set_video_thumb
 
+
 class Command(NoArgsCommand):
     help = ("Downloads the thumbnails for the videos found in the database"
             " and makes them accessible through the 'picture' attribute")

@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 
 from comedyhub.mixins import CreatedMixin
 
+
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
         (0, u'comedian'),
@@ -33,6 +34,7 @@ class Collection(CreatedMixin):
             self.slug = slugify(self.name)
         super(Collection, self).save(*args, **kwargs)
 
+
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
@@ -45,7 +47,7 @@ class Video(CreatedMixin):
     dislikes = models.IntegerField(default=0)
 
     class Meta:
-        ordering =['-created']
+        ordering = ['-created']
 
     def __unicode__(self):
         return u"%s:%s" % (self.title, "%s..." % self.url[:50]
@@ -68,6 +70,7 @@ class Video(CreatedMixin):
     def total_votes(self):
         return self.likes + self.dislikes
 
+
 class FeaturedManager(models.Manager):
     """
     Overrides the default manager's `get` method, to create
@@ -88,6 +91,7 @@ class FeaturedManager(models.Manager):
             kwargs[role_name] = random.choice(new_objs)
         instance = self.create(**kwargs)
         return instance
+
 
 class Featured(models.Model):
     comedian = models.OneToOneField(Collection, related_name='+')

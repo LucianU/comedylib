@@ -3,6 +3,7 @@ from haystack.indexes import CharField, SearchIndex
 
 from profiles.models import Bookmark, Playlist
 
+
 class BookmarkIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
 

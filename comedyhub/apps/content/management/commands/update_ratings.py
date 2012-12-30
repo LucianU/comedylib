@@ -4,6 +4,7 @@ from django.core.management.base import NoArgsCommand
 
 from profiles.models import Feeling
 
+
 class Command(NoArgsCommand):
     help = "Updates likes and dislikes on videos"
 

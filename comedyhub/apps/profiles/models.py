@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from comedyhub.mixins import CreatedMixin
 from content.models import Video
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User)
     feelings = models.ManyToManyField(Video, through='Feeling', null=True)

@@ -18,10 +18,10 @@ prev_sys_path = list(sys.path)
 
 # Get the path to the env's site-packages directory
 site_packages = subprocess.check_output([
-                    os.path.join(VIRTUAL_ENV, 'bin/python'),
-                    '-c',
-                    'from distutils.sysconfig import get_python_lib;'
-                    'print get_python_lib(),'
+    os.path.join(VIRTUAL_ENV, 'bin/python'),
+    '-c',
+    'from distutils.sysconfig import get_python_lib;'
+    'print get_python_lib(),'
 ]).strip()
 
 # Add the virtualenv site-packages to the site packages

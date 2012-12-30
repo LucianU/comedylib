@@ -5,6 +5,7 @@ from django import forms
 
 from captcha.fields import ReCaptchaField
 
+
 class SignUpForm(UserCreationForm):
     """ Require email address when a user signs up """
     email = forms.EmailField(label='Email address', max_length=75)
@@ -33,6 +34,7 @@ class SignUpForm(UserCreationForm):
 
         return user
 
+
 class CustomAuthForm(forms.Form):
     """
     Using this custom form to perform authentication with e-mail
@@ -46,7 +48,7 @@ class CustomAuthForm(forms.Form):
         'invalid_login': "Please enter a correct username and password. "
                          "Note that both fields are case-sensitive.",
         'no_cookies': "Your Web browser doesn't appear to have cookies "
-                        "enabled. Cookies are required for logging in.",
+                      "enabled. Cookies are required for logging in.",
         'inactive': "This account is inactive.",
     }
 

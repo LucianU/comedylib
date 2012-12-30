@@ -5,6 +5,7 @@ import gdata.youtube.service
 
 from django.core.files.base import ContentFile
 
+
 def get_youtube_thumb(ident):
     yt_service = gdata.youtube.service.YouTubeService()
     entry = yt_service.GetYouTubeVideoEntry(video_id=ident)
@@ -14,6 +15,7 @@ def get_youtube_thumb(ident):
 sources = {
     'youtube.com': get_youtube_thumb,
 }
+
 
 def set_video_thumb(instance):
     url_bits = urlparse.urlparse(instance.url)

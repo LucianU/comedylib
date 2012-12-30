@@ -4,6 +4,7 @@ from django.core.management.base import NoArgsCommand
 
 from content.models import Collection, Featured
 
+
 class Command(NoArgsCommand):
     help = "Updates the featured posts"
 
@@ -15,4 +16,3 @@ class Command(NoArgsCommand):
                                           .exclude(id=curr_obj_id))
             setattr(instance, role_name, random.choice(new_objs))
         instance.save()
-
