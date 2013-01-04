@@ -1691,6 +1691,7 @@ font-size:10px;
 color:#eee;
 }
 #video_detail .social .rating .like {
+position:relative;
 float:left;
 
 }
@@ -1710,10 +1711,16 @@ background-position:0px 33px;
 #video_detail .social .rating .like a.active{
 background-position:0px 33px;
 }
+#video_detail .social .rating .like .load{
+display:none;
+position:absolute;
+top:10px;
+left:10px;
+}
 #video_detail .social .rating .dislike {
 z-index:2;
 float:right;
-
+position:relative;
 }
 #video_detail .social .rating .dislike a{
 display:block;
@@ -1732,7 +1739,12 @@ background-position:146px 33px;
 #video_detail .social .rating .dislike a.active{
 background-position:146px 33px;
 }
-
+#video_detail .social .rating .dislike .load{
+display:none;
+position:absolute;
+top:10px;
+left:10px;
+}
 
 #video_detail .social .nviews{
 z-index:1000;

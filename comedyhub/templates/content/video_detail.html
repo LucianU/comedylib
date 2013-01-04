@@ -55,13 +55,15 @@
 		<div class="rating">
         {% if request.user.is_authenticated %}
 			{% if vid_feel == 'L' %} 
-                <div id="likecontent" class="like" title="Like">
+                <div id="likecontent" class="like load" title="Like">
                     <a href="#" id="like_btn" class="active"></a>
+                    <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
                    
                 </div>
             {% else %} 
                 <div id="likecontent" class="like" title="Like">
-                    <a href="#" id="like_btn1"></a>
+                    <a href="#" id="like_btn"></a>
+                      <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
                 </div>
                 {% endif %}   
 
@@ -84,12 +86,14 @@
                 {% if vid_feel == 'D' %}   
                     <div id="dislikecontent" class="dislike" title="Not like">
                         <a href="#" id="dislike_btn" class="active"></a>
+                          <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
                     </div>    
                     
                     
                 {% else %}
                     <div id="dislikecontent" class="dislike" title="Not like">
-                        <a href="#" id="dislike_btn1"></a>
+                        <a href="#" id="dislike_btn"></a>
+                          <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
                     </div>
                    
                 {% endif %}
@@ -243,42 +247,35 @@ $(document).ready(function() {
  <script>
  $(document).ready(function() { 
  
-$('#like_btn1').click(function() {
+$('#like_btn').click(function() {
+ $('#ll').fadeIn("slow");
 $.ajax({
   type: 'POST',
   url: '/u/vfeel',
   data: {'vid': {{ video.id }}, 'feeling': 'L'},
+  cache: false,
   success: function() {
-   $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn" class="active"></a></div>');
-    $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn1"></a></div>');
+  $('#ll').fadeOut("slow");
+   $('#like_btn').addClass('active');
+    $('#dislike_btn').removeClass('active');
    }
 }).error (function(){
 alert('Ooops! Something went wrong.');
 });
 });
 
-    $('#like_btn').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/u/vfeel',
-      data: {'vid': {{ video.id }}, 'feeling': 'U'},
-      success: function() {
-      $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn1"></a></div>');
-     
-          }
-    }).error (function(){
-    alert('Ooops! Something went wrong.');
-    });
-    });
-  
-    $('#dislike_btn1').click(function() {
+   
+    $('#dislike_btn').click(function() {
+   $('#dl').fadeIn("slow");
         $.ajax({
           type: 'POST',
           url: '/u/vfeel',
           data: {'vid': {{ video.id }}, 'feeling': 'D'},
+          cache: false,
           success: function() {
-      $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn" class="active"></a></div>');
-   $('#likecontent').replaceWith('<div id="likecontent" class="like" title="Like"><a href="#" id="like_btn1"></a></div>');
+          $('#dl').fadeOut("slow");
+     $('#like_btn').removeClass('active');
+    $('#dislike_btn').addClass('active');
      
       }
       }).error (function(){
@@ -286,19 +283,7 @@ alert('Ooops! Something went wrong.');
         });
       });
 
-    $('#dislike_btn').click(function() {
-        $.ajax({
-          type: 'POST',
-          url: '/u/vfeel',
-          data: {'vid': {{ video.id }}, 'feeling': 'U'},
-          success: function() {
-        $('#dislikecontent').replaceWith('<div id="dislikecontent" class="dislike" title="Dislike"><a href="#" id="dislike_btn1"></a></div>');
-        
-      }
-      }).error (function(){
-        alert('Ooops! Something went wrong.');
-        });
-      });  
+   
       
   
   $('#bookmark_btn').click(function() {
