@@ -1,3 +1,6 @@
+"""
+The entry point used by the server to run the project.
+"""
 import os
 import sys
 import site
@@ -25,7 +28,7 @@ site_packages = subprocess.check_output([
 ]).strip()
 
 # Add the virtualenv site-packages to the site packages
-site.addsitedir(site_packages)
+site.addsitedir(site_packages)  # pylint: disable=E1101
 
 # Reorder sys.path so the new directories are at the front.
 new_sys_path = []

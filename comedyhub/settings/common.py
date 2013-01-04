@@ -1,3 +1,6 @@
+"""
+Settings common to all deployment environments
+"""
 import os
 
 # Setting up django-celery

@@ -1,3 +1,6 @@
+"""
+Global project URLs
+"""
 from django.conf import settings
 from django.conf.urls.defaults import patterns, url, include
 from django.conf.urls.static import static

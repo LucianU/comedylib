@@ -1,0 +1,3 @@
+"""
+The comedyhub Django project.
+"""
