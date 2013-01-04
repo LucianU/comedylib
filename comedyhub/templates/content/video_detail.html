@@ -244,61 +244,58 @@ $(document).ready(function() {
 			{% include "registration/login-er.html" %}
 			</div> <!-- end loginerror-->
             
- <script>
- $(document).ready(function() { 
- 
-$('#like_btn').click(function() {
- $('#ll').fadeIn("slow");
-$.ajax({
-  type: 'POST',
-  url: '/u/vfeel',
-  data: {'vid': {{ video.id }}, 'feeling': 'L'},
-  cache: false,
-  success: function() {
-  $('#ll').fadeOut("slow");
-   $('#like_btn').addClass('active');
-    $('#dislike_btn').removeClass('active');
-   }
-}).error (function(){
-alert('Ooops! Something went wrong.');
-});
-});
+<script>
+    // Mapping between buttons and the feelings they express
+    button_feel = {'like_btn': 'L', 'dislike_btn': 'D'};
 
-   
-    $('#dislike_btn').click(function() {
-   $('#dl').fadeIn("slow");
-        $.ajax({
-          type: 'POST',
-          url: '/u/vfeel',
-          data: {'vid': {{ video.id }}, 'feeling': 'D'},
-          cache: false,
-          success: function() {
-          $('#dl').fadeOut("slow");
-     $('#like_btn').removeClass('active');
-    $('#dislike_btn').addClass('active');
-     
-      }
-      }).error (function(){
-        alert('Ooops! Something went wrong.');
+    // Function that returns another function specific to
+    // each pressed button
+    var handlerFact = function(clicked_button, other_button) {
+        var handler = function() {
+            $('#ll').fadeIn('slow');
+            if (clicked_button.hasClass('active')) {
+                var feeling = 'U';
+                var success = function() {
+                    $('#ll').fadeOut('slow');
+                    clicked_button.removeClass('active');
+                };
+            } else {
+                var feeling = button_feel[clicked_button.attr('id')];
+                var success = function() {
+                    $('#ll').fadeOut('slow');
+                    clicked_button.addClass('active');
+                    other_button.removeClass('active');
+                };
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/u/vfeel',
+                data: {'vid': {{ video.id }}, 'feeling': feeling},
+                cache: false
+            }).done(success)
+            //TODO: Do proper error handling
+                .fail(function(){ alert('Ooops! Something went wrong.'); });
+        };
+        return handler;
+    };
+
+    $(document).ready(function() {
+        var likeBtn = $('#like_btn');
+            dislikeBtn = $('#dislike_btn');
+
+        // Binding each button click to its specific callback
+        likeBtn.click(handlerFact(likeBtn, dislikeBtn));
+        dislikeBtn.click(handlerFact(dislikeBtn, likeBtn));
+
+        $('#bookmark_btn').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/u/bookmark',
+                data: {'id': {{ video.id }}, 'obj': 'V'}
+            }).done(function() { alert('OK'); })
+            //TODO: Do proper error handling
+                .fail(function() { alert('Error'); });
         });
-      });
-
-   
-      
-  
-  $('#bookmark_btn').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/u/bookmark',
-      data: {'id': {{ video.id }}, 'obj': 'V'},
-      success: function() {
-       alert('OK');
-  }
-    }).error (function(){
-    alert('Eroare');
     });
-  });
- });
- </script>
+</script>
 {% endblock %}
-
