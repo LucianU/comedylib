@@ -247,22 +247,27 @@ $(document).ready(function() {
 <script>
     // Mapping between buttons and the feelings they express
     button_feel = {'like_btn': 'L', 'dislike_btn': 'D'};
+    // Mapping between buttons and the loader images
+    button_loader = {'like_btn': '#ll', 'dislike_btn': '#dl'};
 
     // Function that returns another function specific to
     // each pressed button
     var handlerFact = function(clicked_button, other_button) {
         var handler = function() {
-            $('#ll').fadeIn('slow');
+            // Getting the button-specific loader
+            var loader = $(button_loader[clicked_button.attr('id')]);
+
+            loader.fadeIn('slow');
             if (clicked_button.hasClass('active')) {
                 var feeling = 'U';
                 var success = function() {
-                    $('#ll').fadeOut('slow');
+                    loader.fadeOut('slow');
                     clicked_button.removeClass('active');
                 };
             } else {
                 var feeling = button_feel[clicked_button.attr('id')];
                 var success = function() {
-                    $('#ll').fadeOut('slow');
+                    loader.fadeOut('slow');
                     clicked_button.addClass('active');
                     other_button.removeClass('active');
                 };
@@ -274,7 +279,7 @@ $(document).ready(function() {
                 cache: false
             }).done(success)
             //TODO: Do proper error handling
-                .fail(function(){ alert('Ooops! Something went wrong.'); });
+              .fail(function(){ alert('Ooops! Something went wrong.'); });
         };
         return handler;
     };
@@ -294,7 +299,7 @@ $(document).ready(function() {
                 data: {'id': {{ video.id }}, 'obj': 'V'}
             }).done(function() { alert('OK'); })
             //TODO: Do proper error handling
-                .fail(function() { alert('Error'); });
+              .fail(function() { alert('Error'); });
         });
     });
 </script>
