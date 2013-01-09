@@ -67,8 +67,7 @@ def update_code():
     Pulls the latest changes from the central repository
     """
     with cd(env.proj_dir):
-        run('hg pull')
-        run('hg up')
+        run('hg pull && hg up %s' % env.branch)
 
 
 def restart_uwsgi():
