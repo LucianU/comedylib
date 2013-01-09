@@ -123,7 +123,7 @@ MIDDLEWARE_CLASSES = (
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
 )
 
-ROOT_URLCONF = 'comedyhub.urls'
+ROOT_URLCONF = 'comedylib.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" org
@@ -213,6 +213,6 @@ LOGGING = {
 # displayed on the page
 RELATED_VIDS_NO = 12
 
-HAYSTACK_SITECONF = 'comedyhub.search_sites'
+HAYSTACK_SITECONF = 'comedylib.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://localhost:8983/solr'

@@ -43,6 +43,6 @@ sys.path.append(REPO_PATH)
 sys.path.append(os.path.join(PROJECT_PATH, 'apps'))
 
 # Now do DJANGO_SETTINGS_MODULE and create the WSGI app.
-os.environ['DJANGO_SETTINGS_MODULE'] = 'comedyhub.settings.development'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'comedylib.settings.development'
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()

@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from comedyhub.mixins import CreatedMixin
+from comedylib.mixins import CreatedMixin
 
 
 class Collection(CreatedMixin):

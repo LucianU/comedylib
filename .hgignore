@@ -4,5 +4,5 @@ syntax: glob
 var
 media
 conf
-comedyhub/settings/local.py
+comedylib/settings/local.py
 
