@@ -17,6 +17,7 @@ def stag():
     env.hosts = ['comedylib@elbear.com']
     env.proj_dir = os.path.join(env.proj_root, 'stag_comedylib')
     env.branch = 'staging'
+    env.settings = 'comedylib.settings.staging'
 
 
 def prod():
@@ -26,6 +27,7 @@ def prod():
     env.hosts = ['comedylib@elbear.com']
     env.proj_dir = os.path.join(env.proj_root, 'comedylib')
     env.branch = 'default'
+    env.settings = 'comedylib.settings.production'
 
 
 @_contextmanager
