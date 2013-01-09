@@ -99,7 +99,13 @@ def syncdb():
     Runs syncdb (along with any pending south migrations)
     """
     with _virtualenv():
-        run('manage.py syncdb --migrate')
+        # Using --noinput because there is a signal connected to
+        # user creation which creates profiles. The problem is that
+        # the profiles table hasn't been created at this point, if
+        # this is the first run of syncdb on this machine. The admin
+        # user can be created afterwards
+        run('DJANGO_SETTINGS_MODULE=%s ./manage.py syncdb --noinput --migrate' %
+            env.settings)
 
 
 def deploy():
