@@ -51,7 +51,7 @@ def make_virtualenv():
     """
     Creates a virtualenv on the remote host
     """
-    run('mkvirtualenv %s' % env.virtualenv)
+    run('mkvirtualenv --no-site-packages %s' % env.virtualenv)
 
 
 def update_reqs():
