@@ -4,6 +4,7 @@ import os
 from fabric.api import env, run, cd, prefix, settings
 
 env.proj_root = '~/'
+env.proj_repo = 'ssh://hg@bitbucket.org/lucianu/comedylib/'
 env.virtualenv = 'comedylib'
 env.activate = 'workon %s' % env.virtualenv
 env.forward_agent = True
@@ -15,7 +16,7 @@ def stag():
     """
     env.hosts = ['comedylib@elbear.com']
     env.proj_dir = os.path.join(env.proj_root, 'stag_comedylib')
-    env.proj_repo = 'ssh://hg@bitbucket.org/lucianu/comedylib/src?at=staging'
+    env.branch = 'staging'
 
 
 def prod():
@@ -24,7 +25,7 @@ def prod():
     """
     env.hosts = ['comedylib@elbear.com']
     env.proj_dir = os.path.join(env.proj_root, 'comedylib')
-    env.proj_repo = 'ssh://hg@bitbucket.org/lucianu/comedylib/src?at=default'
+    env.branch = 'default'
 
 
 @_contextmanager
