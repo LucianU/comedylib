@@ -70,6 +70,13 @@ def update_code():
         run('hg pull && hg up %s' % env.branch)
 
 
+def setup_nginx():
+    """
+    Uses the nginx config file to setup a virtual host
+    """
+    pass
+
+
 def restart_uwsgi():
     """
     Restarts uwsgi process
