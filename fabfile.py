@@ -6,6 +6,7 @@ from fabric.api import env, run, cd, prefix, settings
 env.proj_root = '~/'
 env.virtualenv = 'comedylib'
 env.activate = 'workon %s' % env.virtualenv
+env.forward_agent = True
 
 
 def stag():
