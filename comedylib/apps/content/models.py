@@ -88,6 +88,8 @@ class FeaturedManager(models.Manager):
         kwargs = {}
         for role_id, role_name in Collection.ROLE_CHOICES:
             new_objs = Collection.objects.filter(role=role_id)
+            if not new_objs:
+                return
             kwargs[role_name] = random.choice(new_objs)
         instance = self.create(**kwargs)
         return instance
