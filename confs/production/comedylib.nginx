@@ -1,6 +1,7 @@
 server {
     listen 80;
     server_name comedylib.com;
+    access_log /var/log/nginx/comedylib.com.access.log;
 
     client_max_body_size 20M;
 
