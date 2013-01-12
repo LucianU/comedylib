@@ -105,7 +105,7 @@ def syncdb():
         # this is the first run of syncdb on this machine. The admin
         # user can be created afterwards
         django_settings = 'DJANGO_SETTINGS_MODULE=%s' % env.settings
-        run('%s ./ manage.py syncdb --noinput --migrate' % django_settings)
+        run('%s ./manage.py syncdb --noinput --migrate' % django_settings)
 
 
 def deploy():
