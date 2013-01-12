@@ -1,8 +1,8 @@
-syntax: glob
-*~
-*.py[co]
-var
+syntax: regexp
+.*?~$
+.*.py[co]$
 media
-conf
 comedylib/settings/local.py
+var/log/(?!.hgignore)
+var/run/(?!.hgignore)
 

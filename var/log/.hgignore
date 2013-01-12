@@ -1,0 +1,8 @@
+syntax: regexp
+
+# Ignore everything
+*
+
+# but this file and other special dir
+(?!.hgignore)
+(?!nginx/)
