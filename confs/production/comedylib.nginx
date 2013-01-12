@@ -1,4 +1,9 @@
 server {
+    server_name www.comedylib.com;
+    return 301 $scheme://comedylib.com$request_uri;
+}
+
+server {
     listen 80;
     server_name comedylib.com;
     access_log /var/log/nginx/comedylib.com.access.log;
