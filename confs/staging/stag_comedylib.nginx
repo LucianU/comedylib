@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name test.comedylib.com;
+    server_name staging.comedylib.com;
     access_log /var/log/nginx/staging.comedylib.com.access.log;
     error_log /var/log/nginx/staging.comedylib.com.error.log;
 
