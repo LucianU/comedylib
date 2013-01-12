@@ -104,8 +104,8 @@ def syncdb():
         # the profiles table hasn't been created at this point, if
         # this is the first run of syncdb on this machine. The admin
         # user can be created afterwards
-        run('DJANGO_SETTINGS_MODULE=%s ./manage.py syncdb --noinput --migrate' %
-            env.settings)
+        django_settings = 'DJANGO_SETTINGS_MODULE=%s' % env.settings
+        run('%s ./ manage.py syncdb --noinput --migrate' % django_settings)
 
 
 def deploy():
