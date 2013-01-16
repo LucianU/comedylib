@@ -1,14 +1,45 @@
-{% extends "base.html" %}
-{% block content %}
-  <h2>Videos</h2>
-    <ul>
+
+  <h5>Liked Videos</h5>
+    <div class="section group">
+     <div class="col span_9_of_9">
+      <div class="section group">
       {% for video in liked_videos %}
-        <li>
+        <div class="col span_1_of_4 col4">
+        <div class="collection-content">
+            <div class="coll-pic-content">
+                <a href="{{ video.get_absolute_url }}">
+                    <img src="{{ video.picture.url }}">
+                </a>
+            </div>
+            <div class="coll-name-content">
+                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+            </div>
+            <div class="coll-detail-content">
+            <div class="section group">
+                <div class="col span_1_of_4_coll_det vlength">
+                    <p>{{ video.duration }}</p> <span>Length</span>
+                </div>
+                <div class="col span_2_of_4_coll_det nviews">
+                    <p>{{ video.views }}</p> <span>Views</span>
+                </div>
+                <div class="col span_1_of_4_coll_det rating">
+                    <p>{{ video.rating }} %</p>
+                    <span>Rating</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+        
+        
+        <!--<li>
           <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}" /></a>
           <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-        </li>
+        </li>-->
       {% empty %}
-        <li>You haven't liked any videos.</li>
+        <!--<li>You haven't liked any videos.</li> -->
       {% endfor %}
-    </ul>
-{% endblock %}
+      </div>
+      </div>
+    </div>
+
