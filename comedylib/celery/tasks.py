@@ -3,7 +3,7 @@ Celery tasks
 """
 from django.core.management import call_command
 
-from comedyhub.celery.config import celery
+from comedylib.celery.config import celery
 from content.utils import set_video_thumb
 
 

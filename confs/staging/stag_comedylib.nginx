@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name staging.comedylib.com;
+    access_log /var/log/nginx/staging.comedylib.com.access.log;
+    error_log /var/log/nginx/staging.comedylib.com.error.log;
+
+    client_max_body_size 20M;
+
+    location / {
+        uwsgi_pass unix:///home/comedylib/stag_comedylib/var/run/comedylib.sock;
+        include uwsgi_params;
+    }
+
+    location /static {
+        alias /home/comedylib/stag_comedylib/comedylib/static/;
+    }
+}

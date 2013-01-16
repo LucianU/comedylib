@@ -1,0 +1,22 @@
+server {
+    server_name www.comedylib.com;
+    return 301 $scheme://comedylib.com$request_uri;
+}
+
+server {
+    listen 80;
+    server_name comedylib.com;
+    access_log /var/log/nginx/comedylib.com.access.log;
+    error_log /var/log/nginx/comedylib.com.error.log;
+
+    client_max_body_size 20M;
+
+    location / {
+        uwsgi_pass unix:///home/comedylib/comedylib/var/run/comedylib.sock;
+        include uwsgi_params;
+    }
+
+    location /static {
+        alias /home/comedylib/comedylib/comedylib/static/;
+    }
+}

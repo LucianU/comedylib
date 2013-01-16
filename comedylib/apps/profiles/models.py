@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from comedyhub.mixins import CreatedMixin
+from comedylib.mixins import CreatedMixin
 from content.models import Video
 
 

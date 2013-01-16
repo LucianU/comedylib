@@ -23,8 +23,9 @@ class Home(TemplateView):
             context['%s_videos' % collection] = vids
         context['playlists'] = Playlist.objects.all()[:10]
         featured = Featured.instance.get()
-        for role_id, role_name in Collection.ROLE_CHOICES:
-            context['feat_%s' % role_name] = getattr(featured, role_name)
+        if featured is not None:
+            for role_id, role_name in Collection.ROLE_CHOICES:
+                context['feat_%s' % role_name] = getattr(featured, role_name)
         return context
 
     def _get_recent_videos(self):

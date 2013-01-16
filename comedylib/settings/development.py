@@ -1,7 +1,7 @@
 """
 Development settings
 """
-from comedyhub.settings.common import *  # pylint: disable=W0614, W0401
+from comedylib.settings.common import *  # pylint: disable=W0614, W0401
 
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -20,6 +20,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 try:
-    from comedyhub.settings.local import *  # pylint: disable=W0614, W0401
+    from comedylib.settings.local import *  # pylint: disable=W0614, W0401
 except ImportError:
     pass
