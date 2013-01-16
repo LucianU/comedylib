@@ -77,6 +77,15 @@ class Bookmarks(ListView):
         return bookmarks
 
 
+class Likes(ListView):
+    template_name = 'profiles/liked_videos.html'
+    context_object_name = 'liked_videos'
+    paginate_by = 20
+
+    def get_queryset(self):
+        return self.request.user.profile.feelings.filter(feelings__name='L')
+
+
 class VideoFeeling(View):
     def post(self, request, *args, **kwargs):
         profile = request.user.profile

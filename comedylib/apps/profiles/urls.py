@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import patterns, url
 
 from profiles.views import (Home, Playlists, VideoFeeling, AddToPlaylist,
-                            BookmarkPost, Bookmarks, CreatePlaylist)
+                            BookmarkPost, Bookmarks, Likes, CreatePlaylist)
 
 urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='own_home'),
     url(r'^playlists/$', Playlists.as_view(), name='own_playlists'),
     url(r'^bookmarks/$', Bookmarks.as_view(), name='own_bookmarks'),
+    url(r'^likes/$', Likes.as_view(), name='own_likes'),
     url(r'^vfeel$', VideoFeeling.as_view(), name='vid_feel'),
     url(r'^addtopl$', AddToPlaylist.as_view(), name='add_to_playlist'),
     url(r'^createpl$', CreatePlaylist.as_view(), name='create_playlist'),

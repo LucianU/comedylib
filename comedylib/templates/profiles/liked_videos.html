@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Videos</h2>
+    <ul>
+      {% for video in liked_videos %}
+        <li>
+          <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}" /></a>
+          <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+        </li>
+      {% empty %}
+        <li>You haven't liked any videos.</li>
+      {% endfor %}
+    </ul>
+{% endblock %}
