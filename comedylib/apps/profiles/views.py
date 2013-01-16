@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 import json
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
@@ -79,7 +78,6 @@ class Bookmarks(ListView):
 
 
 class VideoFeeling(View):
-    @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
         profile = request.user.profile
         video_id = request.POST.get('vid')
