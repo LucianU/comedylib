@@ -5,6 +5,8 @@
 {% block content %}
 
 <div id="video_detail">
+<div class="section group">
+            <div class="col span_4_of_6">
 	<div class="video">
 		<div class="mediaplayer">
 			<div id='mediaplayer'></div>
@@ -14,43 +16,19 @@
 					'id': 'playerID',
 					'autostart': 'false',
 					'volume': '80',
-					'width': '700',
-					'height': '400',
+					'width': '667',
+					'height': '390',
 					'skin': '{{ STATIC_URL }}mediaplayer/skins/modieus.zip',
 					'file': '{{ video.url }}'
 				  });
 				</script>
 		</div>
 	</div> <!-- end video-->
-    
-	<div class="video-related">
-	<h4>Related</h4>
-        {% load thumbnail %}
-        <ul>
-        {% for rel_video in related_videos %}
-            <li>
-				
-					<div class="image">
-						<a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 90x60 crop %}" /></a>
-					</div>
-					<div class="title">
-						<a href="{{ rel_video.get_absolute_url }}">{{ rel_video.title }}</a>
-					</div>
-					<div class="nviews">
-						<p>{{ rel_video.views }} <span>views</span></p>
-					</div>
-				
-			</li>
-        {% empty %}
-            <p>No related videos</p>
-        {% endfor %}
-        </ul>
-	</div><!-- end video-related -->
-	<div class="affiliate">
+    <div class="affiliate">
 		affiliate
         
 	</div><!-- end affiliate -->
-	<div class="social">
+    <div class="social">
 	
 		<div class="rating">
         {% if request.user.is_authenticated %}
@@ -198,7 +176,7 @@ $(document).ready(function() {
 </script>
 	
 	</div><!-- end social -->
-	<div class="comments">
+    	<div class="comments">
 		<h1>Comments</h1>
         {% load comments %}
         {% get_comment_count for video as comment_count %}
@@ -238,6 +216,50 @@ $(document).ready(function() {
 		</ul>
        </div>
 	</div><!-- end comments -->
+    
+    
+    </div>
+    <div class="col span_2_of_6">
+	
+	<h5>Related</h5>
+    <div class="section group">
+    {% load thumbnail %}
+        {% for rel_video in related_videos %}
+    <div class="col span_1_of_2 col2">
+        <div class="collection-content">
+            <div class="coll-pic-content">
+                <a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 144x110 crop %}" /></a>
+            </div>
+            <div class="coll-name-content">
+                <a href="{{ video.get_absolute_url }}">{{ rel_video.title }}</a>
+            </div>
+            <div class="coll-detail-content">
+            <div class="section group">
+                <div class="col span_1_of_4_coll_det vlength">
+                    <p>{{ rel_video.duration }}</p> <span>Length</span>
+                </div>
+                <div class="col span_2_of_4_coll_det nviews">
+                    <p>{{ rel_video.views }}</p> <span>Views</span>
+                </div>
+                <div class="col span_1_of_4_coll_det rating">
+                    <p>{{ rel_video.rating }} %</p>
+                    <span>Rating</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+     {% empty %}
+            <p>No related videos</p>
+	{% endfor %}
+    </div>
+      
+
+    </div>
+	
+	
+
+    </div>
 </div> <!-- end video detail-->
 		<div id="loginerror" style="width:292px;display: none;">
 		<h3>You must be logged in to have access to this option</h3>

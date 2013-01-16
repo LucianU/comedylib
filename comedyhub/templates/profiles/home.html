@@ -6,13 +6,17 @@
         $( "#tabs" ).tabs();
 		 });
     </script>
-<div id="firstpage">
-   	 <div class="user-sidebar">
+<div class="section group">
+            <div class="col colbkg1 span_1_of_4">
+   	
 		<div class="user-header">
+        <div class="section group">
+            <div class="col colbkg1 span_2_of_4">
 			<div class="foto">
 			<img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil">
 			</div>
-			
+            </div>
+			  <div class="col colbkg1 span_2_of_4">
 			<div id="tabs1" class="foto-menu">
 				<ul>
 					<li><a href="#public">Public profile</a></li>
@@ -21,6 +25,8 @@
 					<li><a href="#messages">Messages</a></li>
 				</ul>
 			</div>
+            </div>
+            </div>
 		</div>
 		
 		<div id="tabs2" class="user-tabs">
@@ -34,11 +40,17 @@
 			</ul>
 		
 		</div>
-	 </div>
 	 
-	<div class="user-content">
-		<div id="my-playlists" class="my-playlist">
+     </div>
+	   <div class="col colbkg span_3_of_4">
+			<div id="my-playlists" class="my-playlist">
 		<p>my playlists</p>
+        
+            <form name="input" action="{% url create_playlist %}" method="get">
+                Playlist name: <input type="text" name="playlist">
+                <input type="submit" value="Create playlist">
+            </form>
+
 		</div>
 		
 		<div id="video-bookmark" class="my-playlist">
@@ -47,40 +59,100 @@
 
 		<div id="playlist-bookmark" class="my-playlist">
 		<p>bookmark playlist</p>
-			<ul class="playlist-list">
-				<li>
-				<a href="#" class="bookmark-button">Delete Bookmark</a>
-					<div class="playlist-list-title"><a href="#">Top 10 british comedians you had no clue they exist </a></div>
-						<div class="playlist-list-images">Fotografii din video playlists </div>
+        <div class="section group">
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+            
+            
+        </div>
+                      
 					
-				</li>
-				<li>
-				<a href="#" class="bookmark-button">Bookmark this</a>
-					<div class="playlist-list-title"><a href="#">Top 10 british comedians you had no clue they exist </a></div>
-						<div class="playlist-list-images">Fotografii din video playlists </div>
-					
-				</li>
-				<li>
-				<a href="#" class="bookmark-button">Bookmark this</a>
-					<div class="playlist-list-title"><a href="#">Top 10 british comedians you had no clue they exist </a></div>
-						<div class="playlist-list-images">Fotografii din video playlists </div>
-					
-				</li>
-				<li>
-				<a href="#" class="bookmark-button">Bookmark this</a>
-					<div class="playlist-list-title"><a href="#">Top 10 british comedians you had no clue they exist </a></div>
-						<div class="playlist-list-images">Fotografii din video playlists </div>
-					
-				</li>
-				<li>
-				<a href="#" class="bookmark-button">Bookmark this</a>
-					<div class="playlist-list-title"><a href="#">Top 10 british comedians you had no clue they exist </a></div>
-						<div class="playlist-list-images">Fotografii din video playlists </div>
-					
-				</li>
-			</ul>
-		
-		
 		</div>
 		
 		<div id="liked-videos" class="my-playlist">
@@ -111,9 +183,10 @@
 		<p>Messages</p>
 		</div>
 		
-	</div>
 	
-</div>
+    </div>
+	</div>
+
   <style type="text/css">
 	div.inactive {
 			display: none;

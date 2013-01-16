@@ -1,67 +1,115 @@
 {% extends "base.html" %}
 {% block title %} Home {% endblock %}
 {% block content %}
-<!-- #playlists -->
-<div id="playlistcontent">
-	<div class="featured">
-		<div class="comedian">
-			<div class="ribbon"></div>
-			<div class="title">
-			<a href="/">Discover more...</a>
-			</div>
-			<div class="content">
-				<img src="{{ STATIC_URL }}img/featured/featuredcomedian.jpg" alt=""  >
-				<div class="info">
-								<h1>Nume Comic</h1>
-								<p class="description">
-									This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
-								</p>
-								
-				</div>
-			</div>
-		</div>
-		<div class="show">
-		<div class="ribbon"></div>
-		<div class="title">
-		<a href="/">Discover more...</a>
-			</div>
-			<div class="content">
-			<img src="{{ STATIC_URL }}img/featured/featuredshow.jpg" alt=""  >
-			</div>
-		</div>
-		<div class="movie">
-		<div class="ribbon"></div>
-		<div class="title">
-		<a href="/">Discover more...</a>
-			</div>
-			<div class="content">
-			<img src="{{ STATIC_URL }}img/featured/featuredmovie.jpg" alt=""  >
-			</div>
-		</div>
-	</div>
 
-	<div class="randoms">
-		<div class="playlists">
-			<div class="randomplay">
+<!-- #featured -->
+
+    <div class="featured">
+        <div class="section group">
+            <div class="col span_1_of_3">
+                <div class="ribbon_comedians"></div>
+                <div class="featured_title f_t_c">
+                    <a href="/">Discover more...</a>
+                </div>
+                <div class="featured_content">
+                    <img src="{{ STATIC_URL }}img/featured/featuredcomedian.jpg" alt=""  >
+                    <div class="info">
+                        <h1>Nume Comic</h1>
+                        <p class="description">
+                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col span_1_of_3">
+                <div class="ribbon_shows"></div>
+                <div class="featured_title f_t_s">
+                    <a href="/">Discover more...</a>
+                </div>
+                <div class="featured_content">
+                    <img src="{{ STATIC_URL }}img/featured/featuredshow.jpg" alt=""  >
+                    <div class="info">
+                        <h1>Nume Comic</h1>
+                        <p class="description">
+                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                        </p>
+                    </div>
+                </div>
+            </div>
+                       
+            <div class="col span_1_of_3">
+                <div class="ribbon_movies"></div>
+                <div class="featured_title f_t_m">
+                    <a href="/">Discover more...</a>
+                </div>
+                <div class="featured_content">
+                    <img src="{{ STATIC_URL }}img/featured/featuredmovie.jpg" alt=""  >
+                    <div class="info">
+                        <h1>Nume Comic</h1>
+                        <p class="description">
+                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Random playlists and Facebook box -->
+    
+    <div class="section group">
+        <div class="col span_3_of_4">
+            <div class="randomplay_title">
 					<p>Random <span>Playlists</span></p>
-			</div>	
-					
-						<!--	<div id="v1" class="divvid">
-							<div id="thumbvid">
-							<a href="/video/"><img src="{{ STATIC_URL }}img/videothumb.jpg" alt=""  ></a>
-							</div>
-							<div class="titlevid">
-							<a href="/">titlu 1</a>
-							</div>
-							<div id="lengthtime">
-								3 days ago 
-							</div>
-							<div id="nviews">
-								100000000 views
-							</div>
-							</div> -->
-				<!-- for newvideo in videos %} -->
-					<div class="playlist-content">
+			</div>
+                 <div class="section group">
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                          <div class="playlist-content">
+                            <div class="play-pic-content">
+                                <a href="{{ newvideo.get_absolute_url }}">
+                                    <img src="/static/img/playlistimage.jpg">
+                                </a>
+                            </div>
+                            <div class="play-detail-content">
+                                <div class="nvideo">
+                                <span>Videos</span><div class="paragraph">8</div> 
+                                </div>
+                                <div class="user">
+                                <span>User</span><a href="#">username</p>
+                                
+                                </div>
+                            </div>
+                            <div class="play-name-content">
+                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                      <div class="playlist-content">
 						<div class="play-pic-content">
 							<a href="{{ newvideo.get_absolute_url }}">
 								<img src="/static/img/playlistimage.jpg">
@@ -81,8 +129,9 @@
 						</div>
 						
 					</div>
-				<!-- endfor %}	-->	
-				<div class="playlist-content">
+                    </div>
+                      <div class="col span_1_of_3 col3">
+                      <div class="playlist-content">
 						<div class="play-pic-content">
 							<a href="{{ newvideo.get_absolute_url }}">
 								<img src="/static/img/playlistimage.jpg">
@@ -98,11 +147,13 @@
 							</div>
 						</div>
 						<div class="play-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
 						</div>
 						
 					</div>
-						<div class="playlist-content">
+                    </div>
+                    <div class="col span_1_of_3 col3">
+                        <div class="playlist-content">
 						<div class="play-pic-content">
 							<a href="{{ newvideo.get_absolute_url }}">
 								<img src="/static/img/playlistimage.jpg">
@@ -118,31 +169,13 @@
 							</div>
 						</div>
 						<div class="play-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
 						</div>
 						
 					</div>
-					<div class="playlist-content">
-						<div class="play-pic-content">
-							<a href="{{ newvideo.get_absolute_url }}">
-							<img src="/static/img/playlistimage.jpg">
-							</a>
-						</div>
-						<div class="play-detail-content">
-							<div class="nvideo">
-							<span>Videos</span><div class="paragraph">8</div> 
-							</div>
-							<div class="user">
-							<span>User</span><a href="#">username</p>
-							
-							</div>
-						</div>
-						<div class="play-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe </a>
-						</div>
-						
-					</div>
-						<div class="playlist-content">
+                    </div>
+                  <div class="col span_1_of_3 col3">
+                      <div class="playlist-content">
 						<div class="play-pic-content">
 							<a href="{{ newvideo.get_absolute_url }}">
 								<img src="/static/img/playlistimage.jpg">
@@ -158,133 +191,526 @@
 							</div>
 						</div>
 						<div class="play-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians</a>
+							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
 						</div>
 						
 					</div>
-					<div class="playlist-content">
-						<div class="play-pic-content">
-							<a href="{{ newvideo.get_absolute_url }}">
-								<img src="/static/img/playlistimage.jpg">
-							</a>
-						</div>
-						<div class="play-detail-content">
-							<div class="nvideo">
-							<span>Videos</span><div class="paragraph">8</div> 
-							</div>
-							<div class="user">
-							<span>User</span><a href="#">username</p>
-							
-							</div>
-						</div>
-						<div class="play-name-content">
-							<a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe </a>
-						</div>
-			
-					</div> <!-- End of Tab Divs -->
-			
-				
-		</div>
-		<div class="social">
-					<div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="251" data-height="307" data-colorscheme="dark" data-show-faces="true" data-border-color="#444444" data-stream="false" data-header="false"></div>
-		</div>	
-	</div>
-	<div class="toprated">
+                    </div>
+                </div>    
+              
+        </div>
+        <div class="col span_1_of_4">
+            <div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="238" data-height="314" data-colorscheme="dark" data-show-faces="true" data-border-color="#444444" data-stream="false" data-header="false"></div>
+        </div>
+    </div>
+ 
+<!-- Random playlists and Facebook box -->
+
+    <div class="randomplay_title">
 	<p><span>Top Rated </span>Videos</p>
-		<div class="comedian">
-		<p>Comedians</p>
-			<ul>
-				<li>
-					<a href="/c"> 
-						<div class="content">
-							<img src="/static/img/playlistimage.jpg" alt="/">
-							<div class="info">
-								<h1>Nume Comic</h1>
-								<div class="videos">
-									<span>Videos</span>12
-								</div>
-								<div class="ratings">
-									<span>Rating</span>75% based on 1250 votes
-								</div>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-
-			</ul>
-		
-		</div>
-		
-		<div class="shows">
-		<p>Shows</p>
-		<ul>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-
-			</ul>
-		</div>
-		
-		<div class="movies">
-		<p>Movies</p>
-		<ul>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-				<li>
-					<a href=""> 
-					
-					</a>
-				</li>
-
-			</ul>
-		</div>
-	</div>
-</div>
+    </div>
+    <div class="section group">
+        <div class="col span_1_of_3 toprated_section">
+            <p>Comedians</p>
+            <div class="section group">
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          
+            
+        </div>
+        <div class="col span_1_of_3 toprated_section">
+            <p>Shows</p>
+             <div class="section group">
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          
+            
+        </div>
+        <div class="col span_1_of_3 toprated_section">
+            <p>Movies</p>
+            <div class="section group">
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+               <div class="col span_1_of_2 colbkg col2">
+                            <div class="collection-content">
+                    <div class="coll-pic-content">
+                        <a href="{{ video.get_absolute_url }}">
+                            <img src="{{ video.picture.url }}">
+                        </a>
+                    </div>
+                    <div class="coll-name-content">
+                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                    </div>
+                    <div class="coll-detail-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4_coll_det vlength">
+                            <p>{{ video.duration }}</p> <span>Length</span>
+                        </div>
+                        <div class="col span_2_of_4_coll_det nviews">
+                            <p>{{ video.views }}</p> <span>Views</span>
+                        </div>
+                        <div class="col span_1_of_4_coll_det rating">
+                            <p>{{ video.rating }}%</p>
+                            <span>Rating</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          
+            
+        </div>
+        </div>
+    </div>
+    
 
 <div class="cleared"></div>
 
-    <script type="text/javascript">
-function tab(tab) {
-document.getElementById('tab1').style.display = 'none';
-document.getElementById('tab2').style.display = 'none';
-document.getElementById('tab3').style.display = 'none';
-document.getElementById('li_tab1').setAttribute("class", "");
-document.getElementById('li_tab2').setAttribute("class", "");
-document.getElementById('li_tab3').setAttribute("class", "");
-document.getElementById(tab).style.display = 'block';
-document.getElementById('li_'+tab).setAttribute("class", "active");
-}
-</script>
    
 
 {% endblock %}
