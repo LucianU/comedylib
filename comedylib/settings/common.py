@@ -214,5 +214,5 @@ LOGGING = {
 RELATED_VIDS_NO = 12
 
 HAYSTACK_SITECONF = 'comedylib.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SOLR_URL = 'http://localhost:8983/solr'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(SITE_ROOT, 'whoosh_index')

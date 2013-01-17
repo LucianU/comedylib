@@ -3,7 +3,7 @@ fabric==1.5.1
 gdata==2.0.17
 pillow==1.7.7
 psycopg2==2.4.5
-pysolr==2.1.0-beta
+whoosh==2.4.1
 
 # Django apps
 django-breadcrumbs==1.1.3
@@ -13,4 +13,4 @@ django-recaptcha==0.0.4
 django-registration==0.8
 django-social-auth==0.7.6
 easy_thumbnails==1.0.3
-south==0.7.5
+south==0.7.6
