@@ -1,10 +1,30 @@
+ {% extends "base.html" %}
+{% block content %}
+{% block title %}{{ page_title }}{% endblock %}
 
-  <h5>Liked Videos</h5>
+<div class="section group">
+    <div class="col colbkg1 span_1_of_6">
+        <a href="/u/"><h6>{{ user.username }}</h6></a>
+        <div class="user-header">
+            <div class="foto">
+                 <a href="/u/"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
+            </div>
+        </div>
+
+        <div id="tabs2" class="user-tabs">
+            <ul>
+                <li><a href="/u/playlists/">My Playlists</a></li>
+                <li><a href="/u/bookmarks/">Bookmarked Videos</a></li>
+                <li><a href="#playlist-bookmark">Bookmarked Playlists</a></li>
+                <li><a href="/u/likes/"id="lv_btn">Liked Videos</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="col span_5_of_6">
+        <h5>Liked Videos</h5>
     <div class="section group">
-     <div class="col span_9_of_9">
-      <div class="section group">
       {% for video in liked_videos %}
-        <div class="col span_1_of_4 col4">
+        <div class="col span_1_of_5 col5">
         <div class="collection-content">
             <div class="coll-pic-content">
                 <a href="{{ video.get_absolute_url }}">
@@ -30,16 +50,22 @@
             </div>
         </div>
     </div>
+                
         
-        
-        <!--<li>
-          <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}" /></a>
-          <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-        </li>-->
       {% empty %}
-        <!--<li>You haven't liked any videos.</li> -->
+        <p>You haven't liked any videos.</p>
       {% endfor %}
       </div>
-      </div>
+
+		
+				
+	
     </div>
+	</div>
+
+  
+{% endblock %}
+
+  
+     
 

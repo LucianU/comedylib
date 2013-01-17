@@ -9,14 +9,14 @@
             <div class="col span_1_of_3">
                 <div class="ribbon_comedians"></div>
                 <div class="featured_title f_t_c">
-                    <a href="/">Discover more...</a>
+                    <a href="{{ feat_comedian.get_absolute_url }}">Discover more...</a>
                 </div>
                 <div class="featured_content">
-                    <img src="{{ STATIC_URL }}img/featured/featuredcomedian.jpg" alt=""  >
+                    <img src="{{ feat_comedian.picture.url }}" alt=""  >
                     <div class="info">
-                        <h1>Nume Comic</h1>
+                         <a href="{{ feat_comedian.get_absolute_url }}"><h1>{{feat_comedian.name}}</h1></a>
                         <p class="description">
-                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                           {{ feat_comedian.description }}
                         </p>
                     </div>
                 </div>
@@ -25,14 +25,14 @@
             <div class="col span_1_of_3">
                 <div class="ribbon_shows"></div>
                 <div class="featured_title f_t_s">
-                    <a href="/">Discover more...</a>
+                     <a href="{{ feat_show.get_absolute_url }}">Discover more...</a>
                 </div>
                 <div class="featured_content">
-                    <img src="{{ STATIC_URL }}img/featured/featuredshow.jpg" alt=""  >
+                    <img src="{{ feat_show.picture.url }}" alt=""  >
                     <div class="info">
-                        <h1>Nume Comic</h1>
+                         <a href="{{ feat_show.get_absolute_url }}"><h1>{{feat_show.name}}</h1></a>
                         <p class="description">
-                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                             {{ feat_show.description }}
                         </p>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
             <div class="col span_1_of_3">
                 <div class="ribbon_movies"></div>
                 <div class="featured_title f_t_m">
-                    <a href="/">Discover more...</a>
+                    <a href="{{ feat_movie.get_absolute_url }}">Discover more...</a>
                 </div>
                 <div class="featured_content">
-                    <img src="{{ STATIC_URL }}img/featured/featuredmovie.jpg" alt=""  >
+                    <img src="{{ feat_movie.picture.url }}" alt=""  >
                     <div class="info">
-                        <h1>Nume Comic</h1>
+                        <a href="{{ feat_movie.get_absolute_url }}"><h1>{{feat_movie.name}}</h1></a>
                         <p class="description">
-                            This paraghraph is for description or something else we might think ok. The Name, I think, is enough.
+                            {{ feat_movie.description }}
                         </p>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
         <div class="col span_1_of_3 toprated_section">
             <p>Comedians</p>
             <div class="section group">
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -240,7 +240,7 @@
                     </div>
                 </div>
                
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -267,7 +267,7 @@
                     </div>
                 </div>
                 
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -293,7 +293,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -319,7 +319,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -345,7 +345,7 @@
                     </div>
                     </div>
                 </div>
-               <div class="col span_1_of_2 colbkg col2">
+               <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -378,7 +378,7 @@
         <div class="col span_1_of_3 toprated_section">
             <p>Shows</p>
              <div class="section group">
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -405,7 +405,7 @@
                     </div>
                 </div>
                
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -432,7 +432,7 @@
                     </div>
                 </div>
                 
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -458,7 +458,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -484,7 +484,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -510,7 +510,7 @@
                     </div>
                     </div>
                 </div>
-               <div class="col span_1_of_2 colbkg col2">
+               <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -543,7 +543,7 @@
         <div class="col span_1_of_3 toprated_section">
             <p>Movies</p>
             <div class="section group">
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -570,7 +570,7 @@
                     </div>
                 </div>
                
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -597,7 +597,7 @@
                     </div>
                 </div>
                 
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -623,7 +623,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -649,7 +649,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="col span_1_of_2 colbkg col2">
+                <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -675,7 +675,7 @@
                     </div>
                     </div>
                 </div>
-               <div class="col span_1_of_2 colbkg col2">
+               <div class="col span_1_of_2  col2">
                             <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">

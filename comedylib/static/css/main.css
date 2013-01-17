@@ -1,3 +1,15 @@
+/*
+Theme Name: Comedylib
+Theme URI: http://www.mowiti.com
+Description: A clean and minimal theme that is completely compatible with WordPress 3.0
+Author: Bogdan Ganea
+Author URI: http://mowiti.com
+Version: 1.0
+*/
+@import url(font-awesome.min.css);
+@import url(jquery.dropdown.css);
+@import url(slider.css);
+@import url(login.css);
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -46,14 +58,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/*
-Theme Name: Comedyhub 3.0
-Theme URI: http://www.mowiti.com
-Description: A clean and minimal theme that is completely compatible with WordPress 3.0
-Author: Bogdan Ganea
-Author URI: http://mowiti.com
-Version: 1.0
-*/
+
 body{
  font-family: Arial, Helvetica, Georgia, Sans-serif;
 	padding: 0;
@@ -123,7 +128,7 @@ position:relative;
 .borderright {border-right:1px solid #444;}
 
 .col:first-child { margin-left: 0; }
-.col6:nth-child(6n+1), .col2:nth-child(2n+1), .col3:nth-child(3n+1),.col4:nth-child(4n+1), .col1:nth-child(n+1) {
+.col6:nth-child(6n+1), .col2:nth-child(2n+1), .col3:nth-child(3n+1),.col4:nth-child(4n+1), .col1:nth-child(n+1), .col5:nth-child(5n+1) {
 margin-left: 0;
 }
 /*  GRID OF TWO   ============================================================================= */
@@ -157,7 +162,7 @@ margin-left: 0;
 	width: 66.1%;
 }
 .span_1_of_3 {
-	width: 32.2%;
+	width: 32.66%;
 }
 
 /*  GRID OF FOUR  */
@@ -171,7 +176,7 @@ margin-left: 0;
 	width: 49.2%;
 }
 .span_1_of_4 {
-	width: 23.8%;
+	width: 24.25%;
 }
 .span_2_of_4_coll_det {
 	width: 40%;
@@ -189,8 +194,11 @@ margin-left: 0;
 .group:after {
 	clear:both;
 }
+.span_1_of_5 {
+  	width: 19.2%;
+}
 
-/*  GRID OF SIX   ============================================================================= */
+/*  GRID OF SIX   ===98.89===================================== */
 
 
 .span_6_of_6 {
@@ -216,7 +224,13 @@ margin-left: 0;
 .span_1_of_6 {
   	width: 15.83%;
 }
+.span_1_of_6_big{
+  	width: 17.89%;
+}
 
+.span_5_of_6_small{
+  	width: 81%;
+}
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 
@@ -297,42 +311,7 @@ margin-left: 0;
 		width: 100%; 
 	}
 }		    
- 
-.span_9_of_9 {
-	width: 100%;
-}
 
-.span_8_of_9 {
-	width: 88.71%;
-}
-
-.span_7_of_9 {
-	width: 77.42%; 
-}
-
-.span_6_of_9 {
-	width: 66.13%; 
-}
-
-.span_5_of_9 {
-	width: 54.84%; 
-}
-
-.span_4_of_9 {
-	width: 43.55%; 
-}
-
-.span_3_of_9 {
-	width: 32.26%;
-}
-
-.span_2_of_9 {
-	width: 20.97%; 
-}
-
-.span_1_of_9 {
-	width: 9.68%; 
-}
    
     
     
@@ -394,6 +373,13 @@ text-transform: uppercase;
 font: bold 1em Arial, Helvetica, sans-serif;
 color:#FEB200;
 }
+h6{
+padding: 5px;
+text-align:left;
+text-transform: uppercase;
+font: bold 1em Arial, Helvetica, sans-serif;
+color:#FEB200;
+}
 #wrapper{
     margin: 0 auto;
 	margin-top:50px;
@@ -411,7 +397,7 @@ color:#FEB200;
 /* begin Header */
 div.header
 {
-   position: relative;
+   position:relative;
    margin-top:0;
    margin-bottom:0;
    width: 100%;
@@ -436,7 +422,7 @@ background-image: url(/static/img/bgbar.jpg);
 	width:1000px;
 	height:92px; /*127*/
 	/*border:1px solid #fff;*/
-	position:relative;
+	
 	padding: 0px;
 	margin:0 auto;
 	font-size: 0.688em;
@@ -461,6 +447,11 @@ background-position: top left;
     height: 54px;
 	clear:left;
 	/*border:1px solid #fff;*/
+}
+.titlecontent img{
+    width: 176px;
+    height: 54px;
+
 }
 /* CSS search */
 .searchcontent{
@@ -545,47 +536,44 @@ margin-right:5px;
     border-bottom-right-radius: 10px;
 background: #000;
 }
-.avatar {
+/*.avatar {
 float:right;
 border: 2px solid #444;
 width: 45px;
 height: 35px;
-margin:8px 10px 0px 0px;
+margin:6px 6px 0px 0px;
 clear:right;
-}
-.avatar img {
+}*/
+
+.welcome img {
+float:right;
 width:45px;
 height:35px;
+border: 2px solid #444;
 }
 .welcome {
-margin:8px 8px 0px 0px;
+margin:5px 8px 0px 0px;
 float:right;
-width:145px;
-height:40px;
-
+width:200px;
+height:35px;
+/*background:#f00;*/
 }
 .welcome p{
-font: 0.75em Arial, Helvetica, sans-serif;
-padding:3px;
+font-size:14px;
+padding:12px 5px 10px 5px;
 text-align:right;
 float:right;
 height:12px;
-width:145px;
+
+/*background:#00f;*/
 }
 .welcome span{
 color: #63ADD0;
 }
-.logout {
-float:right;
-width:40px;
-
+.welcome i{
+margin-right:6px;
 }
-.logout a{
-font: 0.688em Arial, Helvetica, sans-serif;
-float:right;
-padding:2px 3px 2px 2px;
-}
-.separator{
+/*.separator{
 width:2px;
 float:right;
 margin-top:3px;
@@ -607,7 +595,7 @@ float:right;
 width:100px;
 height:38px;
 border-right: 1px solid #555;
-/*border:1px solid #fff;*/
+
 }
 .notifications {
 margin:5px 6px 0 0;
@@ -629,7 +617,7 @@ float:right;
 width:25px;
 height:25px;
 border:1px solid #fff;
-}
+}*/
 
 
 #register{
@@ -785,19 +773,20 @@ background-image: none;
     width:100%;
 	height:35px;
     display:block;
+    padding-top: 4px;
   	list-style-type: none;
 	float:left;
 color:#fff;
-font: bold 1.125em Arial, Helvetica, sans-serif;
+font: bold 14px Arial, Helvetica, sans-serif;
 /*text-transform:uppercase;*/
 }
 .breadcrumbs p {
 margin-left:10px;
 padding-top:5px;
 }
-.breadcrumbs span{
-font: bold 1em Arial, Helvetica, sans-serif;
-color:#A52D00;
+.breadcrumbs i{
+padding:0 2px 0 8px;
+color:#222;
 }
 .breadcrumbs a{
 color:#fff;
@@ -922,6 +911,7 @@ position:relative;
 }
 
 #menu{
+position:relative;
    	clear:left;
 	float: left;
 	width: 200px;
@@ -1073,7 +1063,7 @@ margin-top:-5px;
 
 .ribbon_comedians{
 position:absolute;
-right:0px;
+right:3px;
 float:right;
 z-index:10;
 top:-12px;
@@ -1085,7 +1075,7 @@ background-position: right;
 }
 .ribbon_shows{
 position:absolute;
-right:0px;
+right:3px;
 float:right;
 z-index:10;
 top:-12px;
@@ -1097,7 +1087,7 @@ background-position: right;
 }
 .ribbon_movies{
 position:absolute;
-right:0px;
+right:3px;
 float:right;
 z-index:10;
 top:-12px;
@@ -1187,7 +1177,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 	margin: 0px 0px 0px 0px;
 	float:left;
 }
+.featured_content img{
+  	width: 311px;
+
+}
 .featured_content .info{
+    text-align:left;
     position:absolute;
     background:#222;
     background:url(/static/img/semitransp60.png) top left repeat;
@@ -1195,6 +1190,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 	width: 250px;
 	height: 70px;
 	font-size:12px;
+    overflow:hidden;
     
 }
 .featured_content .info h1{
@@ -1947,18 +1943,7 @@ margin-left:20px;
 }
 
 
-#breadcrumbs{
-    width:1000px;
-	height:28px;
-    display:block;
-    position:absolute;
-	left:0;
-	padding-top: 5px;
-	margin: 0;
-	list-style-type: none;
 
-/*	background-image: url(/static/img/navigationbg.png);*/
-}
 
 #alphabet{
 	float: left;
@@ -2564,7 +2549,7 @@ padding:5px 0;
 display:block;
 width:89%;
 color:#ddd;
-padding:10px;
+padding:10px 6px;
 text-align:center;
 border:1px solid #222;
 border-top:1px solid #323232;

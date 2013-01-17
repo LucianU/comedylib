@@ -1,198 +1,35 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% block title %}{{ page_title }}{% endblock %}
- <script>
-    $(function() {
-        $( "#tabs" ).tabs();
-		 });
-    </script>
 <div class="section group">
-            <div class="col colbkg1 span_1_of_4">
-   	
-		<div class="user-header">
-        <div class="section group">
-            <div class="col colbkg1 span_2_of_4">
-			<div class="foto">
-			<img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil">
-			</div>
+    <div class="col colbkg1 span_1_of_6">
+        <a href="/u/"><h6>{{ user.username }}</h6></a>
+        <div class="user-header">
+            <div class="foto">
+                <a href="/u/"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
             </div>
-			  <div class="col colbkg1 span_2_of_4">
-			<div id="tabs1" class="foto-menu">
-				<ul>
-					<li><a href="#public">Public profile</a></li>
-					<li><a href="#uset">Profile settings</a></li>
-					<li><a href="#aset">Account settings</a></li>
-					<li><a href="#messages">Messages</a></li>
-				</ul>
-			</div>
-            </div>
-            </div>
-		</div>
-		
-		<div id="tabs2" class="user-tabs">
-			<ul>
-				<li><a href="#my-playlists">My Playlists</a></li>
-				<p>My bookmarks</p>
-				<li><a href="#video-bookmark">Videos</a></li>
-				<li><a href="#playlist-bookmark">Playlists</a></li>
-				<p>Likes</p>
-				<li><a href="#liked-videos"id="lv_btn">Videos</a></li>
-			</ul>
-		
-		</div>
-	 
-     </div>
-	   <div class="col span_3_of_4">
-			<div id="my-playlists" class="my-playlist">
-		<p>my playlists</p>
-        
-            <form name="input" action="{% url create_playlist %}" method="get">
-                Playlist name: <input type="text" name="playlist">
-                <input type="submit" value="Create playlist">
-            </form>
-
-		</div>
-		
-		<div id="video-bookmark" class="my-playlist">
-		<p>bookmark video</p>
-		</div>
-
-		<div id="playlist-bookmark" class="my-playlist">
-		<p>bookmark playlist</p>
-        <div class="section group">
-                    <div class="col span_1_of_3 col3">
-                        <div class="playlist-content">
-                            <div class="play-pic-content">
-                                <a href="{{ newvideo.get_absolute_url }}">
-                                    <img src="/static/img/playlistimage.jpg">
-                                </a>
-                            </div>
-                            <div class="play-detail-content">
-                                <div class="nvideo">
-                                <span>Videos</span><div class="paragraph">8</div> 
-                                </div>
-                                <div class="user">
-                                <span>User</span><a href="#">username</p>
-                                
-                                </div>
-                            </div>
-                            <div class="play-name-content">
-                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col span_1_of_3 col3">
-                        <div class="playlist-content">
-                            <div class="play-pic-content">
-                                <a href="{{ newvideo.get_absolute_url }}">
-                                    <img src="/static/img/playlistimage.jpg">
-                                </a>
-                            </div>
-                            <div class="play-detail-content">
-                                <div class="nvideo">
-                                <span>Videos</span><div class="paragraph">8</div> 
-                                </div>
-                                <div class="user">
-                                <span>User</span><a href="#">username</p>
-                                
-                                </div>
-                            </div>
-                            <div class="play-name-content">
-                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col span_1_of_3 col3">
-                        <div class="playlist-content">
-                            <div class="play-pic-content">
-                                <a href="{{ newvideo.get_absolute_url }}">
-                                    <img src="/static/img/playlistimage.jpg">
-                                </a>
-                            </div>
-                            <div class="play-detail-content">
-                                <div class="nvideo">
-                                <span>Videos</span><div class="paragraph">8</div> 
-                                </div>
-                                <div class="user">
-                                <span>User</span><a href="#">username</p>
-                                
-                                </div>
-                            </div>
-                            <div class="play-name-content">
-                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col span_1_of_3 col3">
-                        <div class="playlist-content">
-                            <div class="play-pic-content">
-                                <a href="{{ newvideo.get_absolute_url }}">
-                                    <img src="/static/img/playlistimage.jpg">
-                                </a>
-                            </div>
-                            <div class="play-detail-content">
-                                <div class="nvideo">
-                                <span>Videos</span><div class="paragraph">8</div> 
-                                </div>
-                                <div class="user">
-                                <span>User</span><a href="#">username</p>
-                                
-                                </div>
-                            </div>
-                            <div class="play-name-content">
-                                <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-            
-            
         </div>
-                      
-					
-		</div>
-		
-		<div id="liked-videos" class="my-playlist">
-		<p>Like videos</p>
-        <script>
- $('#lv_btn').click(function() { 
-  $('#liked-videos').load('/u/likes/', function() {
-  });
-      
-		 });
- </script>
+        <div id="tabs2" class="user-tabs">
+            <ul>
+                <li><a href="/u/playlists/">My Playlists</a></li>
+                <li><a href="/u/bookmarks/">Bookmarked Videos</a></li>
+                <li><a href="#playlist-bookmark">Bookmarked Playlists</a></li>
+                <li><a href="/u/likes/"id="lv_btn">Liked Videos</a></li>
+            </ul>
         </div>
-		
-		<div id="public" class="my-playlist">
-		<p>public profile</p>
-		</div>
-		
-		<div id="uset" class="my-playlist">
-		<p>profile settings</p>
-		</div>
-		
-		<div id="aset" class="my-playlist">
-		<p>Account settings</p>
-		</div>
-		
-		<div id="messages" class="my-playlist">
-		<p>Messages</p>
-		</div>
-		
-	
     </div>
-	</div>
-
-  <style type="text/css">
-	div.inactive {
-			display: none;
-		}
-    </style>
-<script src="{{ STATIC_URL }}js/activatables.js" type="text/javascript"></script>
-<script type="text/javascript">
-activatables('section', ['my-playlists', 'video-bookmark', 'playlist-bookmark', 'liked-videos', 'public', 'uset', 'aset', 'messages' ]);
-</script>
+    <div class="col span_5_of_6 colbkg">
+        <div class="section group">
+            <div class="col span_1_of_3 colbkg1">
+                {{recent_comments}}
+            </div>
+            <div class="col span_1_of_3 colbkg1">
+                {{recent_playlists}}
+            </div>
+            <div class="col span_1_of_3 colbkg1">
+                {{recent_likes}}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

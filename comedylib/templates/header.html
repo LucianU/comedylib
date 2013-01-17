@@ -13,12 +13,13 @@
     <meta name="description" content="This is a database with most of the comedians on the planet" />
 	
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/slider.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
+      <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
     <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
 		<!-- Add google share -->
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
@@ -82,13 +83,25 @@ document.getElementById('fb-root').appendChild(e);
 		
 		{% if request.user.is_authenticated %}
 			<div class="logincontent-user">
-				<div class="avatar">
-					<a href=""><img src="/static/img/logo.jpg"></a>
-				</div>
+				
+
+				
 				<div class="welcome">
-					{% include "profilemenu.html" %}
-			
-				</div>
+                
+    <a href="#" data-dropdown="#dropdown-1" data-vertical-offset="40" data-horizontal-offset="195">
+        <div><img src="/static/img/logo.jpg"><p>Hi,  <span>{{ user.username }} </span> </p></div>
+    </a>
+
+<div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
+    <ul>
+        <li><a href="/u/"><i class="icon-user"></i>Profile</a></li>
+        <li><a href="/u/settings"><i class="icon-cogs"></i>Settings</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
+      
+    </ul>
+</div>
+			</div>
 				
 				
 			</div> <!--end logincontent-nouser-->
@@ -99,6 +112,7 @@ document.getElementById('fb-root').appendChild(e);
             <li><a href="{% url accounts_login %}">Login</a></li>
             <li><a href="{% url registration_register %}">Register</a></li>
 					</ul>-->
+                    
 					{% include "registration/logindrop.html" %}
 				</div> <!--end register-->
 				<div class="why">
@@ -108,11 +122,11 @@ document.getElementById('fb-root').appendChild(e);
 		{% endif %}
 	</div>
 	
-	<div class="breadcrumbs" id="breadcrumbs">
+	<div class="breadcrumbs">
 		<p>
 		{% for breadcrumb in request.breadcrumbs %}
 		  {% if not forloop.last %}
-			<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span>&raquo;</span>
+			<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a><i class="icon-arrow-right"></i>
 		  {% else %}
 			{{ breadcrumb.name }}
 		  {% endif %}

@@ -1,0 +1,73 @@
+ {% extends "base.html" %}
+{% block content %}
+{% block title %}{{ page_title }}{% endblock %}
+
+<div class="section group">
+    <div class="col colbkg1 span_1_of_6">
+        <a href="/u/"><h6>{{ user.username }}</h6></a>
+        <div class="user-header">
+            <div class="foto">
+                 <a href="/u/"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
+            </div>
+        </div>
+
+        <div id="tabs2" class="user-tabs">
+            <ul>
+                <li><a href="/u/playlists/">My Playlists</a></li>
+                <li><a href="/u/bookmarks/">Bookmarked Videos</a></li>
+                <li><a href="#playlist-bookmark">Bookmarked Playlists</a></li>
+                <li><a href="/u/likes/"id="lv_btn">Liked Videos</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="col span_5_of_6">
+
+		
+		<h5>Bookmarked Videos</h5>
+    <div class="section group">
+      {% for video in bookmarked_videos %}
+        <div class="col span_1_of_5 col5">
+        <div class="collection-content">
+            <div class="coll-pic-content">
+                <a href="{{ video.get_absolute_url }}">
+                    <img src="{{ video.picture.url }}">
+                </a>
+            </div>
+            <div class="coll-name-content">
+                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+            </div>
+            <div class="coll-detail-content">
+            <div class="section group">
+                <div class="col span_1_of_4_coll_det vlength">
+                    <p>{{ video.duration }}</p> <span>Length</span>
+                </div>
+                <div class="col span_2_of_4_coll_det nviews">
+                    <p>{{ video.views }}</p> <span>Views</span>
+                </div>
+                <div class="col span_1_of_4_coll_det rating">
+                    <p>{{ video.rating }} %</p>
+                    <span>Rating</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+                
+        
+      {% empty %}
+        <p>You have no bookmarked videos.</p>
+      {% endfor %}
+      </div>
+       
+		
+				
+	
+    </div>
+	</div>
+
+  
+{% endblock %}
+
+  
+     
+
