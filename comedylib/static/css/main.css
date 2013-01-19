@@ -510,7 +510,7 @@ float:right;
 width:100px;
 height:20px;
 clear:right;
-margin-right:5px;
+margin-right:0px;
 padding-top:10px;
 padding-right:7px;
 }
@@ -621,18 +621,23 @@ border:1px solid #fff;
 
 
 #register{
-z-index:9999;
-position:relative;
 width: 140px;
-float:right;
 margin:5px 5px 0 0;
 height: 20px;
 }
 #register a{
-font: 0.75em Arial, Helvetica, sans-serif;
+margin-right:10px;
 float:right;
 text-align:center;
-color: #58DEA1;
+text-transform:uppercase;
+color:#FE4600;
+font-weight:bold;
+
+}
+#register a.reg{
+
+color:#eee;
+
 }
 /* login navigation - tabs*/
 .nav_register{

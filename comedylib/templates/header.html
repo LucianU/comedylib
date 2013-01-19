@@ -100,6 +100,7 @@ document.getElementById('fb-root').appendChild(e);
         <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
       
     </ul>
+ 
 </div>
 			</div>
 				
@@ -108,12 +109,10 @@ document.getElementById('fb-root').appendChild(e);
 		{% else %}
 			<div class="logincontent-nouser">
 				<div id="register">	
-					<!--<ul>
-            <li><a href="{% url accounts_login %}">Login</a></li>
-            <li><a href="{% url registration_register %}">Register</a></li>
-					</ul>-->
-                    
 					{% include "registration/logindrop.html" %}
+           <a href="{% url registration_register %}" class="reg"><p>Register</p></a>
+                    
+					
 				</div> <!--end register-->
 				<div class="why">
 					<a href="#">Why register?</a>
