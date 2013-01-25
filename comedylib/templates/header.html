@@ -76,7 +76,16 @@ document.getElementById('fb-root').appendChild(e);
 		</div>
 		<div class="searchcontent">
 			<div id="search">
-				{% include "search/search.html" %}
+        <form method="get" action="{% url haystack_search %}">
+          {{ form.non_field_errors }}
+          {% for field in form %}
+            <div class="fieldWrapper">
+              {{ field.errors }}
+              {{ field }}
+            </div>
+          {% endfor %}
+          <p><input type="submit" value="Search"></p>
+        </form>
 			</div> <!--end search-->
 		</div>
 		
