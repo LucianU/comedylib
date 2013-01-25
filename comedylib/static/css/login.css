@@ -1,100 +1,20 @@
-navlogin ul {
-  z-index:9999;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
-  float: right;
- 
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px; 
-background: none;
-}
-
-navlogin li {
-  float: left;          
-}
-
-navlogin #login {
-   color:#333;
-}
-
-navlogin #login-trigger,
-navlogin #signup a {
-  font:1em Arial, Helvetica, sans-serif;
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  height: 25px;
-  line-height: 25px;
-  font-weight: bold;
-  padding: 0 8px;
-  text-decoration: none;
-  color: #fff;
-  
-}
-
-navlogin #signup p {
-  -moz-border-radius: 0 3px 3px 0;
-  -webkit-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
-  }
-
-navlogin #login-trigger {
-  -moz-border-radius: 3px 3px 3px 3px;
-  -webkit-border-radius: 3px 3px 3px 3px;
-  border-radius: 3px 3px 3px 3px;
+.signin_content{
+margin:3px;
+width:172px;
+height:186px;
 
 }
-navlogin #login-trigger span{
-  font:0.688em Arial, Helvetica, sans-serif;
-
-}
-
-
-navlogin #login-trigger:hover,
-navlogin #login .active a:hover {
-  color: #ddd;
-  background: #222;
-border:1px solid #333;  
-}
-
-navlogin #login-content {
-  display: none;
-  position: absolute;
-  top: 24px;
-  right: 0;
-  z-index: 9999;    
-  background: #fff;
-  padding: 15px;
-  -moz-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  -webkit-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  -moz-border-radius: 3px 0 3px 3px;
-  -webkit-border-radius: 3px 0 3px 3px;
-  border-radius: 3px 0 3px 3px;
-}
-
-navlogin li #login-content {
-  right: 0;
-  width: 260px; 
- z-index: 9999;
- 
- 
-}
-
 /*--------------------*/
 
 #inputs input {
   background: #f1f1f1;
-  padding: 6px 5px;
+  padding: 4px 5px;
   margin: 0 0 5px 0;
-  width: 238px;
+  width: 160px;
   border: 1px solid #ccc;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   -moz-box-shadow: 0 1px 1px #ccc inset;
   -webkit-box-shadow: 0 1px 1px #ccc inset;
   box-shadow: 0 1px 1px #ccc inset;
@@ -111,11 +31,12 @@ navlogin li #login-content {
 
 /*--------------------*/
 
-#login #actions {
-  margin: 10px 0 0 0;
+#actions {
+  margin: 0px 0 0 0;
 }
 
-#login #submit {		
+ #submit {	
+margin-left:45px;
 -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -137,70 +58,68 @@ navlogin li #login-content {
 	
 }
 
-#login #submit:hover,
-#login #submit:focus {		
+#submit:hover,
+ #submit:focus {		
 background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff8800), color-stop(1, #ffbe73) );
 	background:-moz-linear-gradient( center top, #ff8800 5%, #ffbe73 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8800', endColorstr='#ffbe73');
 	background-color:#ff8800;
 }	
-
-#login #submit:active {		
+ #submit:active {		
 position:relative;
 	top:1px;		
 }
 
-#login #submit:-moz-focus-inner {
+ #submit:-moz-focus-inner {
   border: none;
 }
 
-#login label {
-  float: right;
+ label {
+  float: left;
   line-height: 30px;
 
 }
-
-#login label input {
+label input {
   position: relative;
   top: 2px;
-  right: 2px;
+  right:0px;
 }
-#login-content .center {
+#checkbox-keep{
+padding:3px;
+}
+.signin_content .center {
 text-align: center;
 padding:10px;
 }
-#login-content .center .socialsign {
+.signin_content .center .socialsign {
 /*border:1px solid #ccc;*/
 width:100%;
 padding:3px;
-align:left;
+text-align:left;
 }
-#login-content .lthru {
+.signin_content .lthru {
 text-decoration: line-through;
-color: #ccc;
+color: #bbb;
 }
-#login-content .or {
+.signin_content .or {
 font-size: 93%;
 font-weight: bold;
+color: #bbb;
 }
-#login-content .center .centersocial{
+.signin_content .center .centersocial{
+width:80px;
+height:30px;
 text-align:center;
 display:block;
-margin:0 auto;
-padding:10px;
-/*border:1px solid #ccc;*/
+margin:3px auto;
+padding-left:10px;
 }
-#login-content .center .centersocial a {
-float:center;
-/*border:1px solid #ccc;*/
-padding:10px;
-width:30px;
-align:center;
-}
-#login-content .center .centersocial .socialsign  img {
-width:30px;
 
+.signin_content .center .centersocial  img {
+width:30px;
 }
+#fbtnlnk{float:left}
+#gbtnlnk{float:left}
 
 /*--------------------------Login TAB------------*/
 navlogin #login #login-content #loginregistermenu ul {
@@ -297,159 +216,4 @@ padding:5px;
 navlogin #login #login-content #loginregistermenu #Content_Area_loginregister h2{ /*// this is the css class for the content displayed in each tab*/
 padding:5px 5px 10px 5px;
 color: #333;
-}
-
-
-/*88888888888888888888888888888888888888888888888888888888888888888888888*/
-navprofile ul {
-  z-index:9999;
-  margin: 0;
-  padding: 0;
-  width:145px;
-  height:30px;
-  margin-top:4px;
-  list-style: none;
-  position: relative;
-  float: right;
-position:relative;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px; 
-
-}
-
-navprofile li {
-  float: left;          
-}
-
-navprofile #menu {
-   color:#333;
-}
-
-navprofile #menu-trigger,
-navprofile #signup a {
-  display: block;
-  *display: inline;
-  *zoom: 1;
-  height: 30px;
-  padding:5px;
-  width:145px;
-  line-height: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-  background:url(/static/img/menutrigger.png) 0px 0px;
-  
-}
-
-navprofile #menu-trigger p {
-color:#A57400;
-text-indent:5px;
-margin:3px;
-width:135px;
- padding:5px;
-  text-align:left;
-   font: bold 1.125em Arial, Helvetica, sans-serif;
-  }
-
-navprofile #menu-trigger {
-  -moz-border-radius: 3px 3px 3px 3px;
-  -webkit-border-radius: 3px 3px 3px 3px;
-  border-radius: 3px 3px 3px 3px;
- padding:0;list-style:none;position:absolute;top:0;
-
-}
-navprofile #menu-trigger span{
-  font:1em Arial, Helvetica, sans-serif;
- color:#A57400;
-  margin:2px;
-
-}
-
-
-navprofile #menu-trigger:hover,
-navprofile #menu .active a:hover {
-background-position:0 30px;
-  color: #ddd;
-
- 
-}
-
-navprofile #menu-content {
-  display: none;
-  position: absolute;
-  top: 25px;
-  left: 0px;
-  z-index: 9999;    
-  background: #fff;
-  margin:0;
-
-  -moz-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  -webkit-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
-  -moz-border-radius: 0px 0 4px 4px;
-  -webkit-border-radius: 0px 0 4px 4px;
-  border-radius: 0px 0 4px 4px;
-  
-}
-
-navprofile li #menu-content {
-
-  right: 0;
-  width: 145px; 
-   min-height:108px; /*63*/
- z-index: 9999;
-}
-navprofile li #menu-content a{
-display:block;
-width:145px;
-height:30px;
-text-align:left;
-text-indent:35px;
-font: bold 1em Arial, Helvetica, sans-serif;
-margin-left:0px;
-padding:2px 0 0 0;
-float:right;
-clear:both;
-/*border:1px solid #000;*/
-text-transform:uppercase;
-color:#3CA0D0;
-}
-navprofile li #menu-content a span{
-color:#3CA0D0;
-}
-
-navprofile li #menu-content a:hover{
- color:#FFC640;
-}
-navprofile li #menu-content a:hover span{
- color:#FFC640;
-}
-
-.profile-icon{
-padding:0;list-style:none;position:absolute;
-background:url(/static/img/menutrigger.png) 95px 30px;
-height:30px;
-line-height:30px;
-width:30px;
-
-display:block;
-}
-.settings-icon{
-padding:0;list-style:none;position:absolute;
-background:url(/static/img/menutrigger.png) 95px 0px;
-height:30px;
-line-height:27px;
-width:27px;
-
-display:block;
-}
-.logout-icon{
-padding:0;list-style:none;position:absolute;
-background:url(/static/img/menutrigger.png) 64px 0px;
-height:30px;
-line-height:27px;
-width:27px;
-
-display:block;
 }
