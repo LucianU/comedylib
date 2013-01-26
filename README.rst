@@ -11,7 +11,10 @@ Dependencies
 #. postgresql 9.2.2
 #. postgresql-server-dev 9.1
 #. rabbitmq 3.0.1
-#. solr 4.0.0
+#. libjpeg8-dev
+#. zlib1g-dev
+#. libfreetype6-dev
+#. liblcms1-dev
 
 
 TODO
