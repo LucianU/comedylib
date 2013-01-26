@@ -1,0 +1,43 @@
+<navprofile>
+	<ul>
+		<li id="menu">
+			<a id="menu-trigger" href="#">
+				<p>Hi,  <span>{{ user.username }} </span> </p>
+			</a>
+			<div id="menu-content">
+				<ul>
+				    <li><a href="/u/" ><span class="profile-icon">Profile</span></a></li>
+					<li><a href="/u/settings" class="icon-button"><span class="settings-icon">Settings</span></a></li>
+                    <li><a href="{% url accounts_logout %}" class="icon-button"><span class="logout-icon">Logout</span></a></li>
+				</ul>
+			</div>                     
+		</li>
+		
+	</ul>
+</navprofile>
+<script>
+var mouse_is_inside = false;
+$(document).ready(function(){
+	$('#menu-trigger').click(function(){
+		var loginBox = $("#menu-content");
+        if (loginBox.is(":visible"))
+            loginBox.fadeOut("fast");
+        else
+            loginBox.fadeIn("fast");
+        return false;	
+		})
+	   $("#menu-content").hover(function(){ 
+        mouse_is_inside=true; 
+    }, function(){ 
+        mouse_is_inside=false; 
+    });	
+	 $("body").click(function(){
+        if(! mouse_is_inside) $("#menu-content").fadeOut("fast");
+    });	
+});
+</script>
+
+
+     
+      
+

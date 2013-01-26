@@ -6,6 +6,9 @@ from django.conf.urls.defaults import patterns, url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from haystack.forms import SearchForm
+from haystack.views import SearchView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^a/', include('accounts.urls')),
     url(r'^u/', include('profiles.urls')),
     url(r'^c/', include('django.contrib.comments.urls')),
+    url(r'^search/', SearchView(form_class=SearchForm),
+        name='haystack_search'),
     url(r'^', include('content.urls', namespace='content')),
 )
 
