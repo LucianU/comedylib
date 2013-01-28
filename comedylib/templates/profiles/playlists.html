@@ -20,7 +20,7 @@
     </div>
     <div class="col span_5_of_6">
         <h1>Create playlist</h1>
-        <form name="input" action="{% url create_playlist %}" method="get">
+        <form name="input" action="{% url create_playlist %}" method="post">
             Playlist name: <input type="text" name="playlist">
             <input type="submit" value="Create playlist">
         </form>
