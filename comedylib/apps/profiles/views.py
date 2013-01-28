@@ -5,7 +5,7 @@ from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView, View, ListView, FormView
 
 from content.models import Video
@@ -51,6 +51,7 @@ class Playlists(ListView):
             profile = self.request.user.profile
         context['playlists'] = profile.playlists.all()
         context['profile'] = profile
+        context['playlist_form'] = PlaylistForm()
         return context
 
 
@@ -162,3 +163,4 @@ class CreatePlaylist(FormView):
         self.object = form.save(commit=False)
         self.object.profile = self.request.user.profile
         self.object.save()
+        return redirect('own_playlists')
