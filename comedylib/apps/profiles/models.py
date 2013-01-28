@@ -30,7 +30,11 @@ class Playlist(CreatedMixin):
     slug = models.SlugField(max_length=100, blank=True)
 
     def __unicode__(self):
-        return u"%s: %s videos" % (self.title, self.profile.username)
+        return u"%s: %s videos" % (self.title, self.profile.user.username)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return('playlist', (self.slug, self.id))
 
     def save(self, *args, **kwargs):
         if not self.id:
