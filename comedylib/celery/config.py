@@ -16,12 +16,16 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour='*'),
     },
 }
+CELERY_IGNORE_RESULT = True
 
 celery = Celery('comedylib.celery',
                 backend='amqp',
                 broker='amqp://',
                 include=['comedylib.celery.tasks'])
-celery.conf.update({'CELERYBEAT_SCHEDULE': CELERYBEAT_SCHEDULE})
+celery.conf.update({
+    'CELERYBEAT_SCHEDULE': CELERYBEAT_SCHEDULE,
+    'CELERY_IGNORE_RESULT': CELERY_IGNORE_RESULT,
+})
 
 if __name__ == '__main__':
     celery.start()
