@@ -18,13 +18,19 @@
             </ul>
         </div>
     </div>
+    {% block profile_content %}
     <div class="col span_5_of_6">
         <h1>Create playlist</h1>
-        <form name="input" action="{% url create_playlist %}" method="get">
-            Playlist name: <input type="text" name="playlist">
+        <form name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            {{ playlist_form.as_p }}
             <input type="submit" value="Create playlist">
         </form>
         <h1>Playlists</h1>
+        {% for playlist in playlists %}
+            <p><a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a></p>
+        {% empty %}
+            <p>No playlists found.</p>
+        {% endfor %}
         <div class="section group">
             <div class="col span_1_of_3 col3">
                 <div class="playlist-content">
@@ -99,6 +105,7 @@
                 </div>
             </div>            
         </div>
+        {% endblock %}
     </div>
 </div>
 {% endblock %}
