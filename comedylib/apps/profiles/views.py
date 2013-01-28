@@ -5,8 +5,9 @@ from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, View, ListView, FormView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import (TemplateView, View, ListView, CreateView,
+                                  UpdateView, DetailView)
 
 from content.models import Video
 from profiles.forms import PlaylistForm
@@ -51,7 +52,30 @@ class Playlists(ListView):
             profile = self.request.user.profile
         context['playlists'] = profile.playlists.all()
         context['profile'] = profile
+        context['playlist_form'] = PlaylistForm()
         return context
+
+
+class Playlist(DetailView):
+    template_name = 'profiles/playlist_detail.html'
+    context_object_name = 'playlist'
+    model = Playlist
+
+
+class CreatePlaylist(CreateView):
+    template_name = 'profiles/create_playlist.html'
+    form_class = PlaylistForm
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.profile = self.request.user.profile
+        self.object.save()
+        return redirect('own_playlists')
+
+
+class EditPlaylist(UpdateView):
+    template_name = 'profiles/edit_playlist.html'
+    form_class = PlaylistForm
 
 
 class Bookmarks(ListView):
@@ -129,6 +153,10 @@ class AddToPlaylist(View):
         return HttpResponse(json.dumps({'status': 'OK'}))
 
 
+class RemoveFromPlaylist(View):
+    pass
+
+
 class BookmarkPost(View):
     def post(self, request, *args, **kwargs):
         objs = {
@@ -152,13 +180,3 @@ class BookmarkPost(View):
         Bookmark.objects.get_or_create(profile=profile, content_type=obj_type,
                                        object_id=obj_id)
         return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class CreatePlaylist(FormView):
-    template_name = 'profiles/create_playlist.html'
-    form_class = PlaylistForm
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.profile = self.request.user.profile
-        self.object.save()
