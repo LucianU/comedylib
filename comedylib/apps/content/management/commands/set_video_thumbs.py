@@ -10,6 +10,6 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         for video in Video.objects.all():
-            if video.picture.name is None:
+            if not video.picture:
                 thumbed_vid = set_video_thumb(video)
                 thumbed_vid.save()
