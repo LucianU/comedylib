@@ -1,3 +1,4 @@
+import logging
 import urllib
 import urlparse
 
@@ -5,8 +6,15 @@ import gdata.youtube.service
 
 from django.core.files.base import ContentFile
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s -- %(message)s',
+    datefmt='%m/%d/%Y %I:%M:%S %p'
+)
 
 def get_youtube_thumb(ident):
+    logging.info("Retrieving thumbnail for video id %s from Youtube..." %
+                  ident)
     yt_service = gdata.youtube.service.YouTubeService()
     entry = yt_service.GetYouTubeVideoEntry(video_id=ident)
     thumb = urllib.urlopen(entry.media.thumbnail[0].url).read()
