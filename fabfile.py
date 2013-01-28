@@ -18,6 +18,7 @@ def stag():
     env.proj_dir = os.path.join(env.proj_root, 'stag_comedylib')
     env.branch = 'staging'
     env.settings = 'comedylib.settings.staging'
+    env.conf_path = 'confs/staging/'
 
 
 def prod():
@@ -28,6 +29,7 @@ def prod():
     env.proj_dir = os.path.join(env.proj_root, 'comedylib')
     env.branch = 'default'
     env.settings = 'comedylib.settings.production'
+    env.conf_path = 'confs/production/'
 
 
 @_contextmanager
@@ -82,8 +84,8 @@ def restart_uwsgi():
     Restarts uwsgi process
     """
     with _virtualenv():
-        run('supervisorctl -c confs/production/supervisord.conf'
-            ' restart uwsgi')
+        config_file = os.path.join(env.conf_path, 'supervisord.conf')
+        run('supervisorctl -c %s restart uwsgi' % config_file)
 
 
 def start_supervisord():
@@ -91,7 +93,17 @@ def start_supervisord():
     Starts supervisord on the remote host
     """
     with _virtualenv():
-        run('supervisord -c confs/production/supervisord.conf')
+        config_file = os.path.join(env.conf_path, 'supervisord.conf')
+        run('supervisord -c %s' % config_file)
+
+
+def restart_supervisord():
+    """
+    Restarts supervisord on the remote host
+    """
+    with _virtualenv():
+        config_file = os.path.join(env.conf_path, 'supervisord.conf')
+        run('supervisorctl -c %s reload' % config_file)
 
 
 def syncdb():
