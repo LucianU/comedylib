@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 
 from comedylib.mixins import CreatedMixin
 from content.models import Video
@@ -26,9 +27,15 @@ class Playlist(CreatedMixin):
     profile = models.ForeignKey(Profile, related_name='playlists')
     videos = models.ManyToManyField(Video, related_name='playlists', null=True)
     title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=100, blank=True)
 
     def __unicode__(self):
         return u"%s: %s videos" % (self.title, self.profile.username)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Playlist, self).save(*args, **kwargs)
 
 
 class Feeling(models.Model):
