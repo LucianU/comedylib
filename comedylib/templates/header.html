@@ -87,8 +87,8 @@ document.getElementById('fb-root').appendChild(e);
 		<div class="searchcontent">
 			<div id="search">
         <form method="get" action="{% url haystack_search %}">
-          {{ form.non_field_errors }}
-          {% for field in form %}
+          {{ search_form.non_field_errors }}
+          {% for field in search_form %}
             <div class="fieldWrapper">
               {{ field.errors }}
               {{ field }}

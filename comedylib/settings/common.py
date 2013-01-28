@@ -112,6 +112,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "accounts.context_processors.accounts_forms",
+    "search.context_processors.search_forms",
 )
 
 MIDDLEWARE_CLASSES = (
