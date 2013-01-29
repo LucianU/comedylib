@@ -4,14 +4,42 @@ import json
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
                                   UpdateView, DetailView)
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from content.models import Video
 from profiles.forms import PlaylistForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
+
+
+class AjaxableResponseMixin(SingleObjectTemplateResponseMixin):
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def render_to_json_response(self, context, **response_kwargs):
+        jsoned_context = json.dumps(context)
+        response_kwargs['content_type'] = 'application/json'
+        return HttpResponse(jsoned_context, **response_kwargs)
+
+    def form_invalid(self, form):
+        if self.request.is_ajax():
+            return self.render_to_json_response(form.errors, status=400)
+        else:
+            return super(AjaxableResponseMixin, self).form_invalid(form)
+
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            context = {
+                'pk': form.instance.pk,
+            }
+            return self.render_to_json_response(context)
+        else:
+            return super(AjaxableResponseMixin, self).form_valid(form)
 
 
 class Home(TemplateView):
@@ -62,7 +90,7 @@ class Playlist(DetailView):
     model = Playlist
 
 
-class CreatePlaylist(CreateView):
+class CreatePlaylist(AjaxableResponseMixin, CreateView):
     template_name = 'profiles/create_playlist.html'
     form_class = PlaylistForm
 
@@ -70,10 +98,13 @@ class CreatePlaylist(CreateView):
         self.object = form.save(commit=False)
         self.object.profile = self.request.user.profile
         self.object.save()
-        return redirect('own_playlists')
+        return super(CreatePlaylist, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('own_playlists')
 
 
-class EditPlaylist(UpdateView):
+class EditPlaylist(AjaxableResponseMixin, UpdateView):
     template_name = 'profiles/edit_playlist.html'
     form_class = PlaylistForm
 
