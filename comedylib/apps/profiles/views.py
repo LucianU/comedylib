@@ -78,6 +78,35 @@ class EditPlaylist(UpdateView):
     form_class = PlaylistForm
 
 
+class DeletePlaylist(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        playlist_id = request.POST.get('pid')
+        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
+        playlist.delete()
+
+        if request.is_ajax():
+            return HttpResponse(json.dumps({'status': 'OK'}))
+        return redirect('own_playlists')
+
+
+class HandlePlaylistItems(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        video_id = request.POST.get('vid')
+        playlist_id = request.POST.get('pid')
+        action = kwargs.get('action')
+
+        video = get_object_or_404(Video, id=video_id)
+        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
+
+        # Retrieving 'add' or 'remove' method from 'videos'
+        action_method = getattr(playlist.videos, action)
+        action_method(video)
+        playlist.save()
+        return HttpResponse(json.dumps({'status': 'OK'}))
+
+
 class Bookmarks(ListView):
     template_name = 'profiles/bookmarks.html'
     context_object_name = 'bookmarks'
@@ -99,6 +128,37 @@ class Bookmarks(ListView):
                 post_type = ContentType.objects.get(**post_type_meta)
                 bookmarks = bookmarks.filter(content_type=post_type)
         return bookmarks
+
+
+class HandleBookmarks(View):
+    def post(self, request, *args, **kwargs):
+        objs = {
+            'V': Video,
+            'P': Playlist,
+        }
+        profile = request.user.profile
+        obj_id = request.POST.get('id')
+        try:
+            obj_model = objs[request.POST['obj']]
+        except KeyError:
+            raise SuspiciousOperation
+
+        # We're not using the object, but we are testing to
+        # make sure that it exists before bookmarking it, thus
+        # avoiding an error at that later stage
+        get_object_or_404(obj_model, id=obj_id)
+
+        obj_type = ContentType.objects.get_for_model(obj_model)
+        # Making sure that we don't bookmark the same post twice
+        bookmark = Bookmark.objects.get_or_create(
+            profile=profile,
+            content_type=obj_type,
+            object_id=obj_id
+        )
+        if kwargs.get('action') == 'remove':
+            bookmark.delete()
+
+        return HttpResponse(json.dumps({'status': 'OK'}))
 
 
 class Likes(ListView):
@@ -136,47 +196,4 @@ class VideoFeeling(View):
                 obj.name = feeling
                 obj.save()
 
-        return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class AddToPlaylist(View):
-    def post(self, request, *args, **kwargs):
-        profile = request.user.profile
-        video_id = request.POST.get('vid')
-        playlist_id = request.POST.get('pid')
-
-        video = get_object_or_404(Video, id=video_id)
-        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
-
-        playlist.videos.add(video)
-        playlist.save()
-        return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class RemoveFromPlaylist(View):
-    pass
-
-
-class BookmarkPost(View):
-    def post(self, request, *args, **kwargs):
-        objs = {
-            'V': Video,
-            'P': Playlist,
-        }
-        profile = request.user.profile
-        obj_id = request.POST.get('id')
-        try:
-            obj_model = objs[request.POST['obj']]
-        except KeyError:
-            raise SuspiciousOperation
-
-        # We're not using the object, but we are testing to
-        # make sure that it exists before bookmarking it, thus
-        # avoiding an error at that later stage
-        get_object_or_404(obj_model, id=obj_id)
-
-        obj_type = ContentType.objects.get_for_model(obj_model)
-        # Making sure that we don't bookmark the same post twice
-        Bookmark.objects.get_or_create(profile=profile, content_type=obj_type,
-                                       object_id=obj_id)
         return HttpResponse(json.dumps({'status': 'OK'}))
