@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 
-from profiles.views import (Home, Playlists, Playlist, CreatePlaylist,
+from profiles.views import (Home, Playlists, PlaylistDetail, CreatePlaylist,
                             EditPlaylist, DeletePlaylist, HandlePlaylistItems,
                             Bookmarks, HandleBookmarks, VideoFeeling, Likes)
 
@@ -17,7 +17,7 @@ urlpatterns = patterns('',
         name='remove_from_playlist', kwargs={'action': 'remove'}),
 
     url(r'^playlists/(?P<slug>[a-z0-9-]+)_(?P<pk>\d+)/$',
-        Playlist.as_view(), name='playlist'),
+        PlaylistDetail.as_view(), name='playlist'),
     url(r'^playlists/(?P<slug>[a-z0-9-]+)_(?P<pk>\d+)/edit$',
         EditPlaylist.as_view(), name='edit_playlist'),
 

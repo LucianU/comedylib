@@ -84,7 +84,7 @@ class Playlists(ListView):
         return context
 
 
-class Playlist(DetailView):
+class PlaylistDetail(DetailView):
     template_name = 'profiles/playlist_detail.html'
     context_object_name = 'playlist'
     model = Playlist
