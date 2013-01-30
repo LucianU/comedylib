@@ -1,11 +1,13 @@
 from django.conf.urls.defaults import patterns, url
 
-from profiles.views import (Home, Playlists, PlaylistDetail, CreatePlaylist,
-                            EditPlaylist, DeletePlaylist, HandlePlaylistItems,
-                            Bookmarks, HandleBookmarks, VideoFeeling, Likes)
+from profiles.views import (Home, Settings, Playlists, PlaylistDetail,
+                            CreatePlaylist, EditPlaylist, DeletePlaylist,
+                            HandlePlaylistItems, Bookmarks, HandleBookmarks,
+                            VideoFeeling, Likes)
 
 urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='own_home'),
+    url(r'^settings/$', Settings.as_view(), name='settings'),
     url(r'^playlists/$', Playlists.as_view(), name='own_playlists'),
     url(r'^playlists/create$', CreatePlaylist.as_view(),
         name='create_playlist'),

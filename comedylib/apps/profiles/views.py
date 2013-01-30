@@ -8,11 +8,11 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
-                                  UpdateView, DetailView)
+                                  UpdateView, DetailView, FormView)
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from content.models import Video
-from profiles.forms import PlaylistForm
+from profiles.forms import PlaylistForm, SettingsForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 
@@ -64,6 +64,28 @@ class Home(TemplateView):
         else:
             context['profile'] = self.request.user.profile
         return context
+
+
+class Settings(FormView):
+    template_name = 'profiles/settings.html'
+    form_class = SettingsForm
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.password = form.cleaned_data['password1']
+        user.save()
+        if self.request.FILES['picture']:
+            user.profile.picture = self.request.FILES['picture']
+            user.profile.save()
+        return super(Settings, self).form_valid(form)
+
+    def get_success_url(self):
+        return self.request.user.profile.get_absolute_url()
+
+    def get_form_kwargs(self):
+        kwargs = super(Settings, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class Playlists(ListView):
