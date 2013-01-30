@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Change your settings</h1>
+    <form enctype="multipart/form-data" method="post" action="{% url settings %}">{% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Update" />
+    </form>
+{% endblock %}
