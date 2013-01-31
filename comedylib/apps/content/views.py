@@ -132,8 +132,8 @@ class VideoDetail(DetailView):
 
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist
-        if 'pl' in kwargs:
-            playlist = get_object_or_404(Playlist, id=kwargs['pl'])
+        if 'pl' in self.request.GET:
+            playlist = get_object_or_404(Playlist, id=self.request.GET['pl'])
             collection_vids = playlist.videos.all().exclude(id=video.id)
             context['related_videos'] = collection_vids
         else:
