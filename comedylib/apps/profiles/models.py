@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
@@ -29,6 +29,7 @@ class Playlist(CreatedMixin):
     videos = models.ManyToManyField(Video, related_name='playlists', null=True)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=100, blank=True)
+    empty = models.BooleanField(default=True)
 
     def __unicode__(self):
         return u"%s: %s videos" % (self.title, self.profile.user.username)
@@ -76,3 +77,13 @@ def create_profile(sender, **kwargs):
         user.profile
     except Profile.DoesNotExist:
         Profile.objects.create(user=user)
+
+
+@receiver(m2m_changed, sender=Playlist.videos.through)
+def update_playlist_empty(sender, **kwargs):
+    playlist = kwargs.get('instance')
+    if playlist.videos.count() > 0:
+        playlist.empty = False
+    else:
+        playlist.empty = True
+    playlist.save()
