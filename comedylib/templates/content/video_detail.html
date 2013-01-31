@@ -142,38 +142,25 @@
 			<p>{{ video.views }} <span>views</span></p>
 		</div>
 		<div id="addtoplaycontent" class="addtoplaylist">
-		Here Will be the list of playlists where you can add this video. Also, here should be created new playlists
+ <form id="playlistform" name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
+            <button id="sub">Create playlist</button>
+        </form>
+                <h2>Click on a playlist to add the video:</h1>
+            <ul id="playlistul">
+                {% for playlist in user.profile.playlists.all %}
+                <li>
+                    <a id="" href="#">{{ playlist.title }} ( {% with videos=playlist.videos.count %}{{ videos }}{% endwith %} )</a>
+                </li>
+                {% empty %}
+                    <p>No playlists found.</p>
+                {% endfor %}
+            <ul>
+        
 		</div>
 	
 			
-<script type="text/javascript">
 
-(function($) {
-    $("#addplay-btn").click(function() {
-        if ( $("#addtoplaycontent").is(":hidden") ) {
-            $("#addtoplaycontent").slideDown("normal"); 
-			 } else {
-            $("#addtoplaycontent").slideUp("normal");
-        }
-    });
-})(jQuery);
-$(document).ready(function() {
-		$(".fancybox").fancybox();
-	});
-$(document).ready(function() {
-	$(".various").fancybox({
-		maxWidth	: 400,
-		maxHeight	: 400,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none'
-	});
-});
-</script>
 	
 	</div><!-- end social -->
     	<div class="comments">
@@ -265,8 +252,56 @@ $(document).ready(function() {
 		<h3>You must be logged in to have access to this option</h3>
 			{% include "registration/login-er.html" %}
 			</div> <!-- end loginerror-->
-            
+ <script type="text/javascript">
+
+(function($) {
+    $("#addplay-btn").click(function() {
+        if ( $("#addtoplaycontent").is(":hidden") ) {
+            $("#addtoplaycontent").slideDown("normal"); 
+            return false;
+			 } else {
+            $("#addtoplaycontent").slideUp("normal");
+            return false;
+        }
+    });
+})(jQuery);
+$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 400,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+
+</script>           
 <script>
+
+$('#sub').click(function(event) {
+    var data = $("#playlistform :input").serializeArray();
+    $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) { 
+        $('#playlistul').append('<li><a id="'+data.pk+'">'+ $('#id_title').val() +'</a></li>'); 
+        clearInput();
+    };
+    event.preventDefault();
+    return false;
+};
+
+function clearInput() {
+    $("playlistform :input").each ( function () {
+        $(this).val('');
+    });
+
+};
     // Mapping between buttons and the feelings they express
     button_feel = {'like_btn': 'L', 'dislike_btn': 'D'};
     // Mapping between buttons and the loader images

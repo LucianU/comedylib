@@ -1,19 +1,51 @@
 {% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block profile_content %}
-    <div class="col span_5_of_6">
-        <h2>Create playlist</h2>
-        <form name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
-            {{ playlist_form.as_p }}
+        <div class="col span_5_of_6">
+        <h1>Create playlist</h1>
+              <form id="playlistform" name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
             <input type="submit" value="Create playlist">
         </form>
-        <h2>Playlists</h2>
-        <ul class="playlists">
-            {% for playlist in playlists %}
-                <li><a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a></li>
-            {% empty %}
-                <li>No playlists found.</li>
-            {% endfor %}
-        </ul>
+        <h1>Playlists</h1>
+         <div class="section group">
+        {% for playlist in playlists %}
+         <div class="col span_1_of_3 col3">
+                <div class="playlist-content">
+                 <div class="section group">
+                    <div class="play-pic-content col span_1_of_3">
+                        <a href="{{ playlist.get_absolute_url }}"><img src="{{ playlist.videos.all.0.picture.url}} "></a>
+                    </div>
+                    <div class="play-detail-content col span_2_of_3">
+                    <div class="section group">
+                    <div class="play-name-content col span_2_of_2">
+                        <a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a>
+                    </div> 
+                        <div class="nvideo col span_1_of_2 col1">
+                           <span>Videos</span> <p>
+                                         {% with videos=playlist.videos.count %}
+                                    {{ videos }} </p>
+                                {% endwith %}
+                              </div>
+                        <div class="user col span_1_of_2">
+                            <span>User</span><a href="#">{{ playlist.profile.user.username }}</a>
+                        </div>
+                       
+                        
+                     </div>  
+                        
+                    </div> 
+                 </div>   
+                    
+                </div>
+            </div>
+          
+        {% empty %}
+            <p>No playlists found.</p>
+        {% endfor %}
+        </div>
+     
+     
     </div>
 {% endblock %}
+
