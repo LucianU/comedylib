@@ -4,14 +4,42 @@ import json
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
-                                  UpdateView, DetailView)
+                                  UpdateView, DetailView, FormView)
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from content.models import Video
-from profiles.forms import PlaylistForm
+from profiles.forms import PlaylistForm, SettingsForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
+
+
+class AjaxableResponseMixin(SingleObjectTemplateResponseMixin):
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def render_to_json_response(self, context, **response_kwargs):
+        jsoned_context = json.dumps(context)
+        response_kwargs['content_type'] = 'application/json'
+        return HttpResponse(jsoned_context, **response_kwargs)
+
+    def form_invalid(self, form):
+        if self.request.is_ajax():
+            return self.render_to_json_response(form.errors, status=400)
+        else:
+            return super(AjaxableResponseMixin, self).form_invalid(form)
+
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            context = {
+                'pk': form.instance.pk,
+            }
+            return self.render_to_json_response(context)
+        else:
+            return super(AjaxableResponseMixin, self).form_valid(form)
 
 
 class Home(TemplateView):
@@ -38,6 +66,28 @@ class Home(TemplateView):
         return context
 
 
+class Settings(FormView):
+    template_name = 'profiles/settings.html'
+    form_class = SettingsForm
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.password = form.cleaned_data['password1']
+        user.save()
+        if self.request.FILES['picture']:
+            user.profile.picture = self.request.FILES['picture']
+            user.profile.save()
+        return super(Settings, self).form_valid(form)
+
+    def get_success_url(self):
+        return self.request.user.profile.get_absolute_url()
+
+    def get_form_kwargs(self):
+        kwargs = super(Settings, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+
 class Playlists(ListView):
     template_name = 'profiles/playlists.html'
     context_object_name = 'playlists'
@@ -56,13 +106,13 @@ class Playlists(ListView):
         return context
 
 
-class Playlist(DetailView):
+class PlaylistDetail(DetailView):
     template_name = 'profiles/playlist_detail.html'
     context_object_name = 'playlist'
     model = Playlist
 
 
-class CreatePlaylist(CreateView):
+class CreatePlaylist(AjaxableResponseMixin, CreateView):
     template_name = 'profiles/create_playlist.html'
     form_class = PlaylistForm
 
@@ -70,12 +120,44 @@ class CreatePlaylist(CreateView):
         self.object = form.save(commit=False)
         self.object.profile = self.request.user.profile
         self.object.save()
+        return super(CreatePlaylist, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('own_playlists')
+
+
+class EditPlaylist(AjaxableResponseMixin, UpdateView):
+    template_name = 'profiles/edit_playlist.html'
+    form_class = PlaylistForm
+
+
+class DeletePlaylist(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        playlist_id = request.POST.get('pid')
+        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
+        playlist.delete()
+
+        if request.is_ajax():
+            return HttpResponse(json.dumps({'status': 'OK'}))
         return redirect('own_playlists')
 
 
-class EditPlaylist(UpdateView):
-    template_name = 'profiles/edit_playlist.html'
-    form_class = PlaylistForm
+class HandlePlaylistItems(View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        video_id = request.POST.get('vid')
+        playlist_id = request.POST.get('pid')
+        action = kwargs.get('action')
+
+        video = get_object_or_404(Video, id=video_id)
+        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
+
+        # Retrieving 'add' or 'remove' method from 'videos'
+        action_method = getattr(playlist.videos, action)
+        action_method(video)
+        playlist.save()
+        return HttpResponse(json.dumps({'status': 'OK'}))
 
 
 class Bookmarks(ListView):
@@ -99,6 +181,37 @@ class Bookmarks(ListView):
                 post_type = ContentType.objects.get(**post_type_meta)
                 bookmarks = bookmarks.filter(content_type=post_type)
         return bookmarks
+
+
+class HandleBookmarks(View):
+    def post(self, request, *args, **kwargs):
+        objs = {
+            'V': Video,
+            'P': Playlist,
+        }
+        profile = request.user.profile
+        obj_id = request.POST.get('id')
+        try:
+            obj_model = objs[request.POST['obj']]
+        except KeyError:
+            raise SuspiciousOperation
+
+        # We're not using the object, but we are testing to
+        # make sure that it exists before bookmarking it, thus
+        # avoiding an error at that later stage
+        get_object_or_404(obj_model, id=obj_id)
+
+        obj_type = ContentType.objects.get_for_model(obj_model)
+        # Making sure that we don't bookmark the same post twice
+        bookmark = Bookmark.objects.get_or_create(
+            profile=profile,
+            content_type=obj_type,
+            object_id=obj_id
+        )
+        if kwargs.get('action') == 'remove':
+            bookmark.delete()
+
+        return HttpResponse(json.dumps({'status': 'OK'}))
 
 
 class Likes(ListView):
@@ -136,47 +249,4 @@ class VideoFeeling(View):
                 obj.name = feeling
                 obj.save()
 
-        return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class AddToPlaylist(View):
-    def post(self, request, *args, **kwargs):
-        profile = request.user.profile
-        video_id = request.POST.get('vid')
-        playlist_id = request.POST.get('pid')
-
-        video = get_object_or_404(Video, id=video_id)
-        playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
-
-        playlist.videos.add(video)
-        playlist.save()
-        return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class RemoveFromPlaylist(View):
-    pass
-
-
-class BookmarkPost(View):
-    def post(self, request, *args, **kwargs):
-        objs = {
-            'V': Video,
-            'P': Playlist,
-        }
-        profile = request.user.profile
-        obj_id = request.POST.get('id')
-        try:
-            obj_model = objs[request.POST['obj']]
-        except KeyError:
-            raise SuspiciousOperation
-
-        # We're not using the object, but we are testing to
-        # make sure that it exists before bookmarking it, thus
-        # avoiding an error at that later stage
-        get_object_or_404(obj_model, id=obj_id)
-
-        obj_type = ContentType.objects.get_for_model(obj_model)
-        # Making sure that we don't bookmark the same post twice
-        Bookmark.objects.get_or_create(profile=profile, content_type=obj_type,
-                                       object_id=obj_id)
         return HttpResponse(json.dumps({'status': 'OK'}))

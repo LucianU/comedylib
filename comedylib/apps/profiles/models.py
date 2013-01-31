@@ -22,6 +22,9 @@ class Profile(models.Model):
         return u"%s: %s playlists" % (self.user.username,
                                       self.playlists.all().count())
 
+    @models.permalink
+    def get_absolute_url(self):
+        return('user_home', (self.user.id,))
 
 class Playlist(CreatedMixin):
     profile = models.ForeignKey(Profile, related_name='playlists')
@@ -42,7 +45,7 @@ class Playlist(CreatedMixin):
         super(Playlist, self).save(*args, **kwargs)
 
 
-class Feeling(models.Model):
+class Feeling(CreatedMixin):
     NAME_CHOICES = (
         ('L', 'like'),
         ('D', 'dislike'),
@@ -50,7 +53,6 @@ class Feeling(models.Model):
     profile = models.ForeignKey(Profile)
     video = models.ForeignKey(Video, related_name='feelings')
     name = models.CharField(max_length=5, choices=NAME_CHOICES)
-    timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
         unique_together = ('profile', 'video')

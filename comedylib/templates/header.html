@@ -87,8 +87,8 @@ document.getElementById('fb-root').appendChild(e);
 		<div class="searchcontent">
 			<div id="search">
         <form method="get" action="{% url haystack_search %}">
-          {{ form.non_field_errors }}
-          {% for field in form %}
+          {{ search_form.non_field_errors }}
+          {% for field in search_form %}
             <div class="fieldWrapper">
               {{ field.errors }}
               {{ field }}
@@ -112,8 +112,8 @@ document.getElementById('fb-root').appendChild(e);
 
 <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
     <ul>
-        <li><a href="/u/"><i class="icon-user"></i>Profile</a></li>
-        <li><a href="/u/settings"><i class="icon-cogs"></i>Settings</a></li>
+        <li><a href="{{ user.profile.get_absolute_url }}"><i class="icon-user"></i>Profile</a></li>
+        <li><a href="{% url settings %}"><i class="icon-cogs"></i>Settings</a></li>
         <li class="divider"></li>
         <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
       

@@ -6,9 +6,9 @@
 			</a>
 			<div id="menu-content">
 				<ul>
-				    <li><a href="/u/" ><span class="profile-icon">Profile</span></a></li>
-					<li><a href="/u/settings" class="icon-button"><span class="settings-icon">Settings</span></a></li>
-                    <li><a href="{% url accounts_logout %}" class="icon-button"><span class="logout-icon">Logout</span></a></li>
+            <li><a href="{{ user.profile.get_absolute_url }}" ><span class="profile-icon">Profile</span></a></li>
+            <li><a href="{% url settings %}" class="icon-button"><span class="settings-icon">Settings</span></a></li>
+            <li><a href="{% url accounts_logout %}" class="icon-button"><span class="logout-icon">Logout</span></a></li>
 				</ul>
 			</div>                     
 		</li>

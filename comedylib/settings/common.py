@@ -112,6 +112,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "accounts.context_processors.accounts_forms",
+    "search.context_processors.search_forms",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -144,7 +145,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'breadcrumbs',
-    'captcha',
     'djcelery',
     'easy_thumbnails',
     'haystack',
@@ -181,10 +181,6 @@ SOCIAL_AUTH_PIPELINE = (
 )
 # registration
 ACCOUNT_ACTIVATION_DAYS = 3
-
-# recaptcha
-RECAPTCHA_PUBLIC_KEY = '6Lf-99cSAAAAAHLcXUNp14Jxhqg1AbaGvOas_uVt'
-RECAPTCHA_PRIVATE_KEY = '6Lf-99cSAAAAAHLcXUNp14Jxhqg1AbaGvOas_uVt'
 
 # Specifies the number of related videos that should be
 # displayed on the page
