@@ -9,14 +9,13 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
                                   UpdateView, DetailView, FormView)
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from content.models import Video
 from profiles.forms import PlaylistForm, SettingsForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 
-class AjaxableResponseMixin(SingleObjectTemplateResponseMixin):
+class AjaxableResponseMixin(object):
     """
     Mixin to add AJAX support to a form.
     Must be used with an object-based FormView (e.g. CreateView)
