@@ -1,111 +1,19 @@
-{% extends "base.html" %}
+{% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
-{% block content %}
-<div class="section group">
-    <div class="col colbkg1 span_1_of_6">
-        <a href="/u/"><h6>{{ user.username }}</h6></a>
-        <div class="user-header">
-            <div class="foto">
-                <a href="/u/"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
-            </div>
-        </div>
-        <div id="tabs2" class="user-tabs">
-            <ul>
-                <li><a href="/u/playlists/">My Playlists</a></li>
-                <li><a href="/u/bookmarks/">Bookmarked Videos</a></li>
-                <li><a href="#playlist-bookmark">Bookmarked Playlists</a></li>
-                <li><a href="/u/likes/"id="lv_btn">Liked Videos</a></li>
-            </ul>
-        </div>
-    </div>
-    {% block profile_content %}
+{% block profile_content %}
     <div class="col span_5_of_6">
-        <h1>Create playlist</h1>
+        <h2>Create playlist</h2>
         <form name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
             {{ playlist_form.as_p }}
             <input type="submit" value="Create playlist">
         </form>
-        <h1>Playlists</h1>
-        {% for playlist in playlists %}
-            <p><a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a></p>
-        {% empty %}
-            <p>No playlists found.</p>
-        {% endfor %}
-        <div class="section group">
-            <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
-                    <div class="play-pic-content">
-                        <a href="{{ newvideo.get_absolute_url }}"><img src="/static/img/playlistimage.jpg"></a>
-                    </div>
-                    <div class="play-detail-content">
-                        <div class="nvideo">
-                            <span>Videos</span><div class="paragraph">8</div> 
-                        </div>
-                        <div class="user">
-                            <span>User</span><a href="#">username</p>
-                        </div>
-                    </div>
-                    <div class="play-name-content">
-                        <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
-                    <div class="play-pic-content">
-                        <a href="{{ newvideo.get_absolute_url }}"><img src="/static/img/playlistimage.jpg"></a>
-                    </div>
-                    <div class="play-detail-content">
-                        <div class="nvideo">
-                            <span>Videos</span><div class="paragraph">8</div> 
-                        </div>
-                        <div class="user">
-                            <span>User</span><a href="#">username</p>
-                        </div>
-                    </div>
-                    <div class="play-name-content">
-                        <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
-                    <div class="play-pic-content">
-                        <a href="{{ newvideo.get_absolute_url }}"><img src="/static/img/playlistimage.jpg"></a>
-                    </div>
-                    <div class="play-detail-content">
-                        <div class="nvideo">
-                            <span>Videos</span><div class="paragraph">8</div> 
-                        </div>
-                        <div class="user">
-                            <span>User</span><a href="#">username</p>
-                        </div>
-                    </div>
-                    <div class="play-name-content">
-                        <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
-                    <div class="play-pic-content">
-                        <a href="{{ newvideo.get_absolute_url }}"><img src="/static/img/playlistimage.jpg"></a>
-                    </div>
-                    <div class="play-detail-content">
-                        <div class="nvideo">
-                            <span>Videos</span><div class="paragraph">8</div> 
-                        </div>
-                        <div class="user">
-                            <span>User</span><a href="#">username</p>
-                        </div>
-                    </div>
-                    <div class="play-name-content">
-                        <a href="{{ newvideo.get_absolute_url }}">15 best american comedians that ever lived in Europe but born in South Asia</a>
-                    </div>
-                </div>
-            </div>            
-        </div>
-        {% endblock %}
+        <h2>Playlists</h2>
+        <ul class="playlists">
+            {% for playlist in playlists %}
+                <li><a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a></li>
+            {% empty %}
+                <li>No playlists found.</li>
+            {% endfor %}
+        </ul>
     </div>
-</div>
 {% endblock %}

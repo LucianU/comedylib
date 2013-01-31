@@ -1,11 +1,11 @@
- {% extends "base.html" %}
-{% block content %}
+{% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
+{% block content %}
  <script>
     $(function() {
         $( "#tabs" ).tabs();
-		 });
-    </script>
+    });
+</script>
 <div class="section group">
             <div class="col colbkg1 span_1_of_6">
      <a href="/u/"><h6>{{ user.username }}</h6></a> demo

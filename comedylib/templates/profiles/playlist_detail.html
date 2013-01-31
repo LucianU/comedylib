@@ -2,13 +2,13 @@
 {% block profile_content %}
     <h1>{{ playlist.title }}</h1>
     <ul>
-    {% for video in playlist.videos.all %}
-        <li>
-            <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}" /></a>
-            <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-        </li>
-    {% empty %}
-        <p>This playlist has no videos.</p>
-    {% endfor %}
+        {% for video in playlist.videos.all %}
+            <li>
+                <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}" /></a>
+                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+            </li>
+        {% empty %}
+            <li>This playlist has no videos.</li>
+        {% endfor %}
     </ul>
 {% endblock %}
