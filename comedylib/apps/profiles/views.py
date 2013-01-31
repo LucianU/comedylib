@@ -182,6 +182,16 @@ class Bookmarks(ListView):
                 bookmarks = bookmarks.filter(content_type=post_type)
         return bookmarks
 
+    def get_context_data(self, **kwargs):
+        context = super(Bookmarks, self).get_context_data(**kwargs)
+        post_types = {
+            'V': 'Video',
+            'P': 'Playlist',
+        }
+        post_type = post_types[self.request.GET.get('post')]
+        context['post_type'] = post_type
+        return context
+
 
 class HandleBookmarks(View):
     def post(self, request, *args, **kwargs):

@@ -112,7 +112,7 @@ document.getElementById('fb-root').appendChild(e);
 
 <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
     <ul>
-        <li><a href="{{ user.profile.get_absolute_url }}"><i class="icon-user"></i>Profile</a></li>
+        <li><a href="{% url own_home %}"><i class="icon-user"></i>Profile</a></li>
         <li><a href="{% url settings %}"><i class="icon-cogs"></i>Settings</a></li>
         <li class="divider"></li>
         <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>

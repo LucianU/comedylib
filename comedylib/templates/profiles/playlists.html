@@ -1,27 +1,9 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
-<div class="section group">
-    <div class="col colbkg1 span_1_of_6">
-        <a href="/u/"><h6>{{ user.username }}</h6></a>
-        <div class="user-header">
-            <div class="foto">
-                <a href="/u/"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
-            </div>
-        </div>
-        <div id="tabs2" class="user-tabs">
-            <ul>
-                <li><a href="/u/playlists/">My Playlists</a></li>
-                <li><a href="/u/bookmarks/">Bookmarked Videos</a></li>
-                <li><a href="#playlist-bookmark">Bookmarked Playlists</a></li>
-                <li><a href="/u/likes/"id="lv_btn">Liked Videos</a></li>
-            </ul>
-        </div>
-    </div>
-    {% block profile_content %}
-    <div class="col span_5_of_6">
+{% block profile_content %}
+        <div class="col span_5_of_6">
         <h1>Create playlist</h1>
-        <form id="playlistform" name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
+              <form id="playlistform" name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
             <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
             <input type="submit" value="Create playlist">
         </form>
@@ -63,7 +45,7 @@
         {% endfor %}
         </div>
      
-        {% endblock %}
+     
     </div>
-</div>
 {% endblock %}
+
