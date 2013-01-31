@@ -21,8 +21,8 @@
     {% block profile_content %}
     <div class="col span_5_of_6">
         <h1>Create playlist</h1>
-        <form name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
-            {{ playlist_form.as_p }}
+        <form id="playlistform" name="input" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
             <input type="submit" value="Create playlist">
         </form>
         <h1>Playlists</h1>
@@ -35,22 +35,26 @@
                         <a href="{{ playlist.get_absolute_url }}"><img src="{{ playlist.videos.all.0.picture.url}} "></a>
                     </div>
                     <div class="play-detail-content col span_2_of_3">
-                        <div class="nvideo">
-                            <span>Videos</span><div class="paragraph">
-                                         {% with videos=playlist.videos.count %}
-                                    <p>{{ videos }} </p>
-                                {% endwith %}
-                            
-                            </div> 
-                        </div>
-                        <div class="user">
-                            <span>User</span><a href="#">{{ playlist.profile_id }}</p>
-                        </div>
-                    </div>
-                 </div>   
-                    <div class="play-name-content">
+                    <div class="section group">
+                    <div class="play-name-content col span_2_of_2">
                         <a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a>
-                    </div>
+                    </div> 
+                        <div class="nvideo col span_1_of_2 col1">
+                           <span>Videos</span> <p>
+                                         {% with videos=playlist.videos.count %}
+                                    {{ videos }} </p>
+                                {% endwith %}
+                              </div>
+                        <div class="user col span_1_of_2">
+                            <span>User</span><a href="#">{{ playlist.profile.user.username }}</a>
+                        </div>
+                       
+                        
+                     </div>  
+                        
+                    </div> 
+                 </div>   
+                    
                 </div>
             </div>
           

@@ -91,10 +91,10 @@ document.getElementById('fb-root').appendChild(e);
           {% for field in search_form %}
             <div class="fieldWrapper">
               {{ field.errors }}
-              {{ field }}
+             <input type="text" name="q" id="id_q" placeholder="Search...">
             </div>
           {% endfor %}
-          <p><input type="submit" value="Search"></p> 
+         <!-- <p><input type="submit" value="Search"></p> -->
         </form>
 			</div> <!--end search-->
 		</div>
