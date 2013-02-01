@@ -287,17 +287,16 @@ $(document).ready(function() {
 <script>
 
 $('#sub').click(function(event) {
-    var data = $("#playlistform :input").serializeArray();
     $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) { 
         $('#playlistul').append('<li><a id="'+data.pk+'">'+ $('#id_title').val() +'</a></li>'); 
         clearInput();
-    };
+    });
     event.preventDefault();
     return false;
-};
+});
 
 function clearInput() {
-    $("playlistform :input").each ( function () {
+    $("playlistform :input").each(function() {
         $(this).val('');
     });
 
