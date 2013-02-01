@@ -249,7 +249,6 @@
 <script>
     $('#sub').on("click", function(event)  {
         $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
-        
             $('#playlistul').append('<li><a id="'+data.pk+'" href="#" class="active">'+ $('#id_title').val() +' (0)</a></li>');
             clearInput();
         });
@@ -260,8 +259,21 @@
         $("#playlistform :input").each(function() {
             $(this).val('');
         });
-
     };
+    $(document).on("click", "#playlistul a.active", function(event){
+        event.preventDefault();
+        a = $(this);
+        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': a.attr('id')}, function(data) {
+            title = a.text();
+            vidCount = title.match(/\((\d+)\)/)[1];
+            newVidCount = (parseInt(vidCount) + 1).toString();
+            newTitle = title.replace(/\(\d+\)/, '('+newVidCount+')');
+            a.text(newTitle);
+            a.addClass('inactive');
+            a.removeClass('active');
+        });
+        return false;
+    });
 
     // Mapping between buttons and the feelings they express
     button_feel = {'like_btn': 'L', 'dislike_btn': 'D'};
@@ -319,29 +331,6 @@
             //TODO: Do proper error handling
               .fail(function() { alert('Error'); });
         });
-    
-       
-
-        
     });
-    $(document).on("click", "#playlistul a.active", function(event){
-     event.preventDefault();
-        a = $(this);
-        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': a.attr('id')}, function(data) {
-            title = a.text();
-            vidCount = title.match(/\((\d+)\)/)[1];
-            newVidCount = (parseInt(vidCount) + 1).toString();
-            newTitle = title.replace(/\(\d+\)/, '('+newVidCount+')');
-            a.text(newTitle);
-            a.addClass('inactive');
-            a.removeClass('active');
-          
-        });
-            
-            return false;
-
-    });
-    
-    
 </script>
 {% endblock %}
