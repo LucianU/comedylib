@@ -129,12 +129,12 @@
                     <ul id="playlistul">
                         {% for playlist in user.profile.playlists.all %}
                             <li>
-                                <a id="" href="#">{{ playlist.title }} ( {% with videos=playlist.videos.count %}{{ videos }}{% endwith %} )</a>
+                                <a id="{{ playlist.id }}" href="#" class="active">{{ playlist.title }} ({% with videos=playlist.videos.count %}{{ videos }}{% endwith %})</a>
                             </li>
                         {% empty %}
-                            <p>No playlists found.</p>
+                            <li>No playlists found.</li>
                         {% endfor %}
-                    <ul>
+                    </ul>
                 </div>
             </div><!-- end social -->
             <div class="comments">
@@ -247,16 +247,17 @@
     });
 </script>
 <script>
-    $('#sub').click(function(event) {
+    $('#sub').on("click", function(event)  {
         $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
-            $('#playlistul').append('<li><a id="'+data.pk+'">'+ $('#id_title').val() +'</a></li>');
+        
+            $('#playlistul').append('<li><a id="'+data.pk+'" href="#" class="active">'+ $('#id_title').val() +' (0)</a></li>');
             clearInput();
         });
         event.preventDefault();
         return false;
     });
     function clearInput() {
-        $("playlistform :input").each(function() {
+        $("#playlistform :input").each(function() {
             $(this).val('');
         });
 
@@ -318,6 +319,29 @@
             //TODO: Do proper error handling
               .fail(function() { alert('Error'); });
         });
+    
+       
+
+        
     });
+    $(document).on("click", "#playlistul a.active", function(event){
+     event.preventDefault();
+        a = $(this);
+        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': a.attr('id')}, function(data) {
+            title = a.text();
+            vidCount = title.match(/\((\d+)\)/)[1];
+            newVidCount = (parseInt(vidCount) + 1).toString();
+            newTitle = title.replace(/\(\d+\)/, '('+newVidCount+')');
+            a.text(newTitle);
+            a.addClass('inactive');
+            a.removeClass('active');
+          
+        });
+            
+            return false;
+
+    });
+    
+    
 </script>
 {% endblock %}

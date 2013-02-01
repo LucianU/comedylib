@@ -4,35 +4,66 @@
 <div class="col span_5_of_6">
     <h5>Bookmarked {{ post_type }}s</h5>
     <div class="section group">
-        {% for video in bookmarks %}
-            <div class="col span_1_of_5 col5">
-                <div class="collection-content">
-                    <div class="coll-pic-content">
-                        <a href="{{ video.get_absolute_url }}">
-                            <img src="{{ video.picture.url }}">
-                        </a>
-                    </div>
-                    <div class="coll-name-content">
-                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-                    </div>
-                    <div class="coll-detail-content">
-                        <div class="section group">
-                            <div class="col span_1_of_4_coll_det vlength">
-                                <p>{{ video.duration }}</p> <span>Length</span>
+       {% if post_type == 'Video' %}
+    {% for bookmark in bookmarks %}
+          <div class="col span_1_of_5 col5">
+                    <div class="collection-content">
+                        <div class="coll-pic-content">
+                            <a href="{{ bookmark.post.get_absolute_url }}">
+                                <img src="{{ bookmark.post.picture.url }}">
+                            </a>
+                        </div>
+                        <div class="coll-name-content">
+                            <a href="{{ bookmark.post.get_absolute_url }}">{{ bookmark.post.title }}</a>
+                        </div>
+                        <div class="coll-detail-content">
+                            <div class="section group">
+                                <div class="col span_1_of_4_coll_det vlength">
+                                    <p>{{ bookmark.post.duration }}</p> <span>Length</span>
+                                </div>
+                                <div class="col span_2_of_4_coll_det nviews">
+                                    <p>{{ bookmark.post.views }}</p> <span>Views</span>
+                                </div>
+                                <div class="col span_1_of_4_coll_det rating">
+                                    <p>{{ bookmark.post.rating }} %</p> <span>Rating</span>
+                                </div>
                             </div>
-                            <div class="col span_2_of_4_coll_det nviews">
-                                <p>{{ video.views }}</p> <span>Views</span>
-                            </div>
-                            <div class="col span_1_of_4_coll_det rating">
-                                <p>{{ video.rating }} %</p> <span>Rating</span>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+        <p>There are no videos here, yet.</p>
+                {% endfor %}
+{% else %}
+    {% for bookmark in bookmarks %}
+        <div class="col span_1_of_3 col3">
+                <div class="playlist-content">
+                    <div class="section group">
+                        <div class="play-pic-content col span_1_of_3">
+                            <a href="{{ bookmark.post.get_absolute_url }}"><img src="{{ bookmark.post.videos.all.0.picture.url}} "></a>
+                        </div>
+                        <div class="play-detail-content col span_2_of_3">
+                            <div class="section group">
+                                <div class="play-name-content col span_2_of_2">
+                                    <a href="{{ bookmark.post.get_absolute_url }}">{{ bookmark.post.title }}</a>
+                                </div>
+                                <div class="nvideo col span_1_of_2 col1">
+                                    <span>Videos</span> <p>{% with videos=bookmark.post.videos.count %} {{ videos }}</p>{% endwith %}
+                                </div>
+                                <div class="user col span_1_of_2">
+                                    <span>User</span><a href="#">{{ bookmark.post.profile.user.username }}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% empty %}
-            <p>You have no bookmarked videos.</p>
-        {% endfor %}
+            {% empty %}
+        <p>You have no playlists, yet.</p>
+                {% endfor %}
+    
+                {% endif %}
+
     </div>
 </div>
 {% endblock %}
