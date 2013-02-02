@@ -31,6 +31,9 @@ class Playlist(CreatedMixin):
     slug = models.SlugField(max_length=100, blank=True)
     empty = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['created']
+
     def __unicode__(self):
         return u"%s: %s videos" % (self.title, self.profile.user.username)
 
