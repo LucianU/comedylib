@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'registration',
     'social_auth',
     'south',
+    'taggit',
 
     'accounts',
     'content',
