@@ -1896,6 +1896,10 @@ background:#222;
 width:80px;
 color:#aaa;
 }
+#sociallist .bookmark a.inactive{
+background:#04b404;
+}
+
 .leftmargin20{
 margin-left:20px;
 }
