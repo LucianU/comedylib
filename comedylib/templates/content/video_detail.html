@@ -128,9 +128,7 @@
                     <h2>Click on a playlist to add the video:</h1>
                     <ul id="playlistul">
                         {% for playlist in user.profile.playlists.all %}
-                            <li>
-                                <a id="{{ playlist.id }}" href="#" class="active">{{ playlist.title }} ({% with videos=playlist.videos.count %}{{ videos }}{% endwith %})</a>
-                            </li>
+                            <li data-playlist-id="{{ playlist.id }}" class="active">{{ playlist.title }} ({{ playlist.videos.count }})</li>
                         {% empty %}
                             <li>No playlists found.</li>
                         {% endfor %}
@@ -248,11 +246,11 @@
 </script>
 <script>
     $('#sub').on("click", function(event)  {
+        event.preventDefault();
         $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
-            $('#playlistul').append('<li><a id="'+data.pk+'" href="#" class="active">'+ $('#id_title').val() +' (0)</a></li>');
+            $('#playlistul').append('<li data-playlist-id="'+data.pk+'" class="active">'+$("#id_title").val()+' (0)</li>');
             clearInput();
         });
-        event.preventDefault();
         return false;
     });
     function clearInput() {
@@ -260,17 +258,17 @@
             $(this).val('');
         });
     };
-    $(document).on("click", "#playlistul a.active", function(event){
+    $(document).on("click", "#playlistul li.active", function(event){
         event.preventDefault();
-        a = $(this);
-        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': a.attr('id')}, function(data) {
-            title = a.text();
+        li = $(this);
+        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': li.attr('data-playlist-id')}, function(data) {
+            title = li.text();
             vidCount = title.match(/\((\d+)\)/)[1];
             newVidCount = (parseInt(vidCount) + 1).toString();
             newTitle = title.replace(/\(\d+\)/, '('+newVidCount+')');
-            a.text(newTitle);
-            a.addClass('inactive');
-            a.removeClass('active');
+            li.text(newTitle);
+            li.addClass('inactive');
+            li.removeClass('active');
         });
         return false;
     });

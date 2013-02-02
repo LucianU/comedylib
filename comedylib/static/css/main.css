@@ -1388,9 +1388,6 @@ list-style:none;
 margin:0 0 10px 40px;
 }
 #video_detail .social .addtoplaylist ul li{
-
-}
-#video_detail .social .addtoplaylist ul li a{
 font-weight:bold;
 font-size: 14px;
 display:block;
@@ -1398,9 +1395,12 @@ width:90%;
 padding:5px;
 color:#eee;
 }
-#video_detail .social .addtoplaylist ul li a:hover{
+#video_detail .social .addtoplaylist ul li.active:hover{
 color:#222;
 background:#ccc;
+}
+#video_detail .social .addtoplaylist ul li.inactive{
+background:#04b404;
 }
 
 
