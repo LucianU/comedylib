@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
+from taggit.managers import TaggableManager
 from comedylib.mixins import CreatedMixin
 
 
@@ -21,6 +22,7 @@ class Collection(CreatedMixin):
                                          blank=True)
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
     slug = models.SlugField(max_length=100, blank=True)
+    tags = TaggableManager()
 
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
