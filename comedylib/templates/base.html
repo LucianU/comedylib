@@ -1,9 +1,188 @@
-{% include "header.html" %}
-<div class="cleared reset-box"></div>
-<div id="overcontent" >
-    <div id="content">
-    {% block content %}
-    {% endblock %}
-    </div> <!--end content-->
-</div> <!--end overcontent-->
-{% include "footer.html" %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" itemscope itemtype="http://schema.org/Article">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="en-us" />
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="ROBOTS" content="ALL" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta name="Copyright" content="comedylib.com" />
+        <meta name="keywords" content="Comedians, series, movies" />
+        <meta name="description" content="This is a database with most of the comedians on the planet" />
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.dropdown.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/slider.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.css" />
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
+        <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38034418-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <script type="text/javascript">
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                crossDomain: false, // obviates need for sameOrigin test
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type)) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        </script>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({appId: '222979954499652', status: true, cookie: true, xfbml: true});
+            };
+            (function() {
+                var e = document.createElement('script'); e.async = true;
+                e.src = document.location.protocol +
+                '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+        </script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <div id="main">
+            <div class="cleared reset-box"></div>
+            <div class="header">
+                <div class="header-position">
+                    <div class="headtitlelogin">
+                        <div class="titlecontent">
+                            <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
+                        </div>
+                        <div class="headnav">
+                            <div id="nav">
+                                <ul class="nav">
+                                    <li><a href="/comedians">Comedians</a></li>
+                                    <li><a href="/shows">Shows</a></li>
+                                    <li><a href="/movies">Movies</a></li>
+                                    <li class="end"><a href="/playlists">Playlists</a></li>
+                                </ul>
+                            </div> <!--end nav-->
+                        </div>
+                        <div class="searchcontent">
+                            <div id="search">
+                                <form method="get" action="{% url haystack_search %}">
+                                    {{ search_form.non_field_errors }}
+                                    {% for field in search_form %}
+                                        <div class="fieldWrapper">
+                                            {{ field.errors }}
+                                            <input type="text" name="q" id="id_q" placeholder="Search...">
+                                        </div>
+                                    {% endfor %}
+                                </form>
+                            </div> <!--end search-->
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            <div class="logincontent-user">
+                                <div class="welcome">
+                                    <a href="#" data-dropdown="#dropdown-1" data-vertical-offset="40" data-horizontal-offset="195">
+                                        <div><img src="/static/img/logo.jpg"><p>Hi,  <span>{{ user.username }} </span> </p></div>
+                                    </a>
+                                    <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
+                                        <ul>
+                                            <li><a href="{% url own_home %}"><i class="icon-user"></i>Profile</a></li>
+                                            <li><a href="{% url settings %}"><i class="icon-cogs"></i>Settings</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> <!--end logincontent-nouser-->
+                        {% else %}
+                            <div class="logincontent-nouser">
+                                <div id="register"> 
+                                    {% include "registration/logindrop.html" %}
+                                    <a href="{% url registration_register %}" class="reg"><p>Register</p></a>
+                                </div> <!--end register-->
+                                <div class="why">
+                                    <a href="#">Why register?</a>
+                                </div>
+                            </div> <!--end logincontent-nouser-->
+                        {% endif %}
+                    </div>
+                    <div class="breadcrumbs">
+                        <p>
+                            {% for breadcrumb in request.breadcrumbs %}
+                                {% if not forloop.last %}
+                                    <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a><i class="icon-arrow-right"></i>
+                                {% else %}
+                                    {{ breadcrumb.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="cleared reset-box"></div>
+                        <div id="overcontent" >
+                            <div id="content">
+                            {% block content %}
+                            {% endblock %}
+                            </div> <!--end content-->
+                        </div> <!--end overcontent-->
+                    <div class="cleared"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-body">
+                    <div id="footerpage">
+                        <!-- #1st Column -->
+                        <div id="column1">
+                            <p></p>
+                        </div>
+                        <!-- #2nd Column -->
+                        <div id="column2">
+                            <p></p>
+                        </div>
+                        <!-- #3rd Column -->
+                        <div id="column3">
+                            <p></p>
+                        </div>
+                        <!-- #4thColumn -->
+                        <div id="column4">
+                            <p></p>
+                        </div>
+                    </div> 
+                    <div class="cleared"></div>
+                    <div class="footer-center">
+                        <ul class="navfooter">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/comedians">Comedians</a></li>
+                            <li><a href="/shows">Shows</a></li>
+                            <li><a href="/movies">Movies</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="cleared"></div>
+                    <div id="credits">
+                        <center>Designed by <a href="http://mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png"></a></center>
+                    </div>
+                    <div class="cleared"></div>
+                </div>
+            </div>
+            <div class="cleared"></div>
+        </div>
+    </body>
+</html>
