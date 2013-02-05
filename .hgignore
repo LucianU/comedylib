@@ -2,6 +2,7 @@ syntax: regexp
 .*?~$
 .*.py[co]$
 media
+static_all
 comedylib/settings/local.py
 comedylib/whoosh_index/
 var/log/(?!.hgignore)
