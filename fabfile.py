@@ -72,6 +72,14 @@ def update_code():
         run('hg pull && hg up %s' % env.branch)
 
 
+def collect_static():
+    """
+    Runs the manage.py collectstatic command.
+    """
+    with cd(env.proj_dir):
+        run('./manage.py collectstatic')
+
+
 def setup_nginx():
     """
     Uses the nginx config file to setup a virtual host
