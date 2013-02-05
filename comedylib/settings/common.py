@@ -199,3 +199,12 @@ RELATED_VIDS_NO = 12
 HAYSTACK_SITECONF = 'comedylib.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(SITE_ROOT, 'whoosh_index')
+
+# django-compression settings
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
