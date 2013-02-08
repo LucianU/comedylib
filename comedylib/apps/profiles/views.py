@@ -79,7 +79,7 @@ class Settings(FormView):
         return super(Settings, self).form_valid(form)
 
     def get_success_url(self):
-        return self.request.user.profile.get_absolute_url()
+        return reverse('own_home')
 
     def get_form_kwargs(self):
         kwargs = super(Settings, self).get_form_kwargs()
