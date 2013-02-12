@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+{% load thumbnail %}
+<h1>Playlists</h1>
+<ul id="playlists">
+    {% for playlist in playlists %}
+        <li>
+            <a href="{{ playlist.get_absolute_url }}"><img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" /></a>
+            <a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a>
+        </li>
+    {% empty %}
+        <li>There are no playlists to show.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
