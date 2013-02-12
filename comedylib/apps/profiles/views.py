@@ -127,6 +127,9 @@ class EditPlaylist(AjaxableResponseMixin, UpdateView):
     template_name = 'profiles/edit_playlist.html'
     form_class = PlaylistForm
 
+    def get_queryset(self):
+        return Playlist.objects.filter(profile=self.request.user.profile)
+
 
 class DeletePlaylist(View):
     def post(self, request, *args, **kwargs):
