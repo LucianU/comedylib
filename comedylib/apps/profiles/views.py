@@ -67,8 +67,10 @@ class Settings(FormView):
 
     def form_valid(self, form):
         user = self.request.user
-        user.password = form.cleaned_data['password1']
-        user.save()
+        password = form.cleaned_data.get('password1')
+        if password is not None:
+            user.password = password
+            user.save()
         if self.request.FILES['picture']:
             user.profile.picture = self.request.FILES['picture']
             user.profile.save()
