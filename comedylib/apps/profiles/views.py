@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 import json
 
-from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.core.urlresolvers import reverse
@@ -49,14 +48,11 @@ class Home(TemplateView):
         if 'pk' in kwargs:
             profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
             context['profile'] = profile
-            recent_comms = (Comment.objects.filter(user=profile.user)
-                                           .order_by('-submit_date')[:5])
             recent_likes = (Feeling.objects.filter(profile=profile, name='L')
                                            .order_by('-created')[:5])
             recent_pls = (Playlist.objects.filter(profile=profile)
                                           .order_by('-created')[:5])
             context.update({
-                'recent_comments': recent_comms,
                 'recent_likes': recent_likes,
                 'recent_playlists': recent_pls,
             })
