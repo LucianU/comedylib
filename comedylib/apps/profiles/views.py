@@ -213,7 +213,7 @@ class HandleBookmarks(View):
 
         obj_type = ContentType.objects.get_for_model(obj_model)
         # Making sure that we don't bookmark the same post twice
-        bookmark = Bookmark.objects.get_or_create(
+        bookmark, created = Bookmark.objects.get_or_create(
             profile=profile,
             content_type=obj_type,
             object_id=obj_id
