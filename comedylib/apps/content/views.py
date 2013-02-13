@@ -135,7 +135,10 @@ class VideoDetail(DetailView):
         if 'pl' in self.request.GET:
             playlist = get_object_or_404(Playlist, id=self.request.GET['pl'])
             collection_vids = playlist.videos.all().exclude(id=video.id)
-            context['related_videos'] = collection_vids
+            context.update({
+                'related_videos': collection_vids,
+                'current_pl': playlist,
+            })
         else:
             collection = video.collection
             collection_vids = collection.videos.all().exclude(id=video.id)

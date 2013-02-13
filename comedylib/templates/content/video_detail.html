@@ -184,10 +184,14 @@
                     <div class="col span_1_of_2 col2">
                         <div class="collection-content">
                             <div class="coll-pic-content">
-                                <a href="{{ rel_video.get_absolute_url }}"><img src="{% thumbnail rel_video.picture 144x110 crop %}" /></a>
+                                <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                    <img src="{% thumbnail rel_video.picture 144x110 crop %}" />
+                                </a>
                             </div>
                             <div class="coll-name-content">
-                                <a href="{{ video.get_absolute_url }}">{{ rel_video.title }}</a>
+                                <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                    {{ rel_video.title }}
+                                </a>
                             </div>
                             <div class="coll-detail-content">
                                 <div class="section group">
