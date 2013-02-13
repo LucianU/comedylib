@@ -18,10 +18,11 @@ class SettingsForm(forms.Form):
     oldpassword = forms.CharField(label="Old Password",
         widget=forms.PasswordInput)
     password1 = forms.CharField(label="Password",
-        widget=forms.PasswordInput)
+        widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(label="Password confirmation",
         widget=forms.PasswordInput,
-        help_text="Enter the same password as above, for verification.")
+        help_text="Enter the same password as above, for verification.",
+        required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')

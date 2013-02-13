@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 import json
 
-from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.core.urlresolvers import reverse
@@ -49,14 +48,11 @@ class Home(TemplateView):
         if 'pk' in kwargs:
             profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
             context['profile'] = profile
-            recent_comms = (Comment.objects.filter(user=profile.user)
-                                           .order_by('-submit_date')[:5])
             recent_likes = (Feeling.objects.filter(profile=profile, name='L')
                                            .order_by('-created')[:5])
             recent_pls = (Playlist.objects.filter(profile=profile)
                                           .order_by('-created')[:5])
             context.update({
-                'recent_comments': recent_comms,
                 'recent_likes': recent_likes,
                 'recent_playlists': recent_pls,
             })
@@ -71,15 +67,17 @@ class Settings(FormView):
 
     def form_valid(self, form):
         user = self.request.user
-        user.password = form.cleaned_data['password1']
-        user.save()
+        password = form.cleaned_data.get('password1')
+        if password is not None:
+            user.password = password
+            user.save()
         if self.request.FILES['picture']:
             user.profile.picture = self.request.FILES['picture']
             user.profile.save()
         return super(Settings, self).form_valid(form)
 
     def get_success_url(self):
-        return self.request.user.profile.get_absolute_url()
+        return reverse('own_home')
 
     def get_form_kwargs(self):
         kwargs = super(Settings, self).get_form_kwargs()
@@ -128,6 +126,9 @@ class CreatePlaylist(AjaxableResponseMixin, CreateView):
 class EditPlaylist(AjaxableResponseMixin, UpdateView):
     template_name = 'profiles/edit_playlist.html'
     form_class = PlaylistForm
+
+    def get_queryset(self):
+        return Playlist.objects.filter(profile=self.request.user.profile)
 
 
 class DeletePlaylist(View):
@@ -212,7 +213,7 @@ class HandleBookmarks(View):
 
         obj_type = ContentType.objects.get_for_model(obj_model)
         # Making sure that we don't bookmark the same post twice
-        bookmark = Bookmark.objects.get_or_create(
+        bookmark, created = Bookmark.objects.get_or_create(
             profile=profile,
             content_type=obj_type,
             object_id=obj_id

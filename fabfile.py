@@ -141,6 +141,7 @@ def deploy():
             make_virtualenv()
 
     update_code()
+    collect_static()
     update_reqs()
     syncdb()
     if first_deploy:

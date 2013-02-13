@@ -39,7 +39,7 @@ class CustomAuthForm(forms.Form):
     remember = forms.BooleanField(label='Keep me signed in', required=False)
 
     error_messages = {
-        'invalid_login': "Please enter a correct username and password. "
+        'invalid_login': "Please enter a correct e-mail and password. "
                          "Note that both fields are case-sensitive.",
         'no_cookies': "Your Web browser doesn't appear to have cookies "
                       "enabled. Cookies are required for logging in.",

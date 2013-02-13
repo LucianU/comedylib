@@ -2,6 +2,7 @@
 
 {% block content %}
     {% if query %}
+        <h2>You searched for <span>{{ query }}</span>.</h2>
         <h3>Results</h3>
 
         {% for result in page.object_list %}
@@ -20,6 +21,6 @@
             </div>
         {% endif %}
     {% else %}
-        {# Show some example queries to run, maybe query syntax, something else? #}
+        <p>Insert the terms into the search field.</p>
     {% endif %}
 {% endblock %}

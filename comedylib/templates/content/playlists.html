@@ -35,3 +35,43 @@
     </div>    
 </div>
 {% endblock %}
+
+{% extends "base.html" %}
+{% block content %}
+{% load thumbnail %}
+<h1>Playlists</h1>
+<ul id="playlists">
+    {% for playlist in playlists %}
+        <li>
+            <a href="{{ playlist.get_absolute_url }}"><img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" /></a>
+            <a href="{{ playlist.get_absolute_url }}">{{ playlist.title }}</a>
+        </li>
+    {% empty %}
+        <li>There are no playlists to show.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+                                <div class="play-name-content col span_2_of_2">
+                                    <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">{{ playlist.title }}</a>
+                                </div>
+                                <div class="nvideo col span_1_of_2 col1">
+                                    <span>Videos</span> <p>{% with videos=playlist.videos.count %} {{ videos }}</p>{% endwith %}
+                                </div>
+                                <div class="user col span_1_of_2">
+                                    <span>User</span><a href="#">{{ playlist.profile.user.username }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No playlists found.</p>
+        {% endfor %}
+    <div class="album-pagination">
+        {% include "pagination.html" %}
+    </div>    
+</div>
+{% endblock %}
