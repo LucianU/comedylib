@@ -69,7 +69,7 @@ class Settings(FormView):
         user = self.request.user
         password = form.cleaned_data.get('password1')
         if password is not None:
-            user.password = password
+            user.set_password(password)
             user.save()
         if self.request.FILES['picture']:
             user.profile.picture = self.request.FILES['picture']
