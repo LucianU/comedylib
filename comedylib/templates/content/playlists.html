@@ -1,10 +1,10 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% block content %}
+{% load thumbnail %}
 {% block title %}{{ page_title }}{% endblock %}
 
      <div class="section group">
-   
-	  {% for playlist in playlists %}
+         {% for playlist in playlists %}
             <div class="col span_1_of_4 col4">
                 <div class="playlist-content">
                     <div class="section group">
@@ -32,6 +32,6 @@
         {% endfor %}
     <div class="album-pagination">
         {% include "pagination.html" %}
-    </div>    
+    </div>
 </div>
 {% endblock %}
