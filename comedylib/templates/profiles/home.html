@@ -6,7 +6,7 @@
         <a href="{% url own_home %}"><h6>{{ user.username }}</h6></a>
         <div class="user-header">
             <div class="foto">
-                <a href="{% url own_home %}"><img src="{{ STATIC_URL }}img/foto-profil.jpg" alt="foto profil"></a>
+                <a href="{% url own_home %}"><img src="{{ profile.picture.url}}" alt="foto profil"></a>
             </div>
         </div>
         <div id="tabs2" class="user-tabs">
