@@ -40,12 +40,12 @@
                 <div class="playlist-content">
                     <div class="section group">
                         <div class="play-pic-content col span_1_of_3">
-                            <a href="{{ bookmark.post.get_absolute_url }}"><img src="{{ bookmark.post.videos.all.0.picture.url}} "></a>
+                            <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}"><img src="{{ bookmark.post.videos.all.0.picture.url}} "></a>
                         </div>
                         <div class="play-detail-content col span_2_of_3">
                             <div class="section group">
                                 <div class="play-name-content col span_2_of_2">
-                                    <a href="{{ bookmark.post.get_absolute_url }}">{{ bookmark.post.title }}</a>
+                                    <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}">{{ bookmark.post.title }}</a>
                                 </div>
                                 <div class="nvideo col span_1_of_2 col1">
                                     <span>Videos</span> <p>{% with videos=bookmark.post.videos.count %} {{ videos }}</p>{% endwith %}
