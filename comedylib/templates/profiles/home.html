@@ -6,7 +6,8 @@
         <a href="{% url own_home %}"><h6>{{ user.username }}</h6></a>
         <div class="user-header">
             <div class="foto">
-                <a href="{% url own_home %}"><img src="{{ profile.picture.url}}" alt="foto profil"></a>
+            {% load thumbnail %}
+				<a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
             </div>
         </div>
         <div id="tabs2" class="user-tabs">
