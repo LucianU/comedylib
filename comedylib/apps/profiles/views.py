@@ -47,17 +47,18 @@ class Home(TemplateView):
         context = super(Home, self).get_context_data(**kwargs)
         if 'pk' in kwargs:
             profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
-            context['profile'] = profile
-            recent_likes = (Feeling.objects.filter(profile=profile, name='L')
-                                           .order_by('-created')[:5])
-            recent_pls = (Playlist.objects.filter(profile=profile)
-                                          .order_by('-created')[:5])
-            context.update({
-                'recent_likes': recent_likes,
-                'recent_playlists': recent_pls,
-            })
         else:
-            context['profile'] = self.request.user.profile
+            profile = self.request.user.profile
+
+        recent_likes = (Feeling.objects.filter(profile=profile, name='L')
+                                        .order_by('-created')[:5])
+        recent_pls = (Playlist.objects.filter(profile=profile)
+                                        .order_by('-created')[:5])
+        context.update({
+            'profile': profile,
+            'recent_likes': recent_likes,
+            'recent_playlists': recent_pls,
+        })
         return context
 
 
