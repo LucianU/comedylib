@@ -21,7 +21,7 @@ class Home(TemplateView):
         recent_videos = self._get_recent_videos()
         for collection, vids in recent_videos.iteritems():
             context['%s_videos' % collection] = vids
-        context['playlists'] = Playlist.objects.filter(empty=False)[:10]
+        context['playlists'] = Playlist.objects.filter(empty=False)[:9]
         featured = Featured.instance.get()
         if featured is not None:
             for role_id, role_name in Collection.ROLE_CHOICES:
