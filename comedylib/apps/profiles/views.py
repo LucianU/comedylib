@@ -85,6 +85,11 @@ class Settings(FormView):
         kwargs['request'] = self.request
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super(Settings, self).get_context_data(**kwargs)
+        context['profile'] = self.request.user.profiles
+        return context
+
 
 class Playlists(ListView):
     template_name = 'profiles/playlists.html'
@@ -190,7 +195,10 @@ class Bookmarks(ListView):
             'P': 'Playlist',
         }
         post_type = post_types[self.request.GET.get('post')]
-        context['post_type'] = post_type
+        context.update({
+            'post_type': post_type,
+            'profile': self.request.user.profile,
+        })
         return context
 
 
@@ -232,6 +240,11 @@ class Likes(ListView):
 
     def get_queryset(self):
         return self.request.user.profile.feelings.filter(feelings__name='L')
+
+    def get_context_data(self, **kwargs):
+        context = super(Likes, self).get_context_data(**kwargs)
+        context['profile'] = self.request.user.profile
+        return context
 
 
 class VideoFeeling(View):
