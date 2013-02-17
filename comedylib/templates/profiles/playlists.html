@@ -5,7 +5,7 @@
     <h1>Create playlist</h1>
     <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
         <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
-        <input type="submit" value="Create playlist">
+        <button type="submit">Create playlist</button>
     </form>
     <h1>Playlists</h1>
     <div class="section group">

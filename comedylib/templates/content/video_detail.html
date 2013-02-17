@@ -75,9 +75,16 @@
                         <li id="addplay-btn" class="playlist ">
                             <a href="#" title="Add this video to a playlist">Add to Playlist</a>
                         </li>
+                          {% if bookmarked %}
                         <li class="bookmark">
                             <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark</a>
                         </li>
+                        {% else %}
+                        <li class="bookmark">
+                            <a href="#" id="bookmark_btn" class="inactive" title="Save this video to watch later">Bookmark</a>
+                        </li>
+                        {% endif %}
+                        
                     {% else %}
                         <li class="playlist">
                             <a class="fancybox" href="#loginerror" >Add to Playlist</a>
@@ -220,6 +227,7 @@
     {% include "registration/login-er.html" %}
 </div> <!-- end loginerror-->
 <script>
+var mouse_is_inside = false;
     (function($) {
         $("#addplay-btn").click(function() {
             if ( $("#addtoplaycontent").is(":hidden") ) {
@@ -230,6 +238,14 @@
                 return false;
             }
         });
+        $("#addtoplaycontent").hover(function(){ 
+        mouse_is_inside=true; 
+    }, function(){ 
+        mouse_is_inside=false; 
+    });	
+	 $("body").click(function(){
+        if(! mouse_is_inside) $("#addtoplaycontent").slideUp("fast");
+    });	
     })(jQuery);
     $(document).ready(function() {
             $(".fancybox").fancybox();
@@ -335,7 +351,7 @@
                 button.removeClass('active');
                 button.addClass('inactive');
                 button.text('Bookmarked');
-            }).fail(function() { alert('Error'); });
+            }).fail(function() { alert('An error has occur'); });
             //TODO: Do proper error handling
         });
     });
