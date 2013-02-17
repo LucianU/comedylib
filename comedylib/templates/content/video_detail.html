@@ -320,14 +320,10 @@ var mouse_is_inside = false;
                     other_button.removeClass('active');
                 };
             }
-            $.ajax({
-                type: 'POST',
-                url: '{% url vid_feel %}',
-                data: {'vid': {{ video.id }}, 'feeling': feeling},
-                cache: false
-            }).done(success)
-            //TODO: Do proper error handling
-              .fail(function(){ alert('Ooops! Something went wrong.'); });
+            $.post('{% url vid_feel %}', {'vid': {{ video.id }}, 'feeling': feeling})
+                .done(success)
+                .fail(function(){ alert('Ooops! Something went wrong.'); });
+                //TODO: Do proper error handling
         };
         return handler;
     };
@@ -359,16 +355,14 @@ var mouse_is_inside = false;
             event.preventDefault();
             button = $(this);
             button_cls = button.attr('class');
-            $.ajax({
-                type: 'POST',
-                url: bookmarkStates[button_cls].url,
-                data: {'id': {{ video.id }}, 'obj': 'V'}
-            }).done(function() {
-                button.removeClass(bookmarkStates[button_cls].rmCl);
-                button.addClass(bookmarkStates[button_cls].adCl);
-                button.text(bookmarkStates[button_cls].text);
-            }).fail(function() { alert('An error has occur'); });
-            //TODO: Do proper error handling
+            $.post(bookmarkStates[button_cls].url, {'id': {{ video.id }}, 'obj': 'V'})
+                .done(function() {
+                    button.removeClass(bookmarkStates[button_cls].rmCl);
+                    button.addClass(bookmarkStates[button_cls].adCl);
+                    button.text(bookmarkStates[button_cls].text);
+                })
+                .fail(function() { alert('An error has occur'); });
+                //TODO: Do proper error handling
         });
     });
 </script>
