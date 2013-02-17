@@ -339,7 +339,10 @@ var mouse_is_inside = false;
         // Binding each button click to its specific callback
         likeBtn.click(handlerFact(likeBtn, dislikeBtn));
         dislikeBtn.click(handlerFact(dislikeBtn, likeBtn));
-
+        //
+        //
+        //
+        //
         $('#bookmark_btn.active').click(function(event) {
             event.preventDefault();
             button = $(this);
@@ -354,6 +357,7 @@ var mouse_is_inside = false;
             }).fail(function() { alert('An error has occur'); });
             //TODO: Do proper error handling
         });
+        
     });
 </script>
 {% endblock %}

@@ -103,7 +103,7 @@
                             <div class="logincontent-user">
                                 <div class="welcome">
                                     <a href="#" data-dropdown="#dropdown-1" data-vertical-offset="40" data-horizontal-offset="195">
-                                        <div><img src="/static/img/logo.jpg"><p>Hi,  <span>{{ user.username }} </span> </p></div>
+                                        <div>{% load thumbnail %}<img src="{% thumbnail profile.picture 45x35 crop %}"><p>Hi,  <span>{{ user.username }} </span> </p></div>
                                     </a>
                                     <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
                                         <ul>

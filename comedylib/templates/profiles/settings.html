@@ -2,12 +2,21 @@
 {% block title %}{{ page_title }}{% endblock %}
 {% block profile_content %}
 <div class="col span_5_of_6">
-    <h1>Change your settings</h1>
-    <form enctype="multipart/form-data" method="post" action="{% url settings %}">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update" />
-    </form>
     
+    <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+       <h1>Upload an avatar</h1>
+             
+         <p><input type="file" name="picture" id="id_picture" placeholder="Picture" class="st"/>
+    
+    
+    <h1>Change your password</h1>
+        
+<p><input type="password" name="oldpassword" id="id_oldpassword" placeholder="Old Password" class="small"/></p>
+<p><input type="password" name="password1" id="id_password1" placeholder="New Password" class="small"/></p>
+<p><input type="password" name="password2" id="id_password2" placeholder="Confirm Password" class="small"/> <span class="helptext">Enter the same password as above, for verification.</span></p>
+<input type="submit" value="Update" class="button" />
+        
+    </form>
   
 </div>
 {% endblock %}

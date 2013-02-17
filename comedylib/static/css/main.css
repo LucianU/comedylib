@@ -100,6 +100,41 @@ html {
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(254,70,0,0.4); 
 }    
+.form {
+margin-left:20px;
+}
+.st{
+border:none;
+width:250px;
+height:25px;
+background:none;
+padding:5px;
+box-shadow:none;
+text-align:center;
+}
+.small {
+width: 150px;
+}
+div.fileinputs {
+	position: relative;
+}
+
+div.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+input.file {
+	position: relative;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+}
+
 input {
   background: #f1f1f1;
   padding: 6px 5px;
@@ -160,6 +195,31 @@ position:relative;
 
 button::-moz-focus-inner {
   border: none;
+}
+.button{		
+-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffbe73), color-stop(1, #ff8800) );
+	background:-moz-linear-gradient( center top, #ffbe73 5%, #ff8800 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbe73', endColorstr='#ff8800');
+	background-color:#ffbe73;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	width:100px;
+	/*margin-top:20px;*/
+	border-radius:6px;
+	border:1px solid #bf7c30;
+	display:inline-block;
+	color:#eee;
+	font: bold 0.938em Arial, Helvetica, sans-serif;
+	padding:6px 20px;
+	text-decoration:none;
+	margin-left:30px;
+}
+.helptext {
+font: 12px Arial, Helvetica, sans-serif;
+color: #ccc;
 }
 
 
