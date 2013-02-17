@@ -301,8 +301,9 @@ var mouse_is_inside = false;
     // Function that returns another function specific to
     // each pressed button
     var handlerFact = function(clicked_button, other_button) {
-        var handler = function() {
+        var handler = function(event) {
             // Getting the button-specific loader
+            event.preventDefault();
             var loader = $(button_loader[clicked_button.attr('id')]);
 
             loader.fadeIn('slow');
