@@ -77,11 +77,11 @@
                         </li>
                           {% if bookmarked %}
                         <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark</a>
+                            <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmarked</a>
                         </li>
                         {% else %}
                         <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="inactive" title="Save this video to watch later">Bookmark</a>
+                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark</a>
                         </li>
                         {% endif %}
                         
@@ -301,8 +301,9 @@ var mouse_is_inside = false;
     // Function that returns another function specific to
     // each pressed button
     var handlerFact = function(clicked_button, other_button) {
-        var handler = function() {
+        var handler = function(event) {
             // Getting the button-specific loader
+            event.preventDefault();
             var loader = $(button_loader[clicked_button.attr('id')]);
 
             loader.fadeIn('slow');
@@ -320,17 +321,28 @@ var mouse_is_inside = false;
                     other_button.removeClass('active');
                 };
             }
-            $.ajax({
-                type: 'POST',
-                url: '{% url vid_feel %}',
-                data: {'vid': {{ video.id }}, 'feeling': feeling},
-                cache: false
-            }).done(success)
-            //TODO: Do proper error handling
-              .fail(function(){ alert('Ooops! Something went wrong.'); });
+            $.post('{% url vid_feel %}', {'vid': {{ video.id }}, 'feeling': feeling})
+                .done(success)
+                .fail(function(){ alert('Ooops! Something went wrong.'); });
+                //TODO: Do proper error handling
         };
         return handler;
     };
+
+    var bookmarkStates = {
+        'active': {
+            'rmCl': 'active',
+            'adCl': 'inactive',
+            'text': 'Bookmarked',
+            'url': '{% url add_to_bookmarks %}'
+        },
+        'inactive': {
+            'rmCl': 'inactive',
+            'adCl': 'active',
+            'text': 'Bookmark',
+            'url': '{% url remove_from_bookmarks %}'
+        }
+    }
 
     $(document).ready(function() {
         var likeBtn = $('#like_btn');
@@ -339,25 +351,20 @@ var mouse_is_inside = false;
         // Binding each button click to its specific callback
         likeBtn.click(handlerFact(likeBtn, dislikeBtn));
         dislikeBtn.click(handlerFact(dislikeBtn, likeBtn));
-        //
-        //
-        //
-        //
-        $('#bookmark_btn.active').click(function(event) {
+
+        $('#bookmark_btn').click(function(event) {
             event.preventDefault();
             button = $(this);
-            $.ajax({
-                type: 'POST',
-                url: '{% url add_to_bookmarks %}',
-                data: {'id': {{ video.id }}, 'obj': 'V'}
-            }).done(function() {
-                button.removeClass('active');
-                button.addClass('inactive');
-                button.text('Bookmarked');
-            }).fail(function() { alert('An error has occur'); });
-            //TODO: Do proper error handling
+            button_cls = button.attr('class');
+            $.post(bookmarkStates[button_cls].url, {'id': {{ video.id }}, 'obj': 'V'})
+                .done(function() {
+                    button.removeClass(bookmarkStates[button_cls].rmCl);
+                    button.addClass(bookmarkStates[button_cls].adCl);
+                    button.text(bookmarkStates[button_cls].text);
+                })
+                .fail(function() { alert('An error has occur'); });
+                //TODO: Do proper error handling
         });
-        
     });
 </script>
 {% endblock %}
