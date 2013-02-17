@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ video.title }}{% endblock %}
 {% block content %}
+{% load thumbnail %}
 <div id="video_detail">
     <div class="section group">
         <div class="col span_4_of_6">
@@ -174,7 +175,12 @@
                             <li>
                                 <p>{{comment.comment}}</p> 
                                 <div class="head">
-                                    <a href="{{user_url}}">{{comment.user_name}}</a>
+                                    <a href="{{ comment.user.profile.get_absolute_url }}">
+                                        <img src="{% thumbnail comment.user.profile.picture 45x35 crop %}" />
+                                    </a>
+                                    <a href="{{ comment.user.profile.get_absolute_url }}">
+                                        {{comment.user_name}}
+                                    </a>
                                     <span>{{comment.submit_date}}</span>
                                 </div>
                             </li>
@@ -186,7 +192,6 @@
         <div class="col span_2_of_6">
             <h5>Related</h5>
             <div class="section group">
-                {% load thumbnail %}
                 {% for rel_video in related_videos %}
                     <div class="col span_1_of_2 col2">
                         <div class="collection-content">
