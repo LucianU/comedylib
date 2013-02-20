@@ -4,7 +4,28 @@
 {% load thumbnail %}
 <div id="video_detail">
     <div class="section group">
-        <div class="col span_4_of_6">
+        
+            <div class="col0 span_4_of_6_1 playlist_title">
+              <a href="#">{{ current_pl.title }}</a> from <a href ="#">{{ current_pl.profile.user.username }}</a>
+            </div>
+            <div class="col0 span_2_of_6_1 playlist_title">
+                <div class="section group">
+                    <div class="col span_1_of_4">
+                   <a href="#">  <i class="icon-step-backward"></i></a>
+                    1/15
+                   <a href="#">  <i class="icon-step-forward"></i></a>
+                    </div>
+                    <div class="col span_2_of_4 bookmark">
+                       <a href="#" title="Bookmark playlist for later view">Bookmark <span><i class="icon-list"></i></span></a>
+                    </div>                     
+                    <div class="col span_1_of_4 alignright">
+                       <a href="#"> <i class=" icon-refresh"></i></a>
+                        <a href="#"><i class="icon-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
                 <div class="mediaplayer">
                     <div id='mediaplayer'></div>
@@ -22,6 +43,41 @@
                     </script>
                 </div>
             </div> <!-- end video-->
+        </div>
+                <div class="col0 span_2_of_6_1 related nosectionspace">
+            <div class="container_list" id="content_1">
+              <div>
+                    <ol>
+                    {% for rel_video in related_videos %}
+                        <li>
+                       <div class="col span_1_of_3">
+                           
+                              <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                        <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
+                              </a>
+                         </div>      
+                         <div class="col span_2_of_3">   
+                                    <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                        {{ rel_video.title }}
+                                    </a>
+                              <br/>
+                               
+                                   <a href="" class="collection">{{ rel_video.collection.name }}</a>
+                               
+                           
+                        </div> 
+                        </li>
+                    {% empty %}
+                        <li>No related videos</li>
+                    {% endfor %}
+                    </ol>
+               </div    >
+            </div>
+        </div>
+       
+    </div>
+    <div class="section group">
+        <div class="col span_4_of_6 nosectionspace">    
             <div class="affiliate">
                 affiliate
             </div><!-- end affiliate -->
@@ -74,21 +130,21 @@
                 <ul id="sociallist" >
                     {% if request.user.is_authenticated %}
                         <li id="addplay-btn" class="playlist ">
-                            <a href="#" title="Add this video to a playlist">Add to Playlist</a>
+                            <a href="#" title="Add this video to a playlist">Playlist <span><i class="icon-list"></i></span></a>
                         </li>
                           {% if bookmarked %}
                         <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmarked</a>
+                            <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span><i class="icon-minus"></i></span></a>
                         </li>
                         {% else %}
                         <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark</a>
+                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span><i class="icon-plus"></i></span></a>
                         </li>
                         {% endif %}
                         
                     {% else %}
                         <li class="playlist">
-                            <a class="fancybox" href="#loginerror" >Add to Playlist</a>
+                            <a class="fancybox" href="#loginerror" >Playlist  <span><i class="icon-list"></i></span></a>
                         </li>
                         <li class="bookmark">
                             <a class="fancybox" href="#loginerror" >Bookmark</a>
@@ -173,57 +229,22 @@
                     <ul>
                         {% for comment in comments %}
                             <li>
+                                <a href="{{ comment.user.profile.get_absolute_url }}">
+                                    <img src="{% thumbnail comment.user.profile.picture 45x35 crop %}" />
+                                </a>
+                                <a href="{{ comment.user.profile.get_absolute_url }}">
+                                    {{comment.user_name}}
+                                </a>
+                                <span>{{comment.submit_date}}</span>
                                 <p>{{comment.comment}}</p> 
-                                <div class="head">
-                                    <a href="{{ comment.user.profile.get_absolute_url }}">
-                                        <img src="{% thumbnail comment.user.profile.picture 45x35 crop %}" />
-                                    </a>
-                                    <a href="{{ comment.user.profile.get_absolute_url }}">
-                                        {{comment.user_name}}
-                                    </a>
-                                    <span>{{comment.submit_date}}</span>
-                                </div>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div><!-- end comments -->
         </div>
-        <div class="col span_2_of_6">
-            <h5>Related</h5>
-            <div class="section group">
-                {% for rel_video in related_videos %}
-                    <div class="col span_1_of_2 col2">
-                        <div class="collection-content">
-                            <div class="coll-pic-content">
-                                <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                    <img src="{% thumbnail rel_video.picture 144x110 crop %}" />
-                                </a>
-                            </div>
-                            <div class="coll-name-content">
-                                <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                    {{ rel_video.title }}
-                                </a>
-                            </div>
-                            <div class="coll-detail-content">
-                                <div class="section group">
-                                    <div class="col span_1_of_4_coll_det vlength">
-                                        <p>{{ rel_video.duration }}</p> <span>Length</span>
-                                    </div>
-                                    <div class="col span_2_of_4_coll_det nviews">
-                                        <p>{{ rel_video.views }}</p> <span>Views</span>
-                                    </div>
-                                    <div class="col span_1_of_4_coll_det rating">
-                                        <p>{{ rel_video.rating }}%</p> <span>Rating</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% empty %}
-                    <p>No related videos</p>
-                {% endfor %}
-            </div>
+        <div class="col span_2_of_6 nosectionspace">
+            
         </div>
     </div>
 </div> <!-- end video detail-->
@@ -338,13 +359,15 @@ var mouse_is_inside = false;
         'active': {
             'rmCl': 'active',
             'adCl': 'inactive',
-            'text': 'Bookmarked',
+            'text': 'Bookmark <span><i class="icon-minus"></i></span>',
+            'titl': 'Remove from bookmarks',
             'url': '{% url add_to_bookmarks %}'
         },
         'inactive': {
             'rmCl': 'inactive',
             'adCl': 'active',
-            'text': 'Bookmark',
+            'text': 'Bookmark <span><i class="icon-plus"></i></span>',
+            'titl': 'Save this video to watch later',
             'url': '{% url remove_from_bookmarks %}'
         }
     }
@@ -365,11 +388,23 @@ var mouse_is_inside = false;
                 .done(function() {
                     button.removeClass(bookmarkStates[button_cls].rmCl);
                     button.addClass(bookmarkStates[button_cls].adCl);
-                    button.text(bookmarkStates[button_cls].text);
+                    button.html(bookmarkStates[button_cls].text);
+                    button.attr('title', bookmarkStates[button_cls].titl );
                 })
                 .fail(function() { alert('An error has occur'); });
                 //TODO: Do proper error handling
         });
     });
 </script>
+  	<script>
+		(function($){
+			$(window).load(function(){
+				$("#content_1").mCustomScrollbar({
+					autoHideScrollbar:true,
+					theme:"light-thin"
+				});
+			});
+		})(jQuery);
+	</script>
+    
 {% endblock %}

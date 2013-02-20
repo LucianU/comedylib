@@ -4,6 +4,12 @@ width:172px;
 height:186px;
 
 }
+.register_content{
+margin:3px;
+width:210px;
+height:290px;
+
+}
 /*--------------------*/
 
 #inputs input {
@@ -29,6 +35,29 @@ height:186px;
   box-shadow: 0 0 0 1px #e8c291 inset;
 }
 
+#inputs1 input {
+  background: #f1f1f1;
+  padding: 4px 5px;
+  margin: 0 0 5px 0;
+  width: 198px;
+  border: 1px solid #ccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0 1px 1px #ccc inset;
+  -webkit-box-shadow: 0 1px 1px #ccc inset;
+  box-shadow: 0 1px 1px #ccc inset;
+}
+
+#inputs1 input:focus {
+  background-color: #fff;
+  border-color: #e8c291;
+  outline: none;
+  -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+  -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+  box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
 /*--------------------*/
 
 #actions {
@@ -36,7 +65,7 @@ height:186px;
 }
 
  #submit {	
-margin-left:45px;
+margin-left:10%;
 -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -55,7 +84,7 @@ margin-left:45px;
 	font-weight:bold;
 	padding:6px 20px;
 	text-decoration:none;
-	
+	width:80%;
 }
 
 #submit:hover,
@@ -86,27 +115,35 @@ label input {
 }
 #checkbox-keep{
 padding:3px;
+width:20px;
 }
-.signin_content .center {
+.register_content.helptext {
+margin:0 2px 6px 2px;
+background:#f0f;
+width:100%;
+text-align:left;
+padding:3px;
+}
+.register_content .center, .signin_content .center {
 text-align: center;
 padding:10px;
 }
-.signin_content .center .socialsign {
+.register_content .center .socialsign , .signin_content .center .socialsign {
 /*border:1px solid #ccc;*/
 width:100%;
 padding:3px;
 text-align:left;
 }
-.signin_content .lthru {
+.register_content .lthru, .signin_content .lthru {
 text-decoration: line-through;
 color: #bbb;
 }
-.signin_content .or {
+.register_content .or, .signin_content .or {
 font-size: 93%;
 font-weight: bold;
 color: #bbb;
 }
-.signin_content .center .centersocial{
+.register_content .center .centersocial, .signin_content .center .centersocial{
 width:80px;
 height:30px;
 text-align:center;
@@ -115,11 +152,13 @@ margin:3px auto;
 padding-left:10px;
 }
 
-.signin_content .center .centersocial  img {
+.register_content .center .centersocial img, .signin_content .center .centersocial  img {
 width:30px;
 }
 #fbtnlnk{float:left}
 #gbtnlnk{float:left}
+#fbtnlnk1{float:left}
+#gbtnlnk1{float:left}
 
 /*--------------------------Login TAB------------*/
 navlogin #login #login-content #loginregistermenu ul {
