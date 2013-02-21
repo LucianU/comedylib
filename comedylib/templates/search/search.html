@@ -41,6 +41,9 @@
             
         {% empty %}
             <p>No results found.</p>
+            {% if suggestion %}
+                <p>Did you mean <i>{{ suggestion }}</i>?</p>
+            {% endif %}
         {% endfor %}
 </div>
         {% if page.has_previous or page.has_next %}

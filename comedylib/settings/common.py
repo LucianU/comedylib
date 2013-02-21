@@ -199,6 +199,7 @@ RELATED_VIDS_NO = 12
 HAYSTACK_SITECONF = 'comedylib.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(SITE_ROOT, 'whoosh_index')
+HAYSTACK_INCLUDE_SPELLING = True
 
 # django-compression settings
 COMPRESS_CSS_FILTERS = [
