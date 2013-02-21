@@ -4,7 +4,7 @@
 {% load thumbnail %}
 <div id="video_detail">
     <div class="section group">
-        
+        {% if playlist %}
             <div class="col0 span_4_of_6_1 playlist_title">
               <a href="#">{{ current_pl.title }}</a> from <a href ="#">{{ current_pl.profile.user.username }}</a>
             </div>
@@ -24,6 +24,14 @@
                     </div>
                 </div>
             </div>
+        {% else %}
+        <div class="col0 span_4_of_6_1 playlist_title nosectionspace05">
+                 </div>
+            <div class="col0 span_2_of_6_1 playlist_title nosectionspace05">
+             	<p class="title">Related <span>Videos</span></p>
+			
+            </div>
+        {%endif%}
         
         <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
@@ -45,33 +53,28 @@
             </div> <!-- end video-->
         </div>
                 <div class="col0 span_2_of_6_1 related nosectionspace">
-            <div class="container_list" id="content_1">
-              <div>
-                    <ol>
-                    {% for rel_video in related_videos %}
-                        <li>
-                       <div class="col span_1_of_3">
-                           
-                              <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                        <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
-                              </a>
-                         </div>      
-                         <div class="col span_2_of_3">   
-                                    <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                        {{ rel_video.title }}
-                                    </a>
-                              <br/>
-                               
-                                   <a href="" class="collection">{{ rel_video.collection.name }}</a>
-                               
-                           
+            <div class="container_list divscroll">          
+                <ol>
+                {% for rel_video in related_videos %}
+                    <li>
+                        <div class="col span_1_of_3 picture">
+                            <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
+                            </a>
+                            <p class="time">{{ rel_video.duration }}</a>
+                        </div>      
+                        <div class="col span_2_of_3">   
+                            <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                {{ rel_video.title }}
+                            </a>
+                            <br/>
+                            <a href="{{ rel_video.collection.get_absolute_url }}" class="collection">{{ rel_video.collection.name }}</a>
                         </div> 
-                        </li>
-                    {% empty %}
-                        <li>No related videos</li>
-                    {% endfor %}
-                    </ol>
-               </div    >
+                    </li>
+                {% empty %}
+                    <li>No related videos</li>
+                {% endfor %}
+                </ol>         
             </div>
         </div>
        
@@ -190,13 +193,15 @@
                         <button id="sub">Create playlist</button>
                     </form>
                     <h2>Click on a playlist to add the video:</h1>
-                    <ul id="playlistul">
-                        {% for playlist in user.profile.playlists.all %}
-                            <li data-playlist-id="{{ playlist.id }}" class="active">{{ playlist.title }} ({{ playlist.videos.count }})</li>
-                        {% empty %}
-                            <li>No playlists found.</li>
-                        {% endfor %}
-                    </ul>
+                    <div class="playlistul divscroll">
+                        <ul id="playlistul">
+                            {% for playlist in user.profile.playlists.all %}
+                                <li data-playlist-id="{{ playlist.id }}" class="active">{{ playlist.title }} ({{ playlist.videos.count }})</li>
+                            {% empty %}
+                                <li>No playlists found.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div><!-- end social -->
             <div class="comments">
@@ -204,7 +209,7 @@
                 {% load comments %}
                 {% get_comment_count for video as comment_count %}
                 {% if comment_count %}
-                    <span>{{ comment_count }} comments</span>
+                    <span class="nrcom">{{ comment_count }} comments</span>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     {% get_comment_form for video as comm_form %}
@@ -248,7 +253,7 @@
         </div>
     </div>
 </div> <!-- end video detail-->
-<div id="loginerror" style="width:292px;display: none;">
+<div id="loginerror" style="width:200px;display: none;">
     <h3>You must be logged in to have access to this option</h3>
     {% include "registration/login-er.html" %}
 </div> <!-- end loginerror-->
@@ -399,11 +404,11 @@ var mouse_is_inside = false;
   	<script>
 		(function($){
 			$(window).load(function(){
-				$("#content_1").mCustomScrollbar({
+				$(".divscroll").mCustomScrollbar({
 					autoHideScrollbar:true,
 					theme:"light-thin"
 				});
-			});
+  			});
 		})(jQuery);
 	</script>
     
