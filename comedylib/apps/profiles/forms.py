@@ -12,7 +12,7 @@ class PlaylistForm(forms.ModelForm):
 class SettingsForm(forms.Form):
     error_messages = {
         'password_mismatch': "The two password fields didn't match.",
-        'incorrect_oldpass': "The Old Password that you provided is incorrect.",
+        'incorrect_oldpass': "The old password that you provided is incorrect.",
     }
     picture = forms.ImageField(required=False)
     oldpassword = forms.CharField(label="Old Password",
