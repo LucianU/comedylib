@@ -87,7 +87,7 @@ class Settings(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(Settings, self).get_context_data(**kwargs)
-        context['profile'] = self.request.user.profiles
+        context['profile'] = self.request.user.profile
         return context
 
 
