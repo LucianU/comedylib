@@ -4,7 +4,7 @@
 {% load thumbnail %}
 <div id="video_detail">
     <div class="section group">
-        {% if playlist %}
+        {% if current_pl %}
             <div class="col0 span_4_of_6_1 playlist_title">
               <a href="#">{{ current_pl.title }}</a> from <a href ="#">{{ current_pl.profile.user.username }}</a>
             </div>
