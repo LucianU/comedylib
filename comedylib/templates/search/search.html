@@ -42,7 +42,7 @@
         {% empty %}
             <p>No results found.</p>
             {% if suggestion %}
-                <p>Did you mean <i>{{ suggestion }}</i>?</p>
+                <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
             {% endif %}
         {% endfor %}
 </div>
