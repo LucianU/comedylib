@@ -4,9 +4,9 @@
 {% load thumbnail %}
 <div id="video_detail">
     <div class="section group">
-        {% if playlist %}
+        {% if current_pl %}
             <div class="col0 span_4_of_6_1 playlist_title">
-              <a href="#">{{ current_pl.title }}</a> from <a href ="#">{{ current_pl.profile.user.username }}</a>
+              <a href="{{current.pl_get_absolute_url}}">{{ current_pl.title }}</a> from <a href ="{{current_pl.profile.get_absolute_url}}">{{ current_pl.profile.user.username }}</a>
             </div>
             <div class="col0 span_2_of_6_1 playlist_title">
                 <div class="section group">
@@ -16,7 +16,15 @@
                    <a href="#">  <i class="icon-step-forward"></i></a>
                     </div>
                     <div class="col span_2_of_4 bookmark">
-                       <a href="#" title="Bookmark playlist for later view">Bookmark <span><i class="icon-list"></i></span></a>
+                        {% if request.user.is_authenticated %}
+                            {% if bookmarked %}
+                                <a href="#" id="bookmark_pl" class="inactive1" title="Remove from bookmarks">Bookmark <span><i class="icon-list"></i></span></a>
+                            {% else %}
+                                <a href="#" id="bookmark_pl" class="active1" title="Save this playlist to watch later">Bookmark <span><i class="icon-list"></i></span></a>
+                            {% endif %}
+                        {% else %}
+                        <a class="fancybox" href="#loginerror" title="Save this playlist to watch later">Bookmark <span><i class="icon-list"></i></span></a>
+                        {% endif %}
                     </div>                     
                     <div class="col span_1_of_4 alignright">
                        <a href="#"> <i class=" icon-refresh"></i></a>
@@ -365,7 +373,7 @@ var mouse_is_inside = false;
             'rmCl': 'active',
             'adCl': 'inactive',
             'text': 'Bookmark <span><i class="icon-minus"></i></span>',
-            'titl': 'Remove from bookmarks',
+            'titl': 'Remove this video from bookmarks',
             'url': '{% url add_to_bookmarks %}'
         },
         'inactive': {
@@ -373,6 +381,20 @@ var mouse_is_inside = false;
             'adCl': 'active',
             'text': 'Bookmark <span><i class="icon-plus"></i></span>',
             'titl': 'Save this video to watch later',
+            'url': '{% url remove_from_bookmarks %}'
+        },
+         'active1': {
+            'rmCl': 'active1',
+            'adCl': 'inactive1',
+            'text': 'Bookmark <span><i class="icon-list"></i></span>',
+            'titl': 'Remove this playlist from bookmarks',
+            'url': '{% url add_to_bookmarks %}'
+        },
+        'inactive1': {
+            'rmCl': 'inactive1',
+            'adCl': 'active1',
+            'text': 'Bookmark <span><i class="icon-list"></i></span>',
+            'titl': 'Save this playlist to watch later',
             'url': '{% url remove_from_bookmarks %}'
         }
     }
@@ -390,6 +412,20 @@ var mouse_is_inside = false;
             button = $(this);
             button_cls = button.attr('class');
             $.post(bookmarkStates[button_cls].url, {'id': {{ video.id }}, 'obj': 'V'})
+                .done(function() {
+                    button.removeClass(bookmarkStates[button_cls].rmCl);
+                    button.addClass(bookmarkStates[button_cls].adCl);
+                    button.html(bookmarkStates[button_cls].text);
+                    button.attr('title', bookmarkStates[button_cls].titl );
+                })
+                .fail(function() { alert('An error has occur'); });
+                //TODO: Do proper error handling
+        });
+        $('#bookmark_pl').click(function(event) {
+            event.preventDefault();
+            button = $(this);
+            button_cls = button.attr('class');
+            $.post(bookmarkStates[button_cls].url, {'id': {{ current_pl.id }}, 'obj': 'P'})
                 .done(function() {
                     button.removeClass(bookmarkStates[button_cls].rmCl);
                     button.addClass(bookmarkStates[button_cls].adCl);

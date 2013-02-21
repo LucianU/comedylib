@@ -20,7 +20,7 @@
                                     <span>Videos</span> <p>{% with videos=playlist.videos.count %} {{ videos }}</p>{% endwith %}
                                 </div>
                                 <div class="user col span_1_of_2">
-                                    <span>User</span><a href="#">{{ playlist.profile.user.username }}</a>
+                                    <span>User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
                                 </div>
                             </div>
                         </div>

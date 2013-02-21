@@ -103,37 +103,12 @@ html {
 .form {
 margin-left:20px;
 }
-.st{
-border:none;
-width:250px;
-height:25px;
-background:none;
-padding:5px;
-box-shadow:none;
-text-align:center;
-}
+
 .small {
 width: 150px;
 }
-div.fileinputs {
-	position: relative;
-}
 
-div.fakefile {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	z-index: 1;
-}
 
-input.file {
-	position: relative;
-	text-align: right;
-	-moz-opacity:0 ;
-	filter:alpha(opacity: 0);
-	opacity: 0;
-	z-index: 2;
-}
 
 input {
   background: #f1f1f1;
@@ -493,8 +468,9 @@ font-family:Arial, Helvetica, sans-serif;
 	
 }
 h2 {
+font-family:Arial, Helvetica, sans-serif;
     font-size: 1.125em;
-	
+	font-style:italic;
 }
  
 h3 {
@@ -1456,11 +1432,12 @@ text-align:right;
 }
 .centertext {text-align:center;}
 #video_detail .playlist_title{
+text-transform:uppercase;
 	height:24px;
 	background:#181919;
     padding-top:7px;
     font: bold 14px Arial,Helvetica,sans-serif;
-     color:#fff;
+     color:#888;
    
 }
 #video_detail .playlist_title p{
@@ -1478,6 +1455,7 @@ color:#63ADD0;
 color: #FEB200;
 }
 #video_detail .playlist_title a{
+
  height:30px;
  color:#eee;
  margin:0px;
@@ -1506,6 +1484,12 @@ padding:3px;
 margin-left:0px;
 font-size:14px;
 
+}
+#video_detail .playlist_title .bookmark a.active1:hover{
+
+}
+#video_detail .playlist_title .bookmark a.inactive1{
+color:#FFC640;
 }
 
 #video_detail .related{
