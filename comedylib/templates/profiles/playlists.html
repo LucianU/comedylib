@@ -2,11 +2,13 @@
 {% block title %}{{ page_title }}{% endblock %}
 {% block profile_content %}
 <div class="col span_5_of_6">
-    <h1>Create playlist</h1>
-    <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
-        <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
-        <button type="submit">Create playlist</button>
-    </form>
+    {% if user.profile == profile %}
+        <h1>Create playlist</h1>
+        <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            <input id="id_title" type="text" name="title" maxlength="255" placeholder="Type the playlist name">
+            <button type="submit">Create playlist</button>
+        </form>
+    {% endif %}
     <h1>Playlists</h1>
     <div class="section group">
         {% for playlist in playlists %}

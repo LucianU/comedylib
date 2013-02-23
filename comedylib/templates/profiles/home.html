@@ -3,20 +3,34 @@
 {% block content %}
 <div class="section group">
     <div class="col colbkg1 span_1_of_6">
-        <a href="{% url own_home %}"><h6>{{ user.username }}</h6></a>
+        {% if user.profile == profile %}
+            <a href="{% url own_home %}"><h6>{{ user.username }}</h6></a>
+        {% else %}
+            <a href="{% url user_home profile.user.id %}"><h6>{{ profile.user.username }}</h6></a>
+        {% endif %}
         <div class="user-header">
             <div class="foto">
             {% load thumbnail %}
-				<a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                {% if user.profile == profile %}
+                    <a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                {% else %}
+                    <a href="{% url user_home profile.user.id %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                {% endif %}
             </div>
         </div>
         <div id="tabs2" class="user-tabs">
-            <ul>
-                <li><a href="{% url own_playlists %}">My Playlists</a></li>
-                <li><a href="{% url own_bookmarks %}?post=V">Bookmarked Videos</a></li>
-                <li><a href="{% url own_bookmarks %}?post=P">Bookmarked Playlists</a></li>
-                <li><a href="{% url own_likes %}" id="lv_btn">Liked Videos</a></li>
-            </ul>
+            {% if user.profile == profile %}
+                <ul>
+                    <li><a href="{% url own_playlists %}">My Playlists</a></li>
+                    <li><a href="{% url own_bookmarks %}?post=V">Bookmarked Videos</a></li>
+                    <li><a href="{% url own_bookmarks %}?post=P">Bookmarked Playlists</a></li>
+                    <li><a href="{% url own_likes %}" id="lv_btn">Liked Videos</a></li>
+                </ul>
+            {% else %}
+                <ul>
+                    <li><a href="{% url user_playlists profile.user.id %}">Playlists</a></li>
+                </ul>
+            {% endif %}
         </div>
     </div>
     {% block profile_content %}
