@@ -10,6 +10,10 @@ DATABASES['default'].update({
     'USER': 'comedylib',
 })
 
+ALLOWED_HOSTS = [
+    '*.comedylib.com',
+]
+
 INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
