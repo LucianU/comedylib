@@ -4,7 +4,7 @@ fabric==1.5.1
 gdata==2.0.17
 pillow==1.7.7
 psycopg2==2.4.5
-pylibmc=1.2.3
+pylibmc==1.2.3
 whoosh==2.4.1
 
 # Django apps
