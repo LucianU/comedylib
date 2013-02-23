@@ -105,7 +105,14 @@
                             <div class="logincontent-user">
                                 <div class="welcome">
                                     <a href="#" data-dropdown="#dropdown-1" data-vertical-offset="40" data-horizontal-offset="195">
-                                        <div>{% load thumbnail %}<img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi,  <span>{{ user.username }} </span> </p></div>
+                                        <div>
+                                            {% if user.profile.picture %}
+                                                {% load thumbnail %}
+                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span>{{ user.username }} </span> </p>
+                                            {% else %}
+                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span></p>
+                                            {% endif %}
+                                        </div>
                                     </a>
                                     <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
                                         <ul>

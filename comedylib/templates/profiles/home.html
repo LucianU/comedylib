@@ -12,9 +12,17 @@
             <div class="foto">
             {% load thumbnail %}
                 {% if user.profile == profile %}
-                    <a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                    {% if profile.picture %}
+                        <a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                    {% else %}
+                        <a href="{% url own_home %}"><img src="{{ STATIC_URL }}img/logo.jpg"></a>
+                    {% endif %}
                 {% else %}
-                    <a href="{% url user_home profile.user.id %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                    {% if profile.picture %}
+                        <a href="{% url user_home profile.user.id %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
+                    {% else %}
+                        <a href="{% url user_home profile.user.id %}"><img src="{{ STATIC_URL }}img/logo.jpg"></a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
