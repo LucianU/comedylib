@@ -45,8 +45,8 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
-        if 'pk' in kwargs:
-            profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
+        if 'pk' in self.kwargs:
+            profile = get_object_or_404(Profile, user__pk=self.kwargs['pk'])
         else:
             profile = self.request.user.profile
 
@@ -99,8 +99,8 @@ class Playlists(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
-        if 'pk' in kwargs:
-            profile = get_object_or_404(Profile, user__pk=kwargs['pk'])
+        if 'pk' in self.kwargs:
+            profile = get_object_or_404(Profile, user__pk=self.kwargs['pk'])
         else:
             profile = self.request.user.profile
         context['playlists'] = profile.playlists.all()
