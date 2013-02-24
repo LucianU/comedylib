@@ -76,8 +76,9 @@ def collect_static():
     """
     Runs the manage.py collectstatic command.
     """
-    with cd(env.proj_dir):
-        run('./manage.py collectstatic')
+    with _virtualenv():
+        django_settings = 'DJANGO_SETTINGS_MODULE=%s' % env.settings
+        run('%s ./manage.py collectstatic' % django_settings)
 
 
 def setup_nginx():
@@ -141,8 +142,8 @@ def deploy():
             make_virtualenv()
 
     update_code()
-    collect_static()
     update_reqs()
+    collect_static()
     syncdb()
     if first_deploy:
         start_supervisord()
