@@ -11,7 +11,7 @@ DATABASES['default'].update({
 })
 
 ALLOWED_HOSTS = [
-    '*.comedylib.com',
+    '.comedylib.com',
 ]
 
 INSTALLED_APPS += (
