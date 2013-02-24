@@ -12,6 +12,6 @@ server {
     }
 
     location /static {
-        alias /home/comedylib/stag_comedylib/comedylib/static/;
+        alias /home/comedylib/stag_comedylib/comedylib/static_all/;
     }
 }
