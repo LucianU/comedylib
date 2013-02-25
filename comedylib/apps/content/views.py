@@ -171,4 +171,4 @@ class Playlists(ListView):
     context_object_name = 'playlists'
     template_name = 'content/playlists.html'
     paginate_by = 20
-    queryset = Playlist.objects.all()
+    queryset = Playlist.objects.filter(empty=False)
