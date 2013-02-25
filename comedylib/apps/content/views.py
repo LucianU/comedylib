@@ -31,7 +31,7 @@ class Home(TemplateView):
     def _get_recent_videos(self):
         videos = {}
         for r_id, r_name in Collection.ROLE_CHOICES:
-            videos[r_name] = Video.objects.filter(collection__role=r_id)[:3]
+            videos[r_name] = Video.objects.filter(collection__role=r_id)[:6]
         return videos
 
 
