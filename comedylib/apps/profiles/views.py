@@ -114,6 +114,11 @@ class PlaylistDetail(DetailView):
     context_object_name = 'playlist'
     model = Playlist
 
+    def get_context_data(self, **kwargs):
+        context = super(PlaylistDetail, self).get_context_data(**kwargs)
+        context['profile'] = self.request.user.profile
+        return context
+
 
 class CreatePlaylist(AjaxableResponseMixin, CreateView):
     template_name = 'profiles/create_playlist.html'

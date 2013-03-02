@@ -283,7 +283,9 @@ var mouse_is_inside = false;
         mouse_is_inside=false; 
     });	
 	 $("body").click(function(){
-        if(! mouse_is_inside) $("#addtoplaycontent").slideUp("fast");
+        if(! mouse_is_inside) {
+            $("#addtoplaycontent").slideUp("fast");
+        }
     });	
     })(jQuery);
     $(document).ready(function() {
@@ -421,31 +423,32 @@ var mouse_is_inside = false;
                 .fail(function() { alert('An error has occur'); });
                 //TODO: Do proper error handling
         });
-        $('#bookmark_pl').click(function(event) {
-            event.preventDefault();
-            button = $(this);
-            button_cls = button.attr('class');
-            $.post(bookmarkStates[button_cls].url, {'id': {{ current_pl.id }}, 'obj': 'P'})
-                .done(function() {
-                    button.removeClass(bookmarkStates[button_cls].rmCl);
-                    button.addClass(bookmarkStates[button_cls].adCl);
-                    button.html(bookmarkStates[button_cls].text);
-                    button.attr('title', bookmarkStates[button_cls].titl );
-                })
-                .fail(function() { alert('An error has occur'); });
-                //TODO: Do proper error handling
-        });
+        {% if current_pl %}
+            $('#bookmark_pl').click(function(event) {
+                event.preventDefault();
+                button = $(this);
+                button_cls = button.attr('class');
+                $.post(bookmarkStates[button_cls].url, {'id': {{ current_pl.id }}, 'obj': 'P'})
+                    .done(function() {
+                        button.removeClass(bookmarkStates[button_cls].rmCl);
+                        button.addClass(bookmarkStates[button_cls].adCl);
+                        button.html(bookmarkStates[button_cls].text);
+                        button.attr('title', bookmarkStates[button_cls].titl );
+                    })
+                    .fail(function() { alert('An error has occur'); });
+                    //TODO: Do proper error handling
+            });
+        {% endif %}
     });
 </script>
-  	<script>
-		(function($){
-			$(window).load(function(){
-				$(".divscroll").mCustomScrollbar({
-					autoHideScrollbar:true,
-					theme:"light-thin"
-				});
-  			});
-		})(jQuery);
-	</script>
-    
+<script>
+(function($) {
+    $(window).load(function() {
+        $(".divscroll").mCustomScrollbar({
+            autoHideScrollbar:true,
+            theme:"light-thin"
+        });
+    });
+})(jQuery);
+</script>
 {% endblock %}
