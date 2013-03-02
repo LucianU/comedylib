@@ -2597,6 +2597,15 @@ font-size:14px;
 height:60px;
 line-height: 60px;
 }
+.play-pic-content .buttons a.playallmain{
+height:106px;
+line-height: 106px;
+background: rgba(68,68,68, 0.6);
+}
+.play-pic-content .buttons a:hover.playallmain{
+
+background: rgba(68,68,68, 0.8);
+}
 .play-pic-content .buttons a.seeall{
 height:46px;
 line-height: 46px;
@@ -2696,7 +2705,7 @@ height:40px;
 .coll-name-content a{
 display:table-cell;
 vertical-align:middle;
-text-transform:uppercase;
+/*text-transform:uppercase;*/
 text-align:center;
 font: bold 0.75em Arial, Helvetica, sans-serif;
 color:#eee;
@@ -2723,6 +2732,9 @@ height:40px;
 }
 .coll-detail-content p{
 color:#63ADD0;
+font: 11px Arial, Helvetica, sans-serif;
+padding-left:0px;
+text-align:center;
 }
 .coll-detail-content span{
 text-align:center;
@@ -2836,6 +2848,8 @@ padding:5px;
 }
 .user-header .foto img{
 border:1px solid #555;
+width:90px;
+height:115px;
 }
 .user-header .foto-menu{
 height:115px;
