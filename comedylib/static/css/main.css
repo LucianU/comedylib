@@ -1441,7 +1441,7 @@ text-align:right;
 }
 .centertext {text-align:center;}
 #video_detail .playlist_title{
-text-transform:uppercase;
+/*text-transform:uppercase;*/
 	height:24px;
 	background:#181919;
     padding-top:7px;

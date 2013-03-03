@@ -13,7 +13,8 @@
     <h1>Playlists</h1>
     <div class="section group">
         {% for playlist in playlists %}
-        <div class="col span_1_of_5 col5">
+        {% if user.profile == profile %}
+            <div class="col span_1_of_5 col5">
                 <div class="collection-content playlist-content">
                     <div class="play-pic-content">
                         <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"></a>
@@ -44,7 +45,39 @@
                     </div>
                 </div>
             </div>
-            
+        {% else %}
+            <div class="col span_1_of_5 col5">
+                <div class="collection-content playlist-content">
+                    <div class="play-pic-content">
+                        <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"></a>
+                        <div class="buttons">
+                             <a class="playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">Play all <span><i class="icon-play"></i></span></a>
+                        </div>
+                        <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" />
+                        <div class="sidebar">
+                            <center><p>{% with videos=playlist.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p></center>
+                            <img src="{% thumbnail playlist.videos.all.1.picture 42x31 crop %}" class="mini"/>
+                            <img src="{% thumbnail playlist.videos.all.2.picture 42x31 crop %}" class="mini"/>
+                        </div>
+                    </div>
+                    <div class="coll-name-content">
+                         <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">{{ playlist.title }}</a>
+                    </div>
+                    <div class="coll-detail-content rating">
+                    <div class="section group">
+                        <div class="col span_2_of_4">
+                            <span class="playlist">Bookmarks</span> <p>{% with videos=playlist.videos.count %} {{ videos }}</p>{% endwith %}
+                        </div>
+                        <div class="col span_2_of_4 alignright">
+                           <span class="playlist">User</span><a class="user" href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
+                        </div>
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        
+        {% endif %}   
         {% empty %}
             <p>No playlists found.</p>
         {% endfor %}
