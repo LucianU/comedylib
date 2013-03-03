@@ -198,7 +198,12 @@ color: #444;
 margin-bottom:5px;
 padding:0 2px;
 }
-
+.helptextdark {
+font: 12px Arial, Helvetica, sans-serif;
+color: #eee;
+margin-bottom:5px;
+padding:0 2px;
+}
 
 
 /*  SECTIONS  */
@@ -674,11 +679,12 @@ margin:5px 8px 0px 0px;
 float:right;
 width:200px;
 height:35px;
+
 /*background:#f00;*/
 }
 .welcome p{
 font-size:14px;
-padding:12px 5px 10px 5px;
+padding:13px 5px 12px 5px;
 text-align:right;
 float:right;
 height:12px;
@@ -687,6 +693,9 @@ height:12px;
 }
 .welcome span{
 color: #63ADD0;
+}
+.welcome p.dropdown{
+/*border:1px solid #444;*/
 }
 .welcome i{
 margin-right:6px;
@@ -3086,3 +3095,34 @@ height:30px;
 #gbtnlnk{float:left}
 #fbtnlnk1{float:left}
 #gbtnlnk1{float:left}
+#tabs {
+background:none;
+border:none;
+font:12px Arial, Helvetica, sans-serif;
+}
+#tabs a :focus{
+border:none;
+}
+#tabs ul {
+background:none;
+border:none;
+margin:0;
+padding:0;
+}
+#tabs ul li {
+background:none;
+border:none;
+text-transform:uppercase;
+font-size:16px;
+font-weight:bold;
+}
+#tabs ul li.ui-tabs-active a, #tabs ul li.ui-tabs-active a:hover {
+color:#FEB200;
+}
+#tabs ul li a{
+color: #555;
+}
+#tabs ul li a:hover{
+color:#ddd;
+}
+

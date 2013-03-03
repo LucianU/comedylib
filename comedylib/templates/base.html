@@ -15,6 +15,7 @@
 
         {% compress css %}
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.dropdown.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/slider.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
@@ -113,9 +114,9 @@
                                         <div>
                                             {% if user.profile.picture %}
                                                 {% load thumbnail %}
-                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span>{{ user.username }} </span> </p>
+                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p class="dropdown">Hi, <span>{{ user.username }} </span> <i class="icon-chevron-down"></i></p>
                                             {% else %}
-                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span></p>
+                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p class="dropdown">Hi, <span>{{ user.username }} </span><i class="icon-chevron-down"></i></p>
                                             {% endif %}
                                         </div>
                                     </a>
