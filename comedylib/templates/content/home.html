@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} Home {% endblock %}
 {% block content %}
-
+{% load thumbnail %}
 <!-- #featured -->
 
     <div class="featured">
@@ -59,39 +59,40 @@
 <!-- Random playlists and Facebook box -->
     
     <div class="section group">
-        <div class="col span_3_of_4">
+        <div class="col span_2_of_3">
             <div class="randomplay_title">
 					<p>Random <span>Playlists</span></p>
 			</div>
                 <div class="section group">
         {% for playlist in playlists %}
-         <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
-                 <div class="section group">
-                    <div class="play-pic-content col span_1_of_3">
-                        <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"><img src="{{ playlist.videos.all.0.picture.url}} "></a>
-                    </div>
-                    <div class="play-detail-content col span_2_of_3">
-                    <div class="section group">
-                    <div class="play-name-content col span_2_of_2">
-                        <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">{{ playlist.title }}</a>
-                    </div> 
-                        <div class="nvideo col span_1_of_2 col1">
-                           <span>Videos</span> <p>
-                                         {% with videos=playlist.videos.count %}
-                                    {{ videos }} </p>
-                                {% endwith %}
-                              </div>
-                        <div class="user col span_1_of_2">
-                            <span>User</span><a href="#">{{ playlist.profile.user.username }}</a>
+                        <div class="col span_1_of_4 col4">
+                <div class="collection-content playlist-content">
+                    <div class="play-pic-content">
+                        <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"></a>
+                        <div class="buttons">
+                             <a class="playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">Play all <span><i class="icon-play"></i></span></a>
                         </div>
-                       
+                        <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" />
+                        <div class="sidebar">
+                            <center><p>{% with videos=playlist.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p></center>
+                            <img src="{% thumbnail playlist.videos.all.1.picture 42x31 crop %}" class="mini"/>
+                            <img src="{% thumbnail playlist.videos.all.2.picture 42x31 crop %}" class="mini"/>
+                        </div>
+                    </div>
+                    <div class="coll-name-content">
+                         <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">{{ playlist.title }}</a>
+                    </div>
+                    <div class="coll-detail-content rating">
+                    <div class="section group">
+                        <div class="col span_2_of_4">
+                            <span class="playlist">Bookmarks</span> <p>{% with videos=playlist.videos.count %} {{ videos }}</p>{% endwith %}
+                        </div>
+                        <div class="col span_2_of_4 alignright">
+                           <span class="playlist">User</span><a class="user" href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
+                        </div>
                         
-                     </div>  
-                        
-                    </div> 
-                 </div>   
-                    
+                    </div>
+                    </div>
                 </div>
             </div>
           
@@ -101,7 +102,7 @@
         </div>  
               
         </div>
-        <div class="col span_1_of_4">
+        <div class="col span_1_of_3">
             <div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="238" data-height="314" data-colorscheme="dark" data-show-faces="true" data-border-color="#444444" data-stream="false" data-header="false"></div>
         </div>
     </div>
@@ -109,7 +110,7 @@
 <!-- Random playlists and Facebook box -->
 
     <div class="randomplay_title">
-	<p><span>Top Rated </span>Videos</p>
+	<p><span>Recent </span>Videos</p>
     </div>
     <div class="section group">
         <div class="col span_1_of_3 toprated_section">

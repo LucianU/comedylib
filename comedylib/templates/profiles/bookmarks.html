@@ -1,6 +1,7 @@
 {% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block profile_content %}
+{% load thumbnail %}
 <div class="col span_5_of_6">
     <h5>Bookmarked {{ post_type }}s</h5>
     <div class="section group">
@@ -36,28 +37,37 @@
                 {% endfor %}
 {% else %}
     {% for bookmark in bookmarks %}
-        <div class="col span_1_of_3 col3">
-                <div class="playlist-content">
+    <div class="col span_1_of_5 col5">
+                <div class="collection-content playlist-content">
+                    <div class="play-pic-content">
+                        <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}"></a>
+                        <div class="buttons">
+                             <a class="playallmain" href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}">Play all <span><i class="icon-play"></i></span></a>
+                        </div>
+                        <img src="{% thumbnail bookmark.post.videos.all.0.picture 144x110 crop %}" />
+                        <div class="sidebar">
+                            <center><p>{% with videos=bookmark.post.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p></center>
+                            <img src="{% thumbnail bookmark.post.videos.all.1.picture 42x31 crop %}" class="mini"/>
+                            <img src="{% thumbnail bookmark.post.videos.all.2.picture 42x31 crop %}" class="mini"/>
+                        </div>
+                    </div>
+                    <div class="coll-name-content">
+                         <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}">{{ bookmark.post.title }}</a>
+                    </div>
+                    <div class="coll-detail-content rating">
                     <div class="section group">
-                        <div class="play-pic-content col span_1_of_3">
-                            <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}"><img src="{{ bookmark.post.videos.all.0.picture.url}} "></a>
+                        <div class="col span_2_of_4">
+                            <span class="playlist">Bookmarks</span> <p>{% with videos=bookmark.post.videos.count %} {{ videos }}</p>{% endwith %}
                         </div>
-                        <div class="play-detail-content col span_2_of_3">
-                            <div class="section group">
-                                <div class="play-name-content col span_2_of_2">
-                                    <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}">{{ bookmark.post.title }}</a>
-                                </div>
-                                <div class="nvideo col span_1_of_2 col1">
-                                    <span>Videos</span> <p>{% with videos=bookmark.post.videos.count %} {{ videos }}</p>{% endwith %}
-                                </div>
-                                <div class="user col span_1_of_2">
-                                    <span>User</span><a href="#">{{ bookmark.post.profile.user.username }}</a>
-                                </div>
-                            </div>
+                        <div class="col span_2_of_4 alignright">
+                           <span class="playlist">User</span><a class="user" href="{{bookmark.post.profile.get_absolute_url}}">{{ bookmark.post.profile.user.username }}</a>
                         </div>
+                        
+                    </div>
                     </div>
                 </div>
             </div>
+       
             {% empty %}
         <p>You have no playlists, yet.</p>
                 {% endfor %}

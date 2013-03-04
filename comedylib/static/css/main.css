@@ -198,7 +198,12 @@ color: #444;
 margin-bottom:5px;
 padding:0 2px;
 }
-
+.helptextdark {
+font: 12px Arial, Helvetica, sans-serif;
+color: #eee;
+margin-bottom:5px;
+padding:0 2px;
+}
 
 
 /*  SECTIONS  */
@@ -674,11 +679,12 @@ margin:5px 8px 0px 0px;
 float:right;
 width:200px;
 height:35px;
+
 /*background:#f00;*/
 }
 .welcome p{
 font-size:14px;
-padding:12px 5px 10px 5px;
+padding:13px 5px 12px 5px;
 text-align:right;
 float:right;
 height:12px;
@@ -687,6 +693,9 @@ height:12px;
 }
 .welcome span{
 color: #63ADD0;
+}
+.welcome p.dropdown{
+/*border:1px solid #444;*/
 }
 .welcome i{
 margin-right:6px;
@@ -1432,7 +1441,7 @@ text-align:right;
 }
 .centertext {text-align:center;}
 #video_detail .playlist_title{
-text-transform:uppercase;
+/*text-transform:uppercase;*/
 	height:24px;
 	background:#181919;
     padding-top:7px;
@@ -2597,6 +2606,15 @@ font-size:14px;
 height:60px;
 line-height: 60px;
 }
+.play-pic-content .buttons a.playallmain{
+height:106px;
+line-height: 106px;
+background: rgba(68,68,68, 0.6);
+}
+.play-pic-content .buttons a:hover.playallmain{
+
+background: rgba(68,68,68, 0.8);
+}
 .play-pic-content .buttons a.seeall{
 height:46px;
 line-height: 46px;
@@ -2696,7 +2714,7 @@ height:40px;
 .coll-name-content a{
 display:table-cell;
 vertical-align:middle;
-text-transform:uppercase;
+/*text-transform:uppercase;*/
 text-align:center;
 font: bold 0.75em Arial, Helvetica, sans-serif;
 color:#eee;
@@ -2723,6 +2741,9 @@ height:40px;
 }
 .coll-detail-content p{
 color:#63ADD0;
+font: 11px Arial, Helvetica, sans-serif;
+padding-left:0px;
+text-align:center;
 }
 .coll-detail-content span{
 text-align:center;
@@ -2836,6 +2857,8 @@ padding:5px;
 }
 .user-header .foto img{
 border:1px solid #555;
+width:90px;
+height:115px;
 }
 .user-header .foto-menu{
 height:115px;
@@ -3072,3 +3095,34 @@ height:30px;
 #gbtnlnk{float:left}
 #fbtnlnk1{float:left}
 #gbtnlnk1{float:left}
+#tabs {
+background:none;
+border:none;
+font:12px Arial, Helvetica, sans-serif;
+}
+#tabs a :focus{
+border:none;
+}
+#tabs ul {
+background:none;
+border:none;
+margin:0;
+padding:0;
+}
+#tabs ul li {
+background:none;
+border:none;
+text-transform:uppercase;
+font-size:16px;
+font-weight:bold;
+}
+#tabs ul li.ui-tabs-active a, #tabs ul li.ui-tabs-active a:hover {
+color:#FEB200;
+}
+#tabs ul li a{
+color: #555;
+}
+#tabs ul li a:hover{
+color:#ddd;
+}
+

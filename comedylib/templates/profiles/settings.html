@@ -1,22 +1,31 @@
 {% extends "profiles/home.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block profile_content %}
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>
 <div class="col span_5_of_6">
-    
-    <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
-       <h1>Upload an avatar</h1>
-             
-         <p><input type="file" name="picture" id="id_picture" placeholder="Picture" class="st"/>
-    
-    
-    <h1>Change your password</h1>
-        
-<p><input type="password" name="oldpassword" id="id_oldpassword" placeholder="Old Password" class="small"/></p>
-<p><input type="password" name="password1" id="id_password1" placeholder="New Password" class="small"/></p>
-<p><input type="password" name="password2" id="id_password2" placeholder="Confirm Password" class="small"/> <span class="helptext">Enter the same password as above, for verification.</span></p>
-<input type="submit" value="Update" class="button" />
-        
-    </form>
-  
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Change your avatar</a></li>
+            <li><a href="#tabs-2">Change your password</a></li>
+        </ul>
+        <div id="tabs-1">
+            <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                <p><input type="file" name="picture" id="id_picture" placeholder="Picture" class="st"/>
+                <input type="submit" value="Update" class="button" />
+            </form>
+        </div>
+        <div id="tabs-2">
+            <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                <p><input type="password" name="oldpassword" id="id_oldpassword" placeholder="Old Password" class="small"/></p>
+                <p><input type="password" name="password1" id="id_password1" placeholder="New Password" class="small"/></p>
+                <p><input type="password" name="password2" id="id_password2" placeholder="Confirm Password" class="small"/> <span class="helptextdark">Enter the same password as above, for verification.</span></p>
+                <input type="submit" value="Update" class="button" />
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
