@@ -175,6 +175,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # social_auth
+LOGIN_URL = '/a/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
