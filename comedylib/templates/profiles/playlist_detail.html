@@ -10,6 +10,9 @@
                         <a href="{{ video.get_absolute_url }}">
                             <img src="{{ video.picture.url }}">
                         </a>
+                         <div class="buttons">
+                             <a id="removebtn" class="remove" href="#" title="Remove video from playlist"><i class="icon-trash"></i></a>
+                        </div>
                     </div>
                     <div class="coll-name-content">
                         <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
@@ -34,6 +37,14 @@
         {% endfor %}
     </div>
 </div>
-
+<script>
+ $(document).on("click", "#removebtn", function(event){
+        event.preventDefault();
+        $.post('{% url remove_from_playlist %}', {'vid': {{ video.id }}, 'pid': {{ playlist.id }} }, function(data) {
+            confirm ('Are you sure you want to delete the video?');
+        });
+        return false;
+    });
+</script>
 
 {% endblock %}

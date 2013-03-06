@@ -2509,7 +2509,7 @@ background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
 -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
 transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
-.playlist-content:hover .buttons{
+.playlist-content:hover .buttons, .collection-content:hover .buttons{
 display:block;
 
 }
@@ -2577,9 +2577,15 @@ display:none;
 z-index:10;
 top:0;
 left:0;
-
 }
-.play-pic-content .buttons a {
+.coll-pic-content .buttons {
+position:absolute;
+display:none;
+z-index:10;
+top:85px;
+right:9px;
+}
+.play-pic-content .buttons a  , .coll-pic-content .buttons a{
 text-transform:uppercase;
 font:bold 13px Arial, Helvetica, sans-serif;
 display:block;
@@ -2591,7 +2597,7 @@ width:146px;
 -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
 transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
-.play-pic-content .buttons a:hover {
+.play-pic-content .buttons a:hover, .coll-pic-content .buttons a:hover {
 background: rgba(68,68,68, 0.9);
 
 }
@@ -2601,7 +2607,16 @@ display:inline-block;
 font-size:14px;
 
 }
-
+.coll-pic-content .buttons a {
+font-size:14px;
+text-align:center;
+padding-top:5px;
+}
+.coll-pic-content .buttons a.remove {
+width:24px;
+height:19px;
+line-height: 24px;
+}
 .play-pic-content .buttons a.playall{
 height:60px;
 line-height: 60px;
