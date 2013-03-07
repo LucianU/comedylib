@@ -42,23 +42,24 @@
         </div>
     </div>
     {% block profile_content %}
-    <div class="col span_5_of_6 colbkg">
+    <div class="col span_5_of_6 front_profile">
+    <h1>Activity</h1>
         <div class="section group">
-            <div class="col span_1_of_3 colbkg1">
+            <!--<div class="col span_1_of_2 colbkg1">
                 <!-- Asta nu e populata momentan. -->
-                {{recent_comments}}
-            </div>
-            <div class="col span_1_of_3 colbkg1">
+            <!--    {{recent_comments}}
+            </div> -->
+            <div class="col span_1_of_2 colbkg1">
                 <ul>
                     {% for pl in recent_playlists %}
-                        <li>{{ profile.user.username }} created the playlist <a href="{{ pl.get_absolute_url }}">{{ pl.title }}</a></li>
+                        <li><div><span>{{ profile.user.username }}</span> created the playlist <a href="{{ pl.videos.all.0.get_absolute_url }}?pl={{ pl.id }}">{{ pl.title }}</a></div></li>
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col span_1_of_3 colbkg1">
+            <div class="col span_1_of_2 colbkg1">
                 <ul>
                     {% for like in recent_likes %}
-                        <li>{{ profile.user.username }} liked the video <a href="{{ like.video.get_absolute_url }}">{{ like.video.title }}</a></li>
+                        <li><div><span>{{ profile.user.username }}</span> liked the video <a href="{{ like.video.get_absolute_url }}">{{ like.video.title }}</a></div></li>
                     {% endfor %}
                 </ul>
             </div>
