@@ -14,14 +14,32 @@
         </ul>
         <div id="tabs-1">
             <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ form.picture.errors }}
+                </div>
                 <p><input type="file" name="picture" id="id_picture" placeholder="Picture" class="st"/>
+                
                 <input type="submit" value="Update" class="button" />
+                
+                {{ form.as_p }}
             </form>
+            
         </div>
         <div id="tabs-2">
-            <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+            <form method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ form.oldpassword.errors }}
+                </div>
                 <p><input type="password" name="oldpassword" id="id_oldpassword" placeholder="Old Password" class="small"/></p>
+               <div class="fieldWrapper">
+                    {{ form.password1.errors }}
+               </div>
                 <p><input type="password" name="password1" id="id_password1" placeholder="New Password" class="small"/></p>
+                <div class="fieldWrapper">
+                    {{ form.password2.errors }}
+                </div>
                 <p><input type="password" name="password2" id="id_password2" placeholder="Confirm Password" class="small"/> <span class="helptextdark">Enter the same password as above, for verification.</span></p>
                 <input type="submit" value="Update" class="button" />
             </form>
