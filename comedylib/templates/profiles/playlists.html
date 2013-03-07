@@ -14,11 +14,12 @@
     <div class="section group">
         {% for playlist in playlists %}
         {% if user.profile == profile %}
-            <div class="col span_1_of_5 col5">
-                <div class="collection-content playlist-content">
+            <div class="col span_1_of_5 col5" id="play{{ playlist.id }}">
+                <div class="collection-content playlist-content"  >
                     <div class="play-pic-content">
                         <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"></a>
                         <div class="buttons">
+                             <a id="deletebtn" data-playlist-id="{{ playlist.id }}" class="remove" href="#" title="Delete playlist"><i class="icon-trash"></i></a>
                              <a class="playall" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">Play all <span><i class="icon-play"></i></span></a>
                              <a class="seeall" href="{{ playlist.get_absolute_url }}">See videos <span><i class="icon-th-list"></i></span></a>
                         </div>
@@ -83,4 +84,22 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    $(document).on("click", "#deletebtn", function(event){
+        event.preventDefault();
+        var r=confirm("Are you sure you want to delete this playlist?");
+        if (r==true)
+            {
+            a = $(this);
+            $.post('{% url delete_playlist %}', {'pid': a.attr('data-playlist-id') }, function(data) {
+                $('#play'+a.attr('data-playlist-id')).slideUp('normal');
+            });
+            return false;
+            }
+        else
+        {
+           
+        }
+    });
+</script>
 {% endblock %}
