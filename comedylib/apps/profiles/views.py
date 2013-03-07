@@ -1,16 +1,17 @@
 #-*- coding: utf-8 -*-
 import json
 
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
                                   UpdateView, DetailView, FormView)
 
 from content.models import Video
-from profiles.forms import PlaylistForm, SettingsForm
+from profiles.forms import PlaylistForm, PictureForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 
@@ -63,26 +64,79 @@ class Home(TemplateView):
 
 
 class Settings(FormView):
+    """
+    This view actually handles two forms, a PictureForm and a
+    PasswordChangeForm, because they are both displayed on the
+    same page but in different tabs.
+    """
     template_name = 'profiles/settings.html'
-    form_class = SettingsForm
+    picture_form = PictureForm
+    password_form = PasswordChangeForm
+
+    def get(self, request, *args, **kwargs):
+        # Using the self.form_invalid method method just to avoid
+        # code duplication, because the logic is the same
+        return self.form_invalid(
+            self.picture_form(), self.password_form(self.request.user)
+        )
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            if type(form) == self.picture_form:
+                return self.form_invalid(
+                    form, self.password_form(self.request.user)
+                )
+            else:
+                return self.form_invalid(self.picture_form(), form)
+
+    def get_form(self, form_class):
+        if form_class == self.picture_form:
+            return form_class(**self.get_form_kwargs())
+
+        return form_class(**self.get_password_form_kwargs())
+
+    def get_form_class(self):
+        """
+        Only used when handling POST request in the case of
+        this view, because on the GET request we send both forms.
+        """
+        if self.request.FILES:
+            return self.picture_form
+        else:
+            return self.password_form
 
     def form_valid(self, form):
         user = self.request.user
-        password = form.cleaned_data.get('password1')
-        if password is not None:
-            user.set_password(password)
-            user.save()
-        if self.request.FILES['picture']:
+        if type(form) == self.picture_form:
             user.profile.picture = self.request.FILES['picture']
             user.profile.save()
-        return super(Settings, self).form_valid(form)
+        else:
+            form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, picture_form, password_form):
+        return self.render_to_response(
+            self.get_context_data(
+                picture_form=picture_form,
+                password_form=password_form,
+            )
+        )
 
     def get_success_url(self):
         return reverse('own_home')
 
-    def get_form_kwargs(self):
-        kwargs = super(Settings, self).get_form_kwargs()
-        kwargs['request'] = self.request
+    def get_password_form_kwargs(self):
+        """
+        This method has this special name, so as not to make checks
+        in the generic `get_form_kwargs` method and adjust kwargs there
+        """
+        kwargs = self.get_form_kwargs()
+        kwargs['user'] = self.request.user
         return kwargs
 
     def get_context_data(self, **kwargs):
