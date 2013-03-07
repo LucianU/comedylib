@@ -4,7 +4,7 @@
     <h5>{{ playlist.title }}</h5>
     <div class="section group">
          {% for video in playlist.videos.all %}
-            <div class="col span_1_of_5 col5" id="play{{ video.id }}">
+            <div class="col span_1_of_5 col5" id="vid{{ video.id }}">
                 <div class="collection-content">
                     <div class="coll-pic-content">
                         <a href="{{ video.get_absolute_url }}">
@@ -41,18 +41,12 @@
 <script>
     $(document).on("click", "#removebtn", function(event){
         event.preventDefault();
-        /*    a = $(this);
-        $.post('{% url remove_from_playlist %}', {'vid': a.attr('data-video-id'), 'pid': {{ playlist.id }} }, function(data) {
-            $('#play'+a.attr('data-video-id')).slideUp();
-        });
-        return false;
-        });*/
-        var r=confirm("Are you sure you want to delete the video from this playlist?");
+            var r=confirm("Are you sure you want to delete the video from this playlist?");
             if (r==true)
                 {
                 a = $(this);
                 $.post('{% url remove_from_playlist %}', {'vid': a.attr('data-video-id'), 'pid': {{ playlist.id }} }, function(data) {
-                    $('#play'+a.attr('data-video-id')).slideUp('normal');
+                    $('#vid'+a.attr('data-video-id')).slideUp('normal');
                 });
                 return false;
                 }
