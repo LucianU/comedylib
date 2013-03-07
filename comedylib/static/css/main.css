@@ -499,7 +499,7 @@ color:#FEB200;
 h6{
 padding: 5px;
 text-align:left;
-text-transform: uppercase;
+/*text-transform: uppercase;*/
 font: bold 1em Arial, Helvetica, sans-serif;
 color:#FEB200;
 }
@@ -2938,7 +2938,38 @@ background: linear-gradient(to bottom,  #181818 0%,#111111 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181818', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
 
 }
-
+.front_profile a:link, .front_profile a:visited{
+font:bold 14px Arial, Helvetica, sans-serif;
+    text-decoration: none; 
+    color: #63ADD0;
+}
+ 
+.front_profile a:hover{
+font:bold 14px Arial, Helvetica, sans-serif;
+    color: #FFD573;
+}
+.front_profile ul {
+font:14px Arial, Helvetica, sans-serif;
+}
+.front_profile ul span {
+font:14px Arial, Helvetica, sans-serif;
+color:#FFD573;
+}
+.front_profile ul li {
+width:99%;
+border-top:1px solid #444;
+border-bottom:1px solid #111;
+padding:3px;
+height:32px;
+display:table;
+}
+.front_profile ul li:nth-child(even) {
+background:#222;
+}
+.front_profile ul li div {
+display:table-cell;
+vertical-align:middle;
+}
 .user-content{
 padding:0px;
 
