@@ -132,7 +132,15 @@ input:focus {
   -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
   box-shadow: 0 0 0 1px #e8c291 inset;
 }
-
+input[type="file" ]{
+	background:none;
+    border:none;
+     -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color:#fff;
+  padding:0px;
+}
 button{		
 -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -953,6 +961,11 @@ z-index:100;
 	-webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+}
+.userloginpage .center1{
+margin-top:10px;
+width:500px;
+    
 }
 .userloginpage .center label {
  font: bold 0.875em Arial, Helvetica, sans-serif;
@@ -3159,6 +3172,8 @@ height:30px;
 #gbtnlnk{float:left}
 #fbtnlnk1{float:left}
 #gbtnlnk1{float:left}
+#fbtnlnk2{width:180px; height:28px; margin:5px;}
+#gbtnlnk2{width:180px; height:28px; margin:5px;}
 #tabs {
 background:none;
 border:none;
@@ -3192,8 +3207,13 @@ color: #555;
 color:#ddd;
 }
 
-.fieldWrapper{
+#fieldWrapper{
 text-transform:none;
+font:14px Arial, Helvetica, sans-serif;
+color: #eee;
+}
+#fieldWrapper ul li{
+text-transform:none;
+font:14px Arial, Helvetica, sans-serif;
 color: #f00;
-
 }
