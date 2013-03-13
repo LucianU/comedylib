@@ -10,4 +10,4 @@ class PlaylistForm(forms.ModelForm):
 
 
 class PictureForm(forms.Form):
-    picture = forms.ImageField(required=False)
+    picture = forms.ImageField()

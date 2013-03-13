@@ -105,10 +105,12 @@ class Settings(FormView):
         Only used when handling POST request in the case of
         this view, because on the GET request we send both forms.
         """
-        if self.request.FILES:
-            return self.picture_form
-        else:
+        # Using this hardcoded field name, because I can't see a
+        # better way to do it
+        if 'old_password' in self.request.POST:
             return self.password_form
+        else:
+            return self.picture_form
 
     def form_valid(self, form):
         user = self.request.user
