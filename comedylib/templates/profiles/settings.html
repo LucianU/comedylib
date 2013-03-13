@@ -3,7 +3,15 @@
 {% block profile_content %}
 <script>
   $(function() {
-    $( "#tabs" ).tabs();
+    {% if picture_form.is_bound %}
+        $("#tabs").tabs({'active': 0});
+    {% else %}
+        {% if password_form.is_bound %}
+            $("#tabs").tabs({'active': 1});
+        {% else %}
+            $("#tabs").tabs();
+        {% endif %}
+    {% endif %}
   });
   </script>
 <div class="col span_5_of_6">
