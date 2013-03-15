@@ -11,6 +11,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 
 from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
+from taggit.models import TaggedItem
 
 
 class Home(TemplateView):
@@ -52,7 +53,14 @@ class CollectionList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Collection.objects.filter(**self.kwargs)
+        categs = self.request.GET.getlist('categs')
+        if categs is not None:
+            kwargs = dict(tag__name__in=categs,
+                          collection__role=self.kwargs['role'])
+            items = TaggedItem.objects.filter(**kwargs)
+            return list(set(item.content_object for item in items))
+        else:
+            return Collection.objects.filter(**self.kwargs)
 
     def render_to_response(self, context, **response_kwargs):
         self.request.breadcrumbs(self.request.path.strip('/').title(), "")
