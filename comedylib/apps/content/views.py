@@ -40,8 +40,10 @@ class About(TemplateView):
 
     def render_to_response(self, context, **response_kwargs):
         self.request.breadcrumbs("About", self.request.path)
-        return super(About, self).render_to_response(context,
-                                                     **response_kwargs)
+        return super(About, self).render_to_response(
+            context,
+            **response_kwargs
+        )
 
 
 class CollectionList(ListView):
@@ -53,10 +55,11 @@ class CollectionList(ListView):
         return Collection.objects.filter(**self.kwargs)
 
     def render_to_response(self, context, **response_kwargs):
-        self.request.breadcrumbs("%s" % self.request.path.strip('/').title(),
-                                 "")
-        return super(CollectionList, self).render_to_response(context,
-                                                              **response_kwargs)
+        self.request.breadcrumbs(self.request.path.strip('/').title(), "")
+        return super(CollectionList, self).render_to_response(
+            context,
+            **response_kwargs
+        )
 
 
 class CollectionDetail(DetailView):
@@ -163,8 +166,10 @@ class VideoDetail(DetailView):
         ))
         breadcrumbs.reverse()
         self.request.breadcrumbs(breadcrumbs)
-        return super(VideoDetail, self).render_to_response(context,
-                                                           **response_kwargs)
+        return super(VideoDetail, self).render_to_response(
+            context,
+            **response_kwargs
+        )
 
 
 class Playlists(ListView):
