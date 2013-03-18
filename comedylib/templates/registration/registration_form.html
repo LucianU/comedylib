@@ -1,40 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="userloginpage">
-    <div class="center center1">
-        <div class="section group">
+    <div class="section group center center1">
             <div class="col span_1_of_2">
                 <form action="{% url accounts_register %}" method="post">{% csrf_token %}
-                    {{ form.non_field_errors }}
-                    <div id="fieldWrapper">
-                        {{ form.username.errors }}
-                    </div>
-                    <p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /> <span class="helptext">Required. 30 characters or fewer. Letters, digits and @ . + - _ only.</span></p>
-                    <div id="fieldWrapper">
-                        {{ form.password1.errors }}
-                    </div>
-                    <p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>
-                     <div id="fieldWrapper">
-                        {{ form.password2.errors }}
-                    </div>
-                    <p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /> <span class="helptext">Enter the same password as above, for verification.</span></p>
-                     <div id="fieldWrapper">
-                        {{ form.email.errors }}
-                    </div>
-                    <p><label for="id_email">Email address:</label> <input id="id_email" type="text" name="email" maxlength="75" /></p>
-                    
-                    <input type="submit" value="Register"/>
+                    <fieldset id="inputs1">
+                        {{ form.non_field_errors }}
+                        <div id="fieldWrapper">
+                            {{ form.username.errors }}
+                        </div>
+                        <p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /> <span class="helptext">Required. 30 characters or fewer. Letters, digits and @ . + - _ only.</span></p>
+                        <div id="fieldWrapper">
+                            {{ form.password1.errors }}
+                        </div>
+                        <p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>
+                         <div id="fieldWrapper">
+                            {{ form.password2.errors }}
+                        </div>
+                        <p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /> <span class="helptext">Enter the same password as above, for verification.</span></p>
+                         <div id="fieldWrapper">
+                            {{ form.email.errors }}
+                        </div>
+                        <p><label for="id_email">Email address:</label> <input id="id_email" type="text" name="email" maxlength="75" /></p>
+                    </fieldset>
+
+                    <fieldset id="actions"> 
+                        <input type="submit" value="Register"/>
+                     </fieldset>
                 </form>
             </div>
-            <div class="col span_1_of_2">
-            <center><h1>Or</h1>
-            <div class="social">
+            <div class="col span_1_of_2 rightside">
+                    <center><h1>Or</h1>
+                    <div class="social">
                         <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.jpg"></a>
                         <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.jpg"></a>
                     </div>
+                    </center>
             </div>
-            </center>
+            
         </div>
-    </div> <!-- end center-->
+    
 </div>
 {% endblock %}

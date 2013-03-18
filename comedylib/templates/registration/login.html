@@ -2,31 +2,30 @@
 
 {% block content %}
 <div class="userloginpage">
-<div class="center">
-{% if form.errors %}
-<div class="form-error">Your username and password didn't match. Please try again.</div>
-{% endif %}
+    <div class="section group center center1">
+    <div class="col span_1_of_2">
+        {% if form.errors %}
+            <div class="form-error">Your username and password didn't match. Please try again.</div>
+        {% endif %}
 
-<form method="post" action="{% url accounts_login %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.email.label_tag }}</td>
-    <td>{{ form.email }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-<div class="submit">
-		<div class="label">
-			<label><input type="checkbox" value="remember"> Keep me signed in</label>
-		</div>
-	<input type="submit" id="submit" value="Login" />
-</div>
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-</div> <!-- end center-->
+        <form method="post" action="{% url accounts_login %}">{% csrf_token %}
+             <fieldset id="inputs1">
+            {{ form.as_p}}
+            </fieldset>
+            <fieldset id="actions"> 
+                <input type="submit" value="Login" />
+            </fieldset>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        </div>
+        <div class="col span_1_of_2 rightside">
+               <center><h1>Or</h1>
+                    <div class="social">
+                        <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.jpg"></a>
+                        <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.jpg"></a>
+                    </div>
+                    </center>
+        </div>
+    </div> <!-- end center-->
 </div>
 {% endblock %}
