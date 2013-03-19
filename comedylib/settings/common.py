@@ -30,7 +30,7 @@ DATABASES = {
     }
 }
 
-CACHE = {
+CACHES = {
     'default': {
         'BACKEND': 'johnny.backends.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
