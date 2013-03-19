@@ -18,6 +18,13 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
 
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
+)
+
 RAVEN_CONFIG = {
     'dsn': ('http://29f26e03533845338ccfcad3293a3bdf:'
             '29278d129e9643268a9f34f16902a54b@sentry.comedylib.com/2'),
