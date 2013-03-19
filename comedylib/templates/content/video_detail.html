@@ -11,9 +11,9 @@
             <div class="col0 span_2_of_6_1 playlist_title">
                 <div class="section group">
                     <div class="col span_1_of_4">
-                   <a href="#">  <i class="icon-step-backward"></i></a>
-                    1/15
-                   <a href="#">  <i class="icon-step-forward"></i></a>
+                        <a href="{{ prev_video_url }}" id="next_video">  <i class="icon-step-backward"></i></a>
+                        {{ video_no }}/{{ videos_count }}
+                        <a href="{{ next_video_url }}" id="prev_video">  <i class="icon-step-forward"></i></a>
                     </div>
                     <div class="col span_2_of_4 bookmark">
                         {% if request.user.is_authenticated %}
@@ -27,7 +27,7 @@
                         {% endif %}
                     </div>                     
                     <div class="col span_1_of_4 alignright">
-                       <a href="#"> <i class=" icon-refresh"></i></a>
+                        <a href="#"><i class="icon-refresh active"></i></a>
                         <a href="#"><i class="icon-random"></i></a>
                     </div>
                 </div>
@@ -302,6 +302,37 @@ var mouse_is_inside = false;
             closeClick  : false,
             openEffect  : 'none',
             closeEffect : 'none'
+        });
+    });
+</script>
+<script>
+    var autoplay = true;
+    // Toggling the 'autoplay' button along with the variable
+    // that specifies whether 'autoplay' should be enabled
+    $(document).ready(function() {
+        $('i.icon-refresh').parent('a').click(function(event) {
+            event.preventDefault();
+            $('i.icon-refresh').toggleClass('active');
+            if (autoplay === true) {
+                autoplay = false;
+            } else {
+                autoplay = true;
+            }
+        });
+    });
+    // When the player is idle, we check if it has reached the end
+    // of the video and redirect to the next one, if autoplay is
+    // enabled
+    $(document).ready(function() {
+        jwplayer().onIdle(function(event) {
+            var nextVideoUrl = '{{ next_video_url }}';
+            if (autoplay === true) {
+                var position = jwplayer().getPosition();
+                var duration = jwplayer().getDuration();
+                if ((duration - position) < 1) {
+                    window.location.href = nextVideoUrl;
+                }
+            }
         });
     });
 </script>

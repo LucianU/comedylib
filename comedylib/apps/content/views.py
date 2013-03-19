@@ -142,12 +142,27 @@ class VideoDetail(DetailView):
             context['bookmarked'] = bookmarked
 
         # If we are in a playlist, we send all the other videos
-        # belonging to this playlist
+        # belonging to this playlist and other specific info
         if 'pl' in self.request.GET:
             playlist = get_object_or_404(Playlist, id=self.request.GET['pl'])
-            collection_vids = playlist.videos.all().exclude(id=video.id)
+            collection_vids = playlist.videos.all()
+            collection_vids_list = list(collection_vids)
+            videos_count = collection_vids.count()
+            video_index = collection_vids_list.index(video)
+
+            prev_video = collection_vids_list[video_index - 1]
+            next_video = collection_vids_list[(video_index + 1) % videos_count]
+
+            prev_video_url = '%s?pl=%s' % (prev_video.get_absolute_url(),
+                                           playlist.id)
+            next_video_url = '%s?pl=%s' % (next_video.get_absolute_url(),
+                                           playlist.id)
             context.update({
-                'related_videos': collection_vids,
+                'related_videos': collection_vids.exclude(id=video.id),
+                'video_no': video_index + 1,
+                'videos_count': videos_count,
+                'prev_video_url': prev_video_url,
+                'next_video_url': next_video_url,
                 'current_pl': playlist,
             })
         else:
