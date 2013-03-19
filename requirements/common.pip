@@ -16,4 +16,5 @@ django-registration==0.8
 django-social-auth==0.7.6
 django-taggit==0.9.3
 easy_thumbnails==1.0.3
+johnny-cache==1.4
 south==0.7.6
