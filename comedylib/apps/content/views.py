@@ -54,7 +54,7 @@ class CollectionList(ListView):
 
     def get_queryset(self):
         categs = self.request.GET.getlist('categs')
-        if categs is not None:
+        if categs:
             kwargs = dict(tag__name__in=categs,
                           collection__role=self.kwargs['role'])
             items = TaggedItem.objects.filter(**kwargs)
