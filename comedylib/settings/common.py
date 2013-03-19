@@ -15,7 +15,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Lucian Ursu', 'lucian.ursu@gmail.com'),
 )
 MANAGERS = ADMINS
 
@@ -106,7 +106,6 @@ SECRET_KEY = 'zv#!xj_y315qhy(d450f+kibaq8g-x1n4u_+rh#!!pw_jq@d$t'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    #'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
