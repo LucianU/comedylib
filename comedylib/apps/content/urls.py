@@ -1,10 +1,11 @@
 from django.conf.urls.defaults import patterns, url
+from django.views.decorators.cache import cache_page
 
 from content.views import (Home, About, CollectionList,
                            CollectionDetail, VideoDetail, Playlists)
 
 urlpatterns = patterns('',
-    url(r'^$', Home.as_view(), name='home'),
+    url(r'^$', cache_page(Home.as_view(), 60 * 15), name='home'),
     url(r'^about/$', About.as_view(), name='about'),
     url(r'^comedians/$', CollectionList.as_view(), {'role': 0},
         name='comedians'),
@@ -22,7 +23,7 @@ urlpatterns = patterns('',
         CollectionDetail.as_view(),
         name='movie'),
     url(r'^(?:comedians|shows|movies)/.*?/(?P<pk>\d+)',
-        VideoDetail.as_view(),
+        cache_page(VideoDetail.as_view(), 60 * 10),
         name='video'),
     url(r'^playlists/$', Playlists.as_view(), name='playlists'),
 )

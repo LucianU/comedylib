@@ -32,10 +32,14 @@ DATABASES = {
 
 CACHES = {
     'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+    'johnny': {
         'BACKEND': 'johnny.backends.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
         'JOHNNY_CACHE': True,
-    }
+    },
 }
 JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_comedylib'
 # Local time zone for this installation. Choices can be found here:
@@ -125,13 +129,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'johnny.middleware.LocalStoreClearMiddleware',
     'johnny.middleware.QueryCacheMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
 )
 
