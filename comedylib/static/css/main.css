@@ -1947,39 +1947,10 @@ resize: none;
 -moz-border-radius: 3px;
 border-radius: 3px; 
 }
-#video_detail .comments .commentform #id_submit{
--moz-box-shadow:inset 0px 1px 0px 0px #eee;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #eee;
-	box-shadow:inset 0px 1px 0px 0px #eee;
-	background-color:#333;
-	-moz-border-radius:2px;
-	-webkit-border-radius:2px;
-	border-radius:2px;
-	border:1px solid #555;
-	display:inline-block;
-	color:#ddd;
-	font-family:arial;
-	font-size:0.938em;
-	font-weight:bold;
-	padding:6px 20px;
-	text-decoration:none;
-	
-	
-}
-
-#video_detail .comments .commentform #id_submit:hover,
-#video_detail .comments .commentform #id_submit:focus {		
-	background-color:#222;
-	color:#aaa;
-}	
-
-#video_detail .comments .commentform #id_submit:active {		
-position:relative;
-	top:1px;		
-}
-
-#video_detail .comments .commentform #id_submit:-moz-focus-inner {
-  border: none;
+#video_detail .comments .commentform input[type="submit" ] {
+width:200px;
+margin-left:0px;
+		
 }
 
 #video_detail .comments .commentlist{
@@ -3265,4 +3236,27 @@ color: #eee;
 text-transform:none;
 font:14px Arial, Helvetica, sans-serif;
 color: #f00;
+}
+.active {
+color: #FFC640;
+}
+.tags {
+
+background:#111;
+}
+.tags ul {
+text-indent: 5px;
+padding:1px;
+}
+.tags ul li {
+margin:3px 0;
+/*background:#00f;*/
+}
+.tags ul li a{
+width:100%;
+padding:3px;
+}
+.tags ul li a:hover{
+color: #FFC640;
+padding-left: 5px;
 }

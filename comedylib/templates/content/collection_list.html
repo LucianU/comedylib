@@ -2,38 +2,54 @@
 {% block content %}
 {% load thumbnail %}
 {% block title %}{{ page_title }}{% endblock %}
-     <div class="section group">
-   
-	 {% for collection in collection_list %}
-    <div class="col span_1_of_6 col6">
-        <div class="collection-content">
-            <div class="coll-pic-content">
-                <a href="{{ collection.get_absolute_url }}">
+    <div class="section group">
+        <div class="col span_1_of_6 tags">
+            <h1>Categories</h1>
+             {% for tag in taggit_tag %}
+             {{tag.name}}
+            
              
-                    <img src="{% thumbnail collection.picture 144x110 crop %}"></a>
-            </div>
-            <div class="coll-name-content">
-                <a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a>
-               
-            </div>
-             <div class="coll-detail-content">
-                 <div class="section group">
-                  <div class="col span_2_of_2 nvideos col1">
-                        {% with videos=collection.videos.count %}
-                            <p>{{ videos }} video{{ videos|pluralize }}</p>
-                        {% endwith %}
+             {%endfor%}
+            <ul>
+                <li><a href="#">un tag</a></li>
+                <li><a href="#">doi tag</a></li>
+                <li><a href="#">trei tag</a></li>
+            </ul>
+        </div>
+        <div class="col span_5_of_6">
+            <div class="section group">
+                {% for collection in collection_list %}
+                <div class="col span_1_of_5 col5">
+                    <div class="collection-content">
+                        <div class="coll-pic-content">
+                            <a href="{{ collection.get_absolute_url }}">
+                         
+                                <img src="{% thumbnail collection.picture 144x110 crop %}"></a>
+                        </div>
+                        <div class="coll-name-content">
+                            <a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a>
+                           
+                        </div>
+                         <div class="coll-detail-content">
+                             <div class="section group">
+                              <div class="col span_2_of_2 nvideos col1">
+                                    {% with videos=collection.videos.count %}
+                                        <p>{{ videos }} video{{ videos|pluralize }}</p>
+                                    {% endwith %}
+                                </div>
+                                <div class="col span_2_of_2 votes col1">
+                                   <p>{{ video.rating }} % out of {{video.total_votes}} votes</p>
+                                </div>
+                            
+                            </div>
+                          </div>
                     </div>
-                    <div class="col span_2_of_2 votes col1">
-                       <p>{{ video.rating }} % out of {{video.total_votes}} votes</p>
-                    </div>
-                
                 </div>
-              </div>
+                {% endfor %}
+                <div class="album-pagination">
+                    {% include "pagination.html" %}
+                </div>    
+            </div>
         </div>
     </div>
-	{% endfor %}
-    <div class="album-pagination">
-        {% include "pagination.html" %}
-    </div>    
-</div>
 {% endblock %}
