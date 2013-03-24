@@ -74,7 +74,7 @@ class Settings(FormView):
     password_form = PasswordChangeForm
 
     def get(self, request, *args, **kwargs):
-        # Using the self.form_invalid method method just to avoid
+        # Using the self.form_invalid method just to avoid
         # code duplication, because the logic is the same
         return self.form_invalid(
             self.picture_form(), self.password_form(self.request.user)
@@ -145,6 +145,21 @@ class Settings(FormView):
         context = super(Settings, self).get_context_data(**kwargs)
         context['profile'] = self.request.user.profile
         return context
+
+
+class AutoPlay(View):
+    def post(self, *args, **kwargs):
+        autoplay = self.request.POST.get('autoplay')
+        if autoplay is not None:
+            try:
+                self.request.session['autoplay'] = int(autoplay)
+            except ValueError:
+                raise SuspiciousOperation
+        else:
+            return HttpResponse(json.dumps(
+                {'status': 'ERROR', 'msg': 'Missing autoplay'}
+            ))
+        return HttpResponse(json.dumps({'status': 'OK'}))
 
 
 class Playlists(ListView):

@@ -27,7 +27,7 @@
                         {% endif %}
                     </div>                     
                     <div class="col span_1_of_4 alignright">
-                        <a href="#"><i class="icon-refresh active"></i></a>
+                        <a href="#"><i class="icon-refresh {% if request.session.autoplay %}active{%endif %}"></i></a>
                        <!-- <a href="#"><i class="icon-random"></i></a> -->
                     </div>
                 </div>
@@ -306,7 +306,11 @@ var mouse_is_inside = false;
     });
 </script>
 <script>
-    var autoplay = true;
+    // If in the backend, autoplay is set to 0, we disable it.
+    // Otherwise we enable it. That's why we don't use strict check,
+    // to account for the case when request.session.autoplay isn't set
+    var autoplay = '{{ request.session.autoplay }}' == 0 ? false : true;
+
     // Toggling the 'autoplay' button along with the variable
     // that specifies whether 'autoplay' should be enabled
     $(document).ready(function() {
@@ -314,9 +318,13 @@ var mouse_is_inside = false;
             event.preventDefault();
             $('i.icon-refresh').toggleClass('active');
             if (autoplay === true) {
-                autoplay = false;
+                $.post('{% url autoplay %}', {'autoplay': 0}, function(data) {
+                    autoplay = false;
+                });
             } else {
-                autoplay = true;
+                $.post('{% url autoplay %}', {'autoplay': 1}, function(data) {
+                    autoplay = true;
+                });
             }
         });
     });

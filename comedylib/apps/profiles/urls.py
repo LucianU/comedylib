@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from profiles.views import (Home, Settings, Playlists, PlaylistDetail,
                             CreatePlaylist, EditPlaylist, DeletePlaylist,
                             HandlePlaylistItems, Bookmarks, HandleBookmarks,
-                            VideoFeeling, Likes)
+                            VideoFeeling, Likes, AutoPlay)
 
 login_patterns = patterns('',
     url(r'^$', Home.as_view(), name='own_home'),
@@ -29,6 +29,7 @@ login_patterns = patterns('',
         name='remove_from_bookmarks', kwargs={'action': 'remove'}),
     url(r'^likes/$', Likes.as_view(), name='own_likes'),
     url(r'^vfeel$', VideoFeeling.as_view(), name='vid_feel'),
+    url(r'^autoplay/$', AutoPlay.as_view(), name='autoplay'),
 )
 
 open_patterns = patterns('',
