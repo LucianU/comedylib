@@ -137,14 +137,26 @@ class VideoDetail(DetailView):
             # If he has bookmarked the video
             video_type = ContentType.objects.get(app_label='content',
                                                  model='video')
-            bookmarked = profile.bookmarks.filter(content_type=video_type,
-                                                  object_id=video.id).exists()
-            context['bookmarked'] = bookmarked
+            bookmarked_vid = profile.bookmarks.filter(
+                content_type=video_type,
+                object_id=video.id
+            ).exists()
+            context['bookmarked_vid'] = bookmarked_vid
 
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist and other specific info
         if 'pl' in self.request.GET:
             playlist = get_object_or_404(Playlist, id=self.request.GET['pl'])
+
+            # We check if the playlist has already been bookmarked
+            playlist_type = ContentType.objects.get(app_label='profiles',
+                                                    model='playlist')
+            bookmarked_pl = profile.bookmarks.filter(
+                content_type=playlist_type,
+                object_id=playlist.id
+            ).exists()
+            context['bookmarked_pl'] = bookmarked_pl
+
             collection_vids = playlist.videos.all()
             collection_vids_list = list(collection_vids)
             videos_count = collection_vids.count()
