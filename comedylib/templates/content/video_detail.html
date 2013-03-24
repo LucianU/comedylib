@@ -361,7 +361,7 @@ var mouse_is_inside = false;
     $(document).on("click", "#playlistul li.active", function(event){
         event.preventDefault();
         li = $(this);
-        $.post('/u/playlists/add', {'vid': {{ video.id }}, 'pid': li.attr('data-playlist-id')}, function(data) {
+        $.post('{% url add_to_playlist %}', {'vid': {{ video.id }}, 'pid': li.attr('data-playlist-id')}, function(data) {
             title = li.text();
             vidCount = title.match(/\((\d+)\)/)[1];
             newVidCount = (parseInt(vidCount) + 1).toString();
