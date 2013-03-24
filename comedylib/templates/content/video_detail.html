@@ -246,7 +246,7 @@
                                     <img src="{% thumbnail comment.user.profile.picture 45x35 crop %}" />
                                 </a>
                                 <a href="{{ comment.user.profile.get_absolute_url }}">
-                                    {{comment.user_name}}
+                                    {{comment.user.username}}
                                 </a>
                                 <span>{{comment.submit_date}}</span>
                                 <p>{{comment.comment}}</p> 
