@@ -11,7 +11,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 
 from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
-from taggit.models import TaggedItem
+from taggit.models import TaggedItem, Tag
 
 
 class Home(TemplateView):
@@ -61,6 +61,12 @@ class CollectionList(ListView):
             return list(set(item.content_object for item in items))
         else:
             return Collection.objects.filter(**self.kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(CollectionList, self).get_context_data(**kwargs)
+        categs = [t[0] for t in Tag.objects.values_list('name')]
+        context['categs'] = categs
+        return context
 
     def render_to_response(self, context, **response_kwargs):
         self.request.breadcrumbs(self.request.path.strip('/').title(), "")

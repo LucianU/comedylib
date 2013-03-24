@@ -5,15 +5,12 @@
     <div class="section group">
         <div class="col span_1_of_6 tags">
             <h1>Categories</h1>
-             {% for tag in taggit_tag %}
-             {{tag.name}}
-            
-             
-             {%endfor%}
             <ul>
-                <li><a href="#">un tag</a></li>
-                <li><a href="#">doi tag</a></li>
-                <li><a href="#">trei tag</a></li>
+                {% for categ in categs %}
+                    <li><input type="checkbox" /></li>
+                {% empty %}
+                    <li>No categories.</p>
+                {%endfor%}
             </ul>
         </div>
         <div class="col span_5_of_6">
