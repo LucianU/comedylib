@@ -125,8 +125,9 @@ class VideoDetail(DetailView):
 
         # We do some extra checks when the user is authenticated
         if self.request.user.is_authenticated():
-            # If the user has expressed a feeling for the video
             profile = self.request.user.profile
+
+            # If the user has expressed a feeling for the video
             try:
                 feeling = Feeling.objects.get(profile=profile, video=video)
             except Feeling.DoesNotExist:
@@ -148,14 +149,18 @@ class VideoDetail(DetailView):
         if 'pl' in self.request.GET:
             playlist = get_object_or_404(Playlist, id=self.request.GET['pl'])
 
-            # We check if the playlist has already been bookmarked
-            playlist_type = ContentType.objects.get(app_label='profiles',
-                                                    model='playlist')
-            bookmarked_pl = profile.bookmarks.filter(
-                content_type=playlist_type,
-                object_id=playlist.id
-            ).exists()
-            context['bookmarked_pl'] = bookmarked_pl
+            # We check if the user is authenticated to see if he's already
+            # bookmarked the playlist
+            if self.request.user.is_authenticated():
+                profile = self.request.user.profile
+
+                playlist_type = ContentType.objects.get(app_label='profiles',
+                                                        model='playlist')
+                bookmarked_pl = profile.bookmarks.filter(
+                    content_type=playlist_type,
+                    object_id=playlist.id
+                ).exists()
+                context['bookmarked_pl'] = bookmarked_pl
 
             collection_vids = playlist.videos.all()
             collection_vids_list = list(collection_vids)
