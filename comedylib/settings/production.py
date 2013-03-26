@@ -10,19 +10,38 @@ DATABASES['default'].update({
     'USER': 'comedylib',
 })
 
-ALLOWED_HOSTS = [
-    '.comedylib.com',
-]
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+    'johnny': {
+        'BACKEND': 'johnny.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+        'JOHNNY_CACHE': True,
+    },
+}
+JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_comedylib'
 
-INSTALLED_APPS += (
-    'raven.contrib.django.raven_compat',
-)
+MIDDLEWARE_CLASSES = (
+    # These need to go before any other middleware
+    'johnny.middleware.LocalStoreClearMiddleware',
+    'johnny.middleware.QueryCacheMiddleware',
+) + MIDDLEWARE_CLASSES
 
 TEMPLATE_LOADERS = (
     ('django.template.loaders.cached.Loader', (
         'django.template.loaders.filesystem.Loader',
         'django.template.loaders.app_directories.Loader',
     )),
+)
+
+ALLOWED_HOSTS = [
+    '.comedylib.com',
+]
+
+INSTALLED_APPS += (
+    'raven.contrib.django.raven_compat',
 )
 
 RAVEN_CONFIG = {
