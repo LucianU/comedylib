@@ -8,13 +8,7 @@
             <h1>Categories</h1>
             <form action="." method="get">
                 <fieldset id="inputs2"> 
-                    <ul>
-                        {% for categ in categs %}
-                            <li><label><input type="checkbox" name="categs" value="{{categ}}" />{{categ}}</label></li>
-                        {% empty %}
-                            <li>No categories.</p>
-                        {%endfor%}
-                    </ul>
+                    {{ categs_form.as_ul}}
                 </fieldset>
                 <fieldset id="actions"> 
                     <input type="submit" id="filter" value="Filter">
