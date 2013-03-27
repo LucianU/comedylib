@@ -3,6 +3,12 @@ Development settings
 """
 from comedylib.settings.common import *  # pylint: disable=W0614, W0401
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
