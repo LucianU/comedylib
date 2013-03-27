@@ -57,18 +57,22 @@ table {
 }
 
 body{
- font-family: Arial, Helvetica, Georgia, Sans-serif;
-	padding: 0;
-   margin:0;
-   min-width: 1000px;
-   color: #ddd;
-   background-color: #222;
-background:url(/static/img/pixelbkg.png);
-   background-repeat: repeat;
-  /* background-attachment: fixed;*/
-   background-position: top left;
-	
-	}
+    font-family: Arial, Helvetica, Georgia, Sans-serif;
+    padding: 0;
+    margin:0;
+    min-width: 1000px;
+    color: #ddd;
+    background-color: #222;
+    /*background:url(/static/img/pixelbkg.png);
+    background-repeat: repeat;
+    background-position: top left;*/
+   	background: url(/static/img/comedy-club.jpg) no-repeat top center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+  
+}
 /* For the "inset" look only */
 html {
     overflow: auto;
@@ -1005,67 +1009,49 @@ z-index:100;
 	clear: none;
 	margin:5px 5px 3px 5px;
 	padding:5px;
-	background:#181919;
-		padding-top:5px;
-	box-shadow: 0px 0px 20px #333;	
-    display:table;
+	/*background:#181919;*/
+	padding-top:5px;
+
 }
-.userloginpage .center{
+.userloginpage .right{
 	width: 305px;
-	min-height:120px;
-	float: center;
+	min-height:482px;
+	float: right;
 	clear: none;
-	margin:0 auto;
-	margin-top:100px;
-	background: #222;
-	border:1px solid #444;
+	margin:0;
+	margin-top:0px;
+	background: rgba(17,17,17,0.7);
+  	border:1px solid #444;
 	padding:20px;
 	-webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
 }
-.userloginpage .center1{
-margin-top:10px;
-width:500px;
-    
+.userloginpage .right input[type="checkbox"]{
+	width:15px !important;
+    height:15px !important;
+    margin-left:25%;
 }
-.rightside{
-margin-top:100px;
-    
-}
-
-.userloginpage .center label {
- font: bold 0.875em Arial, Helvetica, sans-serif;
- text-transform:uppercase;
- padding:5px;
-}
-/*
-.userloginpage .center input {
-  background: #f1f1f1;
-  padding: 6px 5px;
-  margin: 0 0 5px 0;
-  width: 200px;
-  border: 1px solid #ccc;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-box-shadow: 0 1px 1px #ccc inset;
-  -webkit-box-shadow: 0 1px 1px #ccc inset;
-  box-shadow: 0 1px 1px #ccc inset;
+.userloginpage .right p{
+	 font:  0.75em Arial, Helvetica, sans-serif;
+     margin-bottom:5px;
 }
 
-.userloginpage .center input:focus {
-  background-color: #fff;
-  border-color: #e8c291;
-  outline: none;
-  -moz-box-shadow: 0 0 0 1px #e8c291 inset;
-  -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
-  box-shadow: 0 0 0 1px #e8c291 inset;
+.userloginpage .right label {
+ font: 12px Arial, Helvetica, sans-serif;
+ padding:0 5px;
+ float:none;
 }
-*/
-.userloginpage .center .form-error {
+
+.userloginpage .right .form-error {
  font:  0.75em Arial, Helvetica, sans-serif;
 color: #f00;
+text-align:center;
+padding-bottom:10px;
+}
+.userloginpage .right .errorlist {
+ font:  0.75em Arial, Helvetica, sans-serif;
+color: #fff;
 text-align:center;
 padding-bottom:10px;
 }
@@ -1074,57 +1060,7 @@ width:300px;
 margin:0 auto;
 text-align:center;
 }
-/*
-.userloginpage .center .submit label {
- font: bold 0.625em Arial, Helvetica, sans-serif;
- text-transform:none;
 
- display:block;
- width:300px;
- text-align:left;
- margin-left:-5px;
-}
-*/
-/*
-.userloginpage .center #submit {		
--moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffbe73), color-stop(1, #ff8800) );
-	background:-moz-linear-gradient( center top, #ffbe73 5%, #ff8800 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbe73', endColorstr='#ff8800');
-	background-color:#ffbe73;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	width:100px;
-	margin-top:20px;
-	border-radius:6px;
-	border:1px solid #bf7c30;
-	display:inline-block;
-	color:#eee;
-	font: bold 0.938em Arial, Helvetica, sans-serif;
-	padding:6px 20px;
-	text-decoration:none;
-	
-}
-
-.userloginpage .center #submit:hover,
-.userloginpage .center #submit:focus {		
-background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff8800), color-stop(1, #ffbe73) );
-	background:-moz-linear-gradient( center top, #ff8800 5%, #ffbe73 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8800', endColorstr='#ffbe73');
-	background-color:#ff8800;
-}	
-
-.userloginpage .center #submit:active {		
-position:relative;
-	top:1px;		
-}
-
-.userloginpage .center #submit::-moz-focus-inner {
-  border: none;
-}
-*/
 #menu{
 position:relative;
    	clear:left;
@@ -2043,19 +1979,11 @@ text-align:center;
   color:#235D79;
  }
 .login-er-content input {
-  background: #f1f1f1;
-  padding: 6px 5px;
-  margin: 0 0 5px 0;
-  width: 238px;
-  border: 1px solid #ccc;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-box-shadow: 0 1px 1px #ccc inset;
-  -webkit-box-shadow: 0 1px 1px #ccc inset;
-  box-shadow: 0 1px 1px #ccc inset;
-}
 
+  width: 238px;
+ 
+}
+/*
 .login-er-content input:focus {
   background-color: #fff;
   border-color: #e8c291;
@@ -2063,7 +1991,7 @@ text-align:center;
   -moz-box-shadow: 0 0 0 1px #e8c291 inset;
   -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
   box-shadow: 0 0 0 1px #e8c291 inset;
-}
+} */
 .regular-checkbox{
  -webkit-appearance: none;
     background-color: #fafafa;
@@ -3054,31 +2982,24 @@ margin: 10px 0 20px 50px;
 .signin_content{
 margin:3px;
 width:172px;
-height:186px;
+height:190px;
 
 }
 .register_content{
 margin:3px;
 width:210px;
-height:290px;
+height:305px;
 
 }
 /*--------------------*/
 
 #inputs input {
-  background: #f1f1f1;
-  padding: 4px 5px;
-  margin: 0 0 5px 0;
-  width: 160px;
-  border: 1px solid #ccc;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-box-shadow: 0 1px 1px #ccc inset;
-  -webkit-box-shadow: 0 1px 1px #ccc inset;
-  box-shadow: 0 1px 1px #ccc inset;
+    width: 160px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
-
+/*
 #inputs input:focus {
   background-color: #fff;
   border-color: #e8c291;
@@ -3086,22 +3007,21 @@ height:290px;
   -moz-box-shadow: 0 0 0 1px #e8c291 inset;
   -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
   box-shadow: 0 0 0 1px #e8c291 inset;
-}
+} */
 
 #inputs1 input {
-  background: #f1f1f1;
-  padding: 4px 5px;
-  margin: 0 0 5px 0;
-  width: 198px;
-  border: 1px solid #ccc;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -moz-box-shadow: 0 1px 1px #ccc inset;
-  -webkit-box-shadow: 0 1px 1px #ccc inset;
-  box-shadow: 0 1px 1px #ccc inset;
+    width: 198px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
-
+#inputs2 input {
+    width: 280px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+/*
 #inputs1 input:focus {
   background-color: #fff;
   border-color: #e8c291;
@@ -3109,6 +3029,10 @@ height:290px;
   -moz-box-shadow: 0 0 0 1px #e8c291 inset;
   -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
   box-shadow: 0 0 0 1px #e8c291 inset;
+} */
+#actions1 input[type="submit"] {
+ width:60%;
+ margin-left:20%;
 }
 
 /*--------------------*/
@@ -3116,6 +3040,12 @@ height:290px;
 #actions {
   margin: 0px 0 0 0;
 }
+#actions input[type="checkbox"] {
+padding:3px;
+width:15px;
+height:15px;
+}
+
 
  #submit {	
 margin-left:10%;
@@ -3154,12 +3084,6 @@ position:relative;
 
  #submit:-moz-focus-inner {
   border: none;
-}
-
-
-#checkbox-keep{
-padding:3px;
-width:20px;
 }
 .register_content.helptext {
 margin:0 2px 6px 2px;
