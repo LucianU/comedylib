@@ -9,10 +9,10 @@
                 <form action="{% url accounts_register %}" method="post">
                 {% csrf_token %}
                     <fieldset id="inputs1">
-                        <input id="id_username" type="text" name="username" placeholder="Username" maxlength="30" /> <p class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
-                        <input type="password" name="password1" placeholder="Password" id="id_password1" />
-                        <input type="password" name="password2" placeholder="Password confirmation" id="id_password2" /> <p class="helptext">Enter the same password as above, for verification.</p>
-                        <input id="id_email" type="text" name="email" placeholder="Email address" maxlength="75" />
+                        <input id="id_username" type="text" name="username" placeholder="Username" maxlength="30" required/> <p class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+                        <input type="password" name="password1" placeholder="Password" id="id_password1" required/>
+                        <input type="password" name="password2" placeholder="Password confirmation" id="id_password2" required/> <p class="helptext">Enter the same password as above, for verification.</p>
+                        <input id="id_email" type="text" name="email" placeholder="Email address" maxlength="75" required/>
                     </fieldset>
                     <fieldset id="actions">
                         <input type="submit" id="submit" value="Register">
