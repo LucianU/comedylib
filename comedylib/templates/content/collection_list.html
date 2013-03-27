@@ -5,13 +5,20 @@
     <div class="section group">
         <div class="col span_1_of_6 tags">
             <h1>Categories</h1>
-            <ul>
-                {% for categ in categs %}
-                    <li><input type="checkbox" /></li>
-                {% empty %}
-                    <li>No categories.</p>
-                {%endfor%}
-            </ul>
+            <form action="." method="get">
+                <fieldset id="inputs2"> 
+                    <ul>
+                        {% for categ in categs %}
+                            <li><label><input type="checkbox" name="categs" value="{{categ}}" />{{categ}}</label></li>
+                        {% empty %}
+                            <li>No categories.</p>
+                        {%endfor%}
+                    </ul>
+                </fieldset>
+                <fieldset id="actions"> 
+                    <input type="submit" id="filter" value="Filter">
+                </fieldset>
+            </form>
         </div>
         <div class="col span_5_of_6">
             <div class="section group">
