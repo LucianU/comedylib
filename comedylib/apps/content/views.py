@@ -1,14 +1,17 @@
+import collections
 import random
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView, ListView, DetailView
 
+from content.forms import CategsForm
 from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
 from taggit.models import TaggedItem, Tag
@@ -53,12 +56,34 @@ class CollectionList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        categs = self.request.GET.getlist('categs')
-        if categs:
-            kwargs = dict(tag__name__in=categs,
-                          collection__role=self.kwargs['role'])
-            items = TaggedItem.objects.filter(**kwargs)
-            return list(set(item.content_object for item in items))
+        form = CategsForm(self.request.GET)
+
+        if form.is_valid():
+            Q_args = Q()
+            categs = form.cleaned_data['categs']
+            # Using Q objects to retrieve all TaggedItems with our
+            # categories. We're doing this, so that we can retrieve
+            # in a single query all the items belonging to the
+            # different categories
+            for categ in categs:
+                Q_args |= Q(tag__name=categ)
+
+            items = TaggedItem.objects.filter(
+                Q_args, collection__role=self.kwargs['role']
+            )
+
+            # We group by tag the objects that the tagged items point to.
+            # This way we'll be able to find the objects belonging to
+            # all tags by using set intersection
+            categ_items = collections.defaultdict(set)
+            for item in items:
+                categ_items[item.tag].add(item.content_object)
+
+            # Building a new form, so that we have the currently checked
+            # categories still checked on page reload
+            self.categs_form = CategsForm(initial={'categs': categs})
+
+            return list(set.intersection(*categ_items.values()))
         else:
             return Collection.objects.filter(**self.kwargs)
 
@@ -66,6 +91,9 @@ class CollectionList(ListView):
         context = super(CollectionList, self).get_context_data(**kwargs)
         categs = [t[0] for t in Tag.objects.values_list('name')]
         context['categs'] = categs
+        categs_form = getattr(self, 'categs_form', None)
+        context['categs_form'] = (CategsForm() if categs_form is None
+                                               else categs_form)
         return context
 
     def render_to_response(self, context, **response_kwargs):
