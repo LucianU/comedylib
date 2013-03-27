@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.conf.urls.defaults import patterns, url, include
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import logout
 
 from registration.views import register
 
 from accounts.forms import CustomAuthForm, SignUpForm
+from accounts.views import login
 
 urlpatterns = patterns('',
     url('^login/$', login,
