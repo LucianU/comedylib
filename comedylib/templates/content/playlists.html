@@ -2,7 +2,7 @@
 {% block content %}
 {% load thumbnail %}
 {% block title %}{{ page_title }}{% endblock %}
-
+<div class="homepage">
      <div class="section group">
          {% for playlist in playlists %}
             <div class="col span_1_of_6 col6">
@@ -66,4 +66,5 @@
         {% include "pagination.html" %}
     </div>
 </div>
+</div
 {% endblock %}

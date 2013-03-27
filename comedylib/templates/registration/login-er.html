@@ -6,8 +6,8 @@
 			<input id="id_password" type="password" name="password" placeholder="Password" required>
 		</fieldset>
 		<fieldset id="actions">
-			<input type="checkbox" value="remember" class="regular-checkbox"><label> Keep me signed in</label>
-			<input type="submit" id="submit" value="Log in">
+			<label><input type="checkbox" value="remember" id="id_remember" class="regular-checkbox"> Keep me signed in</label>
+			<input type="submit" value="Log in">
 			<input type="hidden" name="next" value="{{ request.path }}" />
 		</fieldset>
 	</form>

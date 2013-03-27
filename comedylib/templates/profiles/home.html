@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
+<div class="homepage">
 <div class="section group">
     <div class="col colbkg1 span_1_of_6">
         {% if user.profile == profile %}
@@ -66,5 +67,6 @@
         </div>
     </div>
     {% endblock %}
+</div>
 </div>
 {% endblock %}
