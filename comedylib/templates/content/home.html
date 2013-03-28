@@ -9,51 +9,57 @@
     <div class="featured">
         <div class="section group">
             <div class="col span_1_of_3">
-                <div class="ribbon_comedians"></div>
+            <a href="{{ feat_comedian.get_absolute_url }}">
+                <div class="ribbons ribbon_comedians"></div>
                 <div class="featured_title f_t_c">
-                    <a href="{{ feat_comedian.get_absolute_url }}">Discover more...</a>
+                    <p class="discover">Discover more...</p>
                 </div>
                 <div class="featured_content">
                     <img src="{{ feat_comedian.picture.url }}" alt=""  >
                     <div class="info">
-                         <a href="{{ feat_comedian.get_absolute_url }}"><h1>{{feat_comedian.name}}</h1></a>
+                         <h1>{{feat_comedian.name}}</h1>
                         <p class="description">
                            {{ feat_comedian.description }}
                         </p>
                     </div>
                 </div>
+            </a>
             </div>
             
             <div class="col span_1_of_3">
-                <div class="ribbon_shows"></div>
-                <div class="featured_title f_t_s">
-                     <a href="{{ feat_show.get_absolute_url }}">Discover more...</a>
-                </div>
-                <div class="featured_content">
-                    <img src="{{ feat_show.picture.url }}" alt=""  >
-                    <div class="info">
-                         <a href="{{ feat_show.get_absolute_url }}"><h1>{{feat_show.name}}</h1></a>
-                        <p class="description">
-                             {{ feat_show.description }}
-                        </p>
+                <a href="{{ feat_show.get_absolute_url }}">
+                    <div class="ribbons ribbon_shows"></div>
+                    <div class="featured_title f_t_s">
+                       <p class="discover">Discover more...</p>
                     </div>
-                </div>
+                    <div class="featured_content">
+                        <img src="{{ feat_show.picture.url }}" alt=""  >
+                        <div class="info">
+                            <h1>{{feat_show.name}}</h1>
+                            <p class="description">
+                                 {{ feat_show.description }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
             </div>
                        
             <div class="col span_1_of_3">
-                <div class="ribbon_movies"></div>
+            <a href="{{ feat_movie.get_absolute_url }}">
+                <div class="ribbons ribbon_movies"></div>
                 <div class="featured_title f_t_m">
-                    <a href="{{ feat_movie.get_absolute_url }}">Discover more...</a>
+                    <p class="discover">Discover more...</p>
                 </div>
                 <div class="featured_content">
                     <img src="{{ feat_movie.picture.url }}" alt=""  >
                     <div class="info">
-                        <a href="{{ feat_movie.get_absolute_url }}"><h1>{{feat_movie.name}}</h1></a>
+                        <h1>{{feat_movie.name}}</h1>
                         <p class="description">
                             {{ feat_movie.description }}
                         </p>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
     </div>

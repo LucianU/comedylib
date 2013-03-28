@@ -198,7 +198,7 @@
                 <div id="addtoplaycontent" class="addtoplaylist">
                     <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
                         <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
-                        <button id="sub">Create playlist</button>
+                        <input type="submit" value="Create playlist" />
                     </form>
                     <h2>Click on a playlist to add the video:</h1>
                     <div class="playlistul divscroll">
