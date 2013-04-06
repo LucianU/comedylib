@@ -345,7 +345,7 @@ var mouse_is_inside = false;
     });
 </script>
 <script>
-    $('#sub').on("click", function(event)  {
+    $('#playlistform input[type="submit"]').on("click", function(event)  {
         event.preventDefault();
         $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
             $('#playlistul').append('<li data-playlist-id="'+data.pk+'" class="active">'+$("#id_title").val()+' (0)</li>');
