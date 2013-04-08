@@ -915,7 +915,7 @@ z-index:100;
 }
 .userloginpage .right{
 	width: 305px;
-	min-height:482px;
+	min-height:447px;
 	float: right;
 	clear: none;
 	margin:0;
@@ -2653,6 +2653,22 @@ float:none;
 #signup a:hover{
 text-decoration:underline;
 }
+#signup1{
+margin-top:3px;
+background:#fe4600;
+color:#eee;
+padding:10px;
+text-align:center;
+}
+#signup1 a{
+font-weight:normal;
+text-transform:none;    
+color:#eee;
+float:none;
+}
+#signup1 a:hover{
+text-decoration:underline;
+}
 .register_content{
 margin:3px;
 width:210px;
@@ -2758,8 +2774,8 @@ height:30px;
 #gbtnlnk{float:left}
 #fbtnlnk1{float:left}
 #gbtnlnk1{float:left}
-#fbtnlnk2{width:180px; height:28px; margin:5px;}
-#gbtnlnk2{width:180px; height:28px; margin:5px;}
+#fbtnlnk2{width:150px; height:28px; margin:5px 0;}
+#gbtnlnk2{width:150px; height:28px; margin:5px 0;}
 #tabs {
 background:none;
 border:none;
