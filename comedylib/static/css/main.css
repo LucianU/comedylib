@@ -218,7 +218,11 @@ color: #eee;
 margin-bottom:5px;
 padding:0 2px;
 }
-
+.helptextred{
+font: 12px Arial, Helvetica, sans-serif;
+color: #FFC640;
+padding:0 2px;
+}
 
 /*  SECTIONS  */
 .section {
@@ -2852,4 +2856,9 @@ display:table;
 }
 .table_style_cell {
 display:table-cell;
+}
+.feedback {
+display:block;
+height:15px;
+min-width:15px;
 }

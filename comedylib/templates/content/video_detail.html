@@ -198,7 +198,8 @@
                 <div id="addtoplaycontent" class="addtoplaylist">
                     <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
                         <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
-                        <input type="submit" value="Create playlist" />
+                        <input type="submit" id="sub" value="Create playlist" />
+                        <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
                     </form>
                     <h2>Click on a playlist to add the video:</h1>
                     <div class="playlistul divscroll">
@@ -345,8 +346,9 @@ var mouse_is_inside = false;
     });
 </script>
 <script>
-    $('#playlistform input[type="submit"]').on("click", function(event)  {
+    $('#sub').on("click", function(event)  {
         event.preventDefault();
+        $("#feedback").text('').fadeIn();
         $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
             $('#playlistul').append('<li data-playlist-id="'+data.pk+'" class="active">'+$("#id_title").val()+' (0)</li>');
             clearInput();
@@ -357,6 +359,8 @@ var mouse_is_inside = false;
         $("#playlistform :input").each(function() {
             $(this).val('');
         });
+        $("#sub").val('Create playlist');
+        $("#feedback").text('Your playlist has been created.').delay(1500).fadeOut();
     };
     $(document).on("click", "#playlistul li.active", function(event){
         event.preventDefault();
