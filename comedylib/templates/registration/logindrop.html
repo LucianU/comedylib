@@ -1,4 +1,4 @@
-<a href="#" data-dropdown="#dropdown-1" data-vertical-offset="0" data-horizontal-offset="0">
+<a href="#" data-dropdown="#dropdown-1" data-vertical-offset="0" data-horizontal-offset="35">
     <p>Login</p>
 </a>
 
@@ -13,8 +13,14 @@
                         <input id="id_password" type="password" name="password" placeholder="Password" required>
                     </fieldset>
                     <fieldset id="actions">
-                        <label><input type="checkbox" value="remember" id="id_remember"> Keep me signed in</label>
-                        <input type="submit" value="Log in">
+                        <div class="section group">
+                            <div class="col span_1_of_2 ">
+                                <label><input type="checkbox" value="remember" id="id_remember" checked/> Remember me</label>
+                            </div>
+                            <div class="col span_1_of_2 ">
+                                <input type="submit" value="Log in">
+                            </div>
+                        </div>
                         <input type="hidden" name="next" value="{{ request.path }}" />
                         
                     </fieldset>
@@ -28,6 +34,10 @@
                         <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" id="fbtnlnk" ><img src="/static/img/fbbtn.png"></a>
                         <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" id="gbtnlnk" ><img src="/static/img/gbtn.png"></a>
                     </div>
+                    
+                </div>
+                <div id="signup">
+                   <a href="{% url accounts_register %}"> Sign up for Comedylib </a>
                 </div>
             </div>                     
         </li>

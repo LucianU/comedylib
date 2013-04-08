@@ -8,7 +8,7 @@
         {% endif %}
 
         <form method="post" action="{% url accounts_login %}">{% csrf_token %}
-             <fieldset id="inputs2">
+            <fieldset id="inputs2">
                 {{ form.non_field_errors }}
                 <div id="fieldWrapper">
                     {{ form.email.errors }}
@@ -18,21 +18,40 @@
                     {{ form.password.errors }}
                 </div>
                 <p><input type="password" placeholder="Password" name="password" id="id_password" required/></p>
-                <p><label for="id_remember">Keep me signed in <input type="checkbox" name="remember" id="id_remember" /></label></p>
             </fieldset>
             <fieldset id="actions1"> 
-                <input type="submit" value="Login" />
+                 <div class="section group">
+                            <div class="col span_1_of_2 ">
+                                <label><input type="checkbox" value="remember" id="id_remember" checked/> Remember me</label>
+                            </div>
+                            <div class="col span_1_of_2 ">
+                                <input type="submit" value="Log in">
+                            </div>
+                        </div>
+               
             </fieldset>
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
        
-               <center><br/><h1>Or</h1>
+                <center><br/><h1>Or</h1>
                     <div class="social">
-                        <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.png"></a>
-                        <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png"></a>
+                        <div class="section group">
+                            <div class="col span_1_of_2 ">
+                                <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.png"></a>
+                            </div>
+                            <div class="col span_1_of_2 ">
+                                <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png"></a>
+                            </div>
+                        </div>
                     </div>
-                    </center>
-       
+                    <br/>
+                    
+                    <div id="signup1">
+                        <a href="{% url accounts_register %}"> Sign up for Comedylib </a>
+                    </div>
+                </center>
+      
     </div> <!-- end center-->
+
 </div>
 {% endblock %}
