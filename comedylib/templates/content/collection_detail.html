@@ -1,63 +1,52 @@
 {% extends "base.html" %}
-
+{% load thumbnail %}
 {% block title %}{{ page_title }}{% endblock %}
-
 {% block content %}
 <div class="homepage">
- <div class="section group">
- <div class="col span_2_of_6 ">
-	<div class="info"id="info">
-		
-		{% load thumbnail %}
-				<img src="{% thumbnail collection.picture 300x200 crop %}">
-		
-		
-			<h1>{{ collection.name }}</h1>
-		<div class="description_content" id="desc_content">
-			{{ collection.description }}
-		</div>
-		
-	</div> <!-- end info-->
-  </div>
-  <div class="col span_4_of_6 ">
-
-<div class="section group">
-{% for video in videos %}
-    <div class="col span_1_of_4 col4">
-        <div class="collection-content">
-            <div class="coll-pic-content">
-                <a href="{{ video.get_absolute_url }}">
-                    <img src="{{ video.picture.url }}">
-                </a>
-            </div>
-            <div class="coll-name-content">
-                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-            </div>
-            <div class="coll-detail-content">
+    <div class="section group">
+        <div class="col span_2_of_6 ">
+            <div class="info"id="info">
+                <img src="{% thumbnail collection.picture 300x200 crop %}">
+                <h1>{{ collection.name }}</h1>
+                <div class="description_content" id="desc_content">
+                    {{ collection.description }}
+                </div>
+            </div> <!-- end info-->
+        </div>
+        <div class="col span_4_of_6 ">
             <div class="section group">
-                <div class="col span_1_of_4_coll_det vlength">
-                    <p>{{ video.duration }}</p> <span>Length</span>
-                </div>
-                <div class="col span_2_of_4_coll_det nviews">
-                    <p>{{ video.views }}</p> <span>Views</span>
-                </div>
-                <div class="col span_1_of_4_coll_det rating">
-                    <p>{{ video.rating }} %</p>
-                    <span>Rating</span>
-                </div>
+                {% for video in videos %}
+                    <div class="col span_1_of_4 col4">
+                        <div class="collection-content">
+                            <div class="coll-pic-content">
+                                <a href="{{ video.get_absolute_url }}">
+                                    <img src="{{ video.picture.url }}">
+                                </a>
+                            </div>
+                            <div class="coll-name-content">
+                                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                            </div>
+                            <div class="coll-detail-content">
+                                <div class="section group">
+                                    <div class="col span_1_of_4_coll_det vlength">
+                                        <p>{{ video.duration }}</p><span>Length</span>
+                                    </div>
+                                    <div class="col span_2_of_4_coll_det nviews">
+                                        <p>{{ video.views }}</p><span>Views</span>
+                                    </div>
+                                    <div class="col span_1_of_4_coll_det rating">
+                                        <p>{{ video.rating }} %</p><span>Rating</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            </div>
+        </div><!-- end videos-->
+        <div class="detail-pagination">
+            {% include "pagination.html" %}
         </div>
     </div>
-	{% endfor %}
-</div>
-
-
-</div><!-- end videos-->
-<div class="detail-pagination">
-    {% include "pagination.html" %}
-</div>
-</div>
 </div> <!-- end collection detail-->
 {% endblock %}
-
