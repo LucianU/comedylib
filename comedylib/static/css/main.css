@@ -636,7 +636,7 @@ position:relative;
 .logincontent-nouser {
 float:right;
 width:133px;
-height:51px;
+height:31px;
 margin-right:5px;
 -webkit-border-bottom-left-radius: 10px;
     -moz-border-bottom-left-radius: 10px;
@@ -647,17 +647,13 @@ margin-right:5px;
 background: #000;
 }
 .why {
-float:right;
-width:100px;
+float:left;
 height:20px;
-clear:right;
-margin-right:0px;
-padding-top:10px;
-padding-right:7px;
+padding:10px 0px 5px 4px;
 }
 .why a{
-
-float:right;
+font-size:10px;
+float:left;
 color:#3CA0D0;
 }
 .why a:hover{
@@ -718,65 +714,24 @@ color: #63ADD0;
 .welcome i{
 margin-right:6px;
 }
-/*.separator{
-width:2px;
-float:right;
-margin-top:3px;
-}
-.settings {
-float:right;
-width:40px;
-
-}
-.settings a{
-font: 0.688em Arial, Helvetica, sans-serif;
-float:right;
-padding:2px 2px 2px 2px;
-}
-
-.tools {
-margin:8px 3px 0px 0px;
-float:right;
-width:100px;
-height:38px;
-border-right: 1px solid #555;
-
-}
-.notifications {
-margin:5px 6px 0 0;
-float:right;
-width:25px;
-height:25px;
-border:1px solid #fff;
-}
-.playlist-notifier {
-margin:5px 6px 0 0;
-float:right;
-width:25px;
-height:25px;
-border:1px solid #fff;
-}
-.messages {
-margin:5px 6px 0 0;
-float:right;
-width:25px;
-height:25px;
-border:1px solid #fff;
-}*/
-
 
 #register{
-width: 140px;
+float:right;
+/*width: 140px;*/
 margin:5px 5px 0 0;
 height: 20px;
 }
 #register a{
-margin-right:10px;
-float:right;
+margin-right:5px;
+/*float:right;*/
 text-align:center;
 text-transform:uppercase;
 color:#FE4600;
 font-weight:bold;
+
+}
+#register p{
+padding-right:0px;
 
 }
 #register a.reg, #register a.registerap{
@@ -974,7 +929,7 @@ z-index:100;
 }
 .userloginpage .right input[type="checkbox"]{
 	width:15px !important;
-    height:15px !important;
+   /* height:15px !important;*/
     margin-left:25%;
 }
 .userloginpage .right p{
@@ -984,8 +939,10 @@ z-index:100;
 
 .userloginpage .right label {
  font: 12px Arial, Helvetica, sans-serif;
- padding:0 5px;
+ padding:5px 5px;
  float:none;
+ line-height:33px
+ 
 }
 
 .userloginpage .right .form-error {
@@ -2676,9 +2633,25 @@ width:150px;
 
 .signin_content{
 margin:3px;
-width:172px;
-height:195px;
+width:235px;
+height:225px;
 
+}
+#signup{
+margin-top:3px;
+background:#fe4600;
+color:#eee;
+padding:3px 1px;
+text-align:center;
+}
+#signup a{
+font-weight:normal;
+text-transform:none;    
+color:#eee;
+float:none;
+}
+#signup a:hover{
+text-decoration:underline;
 }
 .register_content{
 margin:3px;
@@ -2689,10 +2662,12 @@ height:310px;
 /*--------------------*/
 
 #inputs input {
-    width: 160px;
+    width: 200px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+    margin-left:5%;
+    margin-top:5px;
 }
 #inputs1 input {
     width: 198px;
@@ -2728,9 +2703,16 @@ padding:3px;
 width:15px;
 height:15px;
 }
+#actions label{
+padding: 10px 5px;
+}
+#actions label:hover{
+background:none;
+color:#555;
+}
 #actions input[type="submit"] {
 margin-top:5px;
- width:60%;
+ width:72%;
  margin-left:20%;
 }
 .register_content.helptext {

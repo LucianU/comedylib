@@ -8,7 +8,7 @@
         {% endif %}
 
         <form method="post" action="{% url accounts_login %}">{% csrf_token %}
-             <fieldset id="inputs2">
+            <fieldset id="inputs2">
                 {{ form.non_field_errors }}
                 <div id="fieldWrapper">
                     {{ form.email.errors }}
@@ -18,10 +18,17 @@
                     {{ form.password.errors }}
                 </div>
                 <p><input type="password" placeholder="Password" name="password" id="id_password" required/></p>
-                <p><label for="id_remember">Keep me signed in <input type="checkbox" name="remember" id="id_remember" /></label></p>
             </fieldset>
             <fieldset id="actions1"> 
-                <input type="submit" value="Login" />
+                 <div class="section group">
+                            <div class="col span_1_of_2 ">
+                                <label><input type="checkbox" value="remember" id="id_remember" checked/> Remember me</label>
+                            </div>
+                            <div class="col span_1_of_2 ">
+                                <input type="submit" value="Log in">
+                            </div>
+                        </div>
+               
             </fieldset>
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
@@ -32,7 +39,8 @@
                         <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png"></a>
                     </div>
                     </center>
-       
+      
     </div> <!-- end center-->
+
 </div>
 {% endblock %}
