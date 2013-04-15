@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load thumbnail %}
+{% load cache %}
 {% block title %} Home {% endblock %}
 {% block content %}
-{% load thumbnail %}
+{% cache 3600 content_home %}
 <div class="homepage">
 
 <!-- #featured -->
@@ -229,7 +231,5 @@
     
 
 <div class="cleared"></div>
-
-   
-
+{% endcache %}
 {% endblock %}
