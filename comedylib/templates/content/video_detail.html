@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ video.title }}{% endblock %}
+{% block title %}{{video.collection.name}}, {{ video.title }} - Comedylib{% endblock %}
 {% block content %}
 {% load thumbnail %}
 <div id="video_detail" class="homepage">
@@ -89,9 +89,7 @@
     </div>
     <div class="section group">
         <div class="col span_4_of_6 nosectionspace">    
-            <div class="affiliate">
-                affiliate
-            </div><!-- end affiliate -->
+          
             <div class="social">
                 <div class="rating">
                     {% if request.user.is_authenticated %}
@@ -213,6 +211,9 @@
                     </div>
                 </div>
             </div><!-- end social -->
+            <div class="affiliate">
+                affiliate
+            </div><!-- end affiliate -->
             <div class="comments">
                 <h1>Comments</h1>
                 {% load comments %}
