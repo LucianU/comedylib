@@ -35,10 +35,10 @@
                     <div class="social">
                          <div class="section group">
                             <div class="col span_1_of_2 ">
-                                <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.png"></a>
+                                <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.png" alt="facebook"/></a>
                             </div>
                             <div class="col span_1_of_2 ">
-                                <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png"></a>
+                                <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png" alt="google"/></a>
                             </div>
                         </div>
                     </div>
