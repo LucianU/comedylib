@@ -12,7 +12,7 @@ from search.forms import WildcardSearchForm
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^a52/', include(admin.site.urls)),
     url(r'^a/', include('accounts.urls')),
     url(r'^u/', include('profiles.urls')),
     url(r'^c/', include('django.contrib.comments.urls')),
