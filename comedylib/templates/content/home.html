@@ -1,7 +1,12 @@
 {% extends "base.html" %}
-{% block title %} Comedylib - Comedians, Series and Movies {% endblock %}
-{% block content %}
+
 {% load thumbnail %}
+{% load cache %}
+
+{% block title %} Comedylib - Comedians, Series and Movies {% endblock %}
+
+{% block content %}
+{% cache 3600 content_home %}
 <div class="homepage">
 
 <!-- #featured -->
@@ -229,7 +234,5 @@
     
 
 <div class="cleared"></div>
-
-   
-
+{% endcache %}
 {% endblock %}

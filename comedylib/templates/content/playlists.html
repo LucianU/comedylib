@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block content %}
 {% load thumbnail %}
 {% block title %}{{ page_title }}{% endblock %}
+{% block content %}
 <div class="homepage">
      <div class="section group">
          {% for playlist in playlists %}
@@ -30,35 +30,10 @@
                         <div class="col span_2_of_4 alignright">
                            <span class="playlist">User</span><a class="user" href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
                         </div>
-                        
                     </div>
                     </div>
                 </div>
             </div>
-
-<!--
-           <div class="col span_1_of_4 col4">
-                <div class="playlist-content">
-                    <div class="section group">
-                        <div class="play-pic-content col span_1_of_3">
-                            <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"><img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" /></a>
-                        </div>
-                        <div class="play-detail-content col span_2_of_3">
-                            <div class="section group">
-                                <div class="play-name-content col span_2_of_2">
-                                    <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">{{ playlist.title }}</a>
-                                </div>
-                                <div class="nvideo col span_1_of_2 col1">
-                                    <span>Videos</span> <p>{% with videos=playlist.videos.count %} {{ videos }}</p>{% endwith %}
-                                </div>
-                                <div class="user col span_1_of_2">
-                                    <span>User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  -->
         {% empty %}
             <p>No playlists found.</p>
         {% endfor %}
