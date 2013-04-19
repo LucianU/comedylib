@@ -718,11 +718,12 @@ margin-right:6px;
 #register{
 float:right;
 /*width: 140px;*/
-margin:5px 5px 0 0;
+margin:10px 5px 0 0;
 height: 20px;
 }
 #register a{
 margin-right:5px;
+
 /*float:right;*/
 text-align:center;
 text-transform:uppercase;
@@ -730,10 +731,7 @@ color:#FE4600;
 font-weight:bold;
 
 }
-#register p{
-padding-right:0px;
 
-}
 #register a.reg, #register a.registerap{
 
 color:#eee;
@@ -1014,6 +1012,9 @@ padding: 3px 0 3px 0;
 vertical-align:middle;
 width:90px;
 height:42px;
+}
+#credits p {
+text-align:center;
 }
 #credits a {
 padding:0;
