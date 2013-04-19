@@ -1,17 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 {% load compress %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" itemscope itemtype="http://schema.org/Article">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Language" content="en-us" />
         <title>{% block title %}{% endblock %}</title>
-        <meta name="ROBOTS" content="ALL" />
-        <meta http-equiv="imagetoolbar" content="no" />
-        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta name="robots" content="index, follow" />
+       <!-- <meta http-equiv="imagetoolbar" content="no" />
+        <meta name="MSSmartTagsPreventParsing" content="true" /> -->
         <meta name="Copyright" content="comedylib.com" />
-        <meta name="keywords" content="Comedians, series, movies" />
-        <meta name="description" content="This is a database with most of the comedians on the planet" />
+        <meta name="keywords" content="comedians, comedy series, comedy movies, movie database, film, stars" />
+        <meta name="description" content="Comedylib.com, the database with most of the comedians on the planet" />
 
         {% compress css %}
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css" />
@@ -24,48 +23,13 @@
         {% endcompress %}
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-         {% compress js %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.pack.js"></script>
-        {% endcompress %}
         {% compress js %}
-        <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.js"></script>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-38034418-1']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script');
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                ga.type = 'text/javascript'; ga.async = true;
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-        <script type="text/javascript">
-            var csrftoken = $.cookie('csrftoken');
-            function csrfSafeMethod(method) {
-                // these HTTP methods do not require CSRF protection
-                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-            }
-            $.ajaxSetup({
-                crossDomain: false, // obviates need for sameOrigin test
-                beforeSend: function(xhr, settings) {
-                    if (!csrfSafeMethod(settings.type)) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
-                }
-            });
-        </script>
+       <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
         {% endcompress %}
     </head>
     <body>
         <div id="fb-root"></div>
-        <script>
+        <script type="text/javascript">
             window.fbAsyncInit = function() {
                 FB.init({appId: '222979954499652', status: true, cookie: true, xfbml: true});
             };
@@ -82,7 +46,7 @@
                 <div class="header-position">
                     <div class="headtitlelogin">
                         <div class="titlecontent">
-                            <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"></a></h1>
+                            <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png"/></a></h1>
                         </div>
                         <div class="headnav">
                             <div id="nav">
@@ -101,7 +65,7 @@
                                     {% for field in search_form %}
                                         <div class="fieldWrapper">
                                             {{ field.errors }}
-                                            <input type="text" name="q" id="id_q" placeholder="Search...">
+                                            <input type="text" name="q" id="id_q" placeholder="Search..."/>
                                         </div>
                                     {% endfor %}
                                 </form>
@@ -134,8 +98,6 @@
                             <div class="logincontent-nouser">
                                 <div id="register"> 
                                     {% include "registration/logindrop.html" %}
-                                   <!-- {% include "registration/registerdrop.html" %}-->
-                                    <!--<a href="{% url registration_register %}" class="reg"><p>Register</p></a>-->
                                 </div> <!--end register-->
                                 <div class="why">
                                     <a href="#">Why register?</a>
@@ -192,13 +154,50 @@
                     </div>
                     <div class="cleared"></div>
                     <div id="credits">
-                        <center>Designed by <a href="http://www.mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png"></a></center>
+                        <center>Designed by <a href="http://www.mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png" alt="Mowiti logo"/></a></center>
                     </div>
                     <div class="cleared"></div>
                 </div>
             </div>
             <div class="cleared"></div>
         </div>
-       
+        
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+         {% compress js %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.pack.js"></script>
+        {% endcompress %}
+        {% compress js %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.js"></script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38034418-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.type = 'text/javascript'; ga.async = true;
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <script type="text/javascript">
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                crossDomain: false, // obviates need for sameOrigin test
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type)) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        </script>
+        {% endcompress %}  
     </body>
 </html>

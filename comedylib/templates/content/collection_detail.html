@@ -1,11 +1,13 @@
 {% extends "base.html" %}
-{% load thumbnail %}
-{% block title %}{{ page_title }}{% endblock %}
+
+{% block title %}{{ page_title }}, {{collection.name}} - Comedylib{% endblock %}
+
 {% block content %}
 <div class="homepage">
     <div class="section group">
         <div class="col span_2_of_6 ">
-            <div class="info"id="info">
+            <div class="info" id="info">
+                {% load thumbnail %}
                 <img src="{% thumbnail collection.picture 300x200 crop %}">
                 <h1>{{ collection.name }}</h1>
                 <div class="description_content" id="desc_content">
