@@ -15,6 +15,11 @@ CELERYBEAT_SCHEDULE = {
         'task': 'comedylib.celery.tasks.run_update_ratings',
         'schedule': crontab(minute=0, hour='*'),
     },
+    # Executes every five minutes
+    'every-five-minutes': {
+        'task': 'comedylib.celery.tasks.run_set_video_thumbs',
+        'schedule': crontab(minute='*/5'),
+    }
 }
 CELERY_IGNORE_RESULT = True
 

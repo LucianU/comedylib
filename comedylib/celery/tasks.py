@@ -4,16 +4,14 @@ Celery tasks
 from django.core.management import call_command
 
 from comedylib.celery.config import celery
-from content.utils import set_video_thumb
 
 
 @celery.task
-def set_thumb(video):
+def run_set_video_thumbs(video):
     """
-    Sets the thumbnail on a video
+    Calls the set_video_thumbs management command
     """
-    set_video = set_video_thumb(video)
-    set_video.save()
+    return call_command('set_video_thumbs')
 
 
 @celery.task
