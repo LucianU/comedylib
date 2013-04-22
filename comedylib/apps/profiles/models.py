@@ -46,6 +46,13 @@ class Playlist(CreatedMixin):
             self.slug = slugify(self.title)
         super(Playlist, self).save(*args, **kwargs)
 
+    @property
+    def bookmarks_count(self):
+        return Bookmark.objects.filter(
+            content_type=ContentType.objects.get(name='playlist'),
+            object_id=self.pk
+        ).count()
+
 
 class Feeling(CreatedMixin):
     NAME_CHOICES = (
