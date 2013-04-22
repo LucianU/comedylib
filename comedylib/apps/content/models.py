@@ -36,6 +36,13 @@ class Collection(CreatedMixin):
             self.slug = slugify(self.name)
         super(Collection, self).save(*args, **kwargs)
 
+    @property
+    def rating(self):
+        ratings = [v.rating for v in self.videos.all() if v.rating != 0]
+        if len(ratings) == 0:
+            return 0
+        return sum(ratings) / len(ratings)
+
 
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
