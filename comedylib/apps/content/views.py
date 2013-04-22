@@ -89,8 +89,6 @@ class CollectionList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CollectionList, self).get_context_data(**kwargs)
-        categs = [t[0] for t in Tag.objects.values_list('name')]
-        context['categs'] = categs
         categs_form = getattr(self, 'categs_form', None)
         context['categs_form'] = (CategsForm() if categs_form is None
                                                else categs_form)
