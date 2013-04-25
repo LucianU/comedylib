@@ -52,10 +52,6 @@ RAVEN_CONFIG = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -73,19 +69,9 @@ LOGGING = {
         }
     },
     'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console', 'sentry'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+        'django': {
+            'level': 'INFO',
+            'handlers': ['sentry'],
             'propagate': False,
         },
     },
