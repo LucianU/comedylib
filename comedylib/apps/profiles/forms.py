@@ -1,6 +1,6 @@
 from django import forms
 
-from profiles.models import Playlist
+from profiles.models import Playlist, Profile
 
 
 class PlaylistForm(forms.ModelForm):
@@ -9,5 +9,7 @@ class PlaylistForm(forms.ModelForm):
         fields = ('title',)
 
 
-class PictureForm(forms.Form):
-    picture = forms.ImageField()
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ('user', 'feelings')
