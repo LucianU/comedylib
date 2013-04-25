@@ -165,11 +165,11 @@
                             <!-- Facebook button-->
                             <a href="#" class="faceb" id="fb_share_btn" title="Share to Facebook"></a>
                             <!-- Google button-->
-                            <a href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+                            <a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
                             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="google"><img
                             src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/></a>
                             <!-- Reddit button-->               
-                            <a href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+                            <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
                             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=550');return false;" class="redd" title="Share to Reddit"></a>
                             <script type="text/javascript">
                                 $(document).ready(function(){
