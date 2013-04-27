@@ -2,14 +2,16 @@
 {% load compress %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
+        {% block meta %}
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>{% block title %}{% endblock %}</title>
         <meta name="robots" content="index, follow" />
        <!-- <meta http-equiv="imagetoolbar" content="no" />
         <meta name="MSSmartTagsPreventParsing" content="true" /> -->
         <meta name="author" content="comedylib.com" />
         <meta name="keywords" content="comedians, comedy series, comedy movies, movie database, film, stars" />
         <meta name="description" content="Comedylib.com, the database with most of the comedians on the planet" />
+        {% endblock %}
+        <title>{% block title %}{% endblock %}</title>
 
         {% compress css %}
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css" />
