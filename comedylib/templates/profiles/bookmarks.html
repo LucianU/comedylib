@@ -57,7 +57,7 @@
                     <div class="coll-detail-content rating">
                     <div class="section group">
                         <div class="col span_2_of_4">
-                            <span class="playlist">Bookmarks</span> <p>{% with videos=bookmark.post.videos.count %} {{ videos }}</p>{% endwith %}
+                            <span class="playlist">Bookmarks</span> <p>{{ bookmark.post.bookmarks_count }}</p>
                         </div>
                         <div class="col span_2_of_4 alignright">
                            <span class="playlist">User</span><a class="user" href="{{bookmark.post.profile.get_absolute_url}}">{{ bookmark.post.profile.user.username }}</a>
