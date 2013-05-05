@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block meta %}
+{{ block.super }}
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host}}{{ video.picture.url }}" />
+{% endblock %}
 {% block title %}{{video.collection.name}}, {{ video.title }} - Comedylib{% endblock %}
 {% block content %}
 {% load thumbnail %}
@@ -165,25 +170,18 @@
                             <!-- Facebook button-->
                             <a href="#" class="faceb" id="fb_share_btn" title="Share to Facebook"></a>
                             <!-- Google button-->
-                            <a href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+                            <a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
                             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="google"><img
                             src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/></a>
                             <!-- Reddit button-->               
-                            <a href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}" onclick="javascript:window.open(this.href,
+                            <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
                             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=550');return false;" class="redd" title="Share to Reddit"></a>
                             <script type="text/javascript">
                                 $(document).ready(function(){
                                     $('#fb_share_btn').click(function(e){
                                         e.preventDefault();
-                                        FB.ui({
-                                            method: 'feed',
-                                            name: '{{video.collection.name}} - {{ video.title}}',
-                                            link: '{{ request.get_host }}{{ request.path }}',
-                                            picture: '{{ request.get_host }}{{ video.picture.url }}',
-                                            caption: '{{ request.get_host }}{{ request.path }}',
-                                            description: 'Watch more {{video.collection.name}} videos at {{ request.get_host }}, the biggest comedy collection.',
-                                            message: ''
-                                        });
+                                        var sharer = 'https://www.facebook.com/sharer/sharer.php?u=';
+                                        window.open(sharer+location.href, 'sharer', 'width=626,height=436');
                                     });
                                 });
                             </script>

@@ -11,10 +11,18 @@ from content.models import Video
 
 
 class Profile(models.Model):
+    GENDER_CHOICES = (
+        ('male', 'Male'),
+        ('female', 'Female'),
+    )
     user = models.OneToOneField(User)
     feelings = models.ManyToManyField(Video, through='Feeling', null=True)
     picture = models.ImageField(upload_to='profiles', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES,
+                              blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return u"%s: %s playlists" % (self.user.username,

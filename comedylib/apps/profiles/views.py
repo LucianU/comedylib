@@ -11,7 +11,7 @@ from django.views.generic import (TemplateView, View, ListView, CreateView,
                                   UpdateView, DetailView, FormView)
 
 from content.models import Video
-from profiles.forms import PlaylistForm, PictureForm
+from profiles.forms import PlaylistForm, ProfileForm
 from profiles.models import Profile, Feeling, Playlist, Bookmark
 
 
@@ -65,19 +65,20 @@ class Home(TemplateView):
 
 class Settings(FormView):
     """
-    This view actually handles two forms, a PictureForm and a
+    This view actually handles two forms, a ProfileForm and a
     PasswordChangeForm, because they are both displayed on the
     same page but in different tabs.
     """
     template_name = 'profiles/settings.html'
-    picture_form = PictureForm
+    profile_form = ProfileForm
     password_form = PasswordChangeForm
 
     def get(self, request, *args, **kwargs):
         # Using the self.form_invalid method just to avoid
         # code duplication, because the logic is the same
         return self.form_invalid(
-            self.picture_form(), self.password_form(self.request.user)
+            self.profile_form(instance=self.request.user.profile),
+            self.password_form(self.request.user)
         )
 
     def post(self, request, *args, **kwargs):
@@ -87,16 +88,16 @@ class Settings(FormView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            if type(form) == self.picture_form:
+            if type(form) == self.profile_form:
                 return self.form_invalid(
                     form, self.password_form(self.request.user)
                 )
             else:
-                return self.form_invalid(self.picture_form(), form)
+                return self.form_invalid(self.profile_form(), form)
 
     def get_form(self, form_class):
-        if form_class == self.picture_form:
-            return form_class(**self.get_form_kwargs())
+        if form_class == self.profile_form:
+            return form_class(**self.get_profile_form_kwargs())
 
         return form_class(**self.get_password_form_kwargs())
 
@@ -110,21 +111,16 @@ class Settings(FormView):
         if 'old_password' in self.request.POST:
             return self.password_form
         else:
-            return self.picture_form
+            return self.profile_form
 
     def form_valid(self, form):
-        user = self.request.user
-        if type(form) == self.picture_form:
-            user.profile.picture = self.request.FILES['picture']
-            user.profile.save()
-        else:
-            form.save()
+        form.save()
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_invalid(self, picture_form, password_form):
+    def form_invalid(self, profile_form, password_form):
         return self.render_to_response(
             self.get_context_data(
-                picture_form=picture_form,
+                profile_form=profile_form,
                 password_form=password_form,
             )
         )
@@ -132,11 +128,12 @@ class Settings(FormView):
     def get_success_url(self):
         return reverse('own_home')
 
+    def get_profile_form_kwargs(self):
+        kwargs = self.get_form_kwargs()
+        kwargs['instance'] = self.request.user.profile
+        return kwargs
+
     def get_password_form_kwargs(self):
-        """
-        This method has this special name, so as not to make checks
-        in the generic `get_form_kwargs` method and adjust kwargs there
-        """
         kwargs = self.get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
