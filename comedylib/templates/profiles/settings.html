@@ -24,25 +24,29 @@
             <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
                 {{ profile_form.non_field_errors }}
                 <div id="fieldWrapper">
-                    <p>Select only .jpg, .jpeg, .png or .gif format</p>
                     {{ profile_form.picture.errors }}
-                    <p><input type="file" name="picture" id="id_picture" placeholder="Picture" class="st"/></p>
+                    <label>Picture</label>
+                    <p><input type="file" name="picture" id="id_picture" class="st"/><span>Select only .jpg, .jpeg, .png or .gif format</span></p>    
                 </div>
                 <div id="fieldWrapper">
                     {{ profile_form.description.errors }}
-                    <p><textarea name="description" id="id_description" rows="5" cols="30" placeholder="Stuff you want people to know about you" class="st">{{ profile_form.description.value }}</textarea>
+                    <label>Stuff you want people to know about you</label>
+                    <p><textarea name="description" id="id_description" rows="5" cols="37" class="st">{{ profile_form.description.value|default_if_none:""}}</textarea></p> 
                 </div>
                 <div id="fieldWrapper">
                     {{ profile_form.name.errors }}
-                    <p><input type="text" name="name" id="id_name" value="{{ profile_form.name.value }}" placeholder="What they call you" class="st" /></p>
+                    <label>What they call you</label>
+                    <p><input type="text" name="name" id="id_name" value="{{ profile_form.name.value|default_if_none:"" }}" class="st" /></p> 
                 </div>
                 <div id="fieldWrapper">
                     {{ profile_form.gender.errors }}
-                    {{ profile_form.gender }}
+                    <label>Gender</label>
+                    <p>{{ profile_form.gender }}</p> 
                 </div>
                 <div id="fieldWrapper">
                     {{ profile_form.location.errors }}
-                    <p><input type="text" name="location" id="id_location" value="{{ profile_form.location.value }}" placeholder="Where you at" class="st" /></p>
+                    <label>Where you at</label>
+                    <p><input type="text" name="location" id="id_location" value="{{ profile_form.location.value|default_if_none:"" }}" class="st" /></p> 
                 </div>
                 <input type="submit" value="Update" />
             </form>

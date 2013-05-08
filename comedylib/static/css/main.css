@@ -2823,6 +2823,23 @@ text-transform:none;
 font:14px Arial, Helvetica, sans-serif;
 color: #f00;
 }
+#fieldWrapper label{
+text-transform:none;
+font:bold 14px Arial, Helvetica, sans-serif;
+float:none;
+color:#63ADD0;
+margin-left:5px;
+padding-top:20px;
+}
+#fieldWrapper input{
+width:270px;
+}
+#fieldWrapper p{
+margin-bottom:5px;
+}
+#fieldWrapper span{
+margin-left:30px;
+}
 .active {
 color: #FFC640;
 }
