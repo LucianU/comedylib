@@ -6,7 +6,7 @@
 {% block title %} Comedylib - Comedians, Series and Movies {% endblock %}
 
 {% block content %}
-{% cache 3600 content_home %}
+{% cache 3600 content_home request.user.username %}
 <div class="homepage">
 
 <!-- #featured -->
