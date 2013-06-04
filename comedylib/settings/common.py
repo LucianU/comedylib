@@ -145,6 +145,7 @@ INSTALLED_APPS = (
 
     'breadcrumbs',
     'compressor',
+    'dbbackup',
     'djcelery',
     'easy_thumbnails',
     'haystack',
@@ -201,3 +202,14 @@ COMPRESS_CSS_FILTERS = [
 COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
+
+# django-dbbackup settings
+DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
+DBBACKUP_TOKENS_FILEPATH = os.path.join(os.path.dirname(SITE_ROOT),
+                                        'var/run/dbbackup')
+DBBACKUP_DROPBOX_APP_KEY = ''
+DBBACKUP_DROPBOX_APP_SECRET = ''
+DBBACKUP_DROPBOX_ACCESS_TYPE = 'dropbox'
+DBBACKUP_DROPBOX_DIRECTORY = 'comedylib'
+# This is required because of a bug in the dbbackup app
+DBBACKUP_MEDIA_PATH = MEDIA_ROOT

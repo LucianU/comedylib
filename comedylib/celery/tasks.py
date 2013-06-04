@@ -28,3 +28,20 @@ def run_update_ratings():
     Runs the update_ratings management command
     """
     return call_command('update_ratings')
+
+
+# Backup tasks
+@celery.task
+def backup_db():
+    """
+    Backs up the database
+    """
+    return call_command('dbbackup', clean=True)
+
+
+@celery.task
+def backup_media():
+    """
+    Backs up the media files
+    """
+    return call_command('backup_media', clean=True)

@@ -10,6 +10,14 @@ CELERYBEAT_SCHEDULE = {
         'task': 'comedylib.celery.tasks.run_update_featured',
         'schedule': crontab(minute=0, hour=0),
     },
+    'daily-at-midnight2': {
+        'task': 'comedylib.celery.tasks.backup_db',
+        'schedule': crontab(minute=0, hour=0),
+    },
+    'daily-at-midnight3': {
+        'task': 'comedylib.celery.tasks.backup_media',
+        'schedule': crontab(minute=0, hour=0),
+    },
     # Executes every fixed hour
     'every-fixed-hour': {
         'task': 'comedylib.celery.tasks.run_update_ratings',
