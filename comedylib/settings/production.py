@@ -72,5 +72,10 @@ LOGGING = {
             'handlers': ['sentry'],
             'propagate': False,
         },
+        'celery': {
+            'level': 'INFO',
+            'handlers': ['sentry'],
+            'propagate': False,
+        },
     },
 }
