@@ -7,7 +7,7 @@ from comedylib.celery.config import celery
 
 
 @celery.task
-def run_set_video_thumbs(video):
+def run_set_video_thumbs():
     """
     Calls the set_video_thumbs management command
     """
