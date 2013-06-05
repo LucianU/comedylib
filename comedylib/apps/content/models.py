@@ -4,8 +4,9 @@ import random
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
-from taggit.managers import TaggableManager
+from content.forms import CustomTaggableManager
 from comedylib.mixins import CreatedMixin
 
 
@@ -22,7 +23,7 @@ class Collection(CreatedMixin):
                                          blank=True)
     role = models.SmallIntegerField(choices=ROLE_CHOICES)
     slug = models.SlugField(max_length=100, blank=True)
-    tags = TaggableManager()
+    tags = CustomTaggableManager(help_text = _("Choose one or more tags."))
 
     def __unicode__(self):
         return u"%s:%s" % (self.name, self.get_role_display())
