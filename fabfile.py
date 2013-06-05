@@ -78,7 +78,7 @@ def collect_static():
     """
     with _virtualenv():
         django_settings = 'DJANGO_SETTINGS_MODULE=%s' % env.settings
-        run('%s ./manage.py --noinput collectstatic' % django_settings)
+        run('%s ./manage.py collectstatic --noinput' % django_settings)
 
 
 def setup_nginx():
