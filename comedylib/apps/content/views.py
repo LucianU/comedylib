@@ -14,7 +14,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from content.forms import CategsForm
 from content.models import Collection, Video, Featured
 from profiles.models import Playlist, Feeling
-from taggit.models import TaggedItem, Tag
+from taggit.models import TaggedItem
 
 
 class Home(TemplateView):
