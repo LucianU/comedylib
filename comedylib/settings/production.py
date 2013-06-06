@@ -36,6 +36,7 @@ TEMPLATE_LOADERS = (
 
 ALLOWED_HOSTS = [
     '.comedylib.com',
+    'django-dbbackup', # Used by the lib when sending traceback emails
 ]
 
 INSTALLED_APPS += (
