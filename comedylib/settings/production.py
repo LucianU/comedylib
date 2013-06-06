@@ -75,7 +75,7 @@ LOGGING = {
         'celery': {
             'level': 'INFO',
             'handlers': ['sentry'],
-            'propagate': False,
+            'propagate': True,
         },
     },
 }
