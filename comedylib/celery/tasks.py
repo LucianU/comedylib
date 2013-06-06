@@ -45,3 +45,10 @@ def backup_media():
     Backs up the media files
     """
     return call_command('backup_media', clean=True)
+
+
+@celery.task
+def midnight_caller():
+    run_update_ratings.delay()
+    backup_db.delay()
+    backup_media.delay()
