@@ -53,7 +53,7 @@ class About(TemplateView):
 class CollectionList(ListView):
     context_object_name = 'collection_list'
     template_name = 'content/collection_list.html'
-    paginate_by = 10
+    paginate_by = 30
 
     def get_queryset(self):
         form = CategsForm(self.request.GET)
