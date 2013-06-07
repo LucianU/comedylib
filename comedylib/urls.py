@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^c/', include('django.contrib.comments.urls')),
     url(r'^search/', SearchView(form_class=WildcardSearchForm),
         name='haystack_search'),
+    url(r'^com/', include('affiliates.urls'), namespace='affiliates'),
     url(r'^', include('content.urls', namespace='content')),
 )
 

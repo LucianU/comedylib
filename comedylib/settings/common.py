@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'taggit',
 
     'accounts',
+    'affiliates',
     'content',
     'profiles',
 )
@@ -213,3 +214,8 @@ DBBACKUP_DROPBOX_ACCESS_TYPE = 'dropbox'
 DBBACKUP_DROPBOX_DIRECTORY = 'comedylib'
 # This is required because of a bug in the dbbackup app
 DBBACKUP_MEDIA_PATH = MEDIA_ROOT
+
+# Amazon credentials
+AMAZON_ACCESS_KEY = ''
+AMAZON_SECRET_KEY = ''
+AMAZON_ASSOCIATE_TAG = ''
