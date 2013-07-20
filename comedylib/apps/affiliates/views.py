@@ -12,8 +12,8 @@ class Offers(View):
         if keyword is not None:
             offers = offer_searcher(keyword, no_of_results=1)
         else:
-            return HttpResponse(json.dumps(
-                {'status': 'ERROR', 'msg': 'Missing keyword'},
-                content_type='application/json'
-            ))
+            return HttpResponse(
+                json.dumps({'status': 'ERROR', 'msg': 'Missing keyword'}),
+                content_type='application/json',
+            )
         return HttpResponse(json.dumps(offers), content_type='application/json')
