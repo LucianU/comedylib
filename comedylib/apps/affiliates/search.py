@@ -12,10 +12,22 @@ class AmazonSearcher(object):
         self.associate_tag = associate_tag
         self.api = AmazonAPI(access_key, secret_key, associate_tag)
 
-    def search(self, keyword, no_of_results):
+    def search(self, no_of_results, keyword):
         # The results for "Video" and "DVD" seem to be the same, so I'll
         # use "Video"
-        return self.api.search_n(no_of_results, keyword, SearchIndex='Video')
+        raw_results = self.api.search_n(no_of_results, Keywords=keyword,
+                                        SearchIndex='Video')
+        return self._format(raw_results)
+
+    def _format(self, raw_results):
+        results = []
+        for raw_result in raw_results:
+            result = {'title': raw_result.title,
+                      'url': raw_result.offer_url,
+                      'image_url': raw_result.small_image_url,
+                      'price': '$%s' % raw_result.price_and_currency[0]}
+            results.append(result)
+        return results
 
 
 class OfferSearcher(object):
@@ -38,7 +50,7 @@ class OfferSearcher(object):
         """
         results = []
         for searcher in self.searchers:
-            results.append(searcher.search(no_of_results, keyword))
+            results.extend(searcher.search(no_of_results, keyword))
 
         # If we don't have any search results, we just return
         # an empty list
