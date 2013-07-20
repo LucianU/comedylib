@@ -48,12 +48,9 @@ class OfferSearcher(object):
         # If we have fewer results than the number expected, we
         # return all of them
         if randomly:
-            if no_of_results == 1:
-                return [random.choice(results)]
-            else:
-                if len(results) <= no_of_results:
-                    return results
-                return random.sample(results, no_of_results)
+            if len(results) <= no_of_results:
+                return results
+            return random.sample(results, no_of_results)
         else:
             if len(results) <= no_of_results:
                 return results
