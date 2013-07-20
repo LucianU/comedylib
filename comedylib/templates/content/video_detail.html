@@ -215,8 +215,8 @@
                     $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
                         var html = '<p>Buy something with {{ video.collection.name }}</p>';
                         for (var i=0; i < data.length; i++) {
-                            var prod_html = '<p><a href="'+ data[i].url +'">'+ data[i].title +'</a></p>';
-                            prod_html += '<p><a href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a></p>';
+                            var prod_html = '<p><a target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a></p>';
+                            prod_html += '<p><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a></p>';
                             prod_html += '<p>'+ data[i].price +'</p>';
                             html += prod_html;
                         }
