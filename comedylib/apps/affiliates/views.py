@@ -10,7 +10,7 @@ class Offers(View):
     def get(self, *args, **kwargs):
         keyword = self.request.GET.get('keyword')
         if keyword is not None:
-            offers = offer_searcher(keyword, no_of_results=1)
+            offers = offer_searcher.search(keyword, no_of_results=1)
         else:
             return HttpResponse(
                 json.dumps({'status': 'ERROR', 'msg': 'Missing keyword'}),
