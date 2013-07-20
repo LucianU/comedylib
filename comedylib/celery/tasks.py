@@ -49,6 +49,6 @@ def backup_media():
 
 @celery.task
 def midnight_caller():
-    run_update_ratings.delay()
+    run_update_featured.delay()
     backup_db.delay()
     backup_media.delay()
