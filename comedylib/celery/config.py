@@ -12,7 +12,7 @@ CELERYBEAT_SCHEDULE = {
     },
     # Executes every fixed hour
     'every-fixed-hour': {
-        'task': 'comedylib.celery.tasks.run_update_ratings',
+        'task': 'comedylib.celery.tasks.hourly_caller',
         'schedule': crontab(minute=0, hour='*'),
     },
     # Executes every five minutes

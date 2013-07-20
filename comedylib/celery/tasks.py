@@ -48,6 +48,20 @@ def backup_media():
 
 
 @celery.task
+def update_search_index():
+    """
+    Updates the search index
+    """
+    return call_command('update_index')
+
+
+@celery.task
+def hourly_caller():
+    run_update_ratings.delay()
+    update_search_index.delay()
+
+
+@celery.task
 def midnight_caller():
     run_update_featured.delay()
     backup_db.delay()
