@@ -8,37 +8,47 @@
        
     <div class="section group">
         {% for result in page.object_list %}
-           
-   <div class="col span_1_of_6 col6">
-        <div class="collection-content">
-            <div class="coll-pic-content">
-                <a href="{{ result.object.get_absolute_url }}">
-                    <img src="{{ result.object.picture.url }}">
-                </a>
-            </div>
-            <div class="coll-name-content">
-                <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-            </div>
-            <div class="coll-detail-content">
-            <div class="section group">
-                <div class="col span_1_of_4_coll_det vlength">
-                    <p>{{ result.object.duration }}</p> <span>Length</span>
+            {% if result.model_name == 'collection' %}
+                <div class="col span_1_of_6 col1">
+                    <div class="collection-content">
+                        <div class="coll-pic-content">
+                            <a href="{{ result.object.get_absolute_url }}">
+                                <img src="{{ result.object.picture.url }}">
+                            </a>
+                        </div>
+                        <div class="coll-name-content">
+                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col span_2_of_4_coll_det nviews">
-                    <p>{{ result.object.views }}</p> <span>Views</span>
+            {% else %}
+                <div class="col span_1_of_6 col1">
+                    <div class="collection-content">
+                        <div class="coll-pic-content">
+                            <a href="{{ result.object.get_absolute_url }}">
+                                <img src="{{ result.object.picture.url }}">
+                            </a>
+                        </div>
+                        <div class="coll-name-content">
+                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                        </div>
+                        <div class="coll-detail-content">
+                        <div class="section group">
+                            <div class="col span_1_of_4_coll_det vlength">
+                                <p>{{ result.object.duration }}</p> <span>Length</span>
+                            </div>
+                            <div class="col span_2_of_4_coll_det nviews">
+                                <p>{{ result.object.views }}</p> <span>Views</span>
+                            </div>
+                            <div class="col span_1_of_4_coll_det rating">
+                                <p>{{ result.object.rating }} %</p>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col span_1_of_4_coll_det rating">
-                    <p>{{ result.object.rating }} %</p>
-                    <span>Rating</span>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-	 <!--   <p>
-                <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-            </p> -->
-            
+            {% endif %}
         {% empty %}
             <p>No results found.</p>
             {% if suggestion %}
