@@ -210,14 +210,15 @@
                 </div>
             </div><!-- end social -->
             <div id="affiliate"></div>
+            
             <script type="text/javascript">
                 $(document).ready(function() {
                     $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
-                        var html = '<p>Buy something with {{ video.collection.name }}</p>';
+                        var html = '<h2>Buy something with {{ video.collection.name }}</h2>';
                         for (var i=0; i < data.length; i++) {
-                            var prod_html = '<p><a target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a></p>';
-                            prod_html += '<p><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a></p>';
-                            prod_html += '<p>'+ data[i].price +'</p>';
+                            var prod_html = '<div class="item"><a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
+                            prod_html += '<a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
+                            prod_html += '<p>'+ data[i].price +'</p></div>';
                             html += prod_html;
                         }
                         $('div#affiliate').html(html);

@@ -1448,12 +1448,30 @@ color:#FFC640;
 	width: 98.5%;
 	min-height:50px;
 	float: left;
-	clear: none;
+	clear: both;
 	padding:5px;
 	/*background:#181919;*/
 	/*box-shadow: 0px 0px 20px #333;*/
 	border:1px solid #444;
 	margin:1px 0px 0px 0px;*/
+}
+ #affiliate  h4{
+margin-top:10px;
+}
+ #affiliate .item{
+    float:left;
+    width:23%;
+    margin:0 1%;
+}
+ #affiliate .item a.title{
+    font-size:0.75em;
+}
+ #affiliate .item a img{
+    margin:5px 25%;
+}
+ #affiliate .item p{
+    font-size:0.875em;
+    text-align:center;
 }
 #video_detail .comments{
 	width: 98.5%;
