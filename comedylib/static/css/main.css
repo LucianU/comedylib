@@ -66,7 +66,7 @@ body{
     /*background:url(/static/img/pixelbkg.png);
     background-repeat: repeat;
     background-position: top left;*/
-   	background: #111 url(/static/img/comedy-club.jpg) no-repeat top center fixed; 
+  	background: #111 url(/static/img/comedy-club.jpg) no-repeat top center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -2410,7 +2410,7 @@ display:table;
 text-align:center;
 margin-top:5px;
 width:100%;
-height:40px;
+height:45px;
 /*border:1px solid #fff;*/
 /*background:#0f0;*/
 }
@@ -2447,6 +2447,7 @@ color:#63ADD0;
 font: 11px Arial, Helvetica, sans-serif;
 padding-left:0px;
 text-align:center;
+padding-bottom:0px;
 }
 .coll-detail-content span{
 text-align:center;
@@ -2877,4 +2878,84 @@ display:table-cell;
 display:block;
 height:15px;
 min-width:15px;
+}
+/* SEARCH CONTENT STYLE*/
+.search-content {
+background:#444;
+padding:0 3px;
+margin:0px 0;
+border-top:1px solid #666;
+border-bottom:1px solid #222;
+}
+.search-pic-content {
+    position:relative;
+    margin:5px 0;
+   
+}
+.search-pic-content a{
+
+}
+.search-pic-content img{
+    width: 162px;
+    height: 108px;
+    border: 1px solid #444;
+}
+.search-pic-content p{
+    font-size:12px;
+    position:absolute;
+    background:#222;
+    padding:5px;
+    margin:3px;
+    bottom:3px;
+    right:0;
+}
+.search-info-content {
+
+}
+.search-info-content a.title {
+    padding: 0 5px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font: bold 1em Arial, Helvetica, sans-serif;
+    color: #eee;
+}
+.search-info-content p {
+    float:left;
+    padding: 0 5px;
+    font: 11px Arial, Helvetica, sans-serif;
+
+}
+.search-info-content span {
+    float:left;
+    text-transform: uppercase;
+    font: bold 10px Arial, Helvetica, sans-serif;
+    color: #A57400;
+    margin-right:15px;
+}
+.search-collection{
+    background:#222;
+    padding:5px;
+}
+.search-collection p{
+ /*   margin:3px;*/
+    font: 1em Arial, Helvetica, sans-serif;    
+}
+.search-collection a{
+    margin:3px;
+}
+.search-collection a.name{
+    font: bold 1em Arial, Helvetica, sans-serif;
+}
+.search-collection .role{
+    font:  0.75em Arial, Helvetica, sans-serif;
+}
+.search-collection img{
+    width:315px;
+    height:150px;
+    border: 1px solid #444;
+}
+.search-collection ul{
+    
+    margin-left:15px;
 }

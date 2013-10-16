@@ -2,59 +2,65 @@
 
 {% block content %}
     {% if query %}
-     <h1>Results</h1>
-     <br/>
-        <h2>You searched for <span>{{ query }}</span>.</h2>
-       
+    <h1>Results</h1>
+    <br/>
+        <h5>You searched for <span>{{ query }}</span>. There are about 2000 results.</h5>
+      
     <div class="section group">
+        <div class="col span_4_of_6">
         {% for result in page.object_list %}
-            {% if result.model_name == 'collection' %}
-                <div class="col span_1_of_6 col1">
-                    <div class="collection-content">
-                        <div class="coll-pic-content">
-                            <a href="{{ result.object.get_absolute_url }}">
+            {% if result.model_name != 'collection' %}
+                <div class="col span_4_of_4 col1 search-content">
+                    <div class="section group">
+                        <div class="col span_1_of_4 search-pic-content">
+                             <a href="{{ result.object.get_absolute_url }}">
                                 <img src="{{ result.object.picture.url }}">
                             </a>
+                            <p class="duration">{{ result.object.duration }}</p>
                         </div>
-                        <div class="coll-name-content">
-                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="col span_1_of_6 col1">
-                    <div class="collection-content">
-                        <div class="coll-pic-content">
-                            <a href="{{ result.object.get_absolute_url }}">
-                                <img src="{{ result.object.picture.url }}">
-                            </a>
-                        </div>
-                        <div class="coll-name-content">
-                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                        </div>
-                        <div class="coll-detail-content">
-                        <div class="section group">
-                            <div class="col span_1_of_4_coll_det vlength">
-                                <p>{{ result.object.duration }}</p> <span>Length</span>
-                            </div>
-                            <div class="col span_2_of_4_coll_det nviews">
-                                <p>{{ result.object.views }}</p> <span>Views</span>
-                            </div>
-                            <div class="col span_1_of_4_coll_det rating">
-                                <p>{{ result.object.rating }} %</p>
-                                <span>Rating</span>
-                            </div>
-                        </div>
+                        <div class="col span_3_of_4 search-info-content">
+                            <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                            <p>{{ result.object.views }}</p><span>Views</span>
+                            <p>{{ result.object.rating }} %</p><span>Rating</span>    
+                        <!--<p>by</p><a class="username" href="">username</a>-->
                         </div>
                     </div>
                 </div>
             {% endif %}
-        {% empty %}
+            {% empty %}
             <p>No results found.</p>
             {% if suggestion %}
                 <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
             {% endif %}
         {% endfor %}
+        </div>
+        <div class="col span_2_of_6">
+         {% for result in page.object_list %}
+            {% if result.model_name == 'collection' %}
+                <div class="col span_2_of_2 col1 search-collection">
+                    <a class="name" href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
+                    <p class="role">{{ result.object.get_role_display|title }}</p>
+                    {% load thumbnail %}
+                    <a href="{{ result.object.get_absolute_url }}">
+                        <img src="{% thumbnail result.object.picture 315x150 crop %}">
+                    </a>
+                <div class="playlist"> 
+                    <h1>Playlists</h1>
+                    <ul>
+                        <li>Playlist 1</li>
+                        <li>Playlist 2</li>
+                        <li>Playlist 3</li>
+                        <li>Playlist 4</li>
+                        <li>Playlist 5</li>
+                    </ul>
+                </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+            
+        
 </div>
         {% if page.has_previous or page.has_next %}
             <div>
@@ -66,4 +72,5 @@
     {% else %}
         <p>Insert the terms into the search field.</p>
     {% endif %}
+
 {% endblock %}
