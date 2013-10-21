@@ -171,8 +171,8 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = '/a/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
+GOOGLE_OAUTH2_CLIENT_ID = ''
+GOOGLE_OAUTH2_CLIENT_SECRET = ''
 
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',

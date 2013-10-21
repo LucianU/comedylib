@@ -39,6 +39,10 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logger.LoggingPanel',
     'johnny_panel.panel.JohnnyPanel'
 )
+
+GOOGLE_OAUTH2_CLIENT_ID = '448075750287.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'UhpdrUFe7E4OdUGcxv98py30'
+
 try:
     from comedylib.settings.local import *  # pylint: disable=W0614, W0401
 except ImportError:
