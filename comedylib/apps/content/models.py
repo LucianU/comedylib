@@ -1,6 +1,8 @@
 import datetime
+import os
 import random
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -52,7 +54,9 @@ class Video(CreatedMixin):
                                 help_text='Format hh:mm:ss or mm:ss')
     views = models.IntegerField(default=0)
     collection = models.ForeignKey(Collection, related_name='videos')
-    picture = models.ImageField(upload_to='videos', null=True, blank=True)
+    VID_THUMB_DUMMY = os.path.join(settings.STATIC_URL, 'img/dumvid.jpg')
+    picture = models.ImageField(upload_to='videos', null=True, blank=True,
+                                default=VID_THUMB_DUMMY)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
 
