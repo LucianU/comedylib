@@ -10,6 +10,6 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         for video in Video.objects.all():
-            if not video.picture:
+            if not video.picture or 'static' in video.picture.url:
                 thumbed_vid = set_video_thumb(video)
                 thumbed_vid.save()
