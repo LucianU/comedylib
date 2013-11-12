@@ -8,9 +8,13 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from south.modelsinspector import add_ignored_fields
+
 from content.forms import CustomTaggableManager
 from comedylib.mixins import CreatedMixin
 
+# We make South ignore this custom field
+add_ignored_fields(["^content\.forms\.CustomTaggableManager"])
 
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
@@ -59,6 +63,12 @@ class Video(CreatedMixin):
                                 default=VID_THUMB_DUMMY)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
+    STATUS_CHOICES = (
+        (0, u'private'),
+        (1, u'public'),
+    )
+    status = models.SmallIntegerField(choices=STATUS_CHOICES, default=1,
+                                      blank=True)
 
     class Meta:
         ordering = ['-created']
