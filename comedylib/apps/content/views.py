@@ -109,7 +109,8 @@ class CollectionDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CollectionDetail, self).get_context_data(**kwargs)
         collection = context['collection']
-        videos_list = collection.videos.all()
+        # Retrieving public videos only
+        videos_list = collection.videos.filter(status=1)
         paginator = Paginator(videos_list, 20)
         page = self.request.GET.get('page')
         try:
