@@ -21,7 +21,7 @@ def get_youtube_thumb(ident):
         entry = yt_service.GetYouTubeVideoEntry(video_id=ident)
     except RequestError, e:
         logging.info("Error occurred while trying to retrieve video %s. "
-                     "Got message %s" % (e,))
+                     "Got message %s" % (ident, e))
         return
     thumb = urllib.urlopen(entry.media.thumbnail[0].url).read()
     return thumb
