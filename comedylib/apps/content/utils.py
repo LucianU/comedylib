@@ -2,6 +2,7 @@ import logging
 import urllib
 import urlparse
 
+from gdata.service import RequestError
 import gdata.youtube.service
 
 from django.core.files.base import ContentFile
@@ -16,7 +17,12 @@ def get_youtube_thumb(ident):
     logging.info("Retrieving thumbnail for video id %s from Youtube..." %
                   ident)
     yt_service = gdata.youtube.service.YouTubeService()
-    entry = yt_service.GetYouTubeVideoEntry(video_id=ident)
+    try:
+        entry = yt_service.GetYouTubeVideoEntry(video_id=ident)
+    except RequestError, e:
+        logging.info("Error occurred while trying to retrieve video %s. "
+                     "Got message %s" % (e,))
+        return
     thumb = urllib.urlopen(entry.media.thumbnail[0].url).read()
     return thumb
 
@@ -26,11 +32,16 @@ sources = {
 
 
 def set_video_thumb(instance):
+    # Finding the source of the video, to know where to retrieve
+    # the thumbnail from
     url_bits = urlparse.urlparse(instance.url)
     source = url_bits.netloc.strip('www.')
     querydict = urlparse.parse_qs(url_bits.query)
 
+    # This only applies to Youtube
     ident = querydict['v'][0]
+
     thumb = sources[source](ident)
-    instance.picture.save('%s_%s' % (source, ident), ContentFile(thumb))
+    if thumb is not None:
+        instance.picture.save('%s_%s' % (source, ident), ContentFile(thumb))
     return instance
