@@ -1088,7 +1088,7 @@ border-bottom-left-radius: 5px; */
 }
 .featured{
 	width: 100%;
-	height: 205px;
+	height: 288px;
 	float:left;
 }
 .featured p.discover {
@@ -1173,22 +1173,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 .featured_content{
     position:relative;
 	width: 311px;
-	height: 165px;
+	height: 249px;
 	overflow:hidden;
 	margin: 0px 0px 0px 0px;
 	float:left;
 }
 .featured_content img{
-  	width: 311px;
+  	height: 249px;
+    width:311px;
 
 }
 .featured_content .info{
     text-align:left;
     position:absolute;
-    background:#222;
-    background:url(/static/img/semitransp60.png) top left repeat;
-    top:90px;
-	width: 250px;
+    background:rgba(34,34,34,0.6);
+    /*background:url(/static/img/semitransp60.png) top left repeat;*/
+    top:250px;
+	width: 311px;
 	height: 70px;
 	font-size:12px;
     overflow:hidden;
@@ -1203,6 +1204,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 }
 .featured_content .info p{
     padding:5px 3px 0 5px;
+    text-align:justify;
 }
 .randomplay_title{
 float:left;
