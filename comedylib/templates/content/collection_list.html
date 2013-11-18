@@ -23,7 +23,7 @@
                     <div class="coll-list-content">
                         <img src="{% thumbnail collection.picture 198x250 crop %}">
                         <div class="coll-list-detail-content">
-                            <p class="name">{{ collection.name }}</p>
+                            <p class="name">{{ collection.name|truncatechars:80 }}</p>
                             {% with videos=collection.videos.count %}
                             <p>{{ videos }} video{{ videos|pluralize }}</p>
                             {% endwith %}

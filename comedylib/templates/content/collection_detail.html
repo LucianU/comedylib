@@ -24,7 +24,7 @@
                                 </a>
                             </div>
                             <div class="coll-name-content">
-                                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                                <a href="{{ video.get_absolute_url }}">{{ video.title|truncatechars:80 }}</a>
                             </div>
                             <div class="coll-detail-content">
                                 <div class="section group">
