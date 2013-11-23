@@ -25,7 +25,8 @@ class Home(TemplateView):
         recent_videos = self._get_recent_videos()
         for collection, vids in recent_videos.iteritems():
             context['%s_videos' % collection] = vids
-        context['playlists'] = Playlist.objects.filter(empty=False)[:8]
+        F_PL_NO = settings.FRONTPAGE_PLAYLISTS_NO
+        context['playlists'] = Playlist.objects.filter(empty=False)[:F_PL_NO]
         featured = Featured.instance.get()
         if featured is not None:
             for role_id, role_name in Collection.ROLE_CHOICES:
@@ -34,8 +35,9 @@ class Home(TemplateView):
 
     def _get_recent_videos(self):
         videos = {}
+        RV_NO = settings.RECENT_VIDEOS_NO
         for r_id, r_name in Collection.ROLE_CHOICES:
-            videos[r_name] = Video.objects.filter(collection__role=r_id)[:6]
+            videos[r_name] = Video.objects.filter(collection__role=r_id)[:RV_NO]
         return videos
 
 
@@ -53,7 +55,7 @@ class About(TemplateView):
 class CollectionList(ListView):
     context_object_name = 'collection_list'
     template_name = 'content/collection_list.html'
-    paginate_by = 30
+    paginate_by = settings.COLLECTION_LIST_NO
 
     def get_queryset(self):
         form = CategsForm(self.request.GET)

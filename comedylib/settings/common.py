@@ -186,9 +186,11 @@ SOCIAL_AUTH_PIPELINE = (
 # registration
 ACCOUNT_ACTIVATION_DAYS = 3
 
-# Specifies the number of related videos that should be
-# displayed on the page
+# Constants used to specify the number of different items displayed
 RELATED_VIDS_NO = 12
+FRONTPAGE_PLAYLISTS_NO = 30
+COLLECTION_LIST_NO = 28
+RECENT_VIDEOS_NO = 10
 
 HAYSTACK_SITECONF = 'comedylib.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
