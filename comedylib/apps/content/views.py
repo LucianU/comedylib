@@ -22,11 +22,16 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
+
+        # Getting recent videos
         recent_videos = self._get_recent_videos()
         for collection, vids in recent_videos.iteritems():
             context['%s_videos' % collection] = vids
-        F_PL_NO = settings.FRONTPAGE_PLAYLISTS_NO
-        context['playlists'] = Playlist.objects.filter(empty=False)[:F_PL_NO]
+
+        # Getting random playlists
+        context['playlists'] = self._get_random_playlists()
+
+        # Getting featured collections
         featured = Featured.instance.get()
         if featured is not None:
             for role_id, role_name in Collection.ROLE_CHOICES:
@@ -39,6 +44,12 @@ class Home(TemplateView):
         for r_id, r_name in Collection.ROLE_CHOICES:
             videos[r_name] = Video.objects.filter(collection__role=r_id)[:RV_NO]
         return videos
+
+    def _get_random_playlists(self):
+        playlist_ids = Playlist.objects.values_list('id', flat=True)
+        random_ids = random.sample(playlist_ids,
+                                   settings.FRONTPAGE_PLAYLISTS_NO)
+        return Playlist.objects.filter(id__in=random_ids)
 
 
 class About(TemplateView):
