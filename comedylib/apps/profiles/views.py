@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 import json
 
+from django.conf import settings
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
@@ -163,7 +164,7 @@ class Playlists(ListView):
     template_name = 'profiles/playlists.html'
     context_object_name = 'playlists'
     queryset = Playlist.objects.all()
-    paginate_by = 20
+    paginate_by = settings.PLAYLISTS_PER_PAGE_NO
 
     def get_context_data(self, **kwargs):
         context = super(Playlists, self).get_context_data(**kwargs)
