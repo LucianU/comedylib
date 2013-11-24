@@ -49,23 +49,12 @@
         <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
                 <div class="mediaplayer">
-               <!-- <script type="text/javascript">
-                if(navigator.userAgent.toLowerCase().match(/(android)/) || navigator.userAgent.toLowerCase().match(/(chrom)/) ){
-                        //wee must force flash video player in chrome, because mp4 video files is not supported yet in chrome's HTML5 video implementation.
-                        modes = [{type: 'flash', src:  '{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf'}];
-                    }else{
-                        modes = [ {type: 'html5'},{type: 'flash', src:  '{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf'}];
-                    }
-
-                    jwplayer("container").setup({                   
-                        'modes':modes,      
-                    }); 
-                </script> -->
                     <div id='mediaplayer'></div>
                     <script type="text/javascript">
                         jwplayer('mediaplayer').setup({
                            /* 'id': 'playerID',*/
-                            'player':'{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf',
+                            'flashplayer': '{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf',
+                            'html5player': '{{ STATIC_URL }}mediaplayer/jwplayer.html5.js',
                             'autostart': 'true',
                             'volume': '80',
                             'width': '667',
