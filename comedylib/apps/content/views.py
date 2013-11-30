@@ -261,5 +261,5 @@ class VideoDetail(DetailView):
 class Playlists(ListView):
     context_object_name = 'playlists'
     template_name = 'content/playlists.html'
-    paginate_by = 20
+    paginate_by = settings.PLAYLISTS_PER_PAGE_NO
     queryset = Playlist.objects.filter(empty=False)
