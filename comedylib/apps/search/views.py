@@ -13,7 +13,7 @@ class GroupedResultsSearchView(SearchView):
             uniques[result.id] = result
 
         grouped_results = sorted(
-            sorted(uniques.itervalues(), key=lambda x: x.score, reverse=True),
-            key=lambda x: x.model_name
+            uniques.itervalues(), key=lambda x: (x.score, x.model_name),
+            reverse=True,
         )
         return grouped_results
