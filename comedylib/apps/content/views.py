@@ -47,8 +47,11 @@ class Home(TemplateView):
 
     def _get_random_playlists(self):
         playlist_ids = Playlist.objects.values_list('id', flat=True)
-        random_ids = random.sample(playlist_ids,
-                                   settings.FRONTPAGE_PLAYLISTS_NO)
+        if len(playlist_ids) > settings.FRONTPAGE_PLAYLISTS_NO:
+            random_ids = random.sample(playlist_ids,
+                                       settings.FRONTPAGE_PLAYLISTS_NO)
+        else:
+            random_ids = playlist_ids
         return Playlist.objects.filter(id__in=random_ids)
 
 
