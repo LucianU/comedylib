@@ -990,6 +990,8 @@ background: #000;
 }
 .footer-menu{
     position:relative;
+    border-top: 1px dotted #4a5855;
+    padding-top: 5px;
 	width: 355px;
 	height: 10px;
 	margin:0;
@@ -998,6 +1000,7 @@ background: #000;
 }
 
 #credits{
+display:none;
 width: 1000px;
    float:right;
    margin-left: auto;
@@ -2175,7 +2178,7 @@ div#right-column {
 	clear: none;
 	margin:0;
 	text-align:center;
-	padding:10px 5px 5px 5px;
+	padding:20px 5px 5px 5px;
     font-size:18px;
     text-transform:uppercase;
 }
