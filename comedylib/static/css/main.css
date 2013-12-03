@@ -2170,21 +2170,29 @@ div#right-column {
 	/*border:1px solid #fff;*/
 	margin:4px 0px 0px 1px;
 	}
-.album-pagination{
-width: 990px;
+.album-pagination, .detail-pagination{
 	float: left;
 	clear: none;
 	margin:0;
 	text-align:center;
 	padding:10px 5px 5px 5px;
+    font-size:18px;
+    text-transform:uppercase;
 }
-.detail-pagination{
-width: 664px;
-	float: right;
-	clear: none;
-	margin:0;
-	text-align:center;
-	padding:10px 0px 5px 0px;
+.album-pagination{width: 826px;}
+.detail-pagination{width: 664px;}
+.step-links {
+}
+.step-links a{
+background: #63ADD0;
+padding: 5px 10px;
+margin: 2px;
+}
+.step-links a:hover{
+background: #FEB200;
+}
+.step-links .current a{
+background: #FE4600;
 }
 .playlist-content{
 height:87px;
