@@ -1179,7 +1179,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 	float:left;
 }
 .featured_content img{
-  	height: 249px;
+ /* 	height: 249px; */
     width:311px;
 
 }
@@ -2186,13 +2186,43 @@ div#right-column {
 .step-links a{
 background: #63ADD0;
 padding: 5px 10px;
-margin: 2px;
+/*margin: 2px;*/
 }
 .step-links a:hover{
-background: #FEB200;
+background: #FE4600;
 }
 .step-links .current a{
 background: #FE4600;
+}
+.step-links a.next{position:relative}
+.step-links a.next:after{
+position:absolute;
+right:-15px;
+top:0;
+    content:'';
+    width: 0; 
+	height: 0; 
+	border-top: 16px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid #63ADD0;
+}
+.step-links a:hover.next:after{
+border-left: 15px solid #FE4600;
+}
+.step-links a.previous{position:relative}
+.step-links a.previous:after{
+    position:absolute;
+    left:-15px;
+    top:0;
+    content:'';
+    width: 0; 
+	height: 0; 
+	border-top: 16px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-right:15px solid #63ADD0; 
+}
+.step-links a:hover.previous:after{
+border-right: 15px solid #FE4600;
 }
 .playlist-content{
 height:87px;
