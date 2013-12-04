@@ -44,12 +44,25 @@
     </div>
     {% block profile_content %}
     <div class="col span_5_of_6 front_profile">
-    <h1>Activity</h1>
+        <div class="col span_2_of_2 colbkg1 profile-info">
+            <div class="col span_1_of_2">
+                <h1>A.K.A.</h1>
+                <p>{{profile.name}}</p>
+                <h1>Located in</h1>
+                <p>{{profile.location}}</p>
+            </div>     
+            <div class="col span_1_of_2">
+                <h1>About me</h1>
+                <p>{{profile.description}}</p>
+            </div>               
+        </div>
+        <h1>Activity</h1>
         <div class="section group">
             <!--<div class="col span_1_of_2 colbkg1">
                 <!-- Asta nu e populata momentan. -->
             <!--    {{recent_comments}}
             </div> -->
+           
             <div class="col span_1_of_2 colbkg1">
                 <ul>
                     {% for pl in recent_playlists %}

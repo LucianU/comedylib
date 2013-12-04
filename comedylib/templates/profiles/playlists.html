@@ -21,8 +21,9 @@
                         <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"></a>
                         <div class="buttons">
                              <a id="deletebtn" data-playlist-id="{{ playlist.id }}" class="remove" href="#" title="Delete playlist"><i class="icon-trash"></i></a>
-                             <a class="playall" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">Play all <span><i class="icon-play"></i></span></a>
-                             <a class="seeall" href="{{ playlist.get_absolute_url }}">See videos <span><i class="icon-th-list"></i></span></a>
+                             <a href="{{ playlist.get_absolute_url }}" class="edit" href="#" title="Edit playlist"><i class="icon-edit"></i></a>
+                             <a class="playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}">Play all <span><i class="icon-play"></i></span></a>
+                             <!--<a class="seeall" href="{{ playlist.get_absolute_url }}">See videos <span><i class="icon-th-list"></i></span></a> -->
                         </div>
                         <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" />
                         <div class="sidebar">

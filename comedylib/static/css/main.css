@@ -262,7 +262,7 @@ position:relative;
 .borderright {border-right:1px solid #444;}
 
 .col:first-child { margin-left: 0; }
-.col6:nth-child(6n+1), .col2:nth-child(2n+1), .col3:nth-child(3n+1),.col4:nth-child(4n+1), .col1:nth-child(n+1), .col5:nth-child(5n+1) {
+.col6:nth-child(6n+1), .col1:nth-child(n+1), .col2:nth-child(2n+1), .col3:nth-child(3n+1),.col4:nth-child(4n+1), .col1:nth-child(n+1), .col5:nth-child(5n+1) {
 margin-left: 0;
 }
 /*  GRID OF TWO   ============================================================================= */
@@ -1178,20 +1178,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf5730', end
 	width: 311px;
 	height: 249px;
 	overflow:hidden;
-	margin: 0px 0px 0px 0px;
+	margin: 0;
 	float:left;
+    background:#000;
+    text-align:center;
 }
 .featured_content img{
- /* 	height: 249px; */
-    width:311px;
+z-index:2;
+
+	height: 249px; 
+    width:auto;
+   /* width:311px; */
 
 }
+
+
 .featured_content .info{
     text-align:left;
     position:absolute;
     background:rgba(34,34,34,0.6);
     /*background:url(/static/img/semitransp60.png) top left repeat;*/
-    top:250px;
+    top:150px;
 	width: 311px;
 	height: 70px;
 	font-size:12px;
@@ -2182,7 +2189,7 @@ div#right-column {
     font-size:18px;
     text-transform:uppercase;
 }
-.album-pagination{width: 826px;}
+.album-pagination{width: 100%;}
 .detail-pagination{width: 664px;}
 .step-links {
 }
@@ -2313,7 +2320,7 @@ left:0;
 position:absolute;
 display:none;
 z-index:10;
-top:6px;
+top:8px;
 right:9px;
 }
 .play-pic-content .buttons a  , .coll-pic-content .buttons a{
@@ -2334,44 +2341,47 @@ background: rgba(68,68,68, 0.9);
 }
 
 .play-pic-content .buttons a span{
-display:inline-block;
-font-size:14px;
+    display:inline-block;
+    font-size:14px;
 
 }
 .coll-pic-content .buttons a {
-font-size:14px;
-text-align:center;
-padding-top:5px;
+    font-size:14px;
+    text-align:center;
+    padding-top:5px;
 }
 .coll-pic-content .buttons a.remove {
-border:1px solid #555;
-width:24px;
-height:19px;
-line-height: 24px;
+    color:#ff8800;
+    padding-top:0;
+    border:1px solid #555;
+    width:22px;
+    height:22px;
+    line-height: 22px;
 }
 .coll-pic-content .buttons a:hover.remove {
-border:1px solid #333;
-color:#FFD573;
+    border:1px solid #333;
+    color:#FFD573;
 }
-.play-pic-content .buttons a.remove {
+.play-pic-content .buttons a.remove,.play-pic-content .buttons a.edit  {
 border:1px solid #555;
+color:#ff8800;
 font-size:14px;
 text-align:center;
-padding-top:5px;
 position:absolute;
 z-index:20;
 top:2px;
-right:2px;
-width:24px;
-height:19px;
-line-height: 24px;
+width:22px;
+height:22px;
+line-height: 22px;
 }
+.play-pic-content .buttons a.remove {right:2px;}
+.play-pic-content .buttons a.edit {left:2px;}
 .play-pic-content .buttons a.playall{
 height:60px;
 line-height: 60px;
 }
 .play-pic-content .buttons a.playallmain{
-height:106px;
+height:108px;
 line-height: 106px;
 background: rgba(68,68,68, 0.6);
 }
@@ -2732,36 +2742,50 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181818', end
 
 }
 .front_profile a:link, .front_profile a:visited{
-font:bold 14px Arial, Helvetica, sans-serif;
+    font:bold 14px Arial, Helvetica, sans-serif;
     text-decoration: none; 
     color: #63ADD0;
 }
  
 .front_profile a:hover{
-font:bold 14px Arial, Helvetica, sans-serif;
-    color: #FFD573;
+    font:bold 14px Arial, Helvetica, sans-serif;
+        color: #FFD573;
 }
 .front_profile ul {
-font:14px Arial, Helvetica, sans-serif;
+    
 }
 .front_profile ul span {
-font:14px Arial, Helvetica, sans-serif;
-color:#FFD573;
+    font:14px Arial, Helvetica, sans-serif;
+    color:#FFD573;
 }
 .front_profile ul li {
-width:99%;
-border-top:1px solid #444;
-border-bottom:1px solid #111;
-padding:3px;
-height:32px;
-display:table;
+    width:99%;
+    border-top:1px solid #444;
+    border-bottom:1px solid #111;
+    padding:3px;
+    height:32px;
+    display:table;
 }
 .front_profile ul li:nth-child(even) {
-background:#222;
+    background:#222;
 }
 .front_profile ul li div {
-display:table-cell;
-vertical-align:middle;
+    display:table-cell;
+    vertical-align:middle;
+}
+.front_profile .profile-info{
+    display:block;
+    height:125px;
+    width:100%;
+    margin:30px 0 28px;
+}
+.front_profile .profile-info h1{
+    font-size:16px;
+    padding:0 5px;
+    color:#63ADD0;
+}
+.front_profile .profile-info p{
+    margin-bottom:15px;
 }
 .user-content{
 padding:0px;
