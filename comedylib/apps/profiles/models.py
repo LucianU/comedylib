@@ -34,7 +34,8 @@ class Profile(models.Model):
 
 class Playlist(CreatedMixin):
     profile = models.ForeignKey(Profile, related_name='playlists')
-    videos = models.ManyToManyField(Video, related_name='playlists', null=True)
+    videos = models.ManyToManyField(Video, through='PlaylistVideo',
+                                    related_name='playlists', null=True)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=100, blank=True)
     empty = models.BooleanField(default=True)
@@ -60,6 +61,12 @@ class Playlist(CreatedMixin):
             content_type=ContentType.objects.get(name='playlist'),
             object_id=self.pk
         ).count()
+
+
+class PlaylistVideo(models.Model):
+    playlist = models.ForeignKey(Playlist)
+    video = models.ForeignKey(Video)
+    order = models.IntegerField(null=True)
 
 
 class Feeling(CreatedMixin):
