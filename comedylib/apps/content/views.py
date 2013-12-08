@@ -3,6 +3,7 @@ import random
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -24,35 +25,65 @@ class Home(TemplateView):
         context = super(Home, self).get_context_data(**kwargs)
 
         # Getting recent videos
-        recent_videos = self._get_recent_videos()
-        for collection, vids in recent_videos.iteritems():
-            context['%s_videos' % collection] = vids
+        context.update(self._get_recent_videos())
+
+        # Getting featured collections
+        context.update(self._get_featured())
 
         # Getting random playlists
         context['playlists'] = self._get_random_playlists()
 
-        # Getting featured collections
-        featured = Featured.instance.get()
-        if featured is not None:
-            for role_id, role_name in Collection.ROLE_CHOICES:
-                context['feat_%s' % role_name] = getattr(featured, role_name)
         return context
 
     def _get_recent_videos(self):
+        cache_key = 'content_home_rv'
+        videos = cache.get(cache_key)
+        if videos is not None:
+            return videos
+
         videos = {}
         RV_NO = settings.RECENT_VIDEOS_NO
         for r_id, r_name in Collection.ROLE_CHOICES:
-            videos[r_name] = Video.objects.filter(collection__role=r_id)[:RV_NO]
+            videos['%s_videos' % r_name] = Video.objects.filter(
+                collection__role=r_id
+            )[:RV_NO]
+
+        # Caching for 10 minutes
+        cache.set(cache_key, videos, 60 * 10)
         return videos
 
     def _get_random_playlists(self):
+        cache_key = 'content_home_rp'
+        playlists = cache.get(cache_key)
+        if playlists is not None:
+            return playlists
+
         playlist_ids = Playlist.objects.values_list('id', flat=True)
         if len(playlist_ids) > settings.FRONTPAGE_PLAYLISTS_NO:
             random_ids = random.sample(playlist_ids,
                                        settings.FRONTPAGE_PLAYLISTS_NO)
         else:
             random_ids = playlist_ids
-        return Playlist.objects.filter(id__in=random_ids)
+        playlists = Playlist.objects.filter(id__in=random_ids)
+
+        # Caching for 10 minutes
+        cache.set(cache_key, playlists, 60 * 10)
+        return playlists
+
+    def _get_featured(self):
+        cache_key = 'content_home_fc'
+        featured = cache.get(cache_key)
+        if featured is not None:
+            return featured
+
+        featured_inst = Featured.instance.get()
+        featured = {}
+        for role_id, role_name in Collection.ROLE_CHOICES:
+            featured['feat_%s' % role_name] = getattr(featured_inst,
+                                                      role_name)
+        # Caching for 10 minutes
+        cache.set(cache_key, featured, 60 * 10)
+        return featured
 
 
 class About(TemplateView):
@@ -71,37 +102,49 @@ class CollectionList(ListView):
     template_name = 'content/collection_list.html'
     paginate_by = settings.COLLECTION_LIST_NO
 
+    def _get_collections(self, categs=None):
+        if categs is not None:
+            cache_key = 'coll_list_%s' % ('_'.join(categs),)
+        else:
+            cache_key = 'coll_list'
+        coll_list = cache.get(cache_key)
+        if coll_list is not None:
+            return coll_list
+
+        Q_args = Q()
+        # Using Q objects to retrieve all TaggedItems with our
+        # categories. We're doing this, so that we can retrieve
+        # in a single query all the items belonging to the
+        # different categories
+        for categ in categs:
+            Q_args |= Q(tag__name=categ)
+
+        items = TaggedItem.objects.filter(
+            Q_args, collection__role=self.kwargs['role']
+        )
+
+        # We group by tag the objects that the tagged items point to.
+        # This way we'll be able to find the objects belonging to
+        # all tags by using set intersection
+        categ_items = collections.defaultdict(set)
+        for item in items:
+            categ_items[item.tag].add(item.content_object)
+
+        coll_list = list(set.intersection(*categ_items.values()))
+        cache.set(cache_key, coll_list, 60 * 60)
+        return coll_list
+
     def get_queryset(self):
         form = CategsForm(self.request.GET)
+        categs = None
 
         if form.is_valid():
-            Q_args = Q()
             categs = form.cleaned_data['categs']
-            # Using Q objects to retrieve all TaggedItems with our
-            # categories. We're doing this, so that we can retrieve
-            # in a single query all the items belonging to the
-            # different categories
-            for categ in categs:
-                Q_args |= Q(tag__name=categ)
-
-            items = TaggedItem.objects.filter(
-                Q_args, collection__role=self.kwargs['role']
-            )
-
-            # We group by tag the objects that the tagged items point to.
-            # This way we'll be able to find the objects belonging to
-            # all tags by using set intersection
-            categ_items = collections.defaultdict(set)
-            for item in items:
-                categ_items[item.tag].add(item.content_object)
-
             # Building a new form, so that we have the currently checked
             # categories still checked on page reload
             self.categs_form = CategsForm(initial={'categs': categs})
 
-            return list(set.intersection(*categ_items.values()))
-        else:
-            return Collection.objects.filter(**self.kwargs)
+        return self._get_collections(categs)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionList, self).get_context_data(**kwargs)
@@ -122,11 +165,21 @@ class CollectionDetail(DetailView):
     context_object_name = 'collection'
     model = Collection
 
+    def _get_collection_videos(self, collection):
+        cache_key = 'coll_videos_%s' % (collection.id,)
+        videos = cache.get(cache_key)
+        if videos is not None:
+            return videos
+
+        # Retrieving public videos only
+        videos = collection.videos.filter(status=1)
+        cache.set(cache_key, videos, 60 * 60)
+        return videos
+
     def get_context_data(self, **kwargs):
         context = super(CollectionDetail, self).get_context_data(**kwargs)
         collection = context['collection']
-        # Retrieving public videos only
-        videos_list = collection.videos.filter(status=1)
+        videos_list = self._get_collection_videos(collection)
         paginator = Paginator(videos_list, 20)
         page = self.request.GET.get('page')
         try:

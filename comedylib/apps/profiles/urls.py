@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import patterns, url
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_page
 
 from profiles.views import (Home, Settings, Playlists, PlaylistDetail,
                             CreatePlaylist, EditPlaylist, DeletePlaylist,
@@ -34,10 +33,8 @@ login_patterns = patterns('',
 )
 
 open_patterns = patterns('',
-    url(r'^(?P<pk>\w+)$', cache_page(Home.as_view(), 60 * 60),
-        name='user_home'),
-    url(r'^(?P<pk>\w+)/playlists/$',
-        cache_page(Playlists.as_view(), 60 * 15),
+    url(r'^(?P<pk>\w+)$', Home.as_view(), name='user_home'),
+    url(r'^(?P<pk>\w+)/playlists/$', Playlists.as_view(),
         name='user_playlists'),
 )
 
