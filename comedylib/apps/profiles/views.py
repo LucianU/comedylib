@@ -13,7 +13,7 @@ from django.views.generic import (TemplateView, View, ListView, CreateView,
 
 from content.models import Video
 from profiles.forms import PlaylistForm, ProfileForm
-from profiles.models import Profile, Feeling, Playlist, Bookmark
+from profiles.models import Profile, Feeling, Playlist, PlaylistVideo, Bookmark
 
 
 class AjaxableResponseMixin(object):
@@ -233,10 +233,14 @@ class HandlePlaylistItems(View):
         video = get_object_or_404(Video, id=video_id)
         playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
 
-        # Retrieving 'add' or 'remove' method from 'videos'
-        action_method = getattr(playlist.videos, action)
-        action_method(video)
-        playlist.save()
+        if action == 'add':
+            order = playlist.videos.count()
+            PlaylistVideo.objects.create(
+                video=video, playlist=playlist, order=order
+            )
+        elif action == 'remove':
+            PlaylistVideo.objects.get(video=video, playlist=playlist).delete()
+
         return HttpResponse(json.dumps({'status': 'OK'}))
 
 
