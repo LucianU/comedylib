@@ -8,19 +8,18 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'PlaylistVideo'
-        db.create_table('profiles_playlistvideo', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('playlist', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Playlist'])),
-            ('video', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['content.Video'])),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True)),
-        ))
-        db.send_create_signal('profiles', ['PlaylistVideo'])
+        # Removing M2M table for field videos on 'Playlist'
+        db.delete_table('profiles_playlist_videos')
 
 
     def backwards(self, orm):
-        # Deleting model 'PlaylistVideo'
-        db.delete_table('profiles_playlistvideo')
+        # Adding M2M table for field videos on 'Playlist'
+        db.create_table('profiles_playlist_videos', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('playlist', models.ForeignKey(orm['profiles.playlist'], null=False)),
+            ('video', models.ForeignKey(orm['content.video'], null=False))
+        ))
+        db.create_unique('profiles_playlist_videos', ['playlist_id', 'video_id'])
 
 
     models = {
@@ -108,7 +107,7 @@ class Migration(SchemaMigration):
             'profile': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'playlists'", 'to': "orm['profiles.Profile']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'videos': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'playlists'", 'null': 'True', 'to': "orm['content.Video']"})
+            'videos': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'playlists'", 'null': 'True', 'through': "orm['profiles.PlaylistVideo']", 'to': "orm['content.Video']"})
         },
         'profiles.playlistvideo': {
             'Meta': {'object_name': 'PlaylistVideo'},

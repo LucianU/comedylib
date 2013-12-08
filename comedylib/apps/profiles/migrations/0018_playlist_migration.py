@@ -1,27 +1,22 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
 
-
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding model 'PlaylistVideo'
-        db.create_table('profiles_playlistvideo', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('playlist', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Playlist'])),
-            ('video', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['content.Video'])),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True)),
-        ))
-        db.send_create_signal('profiles', ['PlaylistVideo'])
-
+        "Write your forwards methods here."
+        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
+        for playlist in orm.Playlist.objects.all():
+            for index, video in enumerate(playlist.videos.all().order_by('created')):
+                playlistvideo = orm.PlaylistVideo(playlist=playlist, video=video, order=index)
+                playlistvideo.save()
 
     def backwards(self, orm):
-        # Deleting model 'PlaylistVideo'
-        db.delete_table('profiles_playlistvideo')
-
+        "Write your backwards methods here."
+        pass
 
     models = {
         'auth.group': {
@@ -144,3 +139,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['profiles']
+    symmetrical = True
