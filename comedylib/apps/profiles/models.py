@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.db import models
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
@@ -57,10 +58,18 @@ class Playlist(CreatedMixin):
 
     @property
     def bookmarks_count(self):
-        return Bookmark.objects.filter(
+        cache_key = 'pl_bmk_count_%s' % (self.pk,)
+        count = cache.get(cache_key)
+        if count is not None:
+            return count
+
+        count = Bookmark.objects.filter(
             content_type=ContentType.objects.get(name='playlist'),
             object_id=self.pk
         ).count()
+
+        cache.set(cache_key, count, 60 * 60)
+        return count
 
 
 class PlaylistVideo(models.Model):
