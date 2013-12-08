@@ -13,8 +13,10 @@ from south.modelsinspector import add_ignored_fields
 from content.forms import CustomTaggableManager
 from comedylib.mixins import CreatedMixin
 
+
 # We make South ignore this custom field
 add_ignored_fields(["^content\.forms\.CustomTaggableManager"])
+
 
 class Collection(CreatedMixin):
     ROLE_CHOICES = (
@@ -71,7 +73,10 @@ class Video(CreatedMixin):
                                       blank=True)
 
     class Meta:
-        ordering = ['-created']
+        #FIXME: I don't like this, but I don't know another way to
+        # have videos ordered by the `order` field when retrieved
+        # from a collection.
+        ordering = ['playlistvideo__order']
 
     def __unicode__(self):
         return u"%s:%s" % (self.title, "%s..." % self.url[:50]
