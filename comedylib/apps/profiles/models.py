@@ -33,6 +33,7 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return('user_home', (self.user.id,))
 
+
 class Playlist(CreatedMixin):
     profile = models.ForeignKey(Profile, related_name='playlists')
     videos = models.ManyToManyField(Video, through='PlaylistVideo',
