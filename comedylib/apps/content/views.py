@@ -104,9 +104,10 @@ class CollectionList(ListView):
 
     def _get_collections(self, categs=None):
         if categs is not None:
-            cache_key = 'coll_list_%s' % ('_'.join(categs),)
+            cache_key = 'coll_list_%s_%s' % (self.kwargs['role'],
+                                             '_'.join(categs),)
         else:
-            cache_key = 'coll_list'
+            cache_key = 'coll_list_%s' % (self.kwargs['role'],)
 
         coll_list = cache.get(cache_key)
         if coll_list is not None:
