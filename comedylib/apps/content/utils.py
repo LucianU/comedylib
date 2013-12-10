@@ -39,7 +39,12 @@ def set_video_thumb(instance):
     querydict = urlparse.parse_qs(url_bits.query)
 
     # This only applies to Youtube
-    ident = querydict['v'][0]
+    v_param = querydict.get('v')
+    if v_param is not None:
+        ident = v_param[0]
+    else:
+        logging.warning('Invalid Youtube URL %s' % instance.url)
+        return instance
 
     thumb = sources[source](ident)
     if thumb is not None:
