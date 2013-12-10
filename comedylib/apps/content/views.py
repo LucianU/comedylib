@@ -107,30 +107,36 @@ class CollectionList(ListView):
             cache_key = 'coll_list_%s' % ('_'.join(categs),)
         else:
             cache_key = 'coll_list'
+
         coll_list = cache.get(cache_key)
         if coll_list is not None:
             return coll_list
 
-        Q_args = Q()
-        # Using Q objects to retrieve all TaggedItems with our
-        # categories. We're doing this, so that we can retrieve
-        # in a single query all the items belonging to the
-        # different categories
-        for categ in categs:
-            Q_args |= Q(tag__name=categ)
+        if categs is not None:
+            Q_args = Q()
+            # Using Q objects to retrieve all TaggedItems with our
+            # categories. We're doing this, so that we can retrieve
+            # in a single query all the items belonging to the
+            # different categories
+            for categ in categs:
+                Q_args |= Q(tag__name=categ)
 
-        items = TaggedItem.objects.filter(
-            Q_args, collection__role=self.kwargs['role']
-        )
+            items = TaggedItem.objects.filter(
+                Q_args, collection__role=self.kwargs['role']
+            )
 
-        # We group by tag the objects that the tagged items point to.
-        # This way we'll be able to find the objects belonging to
-        # all tags by using set intersection
-        categ_items = collections.defaultdict(set)
-        for item in items:
-            categ_items[item.tag].add(item.content_object)
+            # We group by tag the objects that the tagged items point to.
+            # This way we'll be able to find the objects belonging to
+            # all tags by using set intersection
+            categ_items = collections.defaultdict(set)
+            for item in items:
+                categ_items[item.tag].add(item.content_object)
 
-        coll_list = list(set.intersection(*categ_items.values()))
+            # We get the collections that are common to all tags
+            coll_list = list(set.intersection(*categ_items.values()))
+        else:
+            coll_list = Collection.objects.filter(role=self.kwargs['role'])
+
         cache.set(cache_key, coll_list, 60 * 60)
         return coll_list
 
