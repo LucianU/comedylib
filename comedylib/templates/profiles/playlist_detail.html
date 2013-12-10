@@ -42,18 +42,13 @@
 <script>
     $(document).on("click", "#removebtn", function(event){
         event.preventDefault();
-            var r=confirm("Are you sure you want to delete the video from this playlist?");
-            if (r==true)
-                {
+            var r = confirm("Are you sure you want to delete the video from this playlist?");
+            if (r === true) {
                 a = $(this);
-                $.post('{% url remove_from_playlist %}', {'vid': a.attr('data-video-id'), 'pid': {{ playlist.id }} }, function(data) {
-                    $('#vid'+a.attr('data-video-id')).slideUp('normal');
-                });
+                $.post('{% url remove_from_playlist %}',
+                        {'vid': a.attr('data-video-id'), 'pid': {{ playlist.id }} },
+                        function(data) { $('#vid'+a.attr('data-video-id')).slideUp('normal'); });
                 return false;
-                }
-            else
-            {
-               
             }
     });
 </script>
