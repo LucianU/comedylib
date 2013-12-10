@@ -3,6 +3,7 @@ import os
 import random
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -106,11 +107,24 @@ class FeaturedManager(models.Manager):
     the `Featured` instance (which is a singleton), in case it
     doesn't exist
     """
+    def __init__(self, *args, **kwargs):
+        # We set the key on the manager, so that we can use it
+        # in the management command
+        self.cache_key = 'featured_colls'
+        super(FeaturedManager, self).__init__(*args, **kwargs)
+
     def get(self, *args, **kwargs):
+        instance = cache.get(self.cache_key)
+        if instance is not None:
+            return instance
+
         try:
             instance = super(FeaturedManager, self).get(*args, **kwargs)
         except self.model.DoesNotExist:
             instance = self._create()
+
+        # We cache for 24 hours
+        cache.set(self.cache_key, instance, 60 * 24)
         return instance
 
     def _create(self):

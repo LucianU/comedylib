@@ -71,18 +71,11 @@ class Home(TemplateView):
         return playlists
 
     def _get_featured(self):
-        cache_key = 'content_home_fc'
-        featured = cache.get(cache_key)
-        if featured is not None:
-            return featured
-
         featured_inst = Featured.instance.get()
         featured = {}
         for role_id, role_name in Collection.ROLE_CHOICES:
             featured['feat_%s' % role_name] = getattr(featured_inst,
                                                       role_name)
-        # Caching for 10 minutes
-        cache.set(cache_key, featured, 60 * 10)
         return featured
 
 

@@ -1,5 +1,6 @@
 import random
 
+from django.core.cache import cache
 from django.core.management.base import NoArgsCommand
 
 from content.models import Collection, Featured
@@ -17,3 +18,6 @@ class Command(NoArgsCommand):
             if new_objs:
                 setattr(instance, role_name, random.choice(new_objs))
         instance.save()
+
+        # We update the cache
+        cache.set(Featured.instance.cache_key, instance, 60 * 24)
