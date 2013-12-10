@@ -85,4 +85,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.comedylib.com'
 EMAIL_HOST_USER = 'feedback@comedylib.com'
 EMAIL_HOST_PASSWORD = 'nkcw07homrqZCx7'
-EMAIL_PORT = 465
+EMAIL_PORT = 25
