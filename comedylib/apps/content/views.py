@@ -325,4 +325,15 @@ class Playlists(ListView):
     context_object_name = 'playlists'
     template_name = 'content/playlists.html'
     paginate_by = settings.PLAYLISTS_PER_PAGE_NO
-    queryset = Playlist.objects.filter(empty=False)
+
+    def get_queryset(self):
+        cache_key = 'content_pls'
+        playlists = cache.get(cache_key)
+        if playlists is not None:
+            return playlists
+
+        playlists = Playlist.objects.filter(empty=False)
+
+        # Caching for 30 minutes
+        cache.set(cache_key, playlists, 60 * 30)
+        return playlists
