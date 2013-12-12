@@ -35,7 +35,7 @@ class Collection(CreatedMixin):
     tags = CustomTaggableManager(help_text = _("Choose one or more tags."))
 
     def __unicode__(self):
-        return u"%s:%s" % (self.name, self.get_role_display())
+        return u"%s | %s" % (self.name, self.get_role_display())
 
     @models.permalink
     def get_absolute_url(self):
@@ -84,8 +84,9 @@ class Video(CreatedMixin):
         ordering = ['playlistvideo__order']
 
     def __unicode__(self):
-        return u"%s:%s" % (self.title, "%s..." % self.url[:50]
-                           if len(self.url) > 50 else self.url)
+        return u"%s | %s | %s" % (self.title, self.collection.name,
+                                  "%s..." % self.url[:50]
+                                  if len(self.url) > 50 else self.url)
 
     def get_absolute_url(self):
         coll_url = reverse('content:%s' % self.collection.get_role_display(),
