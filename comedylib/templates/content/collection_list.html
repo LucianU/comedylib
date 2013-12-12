@@ -27,7 +27,7 @@
                             {% with videos=collection.videos.count %}
                             <p>{{ videos }} video{{ videos|pluralize }}</p>
                             {% endwith %}
-                            <p>{{ collection.rating }} % out of {{video.total_votes}} votes</p>
+                            <p>{{ collection.rating }} % out of {{collection.votes}} votes</p>
                         </div>
                     </div>
                     </a>

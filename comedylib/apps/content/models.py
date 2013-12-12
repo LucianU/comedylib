@@ -53,6 +53,10 @@ class Collection(CreatedMixin):
             return 0
         return sum(ratings) / len(ratings)
 
+    @property
+    def votes(self):
+        return sum(v.votes for v in self.videos.all())
+
 
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
@@ -97,7 +101,7 @@ class Video(CreatedMixin):
         return (100 * likes) / (likes + dislikes)
 
     @property
-    def total_votes(self):
+    def votes(self):
         return self.likes + self.dislikes
 
 
