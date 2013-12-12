@@ -1,5 +1,5 @@
 cssmin==0.1.4
-django>=1.4.10
+django==1.4.10
 fabric==1.5.1
 gdata==2.0.17
 pillow==1.7.7
