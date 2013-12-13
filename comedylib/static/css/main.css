@@ -2327,6 +2327,7 @@ z-index:10;
 top:0;
 left:0;
 }
+
 .coll-pic-content .buttons {
 position:absolute;
 display:none;
@@ -2508,6 +2509,7 @@ text-align:center;
 padding-bottom:0px;
 }
 .collection-front-content{
+position:relative;
 background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
 padding:4px;
 -moz-border-radius: 5px;
@@ -2515,6 +2517,24 @@ border-radius: 5px;
 border: 1px solid #444;
 box-shadow: 0px 0px 5px #111;
 overflow:hidden;
+}
+.collection-front-content a.remove{
+position:absolute;
+top:8px;
+left:9px;
+text-transform:uppercase;
+font:bold 13px Arial, Helvetica, sans-serif;
+display:block;
+border:1px solid #444; /*FFD573*/
+background: rgba(17,17,17, 0.8);
+-webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+-moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+-o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.collection-front-content a:hover.remove{
+background: rgba(68,68,68, 0.9);
+
 }
 .coll-front-pic-content{
 float:left;
@@ -3183,4 +3203,18 @@ margin:0 32%;
 .align-form  h1{
 color:#63ADD0;
 text-align:center;
+}
+.playlist-edit{
+    width:324px;
+    margin:0 auto;
+}
+.playlist-edit ul{
+   list-style:none;
+}
+.playlist-edit ul li{
+padding:0;
+margin:0;
+   display:block;
+   height:123px;
+   width:324px;
 }

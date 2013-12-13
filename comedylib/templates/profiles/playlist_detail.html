@@ -1,24 +1,37 @@
 {% extends "profiles/playlists.html" %}
 {% block title %}Comedylib - Playlists of {{user.username}}{% endblock %}
 {% block profile_content %}
+<script>
+  $(function() {
+    $( "#sortable" ).sortable({connectWith: ".connectedSortable"});
+    $( "#sortable" ).disableSelection();
+  });
+</script>
 <div class="col span_5_of_6">
     <h5>{{ playlist.title }}</h5>
-    <div class="section group">
-         {% for video in playlist.videos.all %}
-            <div class="col span_1_of_5 col5" id="vid{{ video.id }}">
-                <div class="collection-content">
-                    <div class="coll-pic-content">
+        <center><h2>Update playlist name</h2>
+        <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
+            <input id="id_title" type="text" name="title" maxlength="255" placeholder="{{ playlist.title }}">
+            <input type="submit" id="sub" value="Update playlist" />
+             <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
+        </form></center>
+    <div class="section group playlist-edit">
+    <ul id="sortable" class="connectedSortable">
+             {% for video in playlist.videos.all %}
+        <li>    
+                <div class="col span_2_of_2 col1" id="vid{{ video.id }}">
+                    <div class="collection-front-content">
+                        <a id="removebtn" data-video-id="{{ video.id }}" class="remove" href="#" title="Remove video from playlist"><i class="icon-trash"></i></a>
                         <a href="{{ video.get_absolute_url }}">
-                            <img src="{{ video.picture.url }}">
+                                <img class="coll-front-pic-content" src="{{ video.picture.url }}">
                         </a>
-                         <div class="buttons">
-                             <a id="removebtn" data-video-id="{{ video.id }}" class="remove" href="#" title="Remove video from playlist"><i class="icon-trash"></i></a>
-                        </div>
-                    </div>
-                    <div class="coll-name-content">
-                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-                    </div>
-                    <div class="coll-detail-content">
+                        <div class="coll-front-detail-content">
+                        <div class="coll-front-name-content">
+                            <a href="{{ video.get_absolute_url }}">{{ video.title|truncatechars:80 }}</a>
+                            
+                        </div> 
+                        
+                        <a class="coll-front-name-content collection" href="{{ video.collection.get_absolute_url }}">{{ video.collection.name|truncatechars:80 }}</a>
                         <div class="section group">
                             <div class="col span_1_of_4_coll_det vlength">
                                 <p>{{ video.duration }}</p> <span>Length</span>
@@ -27,18 +40,26 @@
                                 <p>{{ video.views }}</p> <span>Views</span>
                             </div>
                             <div class="col span_1_of_4_coll_det rating">
-                                <p>{{ video.rating }} %</p> <span>Rating</span>
+                                <p>{{ video.rating }}%</p>
+                                <span>Rating</span>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
-            </div>
+        </li>  
+        
+
           
         {% empty %}
             <p>This playlist has no videos.</p>
         {% endfor %}
-    </div>
+    <!--</div> -->
+     </ul>  
+    
 </div>
+
+
 <script>
     $(document).on("click", "#removebtn", function(event){
         event.preventDefault();
@@ -51,6 +72,7 @@
                 return false;
             }
     });
+
 </script>
 
 {% endblock %}
