@@ -77,7 +77,7 @@
                             </a>
                             <p class="time">{{ rel_video.duration }}</a>
                         </div>      
-                        <div class="col span_2_of_3">   
+                        <div class="col span_2_of_3 data">   
                             <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
                                 {{ rel_video.title }}
                             </a>
@@ -217,8 +217,8 @@
                     $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
                         var html = '<h2>Buy something with {{ video.collection.name }}</h2>';
                         for (var i=0; i < data.length; i++) {
-                            var prod_html = '<div class="item"><a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
-                            prod_html += '<a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
+                            var prod_html = '<div class="item"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
+                            prod_html += '<a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
                             prod_html += '<p>'+ data[i].price +'</p></div>';
                             html += prod_html;
                         }
