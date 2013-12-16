@@ -2,6 +2,5 @@
 
 newrelic==2.6.0.5
 pylibmc==1.2.3
-sentry==5.1.0
 supervisor==3.0
 uwsgi==1.9.21.1
