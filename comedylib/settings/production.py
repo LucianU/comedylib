@@ -44,41 +44,8 @@ INSTALLED_APPS += (
 )
 
 RAVEN_CONFIG = {
-    'dsn': ('http://29f26e03533845338ccfcad3293a3bdf:'
-            '29278d129e9643268a9f34f16902a54b@sentry.comedylib.com/2'),
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django': {
-            'level': 'INFO',
-            'handlers': ['sentry'],
-            'propagate': False,
-        },
-        'celery': {
-            'level': 'INFO',
-            'handlers': ['sentry'],
-            'propagate': True,
-        },
-    },
+    'dsn': 'http://ba670bac2cac47dfbcf0b43e16715fa5:'
+           '983c2bca1e424413ae0ae808c58c81c7@sentry.comedylib.com/2'
 }
 
 EMAIL_USE_TLS = True
