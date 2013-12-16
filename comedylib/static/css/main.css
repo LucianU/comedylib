@@ -1318,7 +1318,7 @@ min-height:500px;
 	float: left;
 	clear: none;
 	border:1px solid #444;
-	/*background:#181919;*/
+	background:#181919;
 }
 .alignright {
 text-align:right;
@@ -1403,7 +1403,7 @@ position:relative;
 }
 #video_detail .container_list .data{
 position:relative;
-
+width:210px;
 }
 #video_detail .container_list .picture p.time{
 font:bold 11px Arial, Helvetica, sans-serif;
@@ -1442,8 +1442,9 @@ background:#333;
 #video_detail .container_list li a{
 font: 12px Arial,Helvetica,sans-serif;
 margin:0;
-
 padding:0;
+
+
 }
 #video_detail .container_list li a:hover{
 color:#FFC640;
@@ -1484,6 +1485,7 @@ margin-top:10px;
     padding: 5px 0;
     margin: 10px 0;
     float: left;
+    width: 222px;
 }
  #affiliate .item a img{
     margin:10px;

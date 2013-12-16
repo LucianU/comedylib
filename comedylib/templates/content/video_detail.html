@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block meta %}
+<meta name="keywords" content="{{video.collection.name}} online video, {{video.collection.name}} stand up comedy online" />
 {{ block.super }}
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:image" content="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host}}{{ video.picture.url }}" />
 {% endblock %}
-{% block title %}Comedylib - {{video.collection.name}}, {{ video.title }}{% endblock %}
+{% block title %}Comedylib - {{video.collection.name}}, {{ video.title }} - online comedy videos{% endblock %}
 {% block content %}
 {% load thumbnail %}
 <div id="video_detail" class="homepage">
@@ -48,7 +49,8 @@
         
         <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
-                <div class="mediaplayer">
+           
+               <div class="mediaplayer">
                     <div id='mediaplayer'></div>
                     <script type="text/javascript">
                         jwplayer('mediaplayer').setup({
@@ -57,13 +59,12 @@
                             'html5player': '{{ STATIC_URL }}mediaplayer/jwplayer.html5.js',
                             'autostart': 'true',
                             'volume': '80',
-                            'width': '667',
-                            'height': '390',
-                            'skin': '{{ STATIC_URL }}mediaplayer/skins/modieus/modieus.xml',
+                            'width': '663',
+                            'height': '392',
                             'file': '{{ video.url }}'
                         });
                     </script>
-                </div>
+                </div> 
             </div> <!-- end video-->
         </div>
                 <div class="col0 span_2_of_6_1 related nosectionspace">
