@@ -20,4 +20,4 @@ class Command(NoArgsCommand):
         instance.save()
 
         # We update the cache
-        cache.set(Featured.instance.cache_key, instance, 60 * 24)
+        cache.set(Featured.instance.cache_key, instance, 60 * 60 * 24)

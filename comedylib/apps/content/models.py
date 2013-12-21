@@ -129,7 +129,7 @@ class FeaturedManager(models.Manager):
             instance = self._create()
 
         # We cache for 24 hours
-        cache.set(self.cache_key, instance, 60 * 24)
+        cache.set(self.cache_key, instance, 60 * 60 * 24)
         return instance
 
     def _create(self):
