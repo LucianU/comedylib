@@ -6,10 +6,10 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import SuspiciousOperation
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (TemplateView, View, ListView, CreateView,
-                                  UpdateView, DetailView, FormView)
+                                  DetailView, FormView)
 
 from content.models import Video
 from profiles.forms import PlaylistForm, ProfileForm
@@ -203,12 +203,33 @@ class CreatePlaylist(AjaxableResponseMixin, CreateView):
         return reverse('own_playlists')
 
 
-class EditPlaylist(AjaxableResponseMixin, UpdateView):
-    template_name = 'profiles/edit_playlist.html'
-    form_class = PlaylistForm
+class EditPlaylist(AjaxableResponseMixin, View):
+    def post(self, request, *args, **kwargs):
+        profile = request.user.profile
+        playlist_title = request.POST.get('playlist_title')
+        playlist_id = request.POST.get('playlist_id')
+        video_order = request.POST.getlist('video_order[]')
+        playlist_videos = PlaylistVideo.objects.filter(
+            playlist__profile=profile,
+            playlist__id=playlist_id,
+        )
+        if not playlist_videos:
+            raise Http404('No videos found.')
 
-    def get_queryset(self):
-        return Playlist.objects.filter(profile=self.request.user.profile)
+        # We update the order of the videos in the playlist
+        if video_order is not None:
+            for i, v in enumerate(video_order):
+                video = playlist_videos.get(video__id=v)
+                video.order = i
+                video.save()
+
+        # We update the playlist title
+        if playlist_title:
+            playlist = playlist_videos[0].playlist
+            playlist.title = playlist_title
+            playlist.save()
+
+        return HttpResponse(json.dumps({'status': 'OK'}))
 
 
 class DeletePlaylist(View):
