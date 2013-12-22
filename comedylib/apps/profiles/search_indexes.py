@@ -1,22 +1,23 @@
-from haystack import site
-from haystack.indexes import CharField, SearchIndex
+from haystack.indexes import CharField, Indexable, SearchIndex
 
 from profiles.models import Bookmark, Playlist
 
 
-class BookmarkIndex(SearchIndex):
+class BookmarkIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
-    def index_queryset(self):
+    def get_model(self):
+        return Bookmark
+
+    def index_queryset(self, using=None):
         return Bookmark.objects.all()
 
 
-class PlaylistIndex(SearchIndex):
+class PlaylistIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
-    def index_queryset(self):
+    def get_model(self):
+        return Playlist
+
+    def index_queryset(self, using=None):
         return Playlist.objects.all()
-
-
-site.register(Bookmark, BookmarkIndex)
-site.register(Playlist, PlaylistIndex)

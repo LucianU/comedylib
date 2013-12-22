@@ -194,10 +194,16 @@ PLAYLISTS_PER_PAGE_NO = 30
 COLLECTION_LIST_NO = 28
 RECENT_VIDEOS_NO = 10
 
-HAYSTACK_SITECONF = 'comedylib.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(SITE_ROOT, 'whoosh_index')
-HAYSTACK_INCLUDE_SPELLING = True
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(SITE_ROOT, 'whoosh_index'),
+        'STORAGE': 'file',
+        'POST_LIMIT': 127 * 1024 * 1024,
+        'INCLUDE_SPELLING': True,
+        'BATCH_SIZE': 100,
+    },
+}
 
 # django-compressor settings
 COMPRESS_CSS_FILTERS = [

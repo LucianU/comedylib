@@ -1,22 +1,23 @@
-from haystack import site
-from haystack.indexes import CharField, SearchIndex
+from haystack.indexes import CharField, Indexable, SearchIndex
 
 from content.models import Collection, Video
 
 
-class CollectionIndex(SearchIndex):
+class CollectionIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
-    def index_queryset(self):
+    def get_model(self):
+        return Collection
+
+    def index_queryset(self, using=None):
         return Collection.objects.all()
 
 
-class VideoIndex(SearchIndex):
+class VideoIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
-    def index_queryset(self):
+    def get_model(self):
+        return Video
+
+    def index_queryset(self, using=None):
         return Video.objects.all()
-
-
-site.register(Collection, CollectionIndex)
-site.register(Video, VideoIndex)
