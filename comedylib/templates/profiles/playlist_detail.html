@@ -3,18 +3,20 @@
 {% block profile_content %}
 <script>
     $(function() {
-        $( "#sortable" ).sortable({connectWith: ".connectedSortable"});
-        $( "#sortable" ).disableSelection();
+        $("#sortable").sortable({connectWith: ".connectedSortable"});
+        $("#sortable").disableSelection();
     });
 </script>
 <div class="col span_5_of_6">
     <h5>{{ playlist.title }}</h5>
-        <center><h2>Update playlist name</h2>
+    <center>
+        <h2>Update playlist name</h2>
         <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
             <input id="id_title" type="text" name="title" maxlength="255" placeholder="{{ playlist.title }}">
             <input type="submit" id="sub" value="Update playlist" />
              <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
-        </form></center>
+        </form>
+    </center>
     <div class="section group playlist-edit">
         <ul id="sortable" class="connectedSortable">
             {% for video in playlist.videos.all %}
@@ -23,7 +25,7 @@
                         <div class="collection-front-content">
                             <a id="removebtn" data-video-id="{{ video.id }}" class="remove" href="#" title="Remove video from playlist"><i class="icon-trash"></i></a>
                             <a href="{{ video.get_absolute_url }}">
-                                    <img class="coll-front-pic-content" src="{{ video.picture.url }}">
+                                <img class="coll-front-pic-content" src="{{ video.picture.url }}">
                             </a>
                             <div class="coll-front-detail-content">
                             <div class="coll-front-name-content">
@@ -63,7 +65,6 @@
                 return false;
             }
     });
-
 </script>
 
 {% endblock %}
