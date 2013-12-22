@@ -258,7 +258,7 @@
                         {% for comment in comments %}
                             <li>
                                 <a href="{{ comment.user.profile.get_absolute_url }}">
-                                    <img src="{% thumbnail comment.user.profile.picture 45x35 crop %}" />
+                                    <img src="{% thumbnail comment.user.profile.picture 80x60 crop %}" />
                                 </a>
                                 <a href="{{ comment.user.profile.get_absolute_url }}">
                                     {{comment.user.username}}

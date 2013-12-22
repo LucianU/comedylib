@@ -1815,7 +1815,7 @@ clear:left;
 float:left;
 clear:left;
 width:667px;
-min-height:20px;
+min-height:60px;
 padding:5px 2px 5px 2px;
 }
 #video_detail .comments .commentlist li:nth-child(odd) { 
@@ -1825,17 +1825,16 @@ background:#222;
 
 }
 #video_detail .comments .commentlist p{
-width:600px;
+width:566px;
 height:auto;
 float:left;
-font-size:13px;
-padding:3px;
-
+font-size:16px;
+padding: 3px 3px 3px 10px;
 }
 #video_detail .comments .commentlist a{
 height:auto;
 float:left;
-font-size:12px;
+font-size:14px;
 font-weight:bold;
 color: #63ADD0;
 }
@@ -1855,11 +1854,10 @@ padding-top:2px;
 
 #video_detail .comments .commentlist  img{
 float:left;
-width:45px;
-height:35px;
+width:80px;
+height:60px;
 margin-right:5px;
-
-
+margin-left:3px;
 }
 
 .login-er-content {
@@ -2476,6 +2474,7 @@ box-shadow: 0px 0px 5px #111;
 overflow:hidden;
 }
 .coll-list-content{
+background:#000;
 position:relative;
 height:250px;
 -moz-border-radius: 5px;
@@ -2826,11 +2825,21 @@ padding:0px;
 /*background:#f00;*/
 }
 #playlistform {
-margin: 10px 0 20px 50px;
+margin: 10px 0 20px 0px;
 }
 #playlistform  input[type="submit"]{
 margin-left:10px;
 width:150px;
+}
+.playlist-input {
+position:relative;
+display:block;
+width:150px;
+height:48px;
+}
+.playlist-input input[type="submit"]{
+width:150px;
+margin: 0 auto 10px;
 }
 
 .signin_content{
