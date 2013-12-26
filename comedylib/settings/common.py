@@ -196,7 +196,7 @@ RECENT_VIDEOS_NO = 10
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.SolrEngine',
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
         'URL': 'http://127.0.0.1:8983/solr',
         'INCLUDE_SPELLING': True,
     },
