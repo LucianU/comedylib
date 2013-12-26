@@ -196,12 +196,9 @@ RECENT_VIDEOS_NO = 10
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(SITE_ROOT, 'whoosh_index'),
-        'STORAGE': 'file',
-        'POST_LIMIT': 127 * 1024 * 1024,
+        'ENGINE': 'haystack.backends.whoosh_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
         'INCLUDE_SPELLING': True,
-        'BATCH_SIZE': 100,
     },
 }
 
