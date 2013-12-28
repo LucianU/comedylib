@@ -123,6 +123,11 @@ class CollectionList(ListView):
                 Q_args, collection__role=self.kwargs['role']
             )
 
+            # It's possible that there are no items that have all
+            # the categs
+            if not items:
+                return items
+
             # We group by tag the objects that the tagged items point to.
             # This way we'll be able to find the objects belonging to
             # all tags by using set intersection
