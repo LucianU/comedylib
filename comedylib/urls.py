@@ -11,6 +11,13 @@ from search.views import GroupedResultsSearchView
 
 admin.autodiscover()
 
+flatpages_urls = patterns('django.contrib.flatpages.views',
+    url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
+    url(r'^terms/$', 'flatpage', {'url': '/terms/'}, name='terms'),
+    url(r'^privacy/$', 'flatpage', {'url': '/privacy/'}, name='privacy'),
+    url(r'^ads/$', 'flatpage', {'url': '/ads/'}, name='ads'),
+)
+
 urlpatterns = patterns('',
     url(r'^a52/', include(admin.site.urls)),
     url(r'^a/', include('accounts.urls')),
@@ -20,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^search/', GroupedResultsSearchView(form_class=WildcardSearchForm),
         name='haystack_search'),
     url(r'^com/', include('affiliates.urls', namespace='affiliates')),
+    url(r'^', include(flatpages_urls, namespace='flatpages')),
     url(r'^', include('content.urls', namespace='content')),
 )
 

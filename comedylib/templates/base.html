@@ -147,11 +147,11 @@
                     <div class="cleared"></div>
                     <div class="footer-menu">
                         <ul class="navfooter">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/terms">Terms</a></li>
-                            <li><a href="/privacy">Privacy</a></li>
-                            <li><a href="/feedback">Send Feedback</a></li>
-                            <li><a href="/ads">Advertising</a></li>
+                            <li><a href="{% url flatpages:about %}">About</a></li>
+                            <li><a href="{% url flatpages:terms %}">Terms</a></li>
+                            <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
+                            <li><a href="{% url contact_form %}">Send Feedback</a></li>
+                            <li><a href="{% url flatpages:ads %}">Advertising</a></li>
                         </ul>
                     </div>
                     <div class="cleared"></div>
