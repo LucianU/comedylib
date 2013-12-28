@@ -19,9 +19,19 @@ class AmazonSearcher(object):
                                         SearchIndex='Video')
         return self._format(raw_results)
 
+    def _passes_filter(self, result):
+        # We filter for products without a price, because it means that
+        # they unavailable
+        if result.price_and_currency[0] == 'None':
+            return False
+        return True
+
     def _format(self, raw_results):
         results = []
         for raw_result in raw_results:
+            if not self._passes_filter(raw_result):
+                continue
+
             result = {'title': raw_result.title,
                       'url': raw_result.offer_url,
                       'image_url': raw_result.small_image_url,
