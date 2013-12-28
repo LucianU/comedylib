@@ -1,4 +1,5 @@
 import collections
+import hashlib
 import random
 
 from django.conf import settings
@@ -97,8 +98,11 @@ class CollectionList(ListView):
 
     def _get_collections(self, categs=None):
         if categs is not None:
-            cache_key = 'coll_list_%s_%s' % (self.kwargs['role'],
-                                             '_'.join(categs),)
+            # There is a limit of 255 characters to a memcached key
+            # This is a way to avoid going over that limit
+            categs_indices = ''.join(categ[0] for categ in categs)
+            categs_key = hashlib.sha1(categs_indices).hexdigest()
+            cache_key = 'coll_list_%s_%s' % (self.kwargs['role'], categs_key)
         else:
             cache_key = 'coll_list_%s' % (self.kwargs['role'],)
 
