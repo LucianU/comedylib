@@ -1,6 +1,7 @@
 import random
 
 from django.conf import settings
+from django.core.cache import cache
 
 from amazon.api import AmazonAPI
 
@@ -58,25 +59,35 @@ class OfferSearcher(object):
             the beginning of the list
         Returns: a sequence
         """
+        cache_key = 'af_k:%s_n:%s_r:%s' % (keyword, no_of_results,
+                                           int(randomly))
+        offers = cache.get(cache_key)
+        if offers is not None:
+            return offers
+
         results = []
         for searcher in self.searchers:
             results.extend(searcher.search(no_of_results, keyword))
 
-        # If we don't have any search results, we just return
-        # an empty list
-        if not results:
-            return results
+        offers = []
+        if results:
+            # If we have fewer results than the number expected, we
+            # return all of them
+            if randomly:
+                if len(results) <= no_of_results:
+                    offers = results
+                else:
+                    offers = random.sample(results, no_of_results)
+            else:
+                if len(results) <= no_of_results:
+                    offers = results
+                else:
+                    offers = results[:no_of_results]
 
-        # If we have fewer results than the number expected, we
-        # return all of them
-        if randomly:
-            if len(results) <= no_of_results:
-                return results
-            return random.sample(results, no_of_results)
-        else:
-            if len(results) <= no_of_results:
-                return results
-            return results[:no_of_results]
+        # We cache even an empty list, because we don't want to hit
+        # the provider api for that keyword
+        cache.set(cache_key, offers, 60 * 60)
+        return offers
 
 
 offer_searcher = OfferSearcher()
