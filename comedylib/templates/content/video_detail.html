@@ -180,15 +180,7 @@
                             <!-- Reddit button-->               
                             <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
                             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=550');return false;" class="redd" title="Share to Reddit"></a>
-                            <script type="text/javascript">
-                                $(document).ready(function(){
-                                    $('#fb_share_btn').click(function(e){
-                                        e.preventDefault();
-                                        var sharer = 'https://www.facebook.com/sharer/sharer.php?u=';
-                                        window.open(sharer+location.href, 'sharer', 'width=626,height=436');
-                                    });
-                                });
-                            </script>
+                           
                         </div>
                     </li>
                 </ul>
@@ -214,21 +206,8 @@
                 </div>
             </div><!-- end social -->
             <div id="affiliate"></div>
-            
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
-                        var html = '<h2>Buy something with {{ video.collection.name }}</h2>';
-                        for (var i=0; i < data.length; i++) {
-                            var prod_html = '<div class="item"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
-                            prod_html += '<a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
-                            prod_html += '<p>'+ data[i].price +'</p></div>';
-                            html += prod_html;
-                        }
-                        $('div#affiliate').html(html);
-                    });
-                });
-            </script>
+            <!-- Affiliate script -->
+           
             <div class="comments">
                 <h1>Comments</h1>
                 {% load comments %}
@@ -282,6 +261,31 @@
     <h3>You must be logged in to have access to this option</h3>
     {% include "registration/login-er.html" %}
 </div> <!-- end loginerror-->
+
+ <!-- Social script-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#fb_share_btn').click(function(e){
+            e.preventDefault();
+            var sharer = 'https://www.facebook.com/sharer/sharer.php?u=';
+            window.open(sharer+location.href, 'sharer', 'width=626,height=436');
+        });
+    });
+</script> <!-- End Social script-->
+ <script type="text/javascript">
+$(document).ready(function() {
+    $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
+        var html = '<h2>Buy something with {{ video.collection.name }}</h2>';
+        for (var i=0; i < data.length; i++) {
+            var prod_html = '<div class="item"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
+            prod_html += '<a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
+            prod_html += '<p>'+ data[i].price +'</p></div>';
+            html += prod_html;
+        }
+        $('div#affiliate').html(html);
+    });
+});
+</script> <!-- END Affiliate script -->
 <script>
 var mouse_is_inside = false;
     (function($) {
