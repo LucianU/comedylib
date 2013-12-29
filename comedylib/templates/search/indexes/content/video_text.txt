@@ -1,3 +1,2 @@
 {{ object.title }}
 {{ object.collection.name }}
-{{ object.collection.description }}
