@@ -49,19 +49,20 @@
         
         <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
-           
-               <div class="mediaplayer">
+                <div class="mediaplayer">
                     <div id='mediaplayer'></div>
                     <script type="text/javascript">
                         jwplayer('mediaplayer').setup({
                            /* 'id': 'playerID',*/
                             'flashplayer': '{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf',
                             'html5player': '{{ STATIC_URL }}mediaplayer/jwplayer.html5.js',
+                            'primary': 'flash',
+                            'title': '{{ video.title }}',
                             'autostart': 'true',
                             'volume': '80',
                             'width': '663',
                             'height': '392',
-                            'file': '{{ video.url }}'
+                            'file': '{{ video.url }}'                        
                         });
                     </script>
                 </div> 
