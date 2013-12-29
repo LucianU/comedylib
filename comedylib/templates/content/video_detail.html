@@ -9,6 +9,22 @@
 {% block content %}
 {% load thumbnail %}
 <div id="video_detail" class="homepage">
+    <script>
+        var pageAbsoluteURI = '{{ request.build_absolute_uri }}',
+            affiliateOffersURI = '{% url affiliates:offers %}',
+            collectioName = '{{ video.collection.name }}',
+            videoId = '{{ video.id }}',
+            currentPlId = '{{ current_pl.id }}',
+            mouseIsInside = false,
+            inPl = !!currentPlId,
+            autoplay = '{{ request.session.autoplay }}' == 0 ? false : true,
+            autoplayURI = '{% url autoplay %}',
+            nextVideoURI = '{{ next_video_url }}',
+            addToPlaylistURI = '{% url add_to_playlist %}',
+            videoFeelingURI = '{% url vid_feel %}',
+            addToBookmarksURI = '{% url add_to_bookmarks %}',
+            removeFromBookmarksURI = '{% url remove_from_bookmarks %}';
+    </script>
     <div class="section group">
         {% if current_pl %}
             <div class="col0 span_4_of_6_1 playlist_title">
@@ -150,16 +166,15 @@
                         <li id="addplay-btn" class="playlist ">
                             <a href="#" title="Add this video to a playlist">Playlist <span><i class="icon-list"></i></span></a>
                         </li>
-                          {% if bookmarked_vid %}
-                        <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span><i class="icon-minus"></i></span></a>
-                        </li>
+                        {% if bookmarked_vid %}
+                            <li class="bookmark">
+                                <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span><i class="icon-minus"></i></span></a>
+                            </li>
                         {% else %}
-                        <li class="bookmark">
-                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span><i class="icon-plus"></i></span></a>
-                        </li>
+                            <li class="bookmark">
+                                <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span><i class="icon-plus"></i></span></a>
+                            </li>
                         {% endif %}
-                        
                     {% else %}
                         <li class="playlist">
                             <a class="fancybox" href="#loginerror" >Playlist  <span><i class="icon-list"></i></span></a>
@@ -172,15 +187,13 @@
                         <div class="social-share">
                             <p><span>Share</span> video</p>
                             <!-- Facebook button-->
-                            <a href="#" class="faceb" id="fb_share_btn" title="Share to Facebook"></a>
+                            <a href="#" class="faceb" id="fb_share_btn" title="Share on Facebook"></a>
                             <!-- Google button-->
-                            <a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
-                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="google"><img
-                            src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/></a>
-                            <!-- Reddit button-->               
-                            <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,
-                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=550');return false;" class="redd" title="Share to Reddit"></a>
-                           
+                            <a href="#" class="google" id="gp_share_btn">
+                                <img src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/>
+                            </a>
+                            <!-- Reddit button-->
+                            <a href="#" class="redd" id="rdt_share_btn" title="Share to Reddit"></a>
                         </div>
                     </li>
                 </ul>
@@ -206,8 +219,6 @@
                 </div>
             </div><!-- end social -->
             <div id="affiliate"></div>
-            <!-- Affiliate script -->
-           
             <div class="comments">
                 <h1>Comments</h1>
                 {% load comments %}
@@ -253,7 +264,6 @@
             </div><!-- end comments -->
         </div>
         <div class="col span_2_of_6 nosectionspace">
-            
         </div>
     </div>
 </div> <!-- end video detail-->
@@ -261,257 +271,7 @@
     <h3>You must be logged in to have access to this option</h3>
     {% include "registration/login-er.html" %}
 </div> <!-- end loginerror-->
-
- <!-- Social script-->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#fb_share_btn').click(function(e){
-            e.preventDefault();
-            var sharer = 'https://www.facebook.com/sharer/sharer.php?u=';
-            window.open(sharer+location.href, 'sharer', 'width=626,height=436');
-        });
-    });
-</script> <!-- End Social script-->
- <script type="text/javascript">
-$(document).ready(function() {
-    $.get('{% url affiliates:offers %}', {keyword: '{{ video.collection.name }}'}, function(data) {
-        var html = '<h2>Buy something with {{ video.collection.name }}</h2>';
-        for (var i=0; i < data.length; i++) {
-            var prod_html = '<div class="item"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
-            prod_html += '<a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
-            prod_html += '<p>'+ data[i].price +'</p></div>';
-            html += prod_html;
-        }
-        $('div#affiliate').html(html);
-    });
-});
-</script> <!-- END Affiliate script -->
-<script>
-var mouse_is_inside = false;
-    (function($) {
-        $("#addplay-btn").click(function() {
-            if ( $("#addtoplaycontent").is(":hidden") ) {
-                $("#addtoplaycontent").slideDown("normal"); 
-                return false;
-                } else {
-                $("#addtoplaycontent").slideUp("normal");
-                return false;
-            }
-        });
-        $("#addtoplaycontent").hover(function(){ 
-        mouse_is_inside=true; 
-    }, function(){ 
-        mouse_is_inside=false; 
-    });	
-	 $("body").click(function(){
-        if(! mouse_is_inside) {
-            $("#addtoplaycontent").slideUp("fast");
-        }
-    });	
-    })(jQuery);
-    $(document).ready(function() {
-            $(".fancybox").fancybox();
-        });
-    $(document).ready(function() {
-        $(".various").fancybox({
-            maxWidth    : 400,
-            maxHeight   : 400,
-            fitToView   : false,
-            width       : '70%',
-            height      : '70%',
-            autoSize    : false,
-            closeClick  : false,
-            openEffect  : 'none',
-            closeEffect : 'none'
-        });
-    });
-</script>
-<script>
-    // If in the backend, autoplay is set to 0, we disable it.
-    // Otherwise we enable it. That's why we don't use strict check,
-    // to account for the case when request.session.autoplay isn't set
-    var autoplay = '{{ request.session.autoplay }}' == 0 ? false : true;
-
-    // Toggling the 'autoplay' button along with the variable
-    // that specifies whether 'autoplay' should be enabled
-    $(document).ready(function() {
-        $('i.icon-refresh').parent('a').click(function(event) {
-            event.preventDefault();
-            $('i.icon-refresh').toggleClass('active');
-            if (autoplay === true) {
-                $.post('{% url autoplay %}', {'autoplay': 0}, function(data) {
-                    autoplay = false;
-                });
-            } else {
-                $.post('{% url autoplay %}', {'autoplay': 1}, function(data) {
-                    autoplay = true;
-                });
-            }
-        });
-    });
-    // When the player is idle, we check if it has reached the end
-    // of the video and redirect to the next one, if autoplay is
-    // enabled
-    $(document).ready(function() {
-        jwplayer().onIdle(function(event) {
-            var nextVideoUrl = '{{ next_video_url }}';
-            if (autoplay === true) {
-                var position = jwplayer().getPosition();
-                var duration = jwplayer().getDuration();
-                if ((duration - position) < 1) {
-                    window.location.href = nextVideoUrl;
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $('#sub').on("click", function(event)  {
-        event.preventDefault();
-        $("#feedback").text('').fadeIn();
-        $.post($("#playlistform").attr("action"), {'title': $('#id_title').val()}, function(data) {
-            $('#playlistul').append('<li data-playlist-id="'+data.pk+'" class="active">'+$("#id_title").val()+' (0)</li>');
-            clearInput();
-        });
-        return false;
-    });
-    function clearInput() {
-        $("#playlistform :input").each(function() {
-            $(this).val('');
-        });
-        $("#sub").val('Create playlist');
-        $("#feedback").text('Your playlist has been created.').delay(1500).fadeOut();
-    };
-    $(document).on("click", "#playlistul li.active", function(event){
-        event.preventDefault();
-        li = $(this);
-        $.post('{% url add_to_playlist %}', {'vid': {{ video.id }}, 'pid': li.attr('data-playlist-id')}, function(data) {
-            title = li.text();
-            vidCount = title.match(/\((\d+)\)/)[1];
-            newVidCount = (parseInt(vidCount) + 1).toString();
-            newTitle = title.replace(/\(\d+\)/, '('+newVidCount+')');
-            li.text(newTitle);
-            li.addClass('inactive');
-            li.removeClass('active');
-        });
-        return false;
-    });
-
-    // Mapping between buttons and the feelings they express
-    button_feel = {'like_btn': 'L', 'dislike_btn': 'D'};
-    // Mapping between buttons and the loader images
-    button_loader = {'like_btn': '#ll', 'dislike_btn': '#dl'};
-
-    // Function that returns another function specific to
-    // each pressed button
-    var handlerFact = function(clicked_button, other_button) {
-        var handler = function(event) {
-            // Getting the button-specific loader
-            event.preventDefault();
-            var loader = $(button_loader[clicked_button.attr('id')]);
-
-            loader.fadeIn('slow');
-            if (clicked_button.hasClass('active')) {
-                var feeling = 'U';
-                var success = function() {
-                    loader.fadeOut('slow');
-                    clicked_button.removeClass('active');
-                };
-            } else {
-                var feeling = button_feel[clicked_button.attr('id')];
-                var success = function() {
-                    loader.fadeOut('slow');
-                    clicked_button.addClass('active');
-                    other_button.removeClass('active');
-                };
-            }
-            $.post('{% url vid_feel %}', {'vid': {{ video.id }}, 'feeling': feeling})
-                .done(success)
-                .fail(function(){ alert('Ooops! Something went wrong.'); });
-                //TODO: Do proper error handling
-        };
-        return handler;
-    };
-
-    var bookmarkStates = {
-        'active': {
-            'rmCl': 'active',
-            'adCl': 'inactive',
-            'text': 'Bookmark <span><i class="icon-minus"></i></span>',
-            'titl': 'Remove this video from bookmarks',
-            'url': '{% url add_to_bookmarks %}'
-        },
-        'inactive': {
-            'rmCl': 'inactive',
-            'adCl': 'active',
-            'text': 'Bookmark <span><i class="icon-plus"></i></span>',
-            'titl': 'Save this video to watch later',
-            'url': '{% url remove_from_bookmarks %}'
-        },
-         'active1': {
-            'rmCl': 'active1',
-            'adCl': 'inactive1',
-            'text': 'Bookmark <span><i class="icon-list"></i></span>',
-            'titl': 'Remove this playlist from bookmarks',
-            'url': '{% url add_to_bookmarks %}'
-        },
-        'inactive1': {
-            'rmCl': 'inactive1',
-            'adCl': 'active1',
-            'text': 'Bookmark <span><i class="icon-list"></i></span>',
-            'titl': 'Save this playlist to watch later',
-            'url': '{% url remove_from_bookmarks %}'
-        }
-    }
-
-    $(document).ready(function() {
-        var likeBtn = $('#like_btn');
-            dislikeBtn = $('#dislike_btn');
-
-        // Binding each button click to its specific callback
-        likeBtn.click(handlerFact(likeBtn, dislikeBtn));
-        dislikeBtn.click(handlerFact(dislikeBtn, likeBtn));
-
-        $('#bookmark_btn').click(function(event) {
-            event.preventDefault();
-            button = $(this);
-            button_cls = button.attr('class');
-            $.post(bookmarkStates[button_cls].url, {'id': {{ video.id }}, 'obj': 'V'})
-                .done(function() {
-                    button.removeClass(bookmarkStates[button_cls].rmCl);
-                    button.addClass(bookmarkStates[button_cls].adCl);
-                    button.html(bookmarkStates[button_cls].text);
-                    button.attr('title', bookmarkStates[button_cls].titl );
-                })
-                .fail(function() { alert('An error has occur'); });
-                //TODO: Do proper error handling
-        });
-        {% if current_pl %}
-            $('#bookmark_pl').click(function(event) {
-                event.preventDefault();
-                button = $(this);
-                button_cls = button.attr('class');
-                $.post(bookmarkStates[button_cls].url, {'id': {{ current_pl.id }}, 'obj': 'P'})
-                    .done(function() {
-                        button.removeClass(bookmarkStates[button_cls].rmCl);
-                        button.addClass(bookmarkStates[button_cls].adCl);
-                        button.html(bookmarkStates[button_cls].text);
-                        button.attr('title', bookmarkStates[button_cls].titl );
-                    })
-                    .fail(function() { alert('An error has occur'); });
-                    //TODO: Do proper error handling
-            });
-        {% endif %}
-    });
-</script>
-<script>
-(function($) {
-    $(window).load(function() {
-        $(".divscroll").mCustomScrollbar({
-            autoHideScrollbar:true,
-            theme:"light-thin"
-        });
-    });
-})(jQuery);
-</script>
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/video_detail.js"></script>
 {% endblock %}
