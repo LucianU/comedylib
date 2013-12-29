@@ -3195,6 +3195,11 @@ border-bottom:1px solid #222;
     -moz-border-radius: 20px;
     border-radius: 20px;
 }
+.align-form-menu{
+    width:560px;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
 .align-form textarea{
 background: #f1f1f1;
 padding: 6px 5px;
