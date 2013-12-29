@@ -20,7 +20,8 @@
                         </div>
                         <div class="col span_3_of_4 search-info-content">
                             <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                            <a class="title-collection" href="{{ result.object.get_absolute_url }}">{{ result.object.collection.name }}</a>
+                            
+                            <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
                             <p>{{ result.object.views }}</p><span>Views</span>
                             <p>{{ result.object.rating }} %</p><span>Rating</span>    
                         </div>
@@ -52,13 +53,9 @@
             
         
 </div>
-        {% if page.has_previous or page.has_next %}
-            <div>
-                {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                |
-                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-            </div>
-        {% endif %}
+        <div class="detail-pagination">
+            {% include "pagination.html" %}
+        </div>
     {% else %}
         <p>Insert the terms into the search field.</p>
     {% endif %}

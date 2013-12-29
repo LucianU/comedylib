@@ -3136,6 +3136,8 @@ border-bottom:1px solid #000;
 
 }
 .search-info-content a.title, .search-info-content a.title-collection{
+    width: 100%;
+    float: left;
     padding: 0 5px;
     display: table-cell;
     vertical-align: middle;
@@ -3144,7 +3146,9 @@ border-bottom:1px solid #000;
     color: #eee;
 }
 .search-info-content a.title-collection{
+    margin-top: 5px;
     color:#63ADD0;
+    font-size:0.75em;
 }
 .search-info-content p {
     float:left;
