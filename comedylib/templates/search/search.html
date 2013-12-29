@@ -20,10 +20,9 @@
                         </div>
                         <div class="col span_3_of_4 search-info-content">
                             <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                            <a class="title-collection" href="{{ result.object.get_absolute_url }}">{{ result.object.collection.title }}</a>
+                            <a class="title-collection" href="{{ result.object.get_absolute_url }}">{{ result.object.collection.name }}</a>
                             <p>{{ result.object.views }}</p><span>Views</span>
                             <p>{{ result.object.rating }} %</p><span>Rating</span>    
-                        <!--<p>by</p><a class="username" href="">username</a>-->
                         </div>
                     </div>
                 </div>
@@ -45,17 +44,7 @@
                     <a href="{{ result.object.get_absolute_url }}">
                         <img src="{% thumbnail result.object.picture 315x150 crop %}">
                     </a>
-                <!--<div class="playlist"> 
-                    <h1>Playlists</h1>
-                    <ul>
-                        <li>Playlist 1</li>
-                        <li>Playlist 2</li>
-                        <li>Playlist 3</li>
-                        <li>Playlist 4</li>
-                        <li>Playlist 5</li>
-                    </ul>
-                </div> -->
-                </div>
+            </div>
             {% endif %}
             {% endfor %}
         </div>
