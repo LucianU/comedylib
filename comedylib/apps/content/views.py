@@ -230,6 +230,75 @@ class VideoDetail(DetailView):
         video.save()
         return video
 
+    def _get_video_feeling(self, profile, video):
+        """
+        Returns the feeling expressed for the video, if any.
+        """
+        try:
+            feeling = Feeling.objects.get(profile=profile, video=video)
+        except Feeling.DoesNotExist:
+            return {'vid_feel': None}
+        else:
+            return {'vid_feel': feeling.name}
+
+    def _get_obj_bookmark_status(self, profile, obj):
+        """
+        Returns the bookmark status of the object (video or playlist).
+        """
+        obj_contenttype = ContentType.objects.get_for_model(obj)
+        bookmark_status = profile.bookmarks.filter(
+            content_type=obj_contenttype,
+            object_id=obj.id
+        ).exists()
+        return {'bookmarked_%s' % obj_contenttype.name: bookmark_status}
+
+    def _get_playlist_context(self, playlist, current_video):
+        """
+        Returns the info needed to know where we are in the current
+        playlist.
+        """
+        videos = playlist.videos.all()
+        videos_list = list(videos)
+        videos_count = len(videos_list)
+        video_index = videos_list.index(current_video)
+
+        prev_video = videos_list[video_index - 1]
+        next_video = videos_list[(video_index + 1) % videos_count]
+
+        prev_video_url = '%s?pl=%s' % (prev_video.get_absolute_url(),
+                                       playlist.id)
+        next_video_url = '%s?pl=%s' % (next_video.get_absolute_url(),
+                                       playlist.id)
+        return {
+            'related_videos': videos.exclude(id=current_video.id),
+            'video_no': video_index + 1,
+            'videos_count': videos_count,
+            'prev_video_url': prev_video_url,
+            'next_video_url': next_video_url,
+            'current_pl': playlist,
+        }
+
+    def _get_related_videos(self, video):
+        """
+        Returns videos related to the specified video when not running
+        in a playlist.
+        """
+        cache_key = 'rel_video_%s' % video.id
+        related_videos = cache.get(cache_key)
+        if related_videos is not None:
+            return related_videos
+
+        collection = video.collection
+        collection_vids = collection.videos.all().exclude(id=video.id)
+        if len(collection_vids) < settings.RELATED_VIDS_NO:
+            related_videos = collection_vids
+        else:
+            related_videos = random.sample(collection_vids, 12)
+
+        cache.set(cache_key, related_videos, 60 * 60)
+        return {'related_videos': related_videos}
+
+
     def get_context_data(self, **kwargs):
         context = super(VideoDetail, self).get_context_data(**kwargs)
         video = context['video']
@@ -239,21 +308,9 @@ class VideoDetail(DetailView):
             profile = self.request.user.profile
 
             # If the user has expressed a feeling for the video
-            try:
-                feeling = Feeling.objects.get(profile=profile, video=video)
-            except Feeling.DoesNotExist:
-                context['vid_feel'] = None
-            else:
-                context['vid_feel'] = feeling.name
-
+            context.update(self._get_video_feeling(profile, video))
             # If he has bookmarked the video
-            video_type = ContentType.objects.get(app_label='content',
-                                                 model='video')
-            bookmarked_vid = profile.bookmarks.filter(
-                content_type=video_type,
-                object_id=video.id
-            ).exists()
-            context['bookmarked_vid'] = bookmarked_vid
+            context.update(self._get_obj_bookmark_status(profile, video))
 
         # If we are in a playlist, we send all the other videos
         # belonging to this playlist and other specific info
@@ -265,41 +322,11 @@ class VideoDetail(DetailView):
             if self.request.user.is_authenticated():
                 profile = self.request.user.profile
 
-                playlist_type = ContentType.objects.get(app_label='profiles',
-                                                        model='playlist')
-                bookmarked_pl = profile.bookmarks.filter(
-                    content_type=playlist_type,
-                    object_id=playlist.id
-                ).exists()
-                context['bookmarked_pl'] = bookmarked_pl
+                context.update(self._get_obj_bookmark_status(profile, playlist))
 
-            collection_vids = playlist.videos.all()
-            collection_vids_list = list(collection_vids)
-            videos_count = collection_vids.count()
-            video_index = collection_vids_list.index(video)
-
-            prev_video = collection_vids_list[video_index - 1]
-            next_video = collection_vids_list[(video_index + 1) % videos_count]
-
-            prev_video_url = '%s?pl=%s' % (prev_video.get_absolute_url(),
-                                           playlist.id)
-            next_video_url = '%s?pl=%s' % (next_video.get_absolute_url(),
-                                           playlist.id)
-            context.update({
-                'related_videos': collection_vids.exclude(id=video.id),
-                'video_no': video_index + 1,
-                'videos_count': videos_count,
-                'prev_video_url': prev_video_url,
-                'next_video_url': next_video_url,
-                'current_pl': playlist,
-            })
+            context.update(self._get_playlist_context(playlist, video))
         else:
-            collection = video.collection
-            collection_vids = collection.videos.all().exclude(id=video.id)
-            if len(collection_vids) < settings.RELATED_VIDS_NO:
-                context['related_videos'] = collection_vids
-            else:
-                context['related_videos'] = random.sample(collection_vids, 12)
+            context.update(self._get_related_videos(video))
 
         return context
 
