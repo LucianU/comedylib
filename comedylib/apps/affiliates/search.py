@@ -2,6 +2,7 @@ import random
 
 from django.conf import settings
 from django.core.cache import cache
+from django.template.defaultfilters import slugify
 
 from amazon.api import AmazonAPI
 
@@ -59,7 +60,7 @@ class OfferSearcher(object):
             the beginning of the list
         Returns: a sequence
         """
-        cache_key = 'af_k:%s_n:%s_r:%s' % (keyword, no_of_results,
+        cache_key = 'af_k:%s_n:%s_r:%s' % (slugify(keyword), no_of_results,
                                            int(randomly))
         offers = cache.get(cache_key)
         if offers is not None:
