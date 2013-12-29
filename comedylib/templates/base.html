@@ -169,44 +169,43 @@
             </div>
             <div class="cleared"></div>
         </div>
-        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-         {% compress js %}
-         
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>
-        {% endcompress %}
-        {% compress js %}
-         
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.js"></script>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-38034418-1']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script');
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                ga.type = 'text/javascript'; ga.async = true;
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-        <script type="text/javascript">
-            var csrftoken = $.cookie('csrftoken');
-            function csrfSafeMethod(method) {
-                // these HTTP methods do not require CSRF protection
-                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-            }
-            $.ajaxSetup({
-                crossDomain: false, // obviates need for sameOrigin test
-                beforeSend: function(xhr, settings) {
-                    if (!csrfSafeMethod(settings.type)) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
+        {% block js %}
+            <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+            {% compress js %}
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
+            <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.js"></script>
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-38034418-1']);
+                _gaq.push(['_trackPageview']);
+                (function() {
+                    var ga = document.createElement('script');
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    ga.type = 'text/javascript'; ga.async = true;
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+            <script type="text/javascript">
+                var csrftoken = $.cookie('csrftoken');
+                function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
                 }
-            });
-        </script>
-        {% endcompress %}
+                $.ajaxSetup({
+                    crossDomain: false, // obviates need for sameOrigin test
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type)) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+            </script>
+            {% block extra_js %}{% endblock %}
+            {% endcompress %}
+        {% endblock %}
     </body>
 </html>
