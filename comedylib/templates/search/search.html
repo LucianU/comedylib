@@ -20,6 +20,7 @@
                         </div>
                         <div class="col span_3_of_4 search-info-content">
                             <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                            <a class="title-collection" href="{{ result.object.get_absolute_url }}">{{ result.object.collection.title }}</a>
                             <p>{{ result.object.views }}</p><span>Views</span>
                             <p>{{ result.object.rating }} %</p><span>Rating</span>    
                         <!--<p>by</p><a class="username" href="">username</a>-->
