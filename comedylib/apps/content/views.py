@@ -286,7 +286,7 @@ class VideoDetail(DetailView):
         cache_key = 'rel_video_%s' % video.id
         related_videos = cache.get(cache_key)
         if related_videos is not None:
-            return related_videos
+            return {'related_videos': related_videos}
 
         collection = video.collection
         collection_vids = collection.videos.all().exclude(id=video.id)
