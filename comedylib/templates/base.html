@@ -26,20 +26,26 @@
        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         {% compress js %}
-     
         {% endcompress %}
     </head>
     <body>
         <div id="fb-root"></div>
-        <script type="text/javascript">
+        <script>
             window.fbAsyncInit = function() {
-                FB.init({appId: '222979954499652', status: true, cookie: true, xfbml: true});
+                FB.init({
+                    appId: '222979954499652',
+                    status: true,
+                    cookie: true,
+                    xfbml: true
+                });
             };
             (function() {
-                var e = document.createElement('script'); e.async = true;
-                e.src = document.location.protocol +
-                '//connect.facebook.net/en_US/all.js';
-                document.getElementById('fb-root').appendChild(e);
+                if (document.getElementById('facebook-jssdk')) {return;}
+                var firstScriptElement = document.getElementsByTagName('script')[0];
+                var facebookJS = document.createElement('script'); 
+                facebookJS.id = 'facebook-jssdk';
+                facebookJS.src = '//connect.facebook.net/en_US/all.js';
+                firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
             }());
         </script>
         <div id="main">
@@ -163,7 +169,6 @@
             </div>
             <div class="cleared"></div>
         </div>
-        
         <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
          {% compress js %}
          
@@ -202,6 +207,6 @@
                 }
             });
         </script>
-        {% endcompress %}  
+        {% endcompress %}
     </body>
 </html>
