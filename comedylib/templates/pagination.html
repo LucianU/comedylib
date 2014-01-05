@@ -1,16 +1,16 @@
 <span class="step-links">
     {% if page_obj.has_previous %}
-        <a class="previous" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+    <a class="previous" href="?{% if categs_params %}{{ categs_params }}&{% endif %}page={{ page_obj.previous_page_number }}">Prev</a>
     {% endif %}
     {% for num in page_obj.paginator.page_range %}
       {% ifequal num page_obj.number %}
         <span class="current"><a href="#">{{ num }}</a></span>
       {% else %}
-        <a href="?page={{ num }}">{{ num }}</a>
+        <a href="?{% if categs_params %}{{ categs_params }}&{% endif %}page={{ num }}">{{ num }}</a>
       {% endifequal %}
     {% endfor %}
     {% if page_obj.has_next %}
-        <a class="next" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="next" href="?{% if categs_params %}{{ categs_params }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
 </span>
 
