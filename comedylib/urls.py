@@ -7,7 +7,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from haystack.forms import SearchForm
-from haystack.views import SearchView, search_view_factory
+from haystack.views import search_view_factory
+
+from search.views import CustomSearchView
 
 admin.autodiscover()
 
@@ -25,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^c/', include('django.contrib.comments.urls')),
     url(r'^feedback/', include('feedback.urls')),
     url(r'^search/', search_view_factory(
-        view_class=SearchView,
+        view_class=CustomSearchView,
         form_class=SearchForm,
         ), name='haystack_search'),
     url(r'^com/', include('affiliates.urls', namespace='affiliates')),
