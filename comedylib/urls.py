@@ -6,9 +6,8 @@ from django.conf.urls.defaults import patterns, url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from haystack.views import SearchView
-
-from search.forms import WildcardSearchForm
+from haystack.forms import SearchForm
+from haystack.views import SearchView, search_view_factory
 
 admin.autodiscover()
 
@@ -25,8 +24,10 @@ urlpatterns = patterns('',
     url(r'^u/', include('profiles.urls')),
     url(r'^c/', include('django.contrib.comments.urls')),
     url(r'^feedback/', include('feedback.urls')),
-    url(r'^search/', SearchView(form_class=WildcardSearchForm),
-        name='haystack_search'),
+    url(r'^search/', search_view_factory(
+        view_class=SearchView,
+        form_class=SearchForm,
+        ), name='haystack_search'),
     url(r'^com/', include('affiliates.urls', namespace='affiliates')),
     url(r'^', include(flatpages_urls, namespace='flatpages')),
     url(r'^', include('content.urls', namespace='content')),
