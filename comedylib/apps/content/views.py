@@ -160,9 +160,11 @@ class CollectionList(ListView):
         categs_form = getattr(self, 'categs_form', None)
 
         # We build the categs GET params to use them easily in pagination
-        categs = categs_form.initial.get('categs')
-        if categs is not None:
-            context['categs_params'] = '&'.join('categs=%s' % c for c in categs)
+        if categs_form is not None:
+            categs = categs_form.initial.get('categs')
+            if categs is not None:
+                categs_params = '&'.join('categs=%s' % c for c in categs)
+                context['categs_params'] = categs_params
         context['categs_form'] = (CategsForm() if categs_form is None
                                                else categs_form)
         return context
