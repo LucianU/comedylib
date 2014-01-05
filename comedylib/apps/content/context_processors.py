@@ -9,7 +9,8 @@ def get_params(request):
     exception of the 'page' param which will be set in the template.
     This enables using pagination with filtering based on GET params.
     """
-    params = request.GET.copy()
+    params = dict(request.GET)
     params.pop('page', None)
-    return {'get_params': escape(urlencode(params, doseq=True))}
+    context = {'get_params': escape(urlencode(params, doseq=True))}
+    return context
 
