@@ -3,7 +3,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import models
-from django.db.models.signals import post_save, m2m_changed
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
@@ -114,11 +114,9 @@ def create_profile(sender, **kwargs):
         Profile.objects.create(user=user)
 
 
-@receiver(m2m_changed, sender=Playlist.videos.through)
+@receiver(post_save, sender=Playlist.videos.through)
 def update_playlist_empty(sender, **kwargs):
-    playlist = kwargs.get('instance')
-    if playlist.videos.count() > 0:
+    playlist = kwargs.get('instance').playlist
+    if playlist.empty:
         playlist.empty = False
-    else:
-        playlist.empty = True
-    playlist.save()
+        playlist.save()
