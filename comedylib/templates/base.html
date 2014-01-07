@@ -21,10 +21,23 @@
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.mCustomScrollbar.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediaelement_build/mediaelementplayer.css" />
+        <!--[if gte IE 9]>
+            <style type="text/css">
+                .gradient {
+                    filter: none;
+                }
+            </style>
+        <![endif]-->
         {% endcompress %}
         {% compress js %}
-        <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script> 
+        <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script>  
+        <script type="text/javascript" src="{{ STATIC_URL }}mediaelement_build/mediaelement-and-player.min.js"></script>
         {% endcompress %}
+        
     </head>
     <body>
         <div id="fb-root"></div>
@@ -49,67 +62,65 @@
         <div id="main">
             <div class="cleared reset-box"></div>
             <div class="header">
-                <div class="header-position">
+                
                     <div class="headtitlelogin">
-                        <div class="titlecontent">
-                            <h1><a href="/"><img src="{{ STATIC_URL }}img/lclear.png" alt="transparent"/></a></h1>
-                        </div>
-                        <div class="headnav">
-                            <div id="nav">
-                                <ul class="nav">
-                                    <li><a href="{% url content:comedians %}">Comedians</a></li>
-                                    <li><a href="{% url content:shows %}">Shows</a></li>
-                                    <li><a href="{% url content:movies %}">Movies</a></li>
-                                    <li class="end"><a href="{% url content:playlists %}">Playlists</a></li>
-                                </ul>
-                            </div> <!--end nav-->
-                        </div>
-                        <div class="searchcontent">
-                            <div id="search">
-                                <form method="get" action="{% url haystack_search %}">
-                                    {{ search_form.non_field_errors }}
-                                    {% for field in search_form %}
-                                        <div class="fieldWrapper">
-                                            {{ field.errors }}
-                                            <input type="text" name="q" id="id_q" placeholder="Search..."/>
-                                        </div>
-                                    {% endfor %}
-                                </form>
-                            </div> <!--end search-->
-                        </div>
+                        <a class="titlecontent" href="/"></a>
+                        
                         {% if request.user.is_authenticated %}
                             <div class="logincontent-user">
                                 <div class="welcome">
-                                    <a href="#" data-dropdown="#dropdown-1" data-vertical-offset="40" data-horizontal-offset="195">
+                                    <a href="#" data-dropdown="#dropdown-2" data-vertical-offset="35" data-horizontal-offset="-860">
                                         <div>
                                             {% if user.profile.picture %}
                                                 {% load thumbnail %}
-                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p class="dropdown">Hi, <span>{{ user.username }} </span> <i class="icon-chevron-down"></i></p>
+                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span>{{ user.username }} </span> <i class="icon-chevron-down"></i></p>
                                             {% else %}
-                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p class="dropdown">Hi, <span>{{ user.username }} </span><i class="icon-chevron-down"></i></p>
+                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span><i class="icon-chevron-down"></i></p>
                                             {% endif %}
                                         </div>
                                     </a>
-                                    <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
-                                        <ul>
+                                    <div id="dropdown-2" class="dropdown dropdown-tip dropdown-anchor-right">
+                                        <ul class="dropdown-menu">          
                                             <li><a href="{% url own_home %}"><i class="icon-user"></i>Profile</a></li>
                                             <li><a href="{% url settings %}"><i class="icon-cogs"></i>Settings</a></li>
-                                            <li class="divider"></li>
+                                            <li class="dropdown-divider"></li>
                                             <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div> <!--end logincontent-nouser-->
                         {% else %}
-                            <div class="logincontent-nouser">
+                            
                                 <div id="register"> 
                                     {% include "registration/logindrop.html" %}
                                 </div> <!--end register-->
-                                <div class="why">
-                                    <a href="#">Why register?</a>
-                                </div>
-                            </div> <!--end logincontent-nouser-->
+                           
                         {% endif %}
+                        <div class="headnav">
+                            <div id="search">
+                                <form role="search" method="get" class="search-form" action="{% url haystack_search %}">
+                                    {{ search_form.non_field_errors }}
+                                    {% for field in search_form %}
+                                        <div class="fieldWrapper">
+                                            {{ field.errors }}
+                                            <label>
+                                                <span class="screen-reader-text">Search for:</span>
+                                                <input type="search" class="search-field" placeholder="Search …" value="" name="q" id="id_q" title="Search for:">
+                                            </label>
+                                            </div>
+                                    {% endfor %}
+                                </form>
+                            </div> <!--end search-->
+                            <ul class="nav">
+                                <li><a href="{% url content:comedians %}">Comedians</a></li>
+                                <li><a href="{% url content:shows %}">Shows</a></li>
+                                <li><a href="{% url content:movies %}">Movies</a></li>
+                                <li class="end"><a href="{% url content:playlists %}">Playlists</a></li>
+                            </ul>
+                            
+                            
+                        </div>
+                        
                     </div>
                     <div class="breadcrumbs">
                         <p>
@@ -122,7 +133,7 @@
                             {% endfor %}
                         </p>
                     </div>
-                </div>
+                
             </div>
             <div class="cleared reset-box"></div>
                 <div id="overcontent" >
@@ -169,11 +180,10 @@
         </div>
         {% block js %}
             <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+           
             {% compress js %}
+            
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
-            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script> 
             <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>

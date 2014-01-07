@@ -1,8 +1,7 @@
-<a href="#" data-dropdown="#dropdown-1" data-vertical-offset="0" data-horizontal-offset="0">Login</a>
+<a href="#" data-dropdown="#dropdown-1" data-vertical-offset="0" data-horizontal-offset="0" class="login">Login</a>
 
-<div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
-    <ul>
-        <li>
+<div id="dropdown-1" class="dropdown dropdown-tip has-icons dropdown-anchor-right">
+	<div class="dropdown-panel">
             <div class="signin_content">
                 <form method="post" action="{% url accounts_login %}">
                 {% csrf_token %}
@@ -38,6 +37,5 @@
                    <a href="{% url accounts_register %}"> Sign up for Comedylib </a>
                 </div>
             </div>                     
-        </li>
-    </ul>
+    </div>
 </div>

@@ -66,21 +66,26 @@
         <div class="col0 span_4_of_6_1 col1 nosectionspace">
             <div class="video">
                 <div class="mediaplayer">
-                    <div id='mediaplayer'></div>
-                    <script type="text/javascript">
-                        jwplayer('mediaplayer').setup({
-                           /* 'id': 'playerID',*/
-                            'flashplayer': '{{ STATIC_URL }}mediaplayer/jwplayer.flash.swf',
-                            'html5player': '{{ STATIC_URL }}mediaplayer/jwplayer.html5.js',
-                            'primary': 'flash',
-                            'title': '{{ video.title }}',
-                            'autostart': 'true',
-                            'volume': '80',
-                            'width': '663',
-                            'height': '392',
-                            'file': '{{ video.url }}'                        
-                        });
-                    </script>
+                <video width="661" height="390" id="player1">
+                    <source type="video/youtube" src="{{ video.url }}" />
+                </video>
+                <script>
+                    $('#player1').mediaelementplayer({
+                        plugins: ['flash', 'silverlight'],
+                        success: function(mediaElement, domObject) {
+                            if (mediaElement.pluginType == 'flash') {
+                                mediaElement.addEventListener('canplay', function() {
+                                    // Player is ready
+                                    mediaElement.play();
+                                }, false);
+                            }
+                        },
+                        error: function() {
+                            alert('Error setting media!');
+                        }
+                    });
+                </script>
+
                 </div> 
             </div> <!-- end video-->
         </div>
