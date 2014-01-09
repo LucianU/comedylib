@@ -237,11 +237,5 @@ $(document).ready(function() {
                 //TODO: Do proper error handling
         });
     }
-    /* Custom scrollbar */
-    $(window).load(function() {
-        $(".divscroll").mCustomScrollbar({
-            autoHideScrollbar:true,
-            theme:"light-thin"
-        });
-    });
+    
 });

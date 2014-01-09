@@ -91,7 +91,7 @@
         </div>
         
                 <div class="col0 span_2_of_6_1 related nosectionspace">
-            <div class="container_list divscroll">          
+            <div class="container_list divscroll" id="content_1">          
                 <ol>
                 {% for rel_video in related_videos %}
                     <li>
@@ -280,3 +280,13 @@
 {% block extra_js %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/video_detail.js"></script>
 {% endblock %}
+<script>
+		(function($){
+			$(window).load(function(){
+				$("#content_1").mCustomScrollbar({
+					autoHideScrollbar:true,
+					theme:"light-thin"
+				});
+			});
+		})(jQuery);
+</script>
