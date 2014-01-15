@@ -2,23 +2,30 @@
 {% load compress %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        {% block meta %}
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    {% block meta %}
+        <meta charset="UTF-8">
         <meta name="robots" content="index, follow" />
-       <!-- <meta http-equiv="imagetoolbar" content="no" />
-        <meta name="MSSmartTagsPreventParsing" content="true" /> -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="comedylib.com" />
         <meta name="keywords" content="online comedy movies, stand up comedy online, watch comedy movies online free, free tv shows episodes online, comedy central stand up, comedians, comedy series, comedy movies, movie database, film, stars" />
         <meta name="description" content="Comedylib.com - Online Comedy Videos Database" />
-        {% endblock %}
-        <title>{% block title %}{% endblock %}</title>
+        <link rel=icon href="favicon.ico">
+        <link rel=icon href="mac.icns" sizes="128x128 512x512 8192x8192 32768x32768">
+        <link rel=icon href="iphone.png" sizes="57x57" type="image/png">
+        <link rel=icon href="gnome.svg" sizes="any" type="image/svg+xml">
+    {% endblock %}
+        <title>{% block title %}Comedylib, a place where people meet to share Comedians, Series and Movies online{% endblock %}</title>
 
-        {% compress css %}
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.dropdown.css" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/slider.css" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="pingback" href="http://www.comedylib.com">
+        <link rel="prefetch" href="http://www.comedylib.com">
+    {% compress css %}
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main1.css">
+        <!--<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css"> -->
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.mCustomScrollbar.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediaelement_build/mediaelementplayer.css" />
@@ -29,21 +36,27 @@
                 }
             </style>
         <![endif]-->
-        {% endcompress %}
-
+        <!--[if !IE 7]>
+	<style type="text/css">
+		#page {display:table;height:100%}
+	</style>
+<![endif]-->
+    {% endcompress %}
+    {% compress js %}
+        <!--[if lt IE 9]>
+            <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
-        {% compress js %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.js"></script>
-        <script type='text/javascript' src='{{ STATIC_URL }}mediaplayer/jwplayer.js'></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script>  
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.min.js"></script>
+       <!-- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script>  -->
         <script type="text/javascript" src="{{ STATIC_URL }}mediaelement_build/mediaelement-and-player.min.js"></script>
-        {% endcompress %}
+
+    {% endcompress %}
     </head>
-    <body>
-        <div id="fb-root"></div>
+<body>
+    <div id="fb-root"></div>
         <script>
             window.fbAsyncInit = function() {
                 FB.init({
@@ -56,138 +69,159 @@
             (function() {
                 if (document.getElementById('facebook-jssdk')) {return;}
                 var firstScriptElement = document.getElementsByTagName('script')[0];
-                var facebookJS = document.createElement('script'); 
+                var facebookJS = document.createElement('script');
                 facebookJS.id = 'facebook-jssdk';
                 facebookJS.src = '//connect.facebook.net/en_US/all.js';
                 firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
             }());
         </script>
-        <div id="main">
-            <div class="cleared reset-box"></div>
-            <div class="header">
-                
-                    <div class="headtitlelogin">
-                        <a class="titlecontent" href="/"></a>
-                        
+    <div id="page" class="container">
+        <header id="masthead" class="site-header" role="banner">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="titlecontent" href="/"></a>
+                </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url content:comedians %}">Comedians</a></li>
+                        <li><a href="{% url content:shows %}">Shows</a></li>
+                        <li><a href="{% url content:movies %}">Movies</a></li>
+                        <li class="end"><a href="{% url content:playlists %}">Playlists</a></li>
                         {% if request.user.is_authenticated %}
-                            <div class="logincontent-user">
-                                <div class="welcome">
-                                    <a href="#" data-dropdown="#dropdown-2" data-vertical-offset="35" data-horizontal-offset="-860">
+                        <li>
+
+                            <div class="row">
+                                <div class="welcome visible-xs col-xs-6 col-xs-offset-3">
+                                {% if user.profile.picture %}
+                                    {% load thumbnail %}
+                                    <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span class="username">{{ user.username }} </p>
+                                {% else %}
+                                    <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span></p>
+                                {% endif %}
+                                </div>
+                            </div>
+                             <div class="row visible-xs user-menu-xs">
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url own_home %}"><span class="glyphicon glyphicon-user"></span>Profile</a></div>
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url settings %}"><span class="glyphicon glyphicon-wrench"></span>Settings</a></div>
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url accounts_logout %}"class="logout"><span class="glyphicon glyphicon-log-out"></span>Log out</a></div>
+                            </div>
+                        </li>
+                        {% else %}
+                            <li class="visible-xs"><a id="login-btn" href="{% url accounts_login %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                    <div id="search">
+                        <form role="search" method="get" class="search-form" action="{% url haystack_search %}">
+                            {{ search_form.non_field_errors }}
+                            {% for field in search_form %}
+                                <div class="fieldWrapper">
+                                    {{ field.errors }}
+                                    <label>
+                                        <span class="screen-reader-text">Search for:</span>
+                                        <input type="search" class="search-field" placeholder="Search …" value="" name="q" id="id_q" title="Search for:">
+                                    </label>
+                                    </div>
+                            {% endfor %}
+                        </form>
+                    </div> <!--end search-->
+                    <ul class="nav navbar-nav navbar-right">
+
+                       {% if request.user.is_authenticated %}
+                        <li>
+
+                                <div class="welcome hidden-xs">
+                                    <a href="#" id="dropdownMenu" data-toggle="dropdown">
                                         <div>
                                             {% if user.profile.picture %}
                                                 {% load thumbnail %}
-                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span>{{ user.username }} </span> <i class="icon-chevron-down"></i></p>
+                                                <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span class="username">{{ user.username }} </span><b class="caret"></b></p>
                                             {% else %}
-                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span><i class="icon-chevron-down"></i></p>
+                                                <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span><b class="caret"></b></p>
                                             {% endif %}
                                         </div>
                                     </a>
-                                    <div id="dropdown-2" class="dropdown dropdown-tip dropdown-anchor-right">
-                                        <ul class="dropdown-menu">          
-                                            <li><a href="{% url own_home %}"><i class="icon-user"></i>Profile</a></li>
-                                            <li><a href="{% url settings %}"><i class="icon-cogs"></i>Settings</a></li>
-                                            <li class="dropdown-divider"></li>
-                                            <li><a href="{% url accounts_logout %}"><i class="icon-signout"></i>Log out</a></li>
-                                        </ul>
-                                    </div>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url own_home %}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url settings %}"><span class="glyphicon glyphicon-wrench"></span>Settings</a></li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url accounts_logout %}"><span class="glyphicon glyphicon-log-out"></span>Log out</a></li>
+                                    </ul>
+
                                 </div>
-                            </div> <!--end logincontent-nouser-->
+
+                        </li>
                         {% else %}
-                            
-                                <div id="register"> 
+                        <li>
+                            <div class="welcome1 hidden-xs">
+                                <a id="login-btn" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                                <ul class="dropdown-menu keep_open">
                                     {% include "registration/logindrop.html" %}
-                                </div> <!--end register-->
-                           
+                                </ul>
+                            </div>
+                        </li>
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $(document).on('click', '.dropdown-menu', function (e) {
+                                    $(this).hasClass('keep_open') && e.stopPropagation(); // This replace if conditional.
+                                });
+                            });
+                        </script>
                         {% endif %}
-                        <div class="headnav">
-                            <div id="search">
-                                <form role="search" method="get" class="search-form" action="{% url haystack_search %}">
-                                    {{ search_form.non_field_errors }}
-                                    {% for field in search_form %}
-                                        <div class="fieldWrapper">
-                                            {{ field.errors }}
-                                            <label>
-                                                <span class="screen-reader-text">Search for:</span>
-                                                <input type="search" class="search-field" placeholder="Search …" value="" name="q" id="id_q" title="Search for:">
-                                            </label>
-                                            </div>
-                                    {% endfor %}
-                                </form>
-                            </div> <!--end search-->
-                            <ul class="nav">
-                                <li><a href="{% url content:comedians %}">Comedians</a></li>
-                                <li><a href="{% url content:shows %}">Shows</a></li>
-                                <li><a href="{% url content:movies %}">Movies</a></li>
-                                <li class="end"><a href="{% url content:playlists %}">Playlists</a></li>
-                            </ul>
-                            
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="breadcrumbs">
-                        <p>
-                            {% for breadcrumb in request.breadcrumbs %}
-                                {% if not forloop.last %}
-                                    <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a><i class="icon-arrow-right"></i>
-                                {% else %}
-                                    {{ breadcrumb.name }}
-                                {% endif %}
-                            {% endfor %}
-                        </p>
-                    </div>
-                
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+            <div class="bread-container">
+                <ol class="breadcrumb">
+                    {% for breadcrumb in request.breadcrumbs %}
+                        {% if not forloop.last %}
+                            <li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a></li>
+                        {% else %}
+                            <li class="active">{{ breadcrumb.name }}</li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ol>
             </div>
-            <div class="cleared reset-box"></div>
-                <div id="overcontent" >
-                    <div id="content">
-                    {% block content %}
-                    {% endblock %}
-                    </div> <!--end content-->
-                </div> <!--end overcontent-->
-            <div class="cleared"></div>
-            <div class="footer">
-                <div class="footer-body">
-                    <div class="section group" id="footerpage">
-                        <div class="col span_1_of_4 ">
-                            <p></p>
-                        </div>
-                         <div class="col span_1_of_4 ">
-                            <p></p>
-                        </div>
-                         <div class="col span_1_of_4 ">
-                            <p></p>
-                        </div>
-                         <div class="col span_1_of_4 ">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="cleared"></div>
-                    <div class="footer-menu">
-                        <ul class="navfooter">
-                            <li><a href="{% url flatpages:about %}">About</a></li>
-                            <li><a href="{% url flatpages:terms %}">Terms</a></li>
-                            <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
-                            <li><a href="{% url contact_form %}">Send Feedback</a></li>
-                            <li><a href="{% url flatpages:ads %}">Advertising</a></li>
-                        </ul>
-                    </div>
-                    <div class="cleared"></div>
-                    <div id="credits">
-                        <p>Designed by <a href="http://www.mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png" alt="Mowiti logo"/></a></p>
-                    </div>
-                    <div class="cleared"></div>
+        </header><!-- #masthead -->
+        <main id="content" class="site-main" role="main">
+            {% block content %}
+            {% endblock %}
+        </main><!-- #main -->
+
+    </div><!-- #page -->
+    <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+                <div class="cleared"></div>
+                <div class="footer-menu">
+                    <ul class="navfooter">
+                        <li><a href="{% url flatpages:about %}">About</a></li>
+                        <li><a href="{% url flatpages:terms %}">Terms</a></li>
+                        <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
+                        <li><a href="{% url contact_form %}">Send Feedback</a></li>
+                        <li><a href="{% url flatpages:ads %}">Advertising</a></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="cleared"></div>
-        </div>
-        {% block js %}
+                <div id="credits">
+                    <p>Designed by <a href="http://www.mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png" alt="Mowiti logo"/></a></p>
+                </div>
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+    {% block js %}
             <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
             {% compress js %}
-            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script>
             <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
-           
+
             <script type="text/javascript">
                 var _gaq = _gaq || [];
                 _gaq.push(['_setAccount', 'UA-38034418-1']);
@@ -214,8 +248,40 @@
                     }
                 });
             </script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+                /// CLOSE login MENU
+                  var loginmenuclosed = true;
+                  function closeLoginMenu() {
+                      $('.dropdown-login').animate({ left: '-90%' }, 0 );
+                      loginmenuclosed = true;
+                  }
+                  $('a.navbarbutton').click(function(e) {
+                         if(loginmenuclosed) {
+                         $('.dropdown-login').css('left','0');
+                         $('.container').css({'left':'90%', 'position':'absolute'});
+                         loginmenuclosed = false;
+                         }else{
+                         $('.dropdown-login').css('left','-90%');
+                         $('.container').css({'left': '0', 'position':'auto'});
+                         loginmenuclosed = true;
+                         }
+                         e.preventDefault();
+                      });
+                      $('.container').click(function(){
+                        if(!loginmenuclosed) {
+                          $('.dropdown-login').css('left','-90%');
+                          loginmenuclosed = true;
+                           $('.container').css({'left': '0', 'position':'auto'});
+                        }
+                      });
+                });
+
+            </script>
+
             {% block extra_js %}{% endblock %}
             {% endcompress %}
         {% endblock %}
-    </body>
+
+</body>
 </html>

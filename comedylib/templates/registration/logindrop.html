@@ -1,41 +1,33 @@
-<a href="#" data-dropdown="#dropdown-1" data-vertical-offset="0" data-horizontal-offset="0" class="login">Login</a>
-
-<div id="dropdown-1" class="dropdown dropdown-tip has-icons dropdown-anchor-right">
-	<div class="dropdown-panel">
-            <div class="signin_content">
-                <form method="post" action="{% url accounts_login %}">
-                {% csrf_token %}
-                    <fieldset id="inputs">
-                        <input id="id_email" type="text" name="email" placeholder="Your email" required/>   
-                        <input id="id_password" type="password" name="password" placeholder="Password" required/>
-                    </fieldset>
-                    <fieldset id="actions">
-                        <div class="section group">
-                            <div class="col span_1_of_2 ">
-                                <label><input type="checkbox" value="remember" id="id_remember" checked/> Remember me</label>
-                            </div>
-                            <div class="col span_1_of_2 ">
-                                <input type="submit" value="Log in"/>
-                            </div>
-                        </div>
-                        <input type="hidden" name="next" value="{{ request.path }}" />
-                        
-                    </fieldset>
-                </form>
-                <div class="cleared"></div>
-                <div class="center">
-                    <span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span class="or">&nbsp; OR &nbsp;</span>
-                    <span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <div class="centersocial">
-                        <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" id="fbtnlnk" ><img src="/static/img/fbbtn.png" alt="facebook"/></a>
-                        <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" id="gbtnlnk" ><img src="/static/img/gbtn.png" alt="google"/></a>
-                    </div>
-                    
-                </div>
-                <div id="signup">
-                   <a href="{% url accounts_register %}"> Sign up for Comedylib </a>
-                </div>
-            </div>                     
+<div class="signin_content">
+    <form method="post" action="{% url accounts_login %}">
+    {% csrf_token %}
+        <fieldset id="inputs">
+            <div class="left-inner-addon ">
+                <i class="glyphicon glyphicon-user"></i>
+                <input id="id_email" type="text" name="email" placeholder="Your email" required/>  
+            </div>
+            <div class="left-inner-addon ">
+                <i class="glyphicon glyphicon-eye-close"></i>
+                <input id="id_password" type="password" name="password" placeholder="Password" required/>
+            </div> 
+        </fieldset>
+        <fieldset id="actions">
+            <div class="row">
+                <div class="col-xs-6"><label><input type="checkbox" value="remember" id="id_remember" checked/> Remember me</label></div>
+                <div class="col-xs-6"> <input type="submit" class="login-btn" value="Log in"/></div>
+            </div>
+            <input type="hidden" name="next" value="{{ request.path }}" />
+        </fieldset>
+    </form>
+    <div class="center">
+        <span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span class="or">&nbsp; OR &nbsp;</span>
+        <span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <div class="centersocial">
+            <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" class="fbtnlnk" ><img src="/static/img/fbbtn.png" alt="facebook"/></a>
+            <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" class="gbtnlnk" ><img src="/static/img/gbtn.png" alt="google"/></a>
+        </div>
+        
     </div>
-</div>
+    <a class="signup" href="{% url accounts_register %}"> Sign up for Comedylib </a>
+</div>                     
