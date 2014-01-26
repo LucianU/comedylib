@@ -9,7 +9,7 @@
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="comedylib.com" />
-        <meta name="keywords" content="online comedy movies, stand up comedy online, watch comedy movies online free, free tv shows episodes online, comedy central stand up, comedians, comedy series, comedy movies, movie database, film, stars" />
+        <meta name="keywords" content="online comedy movies, stand up comedy online, watch comedy movies online, tv shows episodes online, comedy central stand up, comedians, comedy series, comedy movies, movie database, film, stars" />
         <meta name="description" content="Comedylib.com - Online Comedy Videos Database" />
         <link rel=icon href="favicon.ico">
         <link rel=icon href="mac.icns" sizes="128x128 512x512 8192x8192 32768x32768">
@@ -22,36 +22,25 @@
         <link rel="pingback" href="http://www.comedylib.com">
         <link rel="prefetch" href="http://www.comedylib.com">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+       <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"> -->
     {% compress css %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/main1.css">
-        <!--<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css"> -->
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.mCustomScrollbar.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.custom-scrollbar.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediaelement_build/mediaelementplayer.css" />
-        <!--[if gte IE 9]>
-            <style type="text/css">
-                .gradient {
-                    filter: none;
-                }
-            </style>
-        <![endif]-->
-        <!--[if !IE 7]>
-	<style type="text/css">
-		#page {display:table;height:100%}
-	</style>
-<![endif]-->
+        <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
+        <!--[if !IE 7]><style type="text/css">#page {display:table;height:100%}</style><![endif]-->
     {% endcompress %}
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <!--  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+   <!-- <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>-->
     {% compress js %}
         <!--[if lt IE 9]>
             <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
         <![endif]-->
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mCustomScrollbar.min.js"></script>
-       <!-- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropdown.js" ></script>  -->
-        <script type="text/javascript" src="{{ STATIC_URL }}mediaelement_build/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.custom-scrollbar.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}mediaplayer/jwplayer.js" ></script>
 
     {% endcompress %}
     </head>
@@ -75,7 +64,7 @@
                 firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
             }());
         </script>
-    <div id="page" class="container">
+    <div id="page">
         <header id="masthead" class="site-header" role="banner">
             <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -86,7 +75,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="titlecontent" href="/"></a>
+                    <a class="titlecontent" href="/"><img src="{{ STATIC_URL }}img/logo.png" alt="Comedylib logo" title="Comedylib.com - Online Comedy Videos Database"/></a>
                 </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
@@ -103,9 +92,9 @@
                                 <div class="welcome visible-xs col-xs-6 col-xs-offset-3">
                                 {% if user.profile.picture %}
                                     {% load thumbnail %}
-                                    <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span class="username">{{ user.username }} </p>
+                                    <img src="{% thumbnail user.profile.picture 45x35 crop %}" alt="User image"/><p>Hi, <span class="username">{{ user.username }} </p>
                                 {% else %}
-                                    <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span></p>
+                                    <img src="{{ STATIC_URL }}img/logo.jpg" alt="User default image"/><p>Hi, <span>{{ user.username }} </span></p>
                                 {% endif %}
                                 </div>
                             </div>
@@ -161,7 +150,7 @@
                         </li>
                         {% else %}
                         <li>
-                            <div class="welcome1 hidden-xs">
+                            <div class="welcome hidden-xs">
                                 <a id="login-btn" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                                 <ul class="dropdown-menu keep_open">
                                     {% include "registration/logindrop.html" %}
@@ -200,26 +189,20 @@
     </div><!-- #page -->
     <footer id="colophon" class="site-footer" role="contentinfo">
         <div class="site-info">
-                <div class="cleared"></div>
-                <div class="footer-menu">
-                    <ul class="navfooter">
-                        <li><a href="{% url flatpages:about %}">About</a></li>
-                        <li><a href="{% url flatpages:terms %}">Terms</a></li>
-                        <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
-                        <li><a href="{% url contact_form %}">Send Feedback</a></li>
-                        <li><a href="{% url flatpages:ads %}">Advertising</a></li>
-                    </ul>
-                </div>
-                <div id="credits">
-                    <p>Designed by <a href="http://www.mowiti.com" target="_blank"><img src="{{ STATIC_URL }}img/mowitilogo.png" alt="Mowiti logo"/></a></p>
-                </div>
+            <ul class="navfooter">
+                <li><a href="{% url flatpages:about %}">About</a></li>
+                <li><a href="{% url flatpages:terms %}">Terms</a></li>
+                <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
+                <li><a href="{% url contact_form %}">Send Feedback</a></li>
+                <li><a href="{% url flatpages:ads %}">Advertising</a></li>
+            </ul>
         </div><!-- .site-info -->
     </footer><!-- #colophon -->
     {% block js %}
             <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
             {% compress js %}
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script>
-            <script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>
+            <!--<script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>-->
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
 
             <script type="text/javascript">

@@ -1,65 +1,66 @@
 {% extends "profiles/playlists.html" %}
 {% block title %}Comedylib - Playlists of {{user.username}}{% endblock %}
 {% block profile_content %}
+{% load thumbnail %}
 <script type='text/javascript' src='{{ STATIC_URL }}js/notify.js'></script> 
-<div class="col span_5_of_6 playlist" data-playlist-id={{ playlist.id }}>
+<div class="col-xs-12 col-sm-10" data-playlist-id={{ playlist.id }}>
     <h5>{{ playlist.title }}</h5>
-    <center>
-   
-        <h1>Update playlist name</h1>
-        <form id="playlistform" action="{% url edit_playlist playlist.slug playlist.id %}" method="post">{% csrf_token %}
-            <input id="id_title" type="text" name="title" maxlength="255" value="{{ playlist.title }}">
-            <!--<div class="feedback"><p id="feedback" class="helptextred"> </p></div> -->
-             <div class="playlist-input"><input type="submit" id="sub" value="Save"  /></div>
-        </form>
-    </center>
-    <center> <h1>Drag & drop to re-arrange the videos</h1><br/></center>
-    <div class="section group playlist-edit">
-       
-        <ul id="sortable" class="connectedSortable">
-            {% for video in playlist.videos.all %}
-                <li data-video-id="{{ video.id }}">
-                    <div class="col span_2_of_2 col1" id="vid{{ video.id }}">
-                        <div class="collection-front-content">
-                            <a id="removebtn" data-video-id="{{ video.id }}" class="remove" href="#" title="Remove video from playlist"><i class="icon-trash"></i></a>
-                            <a href="{{ video.get_absolute_url }}">
-                                <img class="coll-front-pic-content" src="{{ video.picture.url }}">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">Update playlist name</h1>
+            <form id="playlistform" action="{% url edit_playlist playlist.slug playlist.id %}" method="post">{% csrf_token %}
+                <input id="id_title" type="text" name="title" maxlength="255" value="{{ playlist.title }}">
+                <input type="submit" id="sub" value="Save" class="playlist-input" />
+            </form>
+        </div>
+        <div class="col-xs-12">
+            
+            <div class="section group playlist-edit"> 
+                <ul id="sortable" class="connectedSortable random-video">
+                    <li class="collection-front-content li-disabled" >
+                        <p class="text-center">Drag & drop to re-arrange the videos</p>
+                    </li>
+                    {% for video in playlist.videos.all %}
+                        <li class="collection-front-content" data-video-id="{{ video.id }}" id="vid{{ video.id }}">
+                            <a id="removebtn" data-video-id="{{ video.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete playlist"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="{{ video.get_absolute_url }}" class="col-xs-4">
+                                    <img src="{% thumbnail video.picture 97x92 crop %}" alt="Video image"/>
                             </a>
-                            <div class="coll-front-detail-content">
-                            <div class="coll-front-name-content">
-                                <a href="{{ video.get_absolute_url }}">{{ video.title|truncatechars:80 }}</a>
-                            </div> 
-                            <a class="coll-front-name-content collection" href="{{ video.collection.get_absolute_url }}">{{ video.collection.name|truncatechars:80 }}</a>
-                            <div class="section group">
-                                <div class="col span_1_of_4_coll_det vlength">
-                                    <p>{{ video.duration }}</p> <span>Length</span>
-                                </div>
-                                <div class="col span_2_of_4_coll_det nviews">
-                                    <p>{{ video.views }}</p> <span>Views</span>
-                                </div>
-                                <div class="col span_1_of_4_coll_det rating">
-                                    <p>{{ video.rating }}%</p>
-                                    <span>Rating</span>
+                            <div class="col-xs-8 info">
+                                <div class="coll-front-name-content">
+                                    <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:70 }}</a>
+                                </div> 
+                                <a class="coll-front-name-content collection" href="{{ video.collection.get_absolute_url }}" title="{{ video.collection.name }}">{{ video.collection.name|truncatechars:35 }}</a>
+                                <div class="row details text-center">
+                                    <div class="col-xs-4">
+                                        <p>{{ video.duration }}</p><span>Length</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p>{{ video.views }}</p> <span>Views</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p>{{ video.rating }}%</p>
+                                        <span>Rating</span>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            {% empty %}
-                <p>This playlist has no videos.</p>
-            {% endfor %}
-        </ul>
+                        </li>
+                    {% empty %}
+                        <li>This playlist has no videos.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <form id="playlistform" action="{% url edit_playlist playlist.slug playlist.id %}" method="post">{% csrf_token %}
+                <div class="playlist-input"><input type="submit" id="sub" value="Save"  /></div>
+            </form>
+        </div>
     </div>
-    <center>
-        <form id="playlistform" action="{% url edit_playlist playlist.slug playlist.id %}" method="post">{% csrf_token %}
-            <div class="playlist-input"><input type="submit" id="sub" value="Save"  /></div>
-        </form>
-    </center>
 <script>
 
     $(function() {
-        $("#sortable").sortable({connectWith: ".connectedSortable"});
+        $("#sortable").sortable({connectWith: ".connectedSortable", placeholder: "collection-front-content-transparent",items: "li:not(.li-disabled)",distance: 15});
         $("#sortable").disableSelection();
     });
        
@@ -88,6 +89,9 @@
         },
             url = $('#playlistform').attr('action');
         $.post(url, update_data, function(data) {});
+    });
+    $(function(){
+       $('[rel="tooltip"]').tooltip();
     });
 </script>
 </div>

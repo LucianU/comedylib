@@ -4,53 +4,62 @@
 {% endblock %}
 {% block title %}Comedylib - {{collection.name}} Videos{% endblock %}
 {% block content %}
-<div class="homepage">
-    <div class="section group">
-        <div class="col span_2_of_6 ">
-            <div class="info" id="info">
-                {% load thumbnail %}
-                <img src="{% thumbnail collection.picture 300x200 crop %}">
-                <h1>{{ collection.name }}</h1>
-                <div class="description_content" id="desc_content">
-                    {{ collection.description }}
-                </div>
-            </div> <!-- end info-->
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 detail-sidebar">
+            {% load thumbnail %}
+            <img src="{% thumbnail collection.picture 300x200 crop %}" alt="{{ collection.name }} image"/>
+            <h1>{{ collection.name }}</h1>
+            <p>{{ collection.description|truncatechars:200 }}</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Read more</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">{{ collection.name }}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p class="description-content">{{ collection.description }}</p>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
         </div>
-        <div class="col span_4_of_6 ">
-            <div class="section group">
+        
+        <div class="col-xs-12 col-sm-8 ">
+             <ul class="bookmarks">
                 {% for video in videos %}
-                    <div class="col span_1_of_4 col4">
-                        <div class="collection-content">
-                            <div class="coll-pic-content">
-                                <a href="{{ video.get_absolute_url }}">
-                                    <img src="{{ video.picture.url }}">
-                                </a>
-                            </div>
-                            <div class="coll-name-content">
-                                <a href="{{ video.get_absolute_url }}">{{ video.title|truncatechars:80 }}</a>
-                            </div>
-                            <div class="coll-detail-content">
-                                <div class="section group">
-                                    <div class="col span_1_of_4_coll_det vlength">
-                                        <p>{{ video.duration }}</p><span>Length</span>
+                   <li class="collection-content collection-detail">
+                        <div class="row">
+                            <a href="{{ video.get_absolute_url }}" class="col-xs-12">
+                                <img src="{% thumbnail video.picture 142x110 crop %}" alt="Video image"/>
+                            </a>
+                            <div class="col-xs-12 info">
+                                <div class="play-name-content coll-name-content">
+                                    <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:70 }}</a>
+                                </div> 
+                                <div class="row details text-center">
+                                    <div class="col-xs-4">
+                                        <p>{{ video.duration }}</p> <span>Length</span>
                                     </div>
-                                    <div class="col span_2_of_4_coll_det nviews">
-                                        <p>{{ video.views }}</p><span>Views</span>
+                                    <div class="col-xs-4 nviews">
+                                        <p>{{ video.views }}</p> <span>Views</span>
                                     </div>
-                                    <div class="col span_1_of_4_coll_det rating">
-                                        <p>{{ video.rating }} %</p><span>Rating</span>
+                                    <div class="col-xs-4">
+                                        <p>{{ video.rating }}%</p>
+                                        <span>Rating</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </li>
                 {% endfor %}
-            </div>
+            </ul>
             <div class="detail-pagination">
-            {% include "pagination.html" %}
-        </div>
+                {% include "pagination.html" %}
+            </div>
         </div><!-- end videos-->
         
     </div>
-</div> <!-- end collection detail-->
 {% endblock %}

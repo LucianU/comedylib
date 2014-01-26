@@ -1,85 +1,80 @@
 {% extends "base.html" %}
 {% block title %}Comedylib - {{ user.username }}'s profile{% endblock %}
 {% block content %}
-<div class="homepage">
-<div class="section group">
-    <div class="col colbkg1 span_1_of_6">
-        {% if user.profile == profile %}
-            <a href="{% url own_home %}"><h6>{{ user.username }}</h6></a>
-        {% else %}
-            <a href="{% url user_home profile.user.id %}"><h6>{{ profile.user.username }}</h6></a>
-        {% endif %}
-        <div class="user-header">
-            <div class="foto">
-            {% load thumbnail %}
-                {% if user.profile == profile %}
-                    {% if profile.picture %}
-                        <a href="{% url own_home %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
-                    {% else %}
-                        <a href="{% url own_home %}"><img src="{{ STATIC_URL }}img/logo.jpg"></a>
-                    {% endif %}
-                {% else %}
-                    {% if profile.picture %}
-                        <a href="{% url user_home profile.user.id %}"><img src="{% thumbnail profile.picture 90x115 crop %}"></a>
-                    {% else %}
-                        <a href="{% url user_home profile.user.id %}"><img src="{{ STATIC_URL }}img/logo.jpg"></a>
-                    {% endif %}
-                {% endif %}
-            </div>
-        </div>
-        <div id="tabs2" class="user-tabs">
+    <div class="row">
+        <div class="col-xs-12 col-sm-2">
             {% if user.profile == profile %}
-                <ul>
-                    <li><a href="{% url own_playlists %}">My Playlists</a></li>
-                    <li><a href="{% url own_bookmarks %}?post=V">Bookmarked Videos</a></li>
-                    <li><a href="{% url own_bookmarks %}?post=P">Bookmarked Playlists</a></li>
-                    <li><a href="{% url own_likes %}" id="lv_btn">Liked Videos</a></li>
-                </ul>
+                <a href="{% url own_home %}" class="profile-name">{{ user.username }}</a>
             {% else %}
-                <ul>
-                    <li><a href="{% url user_playlists profile.user.id %}">Playlists</a></li>
-                </ul>
+                <a href="{% url user_home profile.user.id %}" class="profile-name">{{ profile.user.username }}</a>
             {% endif %}
-        </div>
-    </div>
-    {% block profile_content %}
-    <div class="col span_5_of_6 front_profile">
-        <div class="col span_2_of_2 colbkg1 profile-info">
-            <div class="col span_1_of_2">
-                <h1>A.K.A.</h1>
-                <p>{{profile.name}}</p>
-                <h1>Located in</h1>
-                <p>{{profile.location}}</p>
-            </div>     
-            <div class="col span_1_of_2">
-                <h1>About me</h1>
-                <p>{{profile.description}}</p>
-            </div>               
-        </div>
-        <h1>Activity</h1>
-        <div class="section group">
-            <!--<div class="col span_1_of_2 colbkg1">
-                <!-- Asta nu e populata momentan. -->
-            <!--    {{recent_comments}}
-            </div> -->
-           
-            <div class="col span_1_of_2 colbkg1">
-                <ul>
-                    {% for pl in recent_playlists %}
-                        <li><div><span>{{ profile.user.username }}</span> created the playlist <a href="{{ pl.videos.all.0.get_absolute_url }}?pl={{ pl.id }}">{{ pl.title }}</a></div></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col span_1_of_2 colbkg1">
-                <ul>
-                    {% for like in recent_likes %}
-                        <li><div><span>{{ profile.user.username }}</span> liked the video <a href="{{ like.video.get_absolute_url }}">{{ like.video.title }}</a></div></li>
-                    {% endfor %}
-                </ul>
+            <div class="row">
+                <div class="col-xs-6  col-sm-12 user-header">
+                    {% load thumbnail %}
+                    {% if user.profile == profile %}
+                        {% if profile.picture %}
+                            <a href="{% url own_home %}"><img src="{% thumbnail profile.picture 100x115 crop %}" alt="User image"></a>
+                        {% else %}
+                            <a href="{% url own_home %}"><img src="{{ STATIC_URL }}img/logo.jpg" alt="General user image"></a>
+                        {% endif %}
+                    {% else %}
+                        {% if profile.picture %}
+                            <a href="{% url user_home profile.user.id %}"><img src="{% thumbnail profile.picture 100x115 crop %}" alt="User image"></a>
+                        {% else %}
+                            <a href="{% url user_home profile.user.id %}"><img src="{{ STATIC_URL }}img/logo.jpg" alt="General user image"></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-6  col-sm-12 user-menu">
+                    {% if user.profile == profile %}
+                        <ul>
+                            <li><a href="{% url own_playlists %}">My Playlists</a></li>
+                            <li><a href="{% url own_bookmarks %}?post=V">Bookmarked Videos</a></li>
+                            <li><a href="{% url own_bookmarks %}?post=P">Bookmarked Playlists</a></li>
+                            <li><a href="{% url own_likes %}" id="lv_btn">Liked Videos</a></li>
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li><a href="{% url user_playlists profile.user.id %}">Playlists</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
         </div>
+        {% block profile_content %}
+        <div class="col-xs-12 col-sm-10 front-profile">
+            <div class="row profile-info">
+                    <div class="col-xs-12 col-sm-6">
+                        <h1>A.K.A.</h1>
+                        <p>{{profile.name}}</p>
+                        <h1>Located in</h1>
+                        <p>{{profile.location}}</p>
+                    </div>     
+                    <div class="col-xs-12 col-sm-6">
+                        <h1>About me</h1>
+                        <p>{{profile.description}}</p>
+                    </div>               
+            </div>
+            <div class="row"> 
+                <div class="col-xs-12">
+                    <h1>Activity</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <ul class="recent-playlist">
+                        {% for pl in recent_playlists %}
+                            <li><div><span>{{ profile.user.username }}</span> created the playlist <a href="{{ pl.videos.all.0.get_absolute_url }}?pl={{ pl.id }}">{{ pl.title }}</a></div></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <ul class="recent-likes">
+                        {% for like in recent_likes %}
+                            <li><div><span>{{ profile.user.username }}</span> liked the video <a href="{{ like.video.get_absolute_url }}">{{ like.video.title }}</a></div></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
     </div>
-    {% endblock %}
-</div>
-</div>
 {% endblock %}

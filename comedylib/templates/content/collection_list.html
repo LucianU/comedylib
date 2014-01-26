@@ -2,44 +2,72 @@
 {% block title %}Comedylib - {{ collection_list.0.get_role_display|title }}s{% endblock %}
 {% block content %}
 {% load thumbnail %}
-<div class="homepage">
-    <div class="section group">
-        <div class="col span_1_of_6 tags">
-            <h1>Categories</h1>
-            <form action="." method="get" >
-                <fieldset id="inputs3"> 
-                    {{ categs_form.as_p}}
-                </fieldset>
-                <fieldset id="actions"> 
-                    <input type="submit" id="filter" value="Filter">
-                </fieldset>
-            </form>
-        </div>
-        <div class="col span_5_of_6">
-            <div class="section group">
-                {% for collection in collection_list %}
-                <div class="col span_1_of_4 col4">
-                    <a href="{{ collection.get_absolute_url }}">
-                    <div class="coll-list-content">
-                        <img src="{% thumbnail collection.picture 198x250 crop %}">
-                        <div class="coll-list-detail-content">
-                            <p class="name">{{ collection.name|truncatechars:80 }}</p>
-                            {% with videos=collection.videos.count %}
-                            <p>{{ videos }} video{{ videos|pluralize }}</p>
-                            {% endwith %}
-                            <p>{{ collection.rating }} % out of {{collection.votes}} votes</p>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                {% endfor %}
-                <div class="album-pagination">
-                    {% include "pagination.html" %}
-                </div>    
+<div class="row" id="coll-container">
+    <a href="#" class="categ-btn">Categories</a>
+    <div class="col-xs-12 col-sm-3 tags">
+        <nav class="navbar navbar-default navbar-categ" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle categories</span>
+                    <span>Categories</span>
+                </button>
             </div>
-        </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <h1 class="hidden-xs">Categories</h1>
+                <form action="." method="get" >
+                    <fieldset id="actions"> 
+                        <input type="submit" id="filter" value="Filter" class="tag-filter visible-xs">
+                    </fieldset>
+                    <fieldset id="inputs"> 
+                        {{ categs_form.as_p}}
+                    </fieldset>
+                    <fieldset id="actions"> 
+                        <input type="submit" id="filter" value="Filter" class="tag-filter">
+                    </fieldset>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </nav>
     </div>
-    <!-- FEATURES -->
-    
+    <div class="col-xs-12 col-sm-9">
+        <ul class="collection-list">
+            {% for collection in collection_list %}
+            <li class="collection-item">
+                <a href="{{ collection.get_absolute_url }}" title="{{ collection.name}}">
+                    <img src="{% thumbnail collection.picture 167x211 crop %}" alt="{{ collection.name}} image"/>
+                    <div class="collection-item-info">
+                        <p class="name">{{ collection.name|truncatechars:80 }}</p>
+                        {% with videos=collection.videos.count %}
+                        <p>{{ videos }} video{{ videos|pluralize }}</p>
+                        {% endwith %}
+                        <p>{{ collection.rating }} % out of {{collection.votes}} votes</p>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+            <li class="album-pagination">
+                {% include "pagination.html" %}
+            </li>    
+        </ul>
+    </div>
 </div>
+<!--<script type="text/javascript">
+  $(document).ready(function(){
+    /// CLOSE MOBILE MENU 
+	  var menuclosed = true;
+    $('a.categ-btn').on("click", function(e){
+         if(menuclosed) {
+             $('.tags').css('left','0');
+             menuclosed = false;
+         }
+         else{
+             $('.tags').css('left','-20rem');
+             menuclosed = true;
+         }
+         e.preventDefault();
+      });
+	});
+</script> -->
 {% endblock %}

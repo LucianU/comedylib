@@ -1,36 +1,39 @@
 {% extends "profiles/home.html" %}
 {% block title %}Comedylib - {{user.username}}'s liked videos{% endblock %}
 {% block profile_content %}
-<div class="col span_5_of_6">
+{% load thumbnail %}
+<div class="col-xs-12 col-sm-10">
     <h5>Liked Videos</h5>
-    <div class="section group">
+    <ul class="bookmarks"> 
         {% for video in liked_videos %}
-            <div class="col span_1_of_5 col5">
-                <div class="collection-content">
-                    <div class="coll-pic-content">
-                        <a href="{{ video.get_absolute_url }}"><img src="{{ video.picture.url }}"></a>
-                    </div>
-                    <div class="coll-name-content">
-                        <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-                    </div>
-                    <div class="coll-detail-content">
-                        <div class="section group">
-                            <div class="col span_1_of_4_coll_det vlength">
+        <li class="collection-content">
+                <div class="row">
+                    <a href="{{ video.get_absolute_url }}" class="col-xs-12">
+                        <img src="{% thumbnail video.picture 142x110 crop %}" alt="Video image"/>
+                    </a>
+                    <div class="col-xs-12 info">
+                        <div class="coll-front-name-content">
+                            <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:70 }}</a>
+                        </div> 
+                        <a class="coll-front-name-content collection" href="{{ video.collection.get_absolute_url }}" title="{{ video.collection.name }}">{{ video.collection.name|truncatechars:35 }}</a>
+                        <div class="row details text-center">
+                            <div class="col-xs-4">
                                 <p>{{ video.duration }}</p> <span>Length</span>
                             </div>
-                            <div class="col span_2_of_4_coll_det nviews">
+                            <div class="col-xs-4 nviews">
                                 <p>{{ video.views }}</p> <span>Views</span>
                             </div>
-                            <div class="col span_1_of_4_coll_det rating">
-                                <p>{{ video.rating }} %</p> <span>Rating</span>
+                            <div class="col-xs-4">
+                                <p>{{ video.rating }}%</p>
+                                <span>Rating</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </li>
         {% empty %}
-            <p>You haven't liked any videos.</p>
+            <li>You haven't liked any videos.</li>
         {% endfor %}
-    </div>
+    </ul>
 </div>
 {% endblock %}

@@ -8,7 +8,7 @@
 {% block title %}Comedylib - {{video.collection.name}}, {{ video.title }} - online comedy videos{% endblock %}
 {% block content %}
 {% load thumbnail %}
-<div id="video_detail" class="homepage">
+<div id="video_detail" class="row">
     <script>
         var pageAbsoluteURI = '{{ request.build_absolute_uri }}',
             affiliateOffersURI = '{% url affiliates:offers %}',
@@ -25,171 +25,101 @@
             addToBookmarksURI = '{% url add_to_bookmarks %}',
             removeFromBookmarksURI = '{% url remove_from_bookmarks %}';
     </script>
-    <div class="section group">
-        {% if current_pl %}
-            <div class="col0 span_4_of_6_1 playlist_title">
-              <a href="{{current_pl.get_absolute_url}}">{{ current_pl.title }}</a> from <a href ="{{current_pl.profile.get_absolute_url}}">{{ current_pl.profile.user.username }}</a>
-            </div>
-            <div class="col0 span_2_of_6_1 playlist_title">
-                <div class="section group">
-                    <div class="col span_1_of_4">
-                        <a href="{{ prev_video_url }}" id="next_video">  <i class="icon-step-backward"></i></a>
-                        {{ video_no }}/{{ videos_count }}
-                        <a href="{{ next_video_url }}" id="prev_video">  <i class="icon-step-forward"></i></a>
-                    </div>
-                    <div class="col span_2_of_4 bookmark">
-                        {% if request.user.is_authenticated %}
-                            {% if bookmarked_playlist %}
-                                <a href="#" id="bookmark_pl" class="inactive1" title="Remove from bookmarks">Bookmark <span><i class="icon-list"></i></span></a>
-                            {% else %}
-                                <a href="#" id="bookmark_pl" class="active1" title="Save this playlist to watch later">Bookmark <span><i class="icon-list"></i></span></a>
-                            {% endif %}
-                        {% else %}
-                        <a class="fancybox" href="#loginerror" title="Save this playlist to watch later">Bookmark <span><i class="icon-list"></i></span></a>
-                        {% endif %}
-                    </div>                     
-                    <div class="col span_1_of_4 alignright">
-                        <a href="#"><i class="icon-refresh {% if request.session.autoplay %}active{%endif %}"></i></a>
-                       <!-- <a href="#"><i class="icon-random"></i></a> -->
-                    </div>
-                </div>
-            </div>
-        {% else %}
-        <div class="col0 span_4_of_6_1 playlist_title nosectionspace05">
-                 </div>
-            <div class="col0 span_2_of_6_1 playlist_title nosectionspace05">
-             	<p class="title">Related <span>Videos</span></p>
-			
-            </div>
-        {%endif%}
-        
-        <div class="col0 span_4_of_6_1 col1 nosectionspace">
-            <div class="video">
-                <div class="mediaplayer">
-                <video width="661" height="390" id="player1">
-                    <source type="video/youtube" src="{{ video.url }}" />
-                </video>
-                <script>
-                    $('#player1').mediaelementplayer({
-                        plugins: ['flash', 'silverlight'],
-                        success: function(mediaElement, domObject) {
-                            if (mediaElement.pluginType == 'flash') {
-                                mediaElement.addEventListener('canplay', function() {
-                                    // Player is ready
-                                    mediaElement.play();
-                                }, false);
-                            }
-                        },
-                        error: function() {
-                            alert('Error setting media!');
-                        }
-                    });
-                </script>
 
-                </div> 
-            </div> <!-- end video-->
-        </div>
         
-                <div class="col0 span_2_of_6_1 related nosectionspace">
-            <div class="container_list divscroll" id="content_1">          
-                <ol>
-                {% for rel_video in related_videos %}
-                    <li>
-                        <div class="col span_1_of_3 picture">
-                            <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
-                            </a>
-                            <p class="time">{{ rel_video.duration }}</a>
-                        </div>      
-                        <div class="col span_2_of_3 data">   
-                            <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                {{ rel_video.title }}
-                            </a>
-                            <br/>
-                            <a href="{{ rel_video.collection.get_absolute_url }}" class="collection">{{ rel_video.collection.name }}</a>
-                        </div> 
-                    </li>
-                {% empty %}
-                    <li>No related videos</li>
-                {% endfor %}
-                </ol>         
-            </div>
-        </div>
-       
-    </div>
-    <div class="section group">
-        <div class="col span_4_of_6 nosectionspace">    
-          
-            <div class="social">
-                <div class="rating">
-                    {% if request.user.is_authenticated %}
-                        {% if vid_feel == 'L' %}
-                            <div id="likecontent" class="like load" title="Like">
-                                <a href="#" id="like_btn" class="active"></a>
-                                <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
-                            </div>
-                        {% else %}
-                            <div id="likecontent" class="like" title="Like">
-                                <a href="#" id="like_btn"></a>
-                                <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <div id="likecontent" class="like" title="Like">
-                            <a class="fancybox" href="#loginerror"></a>
-                        </div>
-                    {% endif %}
-                    <div class="rateholder">
-                        {% if video.rating == 0 %}
-                            <span class="average">N/A</span>
-                        {% else %}
-                            <span class="average">{{ video.rating }} %</span>
-                        {% endif %}
-                        <span class="nvotes">{{video.total_votes}} votes</span>
-                    </div>
-                    {% if request.user.is_authenticated %}
-                        {% if vid_feel == 'D' %}
-                            <div id="dislikecontent" class="dislike" title="Not like">
-                                <a href="#" id="dislike_btn" class="active"></a>
-                                <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
-                            </div>
-                        {% else %}
-                            <div id="dislikecontent" class="dislike" title="Not like">
-                                <a href="#" id="dislike_btn"></a>
-                                <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <div id="dislikecontent" class="dislike" title="Not like">
-                            <a class="fancybox" href="#loginerror"></a>
-                        </div>
-                    {% endif %}
+        <div class="col-xs-12 col-sm-8">
+            <div class="row">
+            {% if current_pl %}
+                <div class="col-xs-12 header">
+                    <a href="{{current_pl.get_absolute_url}}">{{ current_pl.title }}</a> from <a href ="{{current_pl.profile.get_absolute_url}}">{{ current_pl.profile.user.username }}</a>
                 </div>
-                <!-- verify auth to enable rating-->
-                <ul id="sociallist" >
-                    {% if request.user.is_authenticated %}
-                        <li id="addplay-btn" class="playlist ">
-                            <a href="#" title="Add this video to a playlist">Playlist <span><i class="icon-list"></i></span></a>
-                        </li>
-                        {% if bookmarked_video %}
-                            <li class="bookmark">
-                                <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span><i class="icon-minus"></i></span></a>
-                            </li>
-                        {% else %}
-                            <li class="bookmark">
-                                <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span><i class="icon-plus"></i></span></a>
-                            </li>
-                        {% endif %}
-                    {% else %}
-                        <li class="playlist">
-                            <a class="fancybox" href="#loginerror" >Playlist  <span><i class="icon-list"></i></span></a>
-                        </li>
-                        <li class="bookmark">
-                            <a class="fancybox" href="#loginerror" >Bookmark</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <div class="social-share">
+            {% else %}
+                <div class="col-xs-12">
+                    <p></p>
+                </div>
+            {%endif%}
+                
+                <div class="col-xs-12" id="player">Loading the player ...</div>
+                    <script>
+                        jwplayer("player").setup({
+                            file: "{{ video.url }}",
+                            autostart: false,
+                            title: "{{ video.title }}",
+                            width: "100%",
+                            aspectratio: "16:9"
+                        });
+                    </script>
+                <div class="col-xs-12">  
+                    <div class="social row">
+                        <div class="col-xs-4 col-sm-3 rating">
+                            {% if request.user.is_authenticated %}
+                                {% if vid_feel == 'L' %}
+                                    <div id="likecontent" class="like load" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                        <a href="#" id="like_btn" class="active"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
+                                    </div>
+                                {% else %}
+                                    <div id="likecontent" class="like" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                        <a href="#" id="like_btn"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div id="likecontent" class="like" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                    <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                </div>
+                            {% endif %}
+                            <div class="rateholder">
+                                {% if video.rating == 0 %}
+                                    <span class="average">N/A</span>
+                                {% else %}
+                                    <span class="average">{{ video.rating }} %</span>
+                                {% endif %}
+                                <span class="nvotes">{{video.total_votes}} votes</span>
+                            </div>
+                            {% if request.user.is_authenticated %}
+                                {% if vid_feel == 'D' %}
+                                    <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                        <a href="#" id="dislike_btn" class="active"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
+                                    </div>
+                                {% else %}
+                                    <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                        <a href="#" id="dislike_btn"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                    <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- verify auth to enable rating-->
+                        <ul class="col-xs-8 col-sm-8 col-md-4 social-list" >
+                            {% if request.user.is_authenticated %}
+                                <li id="addplay-btn">
+                                    <a href="#" class="button" title="Add this video to a playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist <span class="glyphicon glyphicon-list"></span></a>
+                                </li>
+                                {% if bookmarked_video %}
+                                    <li>
+                                        <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span class="glyphicon glyphicon-minus"></span></a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span class="glyphicon glyphicon-plus"></span></a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li>
+                                    <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Add this video to playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist  <span class="glyphicon glyphicon-list"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Bookmark this video" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Bookmark <span class="glyphicon glyphicon-plus"></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <div class="col-xs-8 col-sm-8 col-md-4 social-share">
                             <p><span>Share</span> video</p>
                             <!-- Facebook button-->
                             <a href="#" class="faceb" id="fb_share_btn" title="Share on Facebook"></a>
@@ -200,93 +130,172 @@
                             <!-- Reddit button-->
                             <a href="#" class="redd" id="rdt_share_btn" title="Share to Reddit"></a>
                         </div>
-                    </li>
-                </ul>
-                <div class="nviews">
-                    <p>{{ video.views }} <span>views</span></p>
+                        <div class="col-xs-4 col-sm-1 nviews">
+                            <p>{{ video.views }} <span>views</span></p>
+                        </div>
+                        <div id="addtoplaycontent" class="addtoplaylist">
+                            <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
+                                <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
+                                <input type="submit" id="sub" value="Create playlist" />
+                                <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
+                            </form>
+                            <h2>Click on a playlist to add the video:</h1>
+                            <div class="playlistul divscroll">
+                                <ul id="playlistul">
+                                    {% for playlist in user.profile.playlists.all %}
+                                        <li data-playlist-id="{{ playlist.id }}" class="active">{{ playlist.title }} ({{ playlist.videos.count }})</li>
+                                    {% empty %}
+                                        <li>No playlists found.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- end social -->
+                    <div id="affiliate"></div>
                 </div>
-                <div id="addtoplaycontent" class="addtoplaylist">
-                    <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
-                        <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
-                        <input type="submit" id="sub" value="Create playlist" />
-                        <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
-                    </form>
-                    <h2>Click on a playlist to add the video:</h1>
-                    <div class="playlistul divscroll">
-                        <ul id="playlistul">
-                            {% for playlist in user.profile.playlists.all %}
-                                <li data-playlist-id="{{ playlist.id }}" class="active">{{ playlist.title }} ({{ playlist.videos.count }})</li>
-                            {% empty %}
-                                <li>No playlists found.</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- end social -->
-            <div id="affiliate"></div>
-            <div class="comments">
-                <h1>Comments</h1>
-                {% load comments %}
-                {% get_comment_count for video as comment_count %}
-                {% if comment_count %}
-                    <span class="nrcom">{{ comment_count }} comments</span>
-                {% endif %}
-                {% if request.user.is_authenticated %}
-                    {% get_comment_form for video as comm_form %}
-                    <div class="commentform">
-                        <form action="{% comment_form_target %}" method="POST">
-                            {% csrf_token %}
-                            {{ comm_form.comment }}
-                            {{ comm_form.honeypot }}
-                            {{ comm_form.content_type }}
-                            {{ comm_form.object_pk }}
-                            {{ comm_form.timestamp }}
-                            {{ comm_form.security_hash }}
-                            <input type="hidden" name="next" value="{{ video.get_absolute_url }}" />
-                            <input type="submit" value="Add comment" id="id_submit" />
-                        </form>
-                    </div>
-                {% else %}
-                    <p>Please <a class="fancybox" href="#loginerror">log in</a> to leave a comment.</p>
-                {% endif %}
-                <div class="commentlist">
-                {% get_comment_list for video as comments %}
-                    <ul>
-                        {% for comment in comments %}
-                            <li>
-                                <a href="{{ comment.user.profile.get_absolute_url }}">
-                                    <img src="{% thumbnail comment.user.profile.picture 80x60 crop %}" />
-                                </a>
-                                <a href="{{ comment.user.profile.get_absolute_url }}">
-                                    {{comment.user.username}}
-                                </a>
-                                <span>{{comment.submit_date}}</span>
-                                <p>{{comment.comment}}</p> 
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div><!-- end comments -->
+            </div>
         </div>
-        <div class="col span_2_of_6 nosectionspace">
+        
+        <div class="col-xs-12 col-sm-4">
+            <div class="row">
+                    <div class="col-xs-12 header">
+                    {% if current_pl %}
+                        <div class="row playlist-control">
+                            <div class="col-xs-4 navigation">
+                                <a href="{{ prev_video_url }}" data-toggle="tooltip" rel="tooltip" data-placement="bottom" title="Previous" id="next_video"><span class="glyphicon glyphicon-step-backward"></span></a>
+                                {{ video_no }}/{{ videos_count }}
+                                <a href="{{ next_video_url }}" data-toggle="tooltip" rel="tooltip" data-placement="bottom" title="Next" id="prev_video"><span class="glyphicon glyphicon-step-forward"></span></a>
+                            </div>
+                            <div class="col-xs-6">
+                                {% if request.user.is_authenticated %}
+                                    {% if bookmarked_playlist %}
+                                        <a href="#" id="bookmark_pl" class="inactive1" title="Remove from bookmarks">Bookmark <span class="glyphicon glyphicon-list"></span></a>
+                                    {% else %}
+                                        <a href="#" id="bookmark_pl" class="active1" title="Save this playlist to watch later">Bookmark <span class="glyphicon glyphicon-list"></span></a>
+                                    {% endif %}
+                                {% else %}
+                                <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Save this playlist to watch later" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Bookmark <span class="glyphicon glyphicon-list"></span></a>
+                                {% endif %}
+                            </div>                     
+                            <div class="col-xs-2">
+                                <a href="#" title="Repeat" data-toggle="tooltip" rel="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-repeat {% if request.session.autoplay %}active{%endif %}"></span></a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                        <div class="col-xs-12 colored-title">
+                            <p>Related <span>Videos</span></p>
+                        </div>
+                    {%endif%}
+               
+                <div class="col-xs-12 container-list gray-skin scrollable">          
+                    <ul>
+                    {% for rel_video in related_videos %}
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4 picture">
+                                    <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                        <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
+                                    </a>
+                                    <p class="time">{{ rel_video.duration }}</a>
+                                </div>      
+                                <div class="col-xs-8 data">   
+                                    <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
+                                        {{ rel_video.title }}
+                                    </a>
+                                    <br/>
+                                    <a href="{{ rel_video.collection.get_absolute_url }}" class="collection">{{ rel_video.collection.name }}</a>
+                                </div> 
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li>No related videos</li>
+                    {% endfor %}
+                    </ul>         
+                </div>
+                <script type="text/javascript">
+                   if ($(window).width()>=760)  
+                            $(".scrollable").customScrollbar(); 
+                   // $( window ).resize(function() {
+                    //    if ($(window).width()>=760)  
+                    //        $(".scrollable").customScrollbar();  
+                   // });                  
+                </script>
+            </div>
+        </div>
+    </div> <!-- end video detail-->
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 comments">
+                        <h2>Comments</h2>
+                        {% load comments %}
+                        {% get_comment_count for video as comment_count %}
+                        {% if comment_count %}
+                            <span class="nrcom">{{ comment_count }} comments</span>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                            {% get_comment_form for video as comm_form %}
+                            <div class="commentform">
+                                <form action="{% comment_form_target %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ comm_form.comment }}
+                                    {{ comm_form.honeypot }}
+                                    {{ comm_form.content_type }}
+                                    {{ comm_form.object_pk }}
+                                    {{ comm_form.timestamp }}
+                                    {{ comm_form.security_hash }}
+                                    <input type="hidden" name="next" value="{{ video.get_absolute_url }}" />
+                                    <input type="submit" value="Add comment" id="id_submit" />
+                                </form>
+                            </div>
+                        {% else %}
+                            <p>Please <a class="comment-login" href="#" data-toggle="modal" data-target="#loginerror">log in</a> to leave a comment.</p>
+                        {% endif %}
+                        <div class="commentlist">
+                        {% get_comment_list for video as comments %}
+                            <ul>
+                                {% for comment in comments %}
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-2">
+                                                <a href="{{ comment.user.profile.get_absolute_url }}">
+                                                    <img src="{% thumbnail comment.user.profile.picture 80x60 crop %}" />
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-10">
+                                                <a href="{{ comment.user.profile.get_absolute_url }}">
+                                                    {{comment.user.username}}
+                                                </a>
+                                                <span>{{comment.submit_date}}</span>
+                                                <p>{{comment.comment}}</p> 
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div><!-- end comments -->
+        <div class="col-xs-12 col-sm-4 adverts">
+            
         </div>
     </div>
-</div> <!-- end video detail-->
-<div id="loginerror" style="display: none;">
-    <h3>You must be logged in to have access to this option</h3>
-    {% include "registration/login-er.html" %}
-</div> <!-- end loginerror-->
+
+<div class="modal fade" id="loginerror" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">You must be logged in to have access to this option</h4>
+            </div>
+            <div class="modal-body">
+                {% include "registration/logindrop.html" %}
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- end loginerror-->
+
 {% endblock %}
 {% block extra_js %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/video_detail.js"></script>
 {% endblock %}
-<script>
-		(function($){
-			$(window).load(function(){
-				$("#content_1").mCustomScrollbar({
-					autoHideScrollbar:true,
-					theme:"light-thin"
-				});
-			});
-		})(jQuery);
-</script>
+

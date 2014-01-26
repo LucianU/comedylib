@@ -1,74 +1,67 @@
 {% extends "profiles/home.html" %}
 {% block title %}Comedylib - Settings page{% endblock %}
 {% block profile_content %}
-<script>
-  $(function() {
-    {% if picture_form.is_bound %}
-        $("#tabs").tabs({'active': 0});
-    {% else %}
-        {% if password_form.is_bound %}
-            $("#tabs").tabs({'active': 1});
-        {% else %}
-            $("#tabs").tabs();
-        {% endif %}
-    {% endif %}
-  });
-  </script>
-<div class="col span_5_of_6">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Change your info</a></li>
-            <li><a href="#tabs-2">Change your password</a></li>
+    <div class="col-xs-12 col-sm-10">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#info" data-toggle="tab">Change your info</a></li>
+            <li><a href="#pass" data-toggle="tab">Change your password</a></li>
         </ul>
-        <div id="tabs-1">
-            <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
-                {{ profile_form.non_field_errors }}
-                <div id="fieldWrapper">
-                    {{ profile_form.picture.errors }}
-                    <label>Picture</label>
-                    <p><input type="file" name="picture" id="id_picture" class="st"/><span>Select only .jpg, .jpeg, .png or .gif format</span></p>    
-                </div>
-                <div id="fieldWrapper">
-                    {{ profile_form.description.errors }}
-                    <label>Stuff you want people to know about you</label>
-                    <p><textarea name="description" id="id_description" rows="5" cols="37" class="st">{{ profile_form.description.value|default_if_none:""}}</textarea></p> 
-                </div>
-                <div id="fieldWrapper">
-                    {{ profile_form.name.errors }}
-                    <label>What they call you</label>
-                    <p><input type="text" name="name" id="id_name" value="{{ profile_form.name.value|default_if_none:"" }}" class="st" /></p> 
-                </div>
-                <div id="fieldWrapper">
-                    {{ profile_form.gender.errors }}
-                    <label>Gender</label>
-                    <p>{{ profile_form.gender }}</p> 
-                </div>
-                <div id="fieldWrapper">
-                    {{ profile_form.location.errors }}
-                    <label>Where you at</label>
-                    <p><input type="text" name="location" id="id_location" value="{{ profile_form.location.value|default_if_none:"" }}" class="st" /></p> 
-                </div>
-                <input type="submit" value="Update" />
-            </form>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="info">
+                <form enctype="multipart/form-data" method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                    {{ profile_form.non_field_errors }}
+                    <div id="fieldWrapper">
+                        {{ profile_form.picture.errors }}
+                        <label>Picture</label>
+                        <p><input type="file" name="picture" id="id_picture" /><span>Select only .jpg, .jpeg, .png or .gif format</span></p>    
+                    </div>
+                    <div id="fieldWrapper">
+                        {{ profile_form.description.errors }}
+                        <label>Stuff you want people to know about you</label>
+                        <p><textarea name="description" id="id_description" rows="5">{{ profile_form.description.value|default_if_none:""}}</textarea></p> 
+                    </div>
+                    <div id="fieldWrapper">
+                        {{ profile_form.name.errors }}
+                        <label>What they call you</label>
+                        <p><input type="text" name="name" id="id_name" value="{{ profile_form.name.value|default_if_none:"" }}" /></p> 
+                    </div>
+                    <div id="fieldWrapper">
+                        {{ profile_form.gender.errors }}
+                        <label>Gender</label>
+                        <p>{{ profile_form.gender }}</p> 
+                    </div>
+                    <div id="fieldWrapper">
+                        {{ profile_form.location.errors }}
+                        <label>Where you at</label>
+                        <p><input type="text" name="location" id="id_location" value="{{ profile_form.location.value|default_if_none:"" }}" class="st" /></p> 
+                    </div>
+                    <input type="submit" value="Update" />
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pass">
+                <form method="post" action="{% url settings %}" class="form">{% csrf_token %}
+                    {{ password_form.non_field_errors }}
+                    <div id="fieldWrapper">
+                        {{ password_form.old_password.errors }}
+                    </div>
+                    <p><input type="password" name="old_password" id="id_old_password" placeholder="Old Password" /></p>
+                   <div id="fieldWrapper">
+                        {{ password_form.new_password1.errors }}
+                   </div>
+                    <p><input type="password" name="new_password1" id="id_new_password1" placeholder="New Password" /></p>
+                    <div id="fieldWrapper">
+                        {{ password_form.new_password2.errors }}
+                    </div>
+                    <p><input type="password" name="new_password2" id="id_new_password2" placeholder="Confirm Password" /> <span class="helptextdark">Enter the same password as above, for verification.</span></p>
+                    <input type="submit" value="Update"/>
+                </form>
+            </div>
         </div>
-        <div id="tabs-2">
-            <form method="post" action="{% url settings %}" class="form">{% csrf_token %}
-                {{ password_form.non_field_errors }}
-                <div id="fieldWrapper">
-                    {{ password_form.old_password.errors }}
-                </div>
-                <p><input type="password" name="old_password" id="id_old_password" placeholder="Old Password" class="small"/></p>
-               <div id="fieldWrapper">
-                    {{ password_form.new_password1.errors }}
-               </div>
-                <p><input type="password" name="new_password1" id="id_new_password1" placeholder="New Password" class="small"/></p>
-                <div id="fieldWrapper">
-                    {{ password_form.new_password2.errors }}
-                </div>
-                <p><input type="password" name="new_password2" id="id_new_password2" placeholder="Confirm Password" class="small"/> <span class="helptextdark">Enter the same password as above, for verification.</span></p>
-                <input type="submit" value="Update"/>
-            </form>
-        </div>
+        <script>
+            $(function () {
+                $('#myTab a:first').tab('show')
+            })
+        </script>
     </div>
-</div>
 {% endblock %}

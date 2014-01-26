@@ -1,51 +1,39 @@
 {% extends "base.html" %}
 {% block title %} Register on Comedylib - Comedians, Series and Movies {% endblock %}
 {% block content %}
-<div class="userloginpage">
-    <div class="right">
-           
-                <form action="{% url accounts_register %}" method="post">{% csrf_token %}
-                    <fieldset id="inputs2">
-                        {{ form.non_field_errors }}
-                        <div id="fieldWrapper">
-                            {{ form.username.errors }}
-                        </div>
-                        <p><input id="id_username" type="text" placeholder="Username" name="username" maxlength="30" required/> <span class="helptext">Max 30 characters. Letters, digits and @ . + - _ only.</span></p>
-                        <div id="fieldWrapper">
-                            {{ form.password1.errors }}
-                        </div>
-                        <p><input type="password" name="password1" placeholder="Password" id="id_password1" required/></p>
-                         <div id="fieldWrapper">
-                            {{ form.password2.errors }}
-                        </div>
-                        <p><input type="password" placeholder="Confirm password" name="password2" id="id_password2" required/> <span class="helptext">Enter the same password as above, for verification.</span></p>
-                         <div id="fieldWrapper">
-                            {{ form.email.errors }}
-                        </div>
-                        <p><input id="id_email" type="text" placeholder="Email address" name="email" maxlength="75" required/></p>
-                    </fieldset>
-                    <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</p>
-                    <fieldset id="actions1"> 
-                        <input type="submit" value="Sign Up"/>
-                     </fieldset>
-                </form>
-          
-           
-                    <center><br/><h1>Or</h1>
-                    <div class="social">
-                         <div class="section group">
-                            <div class="col span_1_of_2 ">
-                                <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img id="fbtnlnk2"  src="/static/img/fbsign.png" alt="facebook"/></a>
-                            </div>
-                            <div class="col span_1_of_2 ">
-                                <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img id="gbtnlnk2" src="/static/img/googlesign.png" alt="google"/></a>
-                            </div>
-                        </div>
-                    </div>
-                    </center>
+    <div class="signin_content login-register-content">
+        <form action="{% url accounts_register %}" method="post">{% csrf_token %}
+            <fieldset id="inputs">
+                {{ form.non_field_errors }}
+                <div id="fieldWrapper">
+                    {{ form.username.errors }}
+                </div>
+                <p><input id="id_username" type="text" placeholder="Username" name="username" maxlength="30" required/> <span class="helptext">Max 30 characters. Letters, digits and @ . + - _ only.</span></p>
+                <div id="fieldWrapper">
+                    {{ form.password1.errors }}
+                </div>
+                <p><input type="password" name="password1" placeholder="Password" id="id_password1" required/></p>
+                 <div id="fieldWrapper">
+                    {{ form.password2.errors }}
+                </div>
+                <p><input type="password" placeholder="Confirm password" name="password2" id="id_password2" required/> <span class="helptext">Enter the same password as above, for verification.</span></p>
+                 <div id="fieldWrapper">
+                    {{ form.email.errors }}
+                </div>
+                <p><input id="id_email" type="text" placeholder="Email address" name="email" maxlength="75" required/></p>
+            </fieldset>
+            <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</p>
+            <fieldset id="actions"> 
+                <input type="submit" value="Sign Up" class="register-btn"/>
+             </fieldset>
+        </form>
+            <center><br/><h1>Or</h1>
+                <div class="register-social">
+                    <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" ><img src="/static/img/fbsign.png" alt="facebook"/></a>
+                    <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}"  ><img src="/static/img/googlesign.png" alt="google"/></a>
+                </div>
+            </center>
            
             
-        </div>
-    
-</div>
+    </div>
 {% endblock %}

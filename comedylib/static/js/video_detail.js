@@ -1,4 +1,8 @@
 $(document).ready(function() {
+     /* Tooltip activation */
+    $(function(){
+       $('[rel="tooltip"]').tooltip();
+    });
     /* Social sharing */
     // Facebook
     $('#fb_share_btn').click(function(e){
@@ -25,7 +29,7 @@ $(document).ready(function() {
     $.get(affiliateOffersURI, {keyword: collectioName}, function(data) {
         var html = '<h2>Buy something with '+collectioName+'</h2>';
         for (var i=0; i < data.length; i++) {
-            var prod_html = '<div class="item"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
+            var prod_html = '<div class="col-xs-12 col-sm-6"><a target="_blank" href="'+ data[i].url +'"><img src="' + data[i].image_url +'" /></a>';
             prod_html += '<a class="title" target="_blank" href="'+ data[i].url +'">'+ data[i].title +'</a>';
             prod_html += '<p>'+ data[i].price +'</p></div>';
             html += prod_html;
@@ -87,27 +91,13 @@ $(document).ready(function() {
         });
     });
 
-    /* Fancybox */
-    $(".fancybox").fancybox();
-    $(".various").fancybox({
-        maxWidth    : 400,
-        maxHeight   : 400,
-        fitToView   : false,
-        width       : '70%',
-        height      : '70%',
-        autoSize    : false,
-        closeClick  : false,
-        openEffect  : 'none',
-        closeEffect : 'none'
-    });
-
     /* Autoplay */
 
     // Toggling the 'autoplay' button along with the variable
     // that specifies whether 'autoplay' should be enabled
-    $('i.icon-refresh').parent('a').click(function(event) {
+    $('span.glyphicon-repeat').parent('a').click(function(event) {
         event.preventDefault();
-        $('i.icon-refresh').toggleClass('active');
+        $('span.glyphicon-repeat').toggleClass('active');
         if (autoplay === true) {
             $.post(autoplayURI, {'autoplay': 0}, function(data) {
                 autoplay = false;
@@ -180,28 +170,28 @@ $(document).ready(function() {
         'active': {
             'rmCl': 'active',
             'adCl': 'inactive',
-            'text': 'Bookmark <span><i class="icon-minus"></i></span>',
+            'text': 'Bookmark <span class="glyphicon glyphicon-minus"></span>',
             'titl': 'Remove this video from bookmarks',
             'url': addToBookmarksURI
         },
         'inactive': {
             'rmCl': 'inactive',
             'adCl': 'active',
-            'text': 'Bookmark <span><i class="icon-plus"></i></span>',
+            'text': 'Bookmark <span class="glyphicon glyphicon-plus"></span>',
             'titl': 'Save this video to watch later',
             'url': removeFromBookmarksURI
         },
             'active1': {
             'rmCl': 'active1',
             'adCl': 'inactive1',
-            'text': 'Bookmark <span><i class="icon-list"></i></span>',
+            'text': 'Bookmark <span class="glyphicon glyphicon-list"></span>',
             'titl': 'Remove this playlist from bookmarks',
             'url': addToBookmarksURI
         },
         'inactive1': {
             'rmCl': 'inactive1',
             'adCl': 'active1',
-            'text': 'Bookmark <span><i class="icon-list"></i></span>',
+            'text': 'Bookmark <span class="glyphicon glyphicon-list"></span>',
             'titl': 'Save this playlist to watch later',
             'url': removeFromBookmarksURI
         }

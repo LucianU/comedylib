@@ -24,8 +24,8 @@
         <span class="or">&nbsp; OR &nbsp;</span>
         <span class="lthru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <div class="centersocial">
-            <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" class="fbtnlnk" ><img src="/static/img/fbbtn.png" alt="facebook"/></a>
-            <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" class="gbtnlnk" ><img src="/static/img/gbtn.png" alt="google"/></a>
+            <a href="{% url socialauth_begin 'facebook' %}?next={{ request.path }}" class="fbtnlnk" ><img class="small" src="/static/img/fbbtn.png" alt="facebook"/></a>
+            <a href="{% url socialauth_begin 'google-oauth2' %}?next={{ request.path }}" class="gbtnlnk"><img class="small" src="/static/img/gbtn.png" alt="google"/></a>
         </div>
         
     </div>
