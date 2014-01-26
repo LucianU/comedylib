@@ -7,11 +7,11 @@ server {
     client_max_body_size 20M;
 
     location / {
-        uwsgi_pass unix:///home/comedylib/stag_comedylib/var/run/comedylib.sock;
+        uwsgi_pass unix:///home/comedylib/comedylib/var/run/comedylib.sock;
         include uwsgi_params;
     }
 
     location /static {
-        alias /home/comedylib/stag_comedylib/comedylib/static_all/;
+        alias /home/comedylib/comedylib/comedylib/static_all/;
     }
 }
