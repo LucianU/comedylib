@@ -14,9 +14,9 @@ def stag():
     """
     Staging connection information
     """
-    env.hosts = ['comedylib@staging.comedylib.com']
+    env.hosts = ['comedylib@elbear.com']
     env.proj_dir = os.path.join(env.proj_root, 'comedylib')
-    env.branch = 'default'
+    env.branch = 'staging'
     env.settings = 'comedylib.settings.staging'
     env.conf_path = 'confs/staging/'
 

@@ -18,8 +18,4 @@ server {
     location /media {
         alias /home/comedylib/comedylib/comedylib/media/;
     }
-
-    location /media {
-        alias /home/comedylib/comedylib/comedylib/media/;
-    }
 }
