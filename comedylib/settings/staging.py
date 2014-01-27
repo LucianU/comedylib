@@ -37,3 +37,18 @@ TEMPLATE_LOADERS = (
 ALLOWED_HOSTS = [
     '.comedylib.com',
 ]
+
+INSTALLED_APPS += (
+    'raven.contrib.django.raven_compat',
+)
+
+RAVEN_CONFIG = {
+    'dsn': 'http://09c6fa4884924637800194cab7e0c920:'
+           'cb72c14a3a6c42bc9a6250c62f7dcb44@sentry.comedylib.com/3'
+}
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.comedylib.com'
+EMAIL_HOST_USER = 'feedback@comedylib.com'
+EMAIL_HOST_PASSWORD = 'nkcw07homrqZCx7'
+EMAIL_PORT = 25
