@@ -10,20 +10,18 @@
             <div class="col-xs-12 col-sm-8">
             {% for result in page.object_list %}
                 {% if result.model_name != 'collection' %}
-                    <div class="col span_4_of_4 col1 search-content">
-                        <div class="section group">
-                            <div class="col span_1_of_4 search-pic-content">
-                                <a href="{{ result.object.get_absolute_url }}">
-                                    <img src="{{ result.object.picture.url }}">
-                                </a>
-                                <p class="duration">{{ result.object.duration }}</p>
-                            </div>
-                            <div class="col span_3_of_4 search-info-content">
-                                <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                                <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
-                                <p>{{ result.object.views }}</p><span>Views</span>
-                                <p>{{ result.object.rating }} %</p><span>Rating</span>    
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-3 search-pic-content">
+                            <a href="{{ result.object.get_absolute_url }}">
+                                <img src="{{ result.object.picture.url }}">
+                            </a>
+                            <p class="duration">{{ result.object.duration }}</p>
+                        </div>
+                        <div class="col-xs-9 search-info-content">
+                            <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                            <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
+                            <p>{{ result.object.views }}</p><span>Views</span>
+                            <p>{{ result.object.rating }} %</p><span>Rating</span>    
                         </div>
                     </div>
                 {% endif %}

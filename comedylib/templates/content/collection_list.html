@@ -38,9 +38,9 @@
                 <a href="{{ collection.get_absolute_url }}" title="{{ collection.name}}">
                     <img src="{% thumbnail collection.picture 167x211 crop %}" alt="{{ collection.name}} image"/>
                     <div class="collection-item-info">
-                        <p class="name">{{ collection.name|truncatechars:80 }}</p>
+                        <p class="name">{{ collection.name|truncatechars:50 }}</p>
                         {% with videos=collection.videos.count %}
-                        <p>{{ videos }} video{{ videos|pluralize }}</p>
+                        <p class="plural">{{ videos }} video{{ videos|pluralize }}</p>
                         {% endwith %}
                         <p>{{ collection.rating }} % out of {{collection.votes}} votes</p>
                     </div>

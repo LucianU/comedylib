@@ -43,7 +43,8 @@
                     <script>
                         jwplayer("player").setup({
                             file: "{{ video.url }}",
-                            autostart: false,
+                            autostart: true,
+                            repeat: false,
                             title: "{{ video.title }}",
                             width: "100%",
                             aspectratio: "16:9"
@@ -202,10 +203,10 @@
                                 </div>      
                                 <div class="col-xs-8 data">   
                                     <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                        {{ rel_video.title }}
+                                        {{ rel_video.title|truncatechars:57 }}
                                     </a>
                                     <br/>
-                                    <a href="{{ rel_video.collection.get_absolute_url }}" class="collection">{{ rel_video.collection.name }}</a>
+                                    <a href="{{ rel_video.collection.get_absolute_url }}" class="collection">{{ rel_video.collection.name|truncatechars:26 }}</a>
                                 </div> 
                             </div>
                         </li>
