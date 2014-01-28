@@ -1337,16 +1337,16 @@
                 primary: "html5",
                 width: 480,
                 base: d.base ?
-                    d.base : f.getScriptPath("jwplayer.js"),
+                    d.base : f.getScriptPath("/static/mediaplayer/jwplayer.js"),
                 aspectratio: ""
             };
             d = f.extend(h, e.defaults, d);
             var h = {
                 type: "html5",
-                src: d.base + "jwplayer.html5.js"
+                src: "/static/mediaplayer/jwplayer.html5.js"
             }, b = {
                     type: "flash",
-                    src: d.base + "jwplayer.flash.swf"
+                    src: "/static/mediaplayer/jwplayer.flash.swf"
                 };
             d.modes = "flash" == d.primary ? [b, h] : [h, b];
             d.listbar && (d.playlistsize = d.listbar.size, d.playlistposition = d.listbar.position, d.playlistlayout = d.listbar.layout);
