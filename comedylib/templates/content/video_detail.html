@@ -38,8 +38,30 @@
                     <p></p>
                 </div>
             {%endif%}
-                
-                <div class="col-xs-12" id="player">Loading the player ...</div>
+                <video id="youtube1" width="100%" height="100%" preload="auto">
+                    <source src="{{ video.url }}" type="video/youtube" >
+                </video>
+                <script>
+                    $(document).ready(function(){
+                       // $('#youtube1').mediaelementplayer();
+                    
+                        $('#youtube1').mediaelementplayer({
+                            plugins: ['flash', 'silverlight'],
+                            success: function(mediaElement, domObject) {
+                                if (mediaElement.pluginType == 'flash') {
+                                    mediaElement.addEventListener('canplay', function() {
+                                        // Player is ready
+                                        mediaElement.play();
+                                    }, false);
+                                }
+                            },
+                            error: function() {
+                                alert('Error setting media!');
+                            }
+                        });
+                    });
+                </script>
+                <!--<div class="col-xs-12" id="player">Loading the player ...</div>
                     <script>
                         jwplayer("player").setup({
                             file: "{{ video.url }}",
@@ -49,7 +71,7 @@
                             width: "100%",
                             aspectratio: "16:9"
                         });
-                    </script>
+                    </script>-->
                 <div class="col-xs-12">  
                     <div class="social row">
                         <div class="col-xs-4 col-sm-3 rating">

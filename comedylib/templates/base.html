@@ -22,6 +22,7 @@
         <link rel="pingback" href="http://www.comedylib.com">
         <link rel="prefetch" href="http://www.comedylib.com">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/mediaelement/2.12.0/mediaelementplayer.min.css" />
        <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"> -->
     {% compress css %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
@@ -32,6 +33,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <!--  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script> -->
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/mediaelement/2.12.0/mediaelement-and-player.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
    <!-- <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>-->
     {% compress js %}
@@ -39,8 +41,7 @@
             <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
         <![endif]-->
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.custom-scrollbar.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}mediaplayer/jwplayer.js" ></script>
-
+   <!-- <script type="text/javascript" src="{{ STATIC_URL }}mediaplayer/jwplayer.js" ></script>-->
     {% endcompress %}
     </head>
 <body>
