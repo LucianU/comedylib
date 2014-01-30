@@ -3,6 +3,9 @@ import os
 
 from fabric.api import env, run, cd, prefix, settings
 
+# Using the interactive flag to have access to virtualenvwrapper
+# commands which are sourced in .bashrc
+env.shell = '/bin/bash -l -i -c'
 env.proj_root = '~/'
 env.proj_repo = 'ssh://hg@bitbucket.org/lucianu/comedylib/'
 env.virtualenv = 'comedylib'
