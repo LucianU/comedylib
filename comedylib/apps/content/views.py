@@ -59,7 +59,8 @@ class Home(TemplateView):
         if playlists is not None:
             return playlists
 
-        playlist_ids = Playlist.objects.values_list('id', flat=True)
+        playlist_ids = (Playlist.objects.filter(empty=False)
+                                        .values_list('id', flat=True))
         if len(playlist_ids) > settings.FRONTPAGE_PLAYLISTS_NO:
             random_ids = random.sample(playlist_ids,
                                        settings.FRONTPAGE_PLAYLISTS_NO)
