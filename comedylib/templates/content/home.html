@@ -24,7 +24,7 @@
                 </div>
             </a>
             </div>
-            
+
             <div class="col-xs-12 col-sm-4 container">
                 <a href="{{ feat_show.get_absolute_url }}">
                     <div class="ribbons ribbon_shows"></div>
@@ -38,7 +38,7 @@
                     </div>
                 </a>
             </div>
-                       
+
             <div class="col-xs-12 col-sm-4 container">
             <a href="{{ feat_movie.get_absolute_url }}">
                 <div class="ribbons ribbon_movies"></div>
@@ -64,35 +64,13 @@
             </div>
             <ul class="random-playlist">
             {% for playlist in playlists %}
-                <li class="playlist-content">
-                    <div class="play-pic-content">
-                        <a class="text-center playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-                        <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" alt="First playlist image"/>
-                        <div class="sidebar">
-                            <p class="text-center">{% with videos=playlist.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p>
-                            <img src="{% thumbnail playlist.videos.all.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>
-                            <img src="{% thumbnail playlist.videos.all.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>
-                        </div>
-                    </div>
-                    <div class="play-name-content">
-                        <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:40 }}</a>
-                    </div>
-                    <div class="play-detail-content">
-                        <div class="row text-center">
-                            <div class="col-xs-6">
-                                <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
-                            </div>
-                            <div class="col-xs-6">
-                               <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                            </div> 
-                        </div>
-                    </div>
-                </li>
+                {% with videos=playlist.videos.all %}
+                    {% include 'profiles/partials/playlist.html' %}
+                {% endwith %}
             {% empty %}
                 <li><p>No playlists found.</p></li>
             {% endfor %}
             </ul>
-              
         </div>
         <div class="col-sm-4 col-md-4 hidden-xs">
             <div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="311" data-height="410" data-colorscheme="dark" data-show-faces="true" show-border="false" data-stream="false" data-header="false"></div>
@@ -102,7 +80,7 @@
         </div>
     </div>
 
-    <!-- Random playlists and Facebook box -->
+    <!-- Random videos-->
 
     <div class="colored-title">
         <p><span>Random </span>Videos</p>
@@ -114,7 +92,7 @@
             {% for cvideo in comedian_videos %}
                 <li class="collection-front-content comedian-bkg">
                     <a href="{{ cvideo.get_absolute_url }}" class="col-xs-4">
-                            <img src="{% thumbnail cvideo.picture 97x92 crop %}" alt="Comedian video image"/>
+                        <img src="{% thumbnail cvideo.picture 97x92 crop %}" alt="Comedian video image"/>
                     </a>
                     <div class="col-xs-8 info">
                         <div class="coll-front-name-content">
@@ -195,7 +173,7 @@
                         </div>
                     </div>
                 </li>
-            {% endfor %}   
+            {% endfor %}
             </div>
         </div>
     </div>

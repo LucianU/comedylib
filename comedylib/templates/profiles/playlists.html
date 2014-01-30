@@ -1,7 +1,6 @@
 {% extends "profiles/home.html" %}
 {% block title %}Comedylib - {{ user.username }}'s playlists{% endblock %}
 {% block profile_content %}
-{% load thumbnail %}
 <div class="col-xs-12 col-sm-10">
     {% if user.profile == profile %}
         <h5>Create playlist</h5>
@@ -14,60 +13,9 @@
     <h5>Playlists</h5>
     <ul class="random-playlist">
         {% for playlist in playlists %}
-        {% if user.profile == profile %}
-        <li class="playlist-content" id="play{{ playlist.id }}">
-                <div class="play-pic-content">
-                    <a class="text-center playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-                    <a id="deletebtn" data-playlist-id="{{ playlist.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete playlist"><span class="glyphicon glyphicon-trash"></span></a>
-                     <a href="{{ playlist.get_absolute_url }}" data-toggle="tooltip" class="edit" href="#"  rel="tooltip" title="Edit playlist"><span class="glyphicon glyphicon-edit"></span></a>
-                    <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" alt="First playlist image"/>
-                    <div class="sidebar">
-                        <p class="text-center">{% with videos=playlist.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p>
-                        <img src="{% thumbnail playlist.videos.all.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>
-                        <img src="{% thumbnail playlist.videos.all.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>
-                    </div>
-                </div>
-                <div class="play-name-content">
-                    <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:40 }}</a>
-                </div>
-                <div class="play-detail-content">
-                    <div class="row text-center">
-                        <div class="col-xs-6">
-                            <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
-                        </div>
-                        <div class="col-xs-6">
-                           <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                        </div> 
-                    </div>
-                </div>
-            </li>
-        {% else %}
-            <li class="playlist-content">
-                <div class="play-pic-content">
-                    <a class="text-center playallmain" href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-                    <img src="{% thumbnail playlist.videos.all.0.picture 144x110 crop %}" alt="First playlist image"/>
-                    <div class="sidebar">
-                        <p class="text-center">{% with videos=playlist.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p>
-                        <img src="{% thumbnail playlist.videos.all.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>
-                        <img src="{% thumbnail playlist.videos.all.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>
-                    </div>
-                </div>
-                <div class="play-name-content">
-                    <a href="{{ playlist.videos.all.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:40 }}</a>
-                </div>
-                <div class="play-detail-content">
-                    <div class="row text-center">
-                        <div class="col-xs-6">
-                            <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
-                        </div>
-                        <div class="col-xs-6">
-                           <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                        </div> 
-                    </div>
-                </div>
-            </li>
-        
-        {% endif %}   
+            {% with videos=playlist.videos.all %}
+                {% include 'profiles/partials/playlist.html' %}
+            {% endwith %}
         {% empty %}
             <li>No playlists found.</li>
         {% endfor %}

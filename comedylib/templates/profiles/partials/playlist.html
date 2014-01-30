@@ -1,0 +1,29 @@
+{% load thumbnail %}
+<li class="playlist-content"{% if user.profile == profile %} id="play{{ playlist.id }}"{% endif %}>
+    <div class="play-pic-content">
+        <a class="text-center playallmain" href="{{ videos.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
+        {% if user.profile == profile %}
+            <a id="deletebtn" data-playlist-id="{{ playlist.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete playlist"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="{{ playlist.get_absolute_url }}" data-toggle="tooltip" class="edit" href="#" rel="tooltip" title="Edit playlist"><span class="glyphicon glyphicon-edit"></span></a>
+        {% endif %}
+        {% if videos.0 %}<img src="{% thumbnail videos.0.picture 144x110 crop %}" alt="First playlist image"/>{% endif %}
+        <div class="sidebar">
+            <p class="text-center">{{ playlist.videos.count }}<br/>Videos</p>
+            {% if videos.1 %}<img src="{% thumbnail videos.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>{% endif %}
+            {% if videos.2 %}<img src="{% thumbnail videos.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>{% endif %}
+        </div>
+    </div>
+    <div class="play-name-content">
+        <a href="{{ videos.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:40 }}</a>
+    </div>
+    <div class="play-detail-content">
+        <div class="row text-center">
+            <div class="col-xs-6">
+                <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
+            </div>
+            <div class="col-xs-6">
+                <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
+            </div> 
+        </div>
+    </div>
+</li>
