@@ -2053,7 +2053,7 @@ object {
     }
     .collection-front-content, .collection-front-content-transparent {width: 49%;}
     .collection-item {
-        width:49%;
+        width:100%;
     }
    .collection-content div.row.details {
         padding: 0 1.5rem;
