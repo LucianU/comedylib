@@ -115,8 +115,16 @@ def create_profile(sender, **kwargs):
 
 
 @receiver(post_save, sender=Playlist.videos.through)
-def update_playlist_empty(sender, **kwargs):
+def mark_pl_as_not_empty(sender, **kwargs):
     playlist = kwargs.get('instance').playlist
     if playlist.empty:
         playlist.empty = False
+        playlist.save()
+
+
+@receiver(pre_delete, sender=Playlist.videos.through)
+def mark_pl_as_empty(sender, **kwargs):
+    playlist = kwargs.get('instance').playlist
+    if playlist.videos.count() == 1:
+        playlist.empty = True
         playlist.save()
