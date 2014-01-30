@@ -5,7 +5,7 @@
 {% block title %}Comedylib - {{collection.name}} Videos{% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col-xs-12 col-sm-4 detail-sidebar">
+        <div class="col-xs-12 col-md-4 detail-sidebar">
             {% load thumbnail %}
             <img src="{% thumbnail collection.picture 300x200 crop %}" alt="{{ collection.name }} image"/>
             <h1>{{ collection.name }}</h1>
@@ -27,7 +27,7 @@
 
         </div>
         
-        <div class="col-xs-12 col-sm-8 ">
+        <div class="col-xs-12 col-md-8 ">
              <ul class="bookmarks">
                 {% for video in videos %}
                    <li class="collection-content collection-detail">

@@ -22,7 +22,7 @@
                     </li>
                     {% for video in playlist.videos.all %}
                         <li class="collection-front-content" data-video-id="{{ video.id }}" id="vid{{ video.id }}">
-                            <a id="removebtn" data-video-id="{{ video.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete playlist"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a id="removebtn" data-video-id="{{ video.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete video"><span class="glyphicon glyphicon-trash"></span></a>
                             <a href="{{ video.get_absolute_url }}" class="col-xs-4">
                                     <img src="{% thumbnail video.picture 97x92 crop %}" alt="Video image"/>
                             </a>
