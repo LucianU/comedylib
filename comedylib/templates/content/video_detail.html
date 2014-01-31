@@ -43,22 +43,22 @@
                 </video>
                 <script>
                     $(document).ready(function(){
-                       // $('#youtube1').mediaelementplayer();
+                        $('#youtube1').mediaelementplayer();
                     
-                        $('#youtube1').mediaelementplayer({
-                            plugins: ['flash', 'silverlight'],
-                            success: function(mediaElement, domObject) {
-                                if (mediaElement.pluginType == 'flash') {
-                                    mediaElement.addEventListener('canplay', function() {
-                                        // Player is ready
-                                        mediaElement.play();
-                                    }, false);
-                                }
-                            },
-                            error: function() {
-                                alert('Error setting media!');
-                            }
-                        });
+                     //  $('#youtube1').mediaelementplayer({
+                       //     plugins: ['flash', 'silverlight'],
+                       //     success: function(mediaElement, domObject) {
+                       //         if (mediaElement.pluginType == 'flash') {
+                       //             mediaElement.addEventListener('canplay', function() {
+                       //                 // Player is ready
+                       //                 mediaElement.play();
+                       //             }, false);
+                       //         }
+                       //     },
+                       //     error: function() {
+                       //         alert('Error setting media!');
+                       //     }
+                       // });
                     });
                 </script>
                 <!--<div class="col-xs-12" id="player">Loading the player ...</div>
