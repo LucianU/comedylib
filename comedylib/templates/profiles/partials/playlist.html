@@ -2,7 +2,7 @@
 <li class="playlist-content"{% if user.profile == profile %} id="play{{ playlist.id }}"{% endif %}>
     <div class="play-pic-content">
         <a class="text-center playallmain" href="{{ videos.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-        {% if user.profile == profile %}
+        {% if user.profile and user.profile == profile %}
             <a id="deletebtn" data-playlist-id="{{ playlist.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete playlist"><span class="glyphicon glyphicon-trash"></span></a>
             <a href="{{ playlist.get_absolute_url }}" data-toggle="tooltip" class="edit" href="#" rel="tooltip" title="Edit playlist"><span class="glyphicon glyphicon-edit"></span></a>
         {% endif %}
