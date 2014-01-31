@@ -2051,9 +2051,9 @@ object {
     .playlist-content {
         width: 32%;
     }
-    .collection-front-content, .collection-front-content-transparent {width: 49%;}
+    .collection-front-content, .collection-front-content-transparent {width: 100%;}
     .collection-item {
-        width:100%;
+        width:49%;
     }
    .collection-content div.row.details {
         padding: 0 1.5rem;
@@ -2098,9 +2098,9 @@ object {
         width: 100%;
         padding:1.2rem;
     }
-    .collection-item {
+    /*.collection-item {
         width:49%;
-    }
+    }*/
     #playlistform{
         width: 100%;
         margin: 0 auto;
