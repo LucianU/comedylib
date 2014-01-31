@@ -111,15 +111,15 @@ $(document).ready(function() {
     // When the player is idle, we check if it has reached the end
     // of the video and redirect to the next one, if autoplay is
     // enabled
-    jwplayer().onIdle(function(event) {
-        if (autoplay === true) {
-            var position = jwplayer().getPosition();
-            var duration = jwplayer().getDuration();
-            if ((duration - position) < 1) {
-                window.location.href = nextVideoURI;
-            }
-        }
-    });
+    //jwplayer().onIdle(function(event) {
+    //    if (autoplay === true) {
+    //        var position = jwplayer().getPosition();
+    //        var duration = jwplayer().getDuration();
+    //        if ((duration - position) < 1) {
+    //            window.location.href = nextVideoURI;
+    //        }
+    //    }
+    //});
 
     /* Liking */
 

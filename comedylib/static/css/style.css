@@ -1444,13 +1444,19 @@ div.col-xs-4 .navigation{
 #video_detail .playlist-control{
     padding:0.8rem 0;
 }
+#video_detail .social{
+    margin-top:0.5rem;
+}
 #video_detail .social .rating{
-    background:#034769;
-    height:3.3rem;
-    width: 14.2rem;
+    margin-left:-1rem;
+    float: left;
+    background: #034769;
+    height: 3.3rem;
+    width: 13.2rem;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px; 
+    border-radius: 3px;
+    margin-right:1rem;
 }
 #video_detail .social .rating .rateholder{
     z-index:1;
@@ -1483,7 +1489,7 @@ div.col-xs-4 .navigation{
     float:left;
 }
 #video_detail .social .rating .like{
-    margin-left: -1rem;
+    /*margin-left: -1rem;*/
 }
 #video_detail .social .rating .dislike{
     margin-right: -1rem;
@@ -1508,8 +1514,8 @@ div.col-xs-4 .navigation{
     color:#f00;
 }
 #video_detail a.button, #bookmark_btn, #bookmark_pl{
-    font-size: 14px;
-    padding:0.5rem 0.8rem;
+    font-size: 1.2rem;
+    padding:0.6rem 0.4rem 0.7rem;
     color: #eee;
     background: #034769;
     border: 1px solid #235d79;
@@ -1523,7 +1529,8 @@ div.col-xs-4 .navigation{
     margin:0 0.2rem 0 0;
 }
 #video_detail .social-share, #video_detail .social .nviews  {
-    margin-top:0.5rem;
+    float: left;
+    margin-left: 0.5rem;
 }
 #video_detail .social-share p {
     margin:0;
@@ -1558,7 +1565,7 @@ div.col-xs-4 .navigation{
     background-position:107px 107px;
 }
 #video_detail .social .nviews{
-    /*float:right;*/
+    float:right;
     height:3.3rem;
     text-align:center;
     text-transform:uppercase;
@@ -1913,7 +1920,7 @@ object {
         padding-left: 0;
     }
     input[type="search"] {
-        width: 29.3rem !important;
+        width: 26.5rem !important;
     }
     .titlecontent{
         margin-left:1.2rem;
@@ -2043,7 +2050,7 @@ object {
 }
 @media (max-width: 640px) {
     input[type="search"] {
-        width: 52.9rem !important;
+        width: 48rem !important;
     }
     .playlist-content {
         width: 18.9rem;
@@ -2053,7 +2060,7 @@ object {
     }
     .collection-front-content, .collection-front-content-transparent {width: 100%;}
     .collection-item {
-        width:49%;
+        width:32%;
     }
    .collection-content div.row.details {
         padding: 0 1.5rem;
@@ -2065,11 +2072,21 @@ object {
         height:100%;
 
     }
+    #playlistform{
+        width: 100%;
+        margin: 0 auto;
+    }
+    #playlistform input[type="text"] {
+        width:90.5%;
+    }
+    #playlistform input[type="submit"] {
+        margin:0.5rem 25% 0;
+    }
 
 }
 @media (max-width: 500px) {
     input[type="search"] {
-        width: 40rem !important;
+        width: 30rem !important;
     }
     .navfooter li{
         float:none;
@@ -2077,6 +2094,9 @@ object {
    }
    .playlist-content {
         width: 49%;
+    }
+    .collection-item {
+        width:49%;
     }
     .collection-content {
         width:49%;
@@ -2090,7 +2110,7 @@ object {
 }
 @media (max-width: 340px) {
     input[type="search"] {
-        width: 24rem !important;
+        width: 20rem !important;
     }
     .front-playlists {height:42.6rem;}
     .collection-front-content, .collection-front-content-transparent {width: 100%;}
@@ -2101,26 +2121,17 @@ object {
     /*.collection-item {
         width:49%;
     }*/
-    #playlistform{
-        width: 100%;
-        margin: 0 auto;
-    }
-    #playlistform input[type="text"] {
-        width:95%;
-    }
-    #playlistform input[type="submit"] {
-        margin:0.5rem 25% 0;
-    }
+
     .collection-content {
         width:49%;
     }
     .social ul.social-list{
         width:100%;
     }
-    #video_detail .social-list a.button {
+   /* #video_detail .social-list a.button {
         width: 49%;
     }
     #video_detail .social .rating {
         margin: 0 25% 0.5rem;
-    }
+    }*/
 }

@@ -73,8 +73,8 @@
                         });
                     </script>-->
                 <div class="col-xs-12">  
-                    <div class="social row">
-                        <div class="col-xs-4 col-sm-3 rating">
+                    <div class="social">
+                        <div class="rating">
                             {% if request.user.is_authenticated %}
                                 {% if vid_feel == 'L' %}
                                     <div id="likecontent" class="like load" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
@@ -119,7 +119,7 @@
                             {% endif %}
                         </div>
                         <!-- verify auth to enable rating-->
-                        <ul class="col-xs-8 col-sm-8 col-md-4 social-list" >
+                        <ul class="social-list" >
                             {% if request.user.is_authenticated %}
                                 <li id="addplay-btn">
                                     <a href="#" class="button" title="Add this video to a playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist <span class="glyphicon glyphicon-list"></span></a>
@@ -142,7 +142,7 @@
                                 </li>
                             {% endif %}
                         </ul>
-                        <div class="col-xs-8 col-sm-8 col-md-4 social-share">
+                        <div class="social-share">
                             <p><span>Share</span> video</p>
                             <!-- Facebook button-->
                             <a href="#" class="faceb" id="fb_share_btn" title="Share on Facebook"></a>
@@ -153,7 +153,7 @@
                             <!-- Reddit button-->
                             <a href="#" class="redd" id="rdt_share_btn" title="Share to Reddit"></a>
                         </div>
-                        <div class="col-xs-4 col-sm-1 nviews">
+                        <div class="nviews">
                             <p>{{ video.views }} <span>views</span></p>
                         </div>
                         <div id="addtoplaycontent" class="addtoplaylist">

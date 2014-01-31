@@ -14,7 +14,7 @@
                     </a>
                     <div class="col-xs-12 info">
                         <div class="coll-front-name-content">
-                            <a href="{{ bookmark.post.get_absolute_url }}" title="{{ bookmark.post.title}}">{{ bookmark.post.title|truncatechars:70 }}</a>
+                            <a href="{{ bookmark.post.get_absolute_url }}" title="{{ bookmark.post.title}}">{{ bookmark.post.title|truncatechars:50 }}</a>
                         </div> 
                         <a class="coll-front-name-content collection" href="{{ bookmark.post.collection.get_absolute_url }}" title="{{ bookmark.post.collection.name }}">{{ bookmark.post.collection.name|truncatechars:35 }}</a>
                         <div class="row details text-center">

@@ -13,7 +13,7 @@
                     </a>
                     <div class="col-xs-12 info">
                         <div class="coll-front-name-content">
-                            <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:70 }}</a>
+                            <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:50 }}</a>
                         </div> 
                         <a class="coll-front-name-content collection" href="{{ video.collection.get_absolute_url }}" title="{{ video.collection.name }}">{{ video.collection.name|truncatechars:35 }}</a>
                         <div class="row details text-center">
