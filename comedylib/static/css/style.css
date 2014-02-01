@@ -928,9 +928,9 @@ a:hover.signup {
     border: 1px solid #444; 
     background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
 }
-.comedian-bkg{   background: url(/static/img/orange-ptn.png) repeat scroll 0 0 #A57400;   }
-.show-bkg{   background: url(/static/img/blue-ptn.png) repeat scroll 0 0 #034769;   }
-.movie-bkg{   background: url(/static/img/red-ptn.png) repeat scroll 0 0 #A52D00;   }
+.comedian-bkg{   background: url(/static/img/orange-ptn.png) repeat scroll 0 0 #966800;   }
+.show-bkg{   background: url(/static/img/blue-ptn.png) repeat scroll 0 0 #20546d;   }
+.movie-bkg{   background: url(/static/img/red-ptn.png) repeat scroll 0 0 #944122;   }
 .playlist-content{width:14.9rem;height:19.5rem;}
 .collection-front-content, .collection-front-content-transparent{width:29.8rem;height:10.6rem;}
 .li-disabled p{margin:3.5rem 0 0 0;}
@@ -991,7 +991,7 @@ a:hover.signup {
     vertical-align: top;
     color: #A57400;
 }
-.random-video li.comedian-bkg div.info span, .random-video li.show-bkg div.info span, .random-video li.movie-bkg div.info span { color:#000;}
+.random-video li.comedian-bkg div.info span, .random-video li.movie-bkg div.info span { color:#000;}
 .random-video li.comedian-bkg div.info p, .random-video li.show-bkg div.info p, .random-video li.movie-bkg div.info p { color:#fff;}
 .play-pic-content img{
     height:11rem;
@@ -1079,7 +1079,7 @@ a.coll-front-name-content.collection{
     border-bottom:1px solid #444;
     padding-bottom:4px;
 }
-.random-video li.comedian-bkg a.coll-front-name-content.collection, .random-video li.show-bkg a.coll-front-name-content.collection, .random-video li.movie-bkg a.coll-front-name-content.collection{color:#000;}
+.random-video li.comedian-bkg a.coll-front-name-content.collection, .random-video li.movie-bkg a.coll-front-name-content.collection{color:#000;}
 .play-name-content a:hover{
     color:#FFD573;
 }	
