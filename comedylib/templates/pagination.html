@@ -3,11 +3,14 @@
     <a class="previous" href="?{% if get_params %}{{ get_params }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">Prev</a>
     {% endif %}
     {% for num in page_obj.paginator.page_range %}
-      {% ifequal num page_obj.number %}
-        <span class="current"><a href="#">{{ num }}</a></span>
-      {% else %}
-        <a href="?{% if get_params %}{{ get_params }}&amp;{% endif %}page={{ num }}">{{ num }}</a>
-      {% endifequal %}
+      {# We display 2 pages before and 2 pages after the current page #}
+      {% if num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2" %}
+        {% ifequal num page_obj.number %}
+          <span class="current"><a href="#">{{ num }}</a></span>
+        {% else %}
+          <a href="?{% if get_params %}{{ get_params }}&amp;{% endif %}page={{ num }}">{{ num }}</a>
+        {% endifequal %}
+      {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
         <a class="next" href="?{% if get_params %}{{ get_params }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Next</a>
