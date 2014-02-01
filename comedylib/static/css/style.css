@@ -784,8 +784,11 @@ a:hover.signup {
     color: #f00;
 }
 .login-register-content .errorlist {
-    margin:0;
-    color: #fff;
+    margin:0 -2rem;
+    padding:0.5rem;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
 }
 .login-register-content div.register-social a{
     display:block;
@@ -1294,7 +1297,7 @@ display: table;
 .front-profile ul.recent-playlist li { background:#235d79; }
 .front-profile ul.recent-likes li { background:#bf5730;}
 #playlistform{
-    width: 430px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -1402,6 +1405,7 @@ border-color:rgba(254,70,0,1);
 .detail-sidebar p {
     color:#eee;
     margin:0;
+    text-align: left;
 }
 .detail-sidebar button { margin:0; }
 .detail-sidebar p.description-content { color:#333; }
@@ -1446,9 +1450,11 @@ div.col-xs-4 .navigation{
 }
 #video_detail .social{
     margin-top:0.5rem;
+    border-bottom: 1px solid #333;
+    border-top: 1px solid #333;
+    padding-top: 3px;
 }
 #video_detail .social .rating{
-    margin-left:-1rem;
     float: left;
     background: #034769;
     height: 3.3rem;
@@ -1456,7 +1462,7 @@ div.col-xs-4 .navigation{
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    margin-right:1rem;
+    margin:0 1rem 0.3rem -1rem;
 }
 #video_detail .social .rating .rateholder{
     z-index:1;
@@ -1530,7 +1536,7 @@ div.col-xs-4 .navigation{
 }
 #video_detail .social-share, #video_detail .social .nviews  {
     float: left;
-    margin-left: 0.5rem;
+    margin-left: -1rem;
 }
 #video_detail .social-share p {
     margin:0;
@@ -1583,13 +1589,13 @@ div.col-xs-4 .navigation{
     display:none;
     width:100%;
     float:left;
-    background:#333;
+    background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
 	margin:2px;
 	padding:2px;	
-	border:1px solid #555;
+	border:1px solid #292929;
 }
 #video_detail .social .addtoplaylist h2{
-    padding:0 0 5px 10px;
+    padding:0 0 0.5rem 3rem;
 }
 .playlistul{
     width:95%;
@@ -1599,8 +1605,8 @@ div.col-xs-4 .navigation{
 #video_detail .social .addtoplaylist ul{
     border:1px solid #222;
     list-style:none;
-    margin:0 0px 0px 40px;
-    background:#444;
+    margin:0 0 0 3rem;
+    background:#034769;
 }
 #video_detail .social .addtoplaylist ul li{
     font-weight:bold;
@@ -1610,12 +1616,18 @@ div.col-xs-4 .navigation{
     color:#eee;
 }
 #video_detail .social .addtoplaylist ul li.active:hover{
-    color:#222;
-    background:#ccc;
+   /* color:#222;*/
+    background:#086FA1;
     cursor:default;
 }
 #video_detail .social .addtoplaylist ul li.inactive{
     background:#04b404;
+}
+#feedback {
+    padding:5px;
+    height:3rem;
+    display:none;
+    color:#222;
 }
 #video_detail .container-list{
     margin-top:0px;
@@ -2117,6 +2129,9 @@ object {
     .login-register-content{
         width: 100%;
         padding:1.2rem;
+    }
+    .login-register-content .errorlist {
+        margin:0 -1.2rem;
     }
     /*.collection-item {
         width:49%;

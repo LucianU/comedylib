@@ -73,94 +73,98 @@
                         });
                     </script>-->
                 <div class="col-xs-12">  
-                    <div class="social">
-                        <div class="rating">
-                            {% if request.user.is_authenticated %}
-                                {% if vid_feel == 'L' %}
-                                    <div id="likecontent" class="like load" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                        <a href="#" id="like_btn" class="active"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
-                                    </div>
+                    <div class="social row">
+                        <div class="col-xs-12 col-md-6"> 
+                            <div class="rating">
+                                {% if request.user.is_authenticated %}
+                                    {% if vid_feel == 'L' %}
+                                        <div id="likecontent" class="like load" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                            <a href="#" id="like_btn" class="active"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                            <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
+                                        </div>
+                                    {% else %}
+                                        <div id="likecontent" class="like" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                            <a href="#" id="like_btn"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                            <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
+                                        </div>
+                                    {% endif %}
                                 {% else %}
                                     <div id="likecontent" class="like" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                        <a href="#" id="like_btn"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="ll"/>
+                                        <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-up"></span></a>
                                     </div>
                                 {% endif %}
-                            {% else %}
-                                <div id="likecontent" class="like" title="Like" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                    <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                <div class="rateholder">
+                                    {% if video.rating == 0 %}
+                                        <span class="average">N/A</span>
+                                    {% else %}
+                                        <span class="average">{{ video.rating }} %</span>
+                                    {% endif %}
+                                    <span class="nvotes">{{video.total_votes}} votes</span>
                                 </div>
-                            {% endif %}
-                            <div class="rateholder">
-                                {% if video.rating == 0 %}
-                                    <span class="average">N/A</span>
+                                {% if request.user.is_authenticated %}
+                                    {% if vid_feel == 'D' %}
+                                        <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                            <a href="#" id="dislike_btn" class="active"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                            <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
+                                        </div>
+                                    {% else %}
+                                        <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                            <a href="#" id="dislike_btn"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                            <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
+                                        </div>
+                                    {% endif %}
                                 {% else %}
-                                    <span class="average">{{ video.rating }} %</span>
+                                    <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
+                                        <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                    </div>
                                 {% endif %}
-                                <span class="nvotes">{{video.total_votes}} votes</span>
                             </div>
-                            {% if request.user.is_authenticated %}
-                                {% if vid_feel == 'D' %}
-                                    <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                        <a href="#" id="dislike_btn" class="active"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
-                                    </div>
-                                {% else %}
-                                    <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                        <a href="#" id="dislike_btn"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                        <img src="{{ STATIC_URL }}img/loader.gif"class="load" id="dl"/>
-                                    </div>
-                                {% endif %}
-                            {% else %}
-                                <div id="dislikecontent" class="dislike" title="Dislike" data-toggle="tooltip" rel="tooltip" data-placement="bottom">
-                                    <a href="#" data-toggle="modal" data-target="#loginerror"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <!-- verify auth to enable rating-->
-                        <ul class="social-list" >
-                            {% if request.user.is_authenticated %}
-                                <li id="addplay-btn">
-                                    <a href="#" class="button" title="Add this video to a playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist <span class="glyphicon glyphicon-list"></span></a>
-                                </li>
-                                {% if bookmarked_video %}
-                                    <li>
-                                        <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span class="glyphicon glyphicon-minus"></span></a>
+                            <!-- verify auth to enable rating-->
+                            <ul class="social-list" >
+                                {% if request.user.is_authenticated %}
+                                    <li id="addplay-btn">
+                                        <a href="#" class="button" title="Add this video to a playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist <span class="glyphicon glyphicon-list"></span></a>
                                     </li>
+                                    {% if bookmarked_video %}
+                                        <li>
+                                            <a href="#" id="bookmark_btn" class="inactive" title="Remove from bookmarks">Bookmark <span class="glyphicon glyphicon-minus"></span></a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span class="glyphicon glyphicon-plus"></span></a>
+                                        </li>
+                                    {% endif %}
                                 {% else %}
                                     <li>
-                                        <a href="#" id="bookmark_btn" class="active" title="Save this video to watch later">Bookmark <span class="glyphicon glyphicon-plus"></span></a>
+                                        <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Add this video to playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist  <span class="glyphicon glyphicon-list"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Bookmark this video" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Bookmark <span class="glyphicon glyphicon-plus"></a>
                                     </li>
                                 {% endif %}
-                            {% else %}
-                                <li>
-                                    <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Add this video to playlist" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Playlist  <span class="glyphicon glyphicon-list"></span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="button" data-toggle="modal" data-target="#loginerror" title="Bookmark this video" data-toggle="tooltip" rel="tooltip" data-placement="bottom">Bookmark <span class="glyphicon glyphicon-plus"></a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                        <div class="social-share">
-                            <p><span>Share</span> video</p>
-                            <!-- Facebook button-->
-                            <a href="#" class="faceb" id="fb_share_btn" title="Share on Facebook"></a>
-                            <!-- Google button-->
-                            <a href="#" class="google" id="gp_share_btn">
-                                <img src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/>
-                            </a>
-                            <!-- Reddit button-->
-                            <a href="#" class="redd" id="rdt_share_btn" title="Share to Reddit"></a>
+                            </ul>
                         </div>
-                        <div class="nviews">
-                            <p>{{ video.views }} <span>views</span></p>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="social-share">
+                                <p><span>Share</span> video</p>
+                                <!-- Facebook button-->
+                                <a href="#" class="faceb" id="fb_share_btn" title="Share on Facebook"></a>
+                                <!-- Google button-->
+                                <a href="#" class="google" id="gp_share_btn">
+                                    <img src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+"/>
+                                </a>
+                                <!-- Reddit button-->
+                                <a href="#" class="redd" id="rdt_share_btn" title="Share to Reddit"></a>
+                            </div>
+                            <div class="nviews">
+                                <p>{{ video.views }} <span>views</span></p>
+                            </div>
                         </div>
                         <div id="addtoplaycontent" class="addtoplaylist">
                             <form id="playlistform" action="{% url create_playlist %}" method="post">{% csrf_token %}
                                 <input id="id_title" type="text" name="title" maxlength="255" placeholder="Create a new playlist">
                                 <input type="submit" id="sub" value="Create playlist" />
-                                <div class="feedback"><p id="feedback" class="helptextred"> </p></div>
+                                <p id="feedback" class="bg-success"></p>
                             </form>
                             <h2>Click on a playlist to add the video:</h1>
                             <div class="playlistul divscroll">
