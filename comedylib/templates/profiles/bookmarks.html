@@ -38,38 +38,38 @@
                     {% endfor %}
         </ul>
 {% else %}
-     <ul class="random-playlist">
+    <ul class="random-playlist">
     {% for bookmark in bookmarks %}
-    <li class="playlist-content">
-                <div class="play-pic-content">
-                    <a class="text-center playallmain" href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-                    <img src="{% thumbnail bookmark.post.videos.all.0.picture 144x110 crop %}" alt="First playlist image"/>
-                    <div class="sidebar">
-                        <p class="text-center">{% with videos=bookmark.post.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p>
-                        <img src="{% thumbnail bookmark.post.videos.all.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>
-                        <img src="{% thumbnail bookmark.post.videos.all.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>
+        <li class="playlist-content">
+            <div class="play-pic-content">
+                <a class="text-center playallmain" href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
+                <img src="{% thumbnail bookmark.post.videos.all.0.picture 144x110 crop %}" alt="First playlist image"/>
+                <div class="sidebar">
+                    <p class="text-center">{% with videos=bookmark.post.videos.count %} {{ videos }}{% endwith %}<br/>Videos</p>
+                    <img src="{% thumbnail bookmark.post.videos.all.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>
+                    <img src="{% thumbnail bookmark.post.videos.all.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>
+                </div>
+            </div>
+            <div class="play-name-content">
+                <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}" title="{{ bookmark.post.title }}">{{ bookmark.post.title|truncatechars:40 }}</a>
+            </div>
+            <div class="play-detail-content">
+                <div class="row text-center">
+                    <div class="col-xs-6">
+                        <span>Bookmarks</span> <p>{{ bookmark.post.bookmarks_count }}</p>
                     </div>
+                    <div class="col-xs-6">
+                       <span class="user-header">User</span><a href="{{bookmark.post.profile.get_absolute_url}}">{{ bookmark.post.profile.user.username }}</a>
+                    </div> 
                 </div>
-                <div class="play-name-content">
-                    <a href="{{ bookmark.post.videos.all.0.get_absolute_url }}?pl={{ bookmark.post.id }}" title="{{ bookmark.post.title }}">{{ bookmark.post.title|truncatechars:40 }}</a>
-                </div>
-                <div class="play-detail-content">
-                    <div class="row text-center">
-                        <div class="col-xs-6">
-                            <span>Bookmarks</span> <p>{{ bookmark.post.bookmarks_count }}</p>
-                        </div>
-                        <div class="col-xs-6">
-                           <span class="user-header">User</span><a href="{{bookmark.post.profile.get_absolute_url}}">{{ bookmark.post.profile.user.username }}</a>
-                        </div> 
-                    </div>
-                </div>
-            </li>
-     
-            {% empty %}
-        <li>You have no playlists, yet.</li>
-                {% endfor %}
-    
-                {% endif %}
+            </div>
+        </li>
+ 
+    {% empty %}
+        <li><div class="alert alert-warning">You have no playlists, yet.</div></li>
+    {% endfor %}
+    </ul>
+{% endif %}
 
     
 </div>

@@ -8,7 +8,7 @@
                 {% include 'profiles/partials/playlist.html' %}
             {% endwith %}
         {% empty %}
-            <li><p>No playlists found.</p></li>
+             <li><div class="alert alert-warning">No playlists found.</div></li>
         {% endfor %}
     </ul>
     <div class="col-xs-12 album-pagination">

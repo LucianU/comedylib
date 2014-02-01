@@ -51,6 +51,8 @@
                             </div>
                         </div>
                     </li>
+                 {% empty %}
+                    <li><div class="alert alert-warning">There are no video files yet.</div></li>
                 {% endfor %}
             </ul>
             <div class="detail-pagination">
