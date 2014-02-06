@@ -24,9 +24,7 @@
             videoFeelingURI = '{% url vid_feel %}',
             addToBookmarksURI = '{% url add_to_bookmarks %}',
             removeFromBookmarksURI = '{% url remove_from_bookmarks %}';
-    </script>
-
-        
+    </script>        
         <div class="col-xs-12 col-sm-8">
             <div class="row">
             {% if current_pl %}
@@ -38,12 +36,7 @@
                     <p></p>
                 </div>
             {%endif%}
-            <script>
-                videojs.options.flash.swf = "{{ STATIC_URL }}video-js/video-js.swf";
-            </script>
-                <video id="youtube" src="" class="video-js vjs-default-skin" controls preload="auto" autoplay="autoplay" width="100%" height="390" data-setup='{ "techOrder": ["youtube"], "src": "{{ video.url }}"}'>
-                </video>
-                
+                <video id="youtube" src="" class="video-js vjs-default-skin" controls preload="auto" autoplay="autoplay" width="100%" height="390" data-setup='{ "techOrder": ["youtube"], "src": "{{ video.url }}", "ytcontrols": true}'> </video>
                 
                 <div class="col-xs-12">  
                     <div class="social row">
@@ -298,7 +291,10 @@
 {% block extra_js %}
     <script src="{{ STATIC_URL }}video-js/video.js"></script>
     <!--<script src="../vjs.youtube.js"></script>-->
-    <script src="{{ STATIC_URL }}video-js/media.youtube.js"></script>
+    <script src="{{ STATIC_URL }}video-js/vjs.youtube.js"></script>
+    <script>
+        videojs.options.flash.swf = "{{ STATIC_URL }}video-js/video-js.swf";
+    </script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/video_detail.js"></script>
 {% endblock %}
 
