@@ -867,7 +867,7 @@ mejs.MediaElementDefaults = {
 	// overrides the type specified, useful for dynamic instantiation
 	type: '',
 	// path to Flash and Silverlight plugins
-	pluginPath: mejs.Utility.getScriptPath(['mediaelement.js','mediaelement.min.js','mediaelement-and-player.js','mediaelement-and-player.min.js']),
+	pluginPath: '/static/mediaelement/',
 	// name of flash file
 	flashName: 'flashmediaelement.swf',
 	// streamer for RTMP streaming
