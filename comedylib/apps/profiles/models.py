@@ -43,7 +43,7 @@ class Playlist(CreatedMixin):
     empty = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
     def __unicode__(self):
         return u"%s: %s videos" % (self.title, self.profile.user.username)
