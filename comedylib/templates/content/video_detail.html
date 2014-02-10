@@ -41,6 +41,10 @@
                 <video width="650" height="390" style="width: 100%; height: 100%;" id="player1" autoplay="autoplay" preload="auto" >
                     <!-- Pseudo HTML5 -->
                     <source type="video/youtube" src="{{ video.url }}" />
+                    <object width="320" height="240" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+                        <param name="movie" value="flashmediaelement.swf" />
+                        <param name="flashvars" value="controls=true&file={{ video.url }}" />
+                    </object>
                 </video>
                 <script>
                     $('video').mediaelementplayer();
