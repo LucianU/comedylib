@@ -20,9 +20,9 @@
                     <li class="collection-front-content li-disabled" >
                         <p class="text-center">Drag &amp; drop to re-arrange the videos</p>
                     </li>
-                    {% for video in playlist.videos.playlist_order %}
-                        <li class="collection-front-content" data-video-id="{{ video.id }}" id="vid{{ video.id }}">
-                            <a id="removebtn" data-video-id="{{ video.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete video"><span class="glyphicon glyphicon-trash"></span></a>
+                    {% for pl_item_id, video in videos %}
+                        <li class="collection-front-content" data-video-id="{{ video.id }}" id="vid{{ pl_item_id }}">
+                            <a id="removebtn" data-video-id="{{ video.id }}" data-pl-item-id="{{ pl_item_id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete video"><span class="glyphicon glyphicon-trash"></span></a>
                             <a href="{{ video.get_absolute_url }}" class="col-xs-4">
                                     <img src="{% thumbnail video.picture 97x92 crop %}" alt="Video image"/>
                             </a>
@@ -75,8 +75,8 @@
         if (r === true) {
             a = $(this);
             $.post('{% url remove_from_playlist %}',
-                    {'vid': a.attr('data-video-id'), 'pid': {{ playlist.id }} },
-                    function(data) { $('#vid'+a.attr('data-video-id')).slideUp('normal'); });
+                    {'pl_item_id': a.attr('data-pl-item-id'), 'pid': {{ playlist.id }} },
+                    function(data) { $('#vid'+a.attr('data-pl-item-id')).slideUp('normal'); });
             return false;
         }
     });

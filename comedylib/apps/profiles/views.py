@@ -183,8 +183,20 @@ class PlaylistDetail(DetailView):
     context_object_name = 'playlist'
     model = Playlist
 
+    def _get_videos(self, context):
+        """
+        Returns the videos together with the id that they have in the
+        playlist.
+        """
+        playlist = context.get('playlist')
+        videos = []
+        for plvideo in playlist.playlistvideo_set.all():
+            videos.append((plvideo.id, plvideo.video))
+        return {'videos': videos}
+
     def get_context_data(self, **kwargs):
         context = super(PlaylistDetail, self).get_context_data(**kwargs)
+        context.update(self._get_videos(context))
         context['profile'] = self.request.user.profile
         return context
 
@@ -247,20 +259,21 @@ class DeletePlaylist(View):
 class HandlePlaylistItems(View):
     def post(self, request, *args, **kwargs):
         profile = request.user.profile
-        video_id = request.POST.get('vid')
-        playlist_id = request.POST.get('pid')
         action = kwargs.get('action')
-
-        video = get_object_or_404(Video, id=video_id)
+        playlist_id = request.POST.get('pid')
         playlist = get_object_or_404(Playlist, profile=profile, id=playlist_id)
 
         if action == 'add':
+            video_id = request.POST.get('vid')
+            video = get_object_or_404(Video, id=video_id)
+            # We attach the video at the end of the playlist
             order = playlist.videos.count()
             PlaylistVideo.objects.create(
                 video=video, playlist=playlist, order=order
             )
         elif action == 'remove':
-            PlaylistVideo.objects.get(video=video, playlist=playlist).delete()
+            pl_item_id = request.POST.get('pl_item_id')
+            PlaylistVideo.objects.get(id=pl_item_id).delete()
 
         return HttpResponse(json.dumps({'status': 'OK'}))
 
