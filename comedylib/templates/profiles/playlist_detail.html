@@ -18,9 +18,9 @@
             <div class="section group playlist-edit"> 
                 <ul id="sortable" class="connectedSortable random-video">
                     <li class="collection-front-content li-disabled" >
-                        <p class="text-center">Drag & drop to re-arrange the videos</p>
+                        <p class="text-center">Drag &amp; drop to re-arrange the videos</p>
                     </li>
-                    {% for video in playlist.videos.all %}
+                    {% for video in playlist.videos.playlist_order %}
                         <li class="collection-front-content" data-video-id="{{ video.id }}" id="vid{{ video.id }}">
                             <a id="removebtn" data-video-id="{{ video.id }}" data-toggle="tooltip" class="remove" href="#" rel="tooltip" title="Delete video"><span class="glyphicon glyphicon-trash"></span></a>
                             <a href="{{ video.get_absolute_url }}" class="col-xs-4">

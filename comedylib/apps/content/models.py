@@ -58,6 +58,17 @@ class Collection(CreatedMixin):
         return sum(v.votes for v in self.videos.all())
 
 
+class VideoManager(models.Manager):
+    use_for_related_fields = True
+
+    def playlist_order(self):
+        """
+        Used when we retrieve all videos of a playlist. Returns the videos
+        in the order specified in the playlist.
+        """
+        return self.all().order_by('playlistvideo__order')
+
+
 class Video(CreatedMixin):
     title = models.CharField(max_length=255)
     url = models.URLField()
@@ -76,12 +87,10 @@ class Video(CreatedMixin):
     )
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=1,
                                       blank=True)
+    objects = VideoManager()
 
     class Meta:
-        #FIXME: I don't like this, but I don't know another way to
-        # have videos ordered by the `order` field when retrieved
-        # from a collection.
-        ordering = ['playlistvideo__order']
+        ordering = ['-created']
 
     def __unicode__(self):
         return u"%s | %s | %s" % (self.title, self.collection.name,

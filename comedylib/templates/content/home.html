@@ -64,7 +64,7 @@
             </div>
             <ul class="random-playlist">
             {% for playlist in playlists %}
-                {% with videos=playlist.videos.all %}
+                {% with videos=playlist.videos.playlist_order %}
                     {% include 'profiles/partials/playlist.html' %}
                 {% endwith %}
             {% empty %}

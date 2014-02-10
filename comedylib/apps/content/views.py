@@ -258,7 +258,7 @@ class VideoDetail(DetailView):
         Returns the info needed to know where we are in the current
         playlist.
         """
-        videos = playlist.videos.all()
+        videos = playlist.videos.playlist_order()
         videos_list = list(videos)
         videos_count = len(videos_list)
         video_index = videos_list.index(current_video)
