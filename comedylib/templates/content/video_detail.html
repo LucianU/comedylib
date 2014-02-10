@@ -8,6 +8,8 @@
 {% block title %}Comedylib - {{video.collection.name}}, {{ video.title }} - online comedy videos{% endblock %}
 {% block content %}
 {% load thumbnail %}
+<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}mediaelement/build/mediaelementplayer.min.css" />
+<script type="text/javascript" src="{{ STATIC_URL }}mediaelement/build/mediaelement-and-player.min.js"></script>
 <div id="video_detail" class="row">
     <script>
         var pageAbsoluteURI = '{{ request.build_absolute_uri }}',
@@ -36,7 +38,7 @@
                     <p></p>
                 </div>
             {%endif%}
-                <video width="100%" height="390" style="width: 100%; height: 100%;" id="player1" autoplay="autoplay" preload="auto" >
+                <video width="650" height="390" style="width: 100%; height: 100%;" id="player1" autoplay="autoplay" preload="auto" >
                     <!-- Pseudo HTML5 -->
                     <source type="video/youtube" src="{{ video.url }}" />
                 </video>
