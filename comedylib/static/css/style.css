@@ -1398,6 +1398,9 @@ border-color:rgba(254,70,0,1);
 }
 /* =Asides
 ----------------------------------------------- */
+.me-plugin {
+position: relative !important;
+}
 .detail-sidebar img{
     display:block;
     margin:0 auto;
