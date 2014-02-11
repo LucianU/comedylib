@@ -50,13 +50,41 @@ class CheckboxSelectMultipleWithGroups(forms.CheckboxSelectMultiple):
             else:
                 groups[''].append((categ_name, categ_val))
 
-        output = []
+        # We want to display the categories in the groups that they
+        # are a part of:
+        # group
+        #   category
+        #   category
+        # Now, we need to generate all choices with a single call to
+        # the `render` of the base class to avoid ID duplication. Then
+        # we need to insert at the right location the groups themselves
+        # between the choices.
+
+        # We start with index 1 to take into account the <ul> starting tag
+        index = 1
+        indexed_groups = {}
+        formatted_choices = []
+
         for group, group_choices in groups.iteritems():
-            output.append(u'<h3>%s</h3>' % group)
-            self.choices = group_choices
-            output.append(super(CheckboxSelectMultipleWithGroups, self).render(
-                name=name, value=value, attrs=attrs, choices=choices
-            ))
+            indexed_groups[index] = u'<h3>%s</h3>' % group
+            formatted_choices.extend(group_choices)
+            # We extend the index by the group and all its choices
+            index += (1 + len(group_choices))
+
+        # We replace the initial choices, because they don't have the
+        # group and category separate. There, they are in the format
+        # group:category
+        self.choices = formatted_choices
+
+        # We split the output to have a list which we can modify
+        output = super(CheckboxSelectMultipleWithGroups, self).render(
+            name=name, value=value, attrs=attrs, choices=choices
+        ).split('\n')
+
+        # We insert the groups between the categories
+        for index, group in indexed_groups.iteritems():
+            output[index:index] = [group]
+
         return mark_safe(u'\n'.join(output))
 
 
