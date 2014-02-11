@@ -8,9 +8,9 @@
                 <h5>You searched for <span>{{ query }}</span>. </h5>
             </div>
             <div class="col-xs-12 col-sm-8">
-            {% for result in page.object_list %}
-                {% if result.model_name != 'collection' %}
-                    <div class="row">
+                <div class="row">
+                {% for result in page.object_list %}
+                    {% if result.model_name = 'video' %}
                         <div class="col-xs-3 search-pic-content">
                             <a href="{{ result.object.get_absolute_url }}">
                                 <img src="{{ result.object.picture.url }}">
@@ -23,14 +23,41 @@
                             <p>{{ result.object.views }}</p><span>Views</span>
                             <p>{{ result.object.rating }} %</p><span>Rating</span>    
                         </div>
-                    </div>
-                {% endif %}
-            {% empty %}
-                <p>No results found.</p>
-                {% if suggestion %}
-                    <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
-                {% endif %}
-            {% endfor %}
+                    {% else %}
+                        {% if result.model_name = 'playlist' %}
+                            <div class="col-xs-3 search-pic-content playlist-content">
+                                <div class="play-pic-content">
+                                    <a class="text-center playallmain" href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
+                                    {% if videos.0 %}<img src="{% thumbnail result.object.0.picture 144x110 crop %}" alt="First playlist image"/>{% endif %}
+                                    <div class="sidebar">
+                                        <p class="text-center">{{ playlist.result.object.count }}<br/>Videos</p>
+                                        {% if videos.1 %}<img src="{% thumbnail result.object.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>{% endif %}
+                                        {% if videos.2 %}<img src="{% thumbnail result.object.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>{% endif %}
+                                    </div>
+                                </div>
+                                <div class="play-name-content">
+                                    <a href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:30 }}</a>
+                                </div>
+                                <div class="play-detail-content">
+                                    <div class="row text-center">
+                                        <div class="col-xs-6">
+                                            <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% empty %}
+                    <p>No results found.</p>
+                    {% if suggestion %}
+                        <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
+                    {% endif %}
+                {% endfor %}
+                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
                 <div class="row">
