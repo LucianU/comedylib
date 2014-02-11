@@ -1,6 +1,7 @@
 import collections
 
 from django import forms
+from django.core.cache import cache
 from django.utils.safestring import mark_safe
 
 from taggit.managers import TaggableManager
@@ -92,5 +93,20 @@ class CategsForm(forms.Form):
     categs = forms.MultipleChoiceField(
         label='',
         widget=CheckboxSelectMultipleWithGroups(),
-        choices=((t.name, t.name) for t in Tag.objects.all())
+        choices=()
     )
+
+    def __init__(self, role, *args, **kwargs):
+        super(CategsForm, self).__init__(*args, **kwargs)
+
+        cache_key = 'tag_choices_role_%s' % role
+        tag_choices = cache.get(cache_key)
+        if tag_choices is None:
+            tags = Tag.objects.filter(
+                taggit_taggeditem_items__collection__role=role
+            ).distinct()
+            tag_choices = ((t.name, t.name) for t in tags)
+            # Cache for 24 hours
+            cache.set(cache_key, tag_choices, 60 * 60 * 24)
+
+        self.fields['categs'].choices = tag_choices

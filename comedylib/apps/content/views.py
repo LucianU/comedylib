@@ -145,22 +145,23 @@ class CollectionList(ListView):
         return coll_list
 
     def get_queryset(self):
-        form = CategsForm(self.request.GET)
+        form = CategsForm(self.kwargs['role'], self.request.GET)
         categs = None
 
         if form.is_valid():
             categs = form.cleaned_data['categs']
             # Building a new form, so that we have the currently checked
             # categories still checked on page reload
-            self.categs_form = CategsForm(initial={'categs': categs})
+            self.categs_form = CategsForm(self.kwargs['role'],
+                                          initial={'categs': categs})
 
         return self._get_collections(categs)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionList, self).get_context_data(**kwargs)
         categs_form = getattr(self, 'categs_form', None)
-        context['categs_form'] = (CategsForm() if categs_form is None
-                                               else categs_form)
+        context['categs_form'] = (CategsForm(self.kwargs['role'])
+                                  if categs_form is None else categs_form)
         return context
 
     def render_to_response(self, context, **response_kwargs):
