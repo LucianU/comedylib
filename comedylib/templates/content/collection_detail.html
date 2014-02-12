@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Comedylib - {{collection.name}} Videos{% endblock %}
+{% block title %}Comedylib - {{collection.name}} Profile &amp; Videos{% endblock %}
 {% block content %}
 {% load thumbnail %}
     <div class="row">
@@ -23,7 +23,6 @@
             </div><!-- /.modal -->
 
         </div>
-        
         <div class="col-xs-12 col-md-8">
              <ul class="bookmarks">
                 {% for video in videos %}
