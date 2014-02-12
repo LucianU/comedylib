@@ -11,7 +11,7 @@
                 <div class="row">
                 {% for result in page.object_list %}
                     {% if result.model_name = 'video' %}
-                        <div class="col-xs-12 search-content">
+                        <div class="col span_4_of_4 col1 search-content">
                             <div class="col-xs-3 search-pic-content">
                                 <a href="{{ result.object.get_absolute_url }}">
                                     <img src="{{ result.object.picture.url }}">
@@ -22,12 +22,12 @@
                                 <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
                                 <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
                                 <p>{{ result.object.views }}</p><span>Views</span>
-                                <p>{{ result.object.rating }} %</p><span>Rating</span>    
+                                <p>{{ result.object.rating }} %</p><span>Rating</span>
                             </div>
                         </div>
                     {% else %}
                         {% if result.model_name = 'playlist' %}
-                            <div class="col-xs-12 search-content playlist-content">
+                            <div class="col-xs-3 search-content playlist-content">
                                 <div class="play-pic-content">
                                     <a class="text-center playallmain" href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
                                     {% if videos.0 %}<img src="{% thumbnail result.object.0.picture 144x110 crop %}" alt="First playlist image"/>{% endif %}
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                     {% endif %}
                 {% empty %}
                     <div class="col-xs-12">
-                        <p>No results found.</p>
-                        {% if suggestion %}
-                            <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
-                        {% endif %}
+                    <p>No results found.</p>
+                    {% if suggestion %}
+                        <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
+                    {% endif %}
                     </div>
                 {% endfor %}
                  </div>
