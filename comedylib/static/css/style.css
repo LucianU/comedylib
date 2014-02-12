@@ -1414,7 +1414,21 @@ position: relative !important;
 .detail-sidebar p.description-content { color:#333; }
 
 .fb-like-box, .fb-like-box span, .fb-like-box span iframe[style] { width: 100% !important; }
-
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 /* =Social
 ----------------------------------------------- */
 .active {
@@ -1919,7 +1933,95 @@ object {
 	outline: 0;
 	
 }
+/* =SEARCH CONTENT STYLE
+----------------------------------------------- */
+.search-content {
+background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
+padding:0 0.3rem;
+margin:0;
+border-top:1px solid #333;
+border-bottom:1px solid #000;
+}
+.search-pic-content {
+    position:relative;
+    margin:0.5rem 0;
+   
+}
+.search-pic-content a{
 
+}
+.search-pic-content img{
+    width: 16.2rem;
+    height: 10.8rem;
+    border: 1px solid #444;
+}
+.search-pic-content p{
+    font-size:1.2rem;
+    position:absolute;
+    background:#222;
+    padding:0.5rem;
+    margin:0.3rem;
+    bottom:0.3rem;
+    right:0;
+}
+.search-info-content {
+
+}
+.search-info-content a.title, .search-info-content a.title-collection{
+    width: 100%;
+    float: left;
+    padding: 0 0.5rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    font-size:1.4rem;
+    font-weight: bold;
+    color: #eee;
+}
+.search-info-content a.title-collection{
+    margin-top: 0.5rem;
+    color:#63ADD0;
+    font-size:1.2rem;
+}
+.search-info-content p {
+    float:left;
+    padding: 0 0.5rem;
+    font-size: 1.1rem;
+
+}
+.search-info-content span {
+    float:left;
+    text-transform: uppercase;
+    font-size:1.1rem;
+    font-weight: bold;
+    color: #A57400;
+    margin-right:1.5rem;
+}
+.search-collection{
+    background:#222;
+    padding:0.5rem;
+}
+.search-collection p{
+    font-size: 1.4rem;    
+}
+.search-collection a{
+    margin:0.3rem;
+}
+.search-collection a.name{
+    font-size:1.4rem;
+    font-weight: bold;
+}
+.search-collection .role{
+    font-size:1.2rem;
+}
+.search-collection img{
+    width:31.5rem;
+    min-height:15rem;
+    border: 1px solid #444;
+}
+.search-collection ul{
+    margin-left:1.5rem;
+}
 /* =Media Queries
 ----------------------------------------------- */
 @media (max-width: 1160px) {

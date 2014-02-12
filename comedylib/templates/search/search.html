@@ -11,21 +11,23 @@
                 <div class="row">
                 {% for result in page.object_list %}
                     {% if result.model_name = 'video' %}
-                        <div class="col-xs-3 search-pic-content">
-                            <a href="{{ result.object.get_absolute_url }}">
-                                <img src="{{ result.object.picture.url }}">
-                            </a>
-                            <p class="duration">{{ result.object.duration }}</p>
-                        </div>
-                        <div class="col-xs-9 search-info-content">
-                            <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                            <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
-                            <p>{{ result.object.views }}</p><span>Views</span>
-                            <p>{{ result.object.rating }} %</p><span>Rating</span>    
+                        <div class="col-xs-12 search-content">
+                            <div class="col-xs-3 search-pic-content">
+                                <a href="{{ result.object.get_absolute_url }}">
+                                    <img src="{{ result.object.picture.url }}">
+                                </a>
+                                <p class="duration">{{ result.object.duration }}</p>
+                            </div>
+                            <div class="col-xs-9 search-info-content">
+                                <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                                <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
+                                <p>{{ result.object.views }}</p><span>Views</span>
+                                <p>{{ result.object.rating }} %</p><span>Rating</span>    
+                            </div>
                         </div>
                     {% else %}
                         {% if result.model_name = 'playlist' %}
-                            <div class="col-xs-3 search-pic-content playlist-content">
+                            <div class="col-xs-12 search-content playlist-content">
                                 <div class="play-pic-content">
                                     <a class="text-center playallmain" href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
                                     {% if videos.0 %}<img src="{% thumbnail result.object.0.picture 144x110 crop %}" alt="First playlist image"/>{% endif %}
@@ -52,10 +54,12 @@
                         {% endif %}
                     {% endif %}
                 {% empty %}
-                    <p>No results found.</p>
-                    {% if suggestion %}
-                        <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
-                    {% endif %}
+                    <div class="col-xs-12">
+                        <p>No results found.</p>
+                        {% if suggestion %}
+                            <p>Did you mean <a href="{% url haystack_search %}?q={{ suggestion }}">{{ suggestion }}</a>?</p>
+                        {% endif %}
+                    </div>
                 {% endfor %}
                  </div>
             </div>
