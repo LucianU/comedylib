@@ -105,7 +105,7 @@ class CategsForm(forms.Form):
             tags = Tag.objects.filter(
                 taggit_taggeditem_items__collection__role=role
             ).distinct()
-            tag_choices = ((t.name, t.name) for t in tags)
+            tag_choices = [(t.name, t.name) for t in tags]
             # Cache for 24 hours
             cache.set(cache_key, tag_choices, 60 * 60 * 24)
 
