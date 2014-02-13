@@ -1,6 +1,7 @@
 import datetime
 import os
 import random
+from urllib2 import urlparse
 
 from django.conf import settings
 from django.core.cache import cache
@@ -113,6 +114,14 @@ class Video(CreatedMixin):
     @property
     def votes(self):
         return self.likes + self.dislikes
+
+    @property
+    def youtube_id(self):
+        url_params = urlparse.urlparse(self.url).query
+        try:
+            return urlparse.parse_qs(url_params)['v'][0]
+        except (KeyError, IndexError):
+            return None
 
 
 class FeaturedManager(models.Manager):

@@ -26,7 +26,7 @@
             videoFeelingURI = '{% url vid_feel %}',
             addToBookmarksURI = '{% url add_to_bookmarks %}',
             removeFromBookmarksURI = '{% url remove_from_bookmarks %}';
-    </script>        
+    </script>
         <div class="col-xs-12 col-sm-8">
             <div class="row">
             {% if current_pl %}
@@ -39,7 +39,7 @@
                 </div>
             {%endif%}
                 <div class="col-xs-12 video-container">
-                    <iframe width="656" height="369" src="//www.youtube.com/embed/{{video_yt_id}}?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe> 
+                    <iframe width="656" height="369" src="//www.youtube.com/embed/{{video.youtube_id}}?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe> 
                 </div>
                 <div class="col-xs-12">  
                     <div class="social row">

@@ -233,13 +233,6 @@ class VideoDetail(DetailView):
         video.save()
         return video
 
-    def _get_video_yt_id(self, video_url):
-        """
-        Returns the youtube ID of the video.
-        """
-        url_params = urlparse.urlparse(video_url).query
-        return urlparse.parse_qs(url_params)['v'][0]
-
     def _get_video_feeling(self, profile, video):
         """
         Returns the feeling expressed for the video, if any.
@@ -311,7 +304,6 @@ class VideoDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(VideoDetail, self).get_context_data(**kwargs)
         video = context['video']
-        context['video_yt_id'] = self._get_video_yt_id(video.url)
 
         # We do some extra checks when the user is authenticated
         if self.request.user.is_authenticated():
