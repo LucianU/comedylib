@@ -5,7 +5,7 @@
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:image" content="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host}}{{ video.picture.url }}" />
 {% endblock %}
-{% block title %}Comedylib - {{video.collection.name}}, {{ video.title }} - online comedy videos{% endblock %}
+{% block title %}{{video.collection.name}}: {{ video.title }} | Comedylib{% endblock %}
 {% block content %}
 {% load thumbnail %}
 <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}mediaelement/build/mediaelementplayer.min.css" />
