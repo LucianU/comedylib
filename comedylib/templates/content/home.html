@@ -65,7 +65,9 @@
             <ul class="random-playlist">
             {% for playlist in playlists %}
                 {% with videos=playlist.videos.playlist_order %}
-                    {% include 'profiles/partials/playlist.html' %}
+                    <li class="playlist-content">
+                        {% include 'profiles/partials/playlist.html' %}
+                    </li>
                 {% endwith %}
             {% empty %}
                 <li><div class="alert alert-warning">No playlists found.</div></li>
