@@ -2023,6 +2023,11 @@ border-bottom:1px solid #000;
 .search-collection ul{
     margin-left:1.5rem;
 }
+/* =Fix for width when no scrolling
+----------------------------------------------- */
+.overview {
+    width:100%;
+}
 
 /* =Media Queries
 ----------------------------------------------- */

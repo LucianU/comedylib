@@ -207,7 +207,7 @@
                             <div class="row">
                                 <div class="col-xs-4 picture">
                                     <a href="{{ rel_video.get_absolute_url }}{% if current_pl %}?pl={{ current_pl.id }}{% endif %}">
-                                        <img src="{% thumbnail rel_video.picture 80x40 crop %}" />
+                                        <img src="{% thumbnail rel_video.picture 96x64 crop %}" />
                                     </a>
                                     <p class="time">{{ rel_video.duration }}</a>
                                 </div>      
