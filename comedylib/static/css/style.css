@@ -1936,13 +1936,15 @@ object {
 /* =Search Page
 ----------------------------------------------- */
 /* SEARCH CONTENT STYLE*/
-.search-content {
-background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
-padding:0 0.3rem;
-margin:0;
-border-top:1px solid #333;
-border-bottom:1px solid #000;
+.search-content, .search-content-playlist {
+    position:relative;
+    background: url(/static/img/bg-collection.png) repeat scroll 0 0 #222;
+    padding:0 0.3rem;
+    margin:0;
+    border-top:1px solid #333;
+    border-bottom:1px solid #000;
 }
+
 .search-pic-content {
     position:relative;
     margin:0.5rem 0;
