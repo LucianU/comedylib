@@ -12,30 +12,11 @@
                 <div class="row">
                 {% for result in page.object_list %}
                     {% if result.model_name = 'playlist' %}
-                            <div class="playlist-content">
-                                <div class="play-pic-content">
-                                    <a class="text-center playallmain" href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}"><span class="glyphicon glyphicon-play"></span> Play all</a>
-                                    {% if videos.0 %}<img src="{% thumbnail result.object.0.picture 144x110 crop %}" alt="First playlist image"/>{% endif %}
-                                    <div class="sidebar">
-                                        <p class="text-center">{{ playlist.result.object.count }}<br/>Videos</p>
-                                        {% if videos.1 %}<img src="{% thumbnail result.object.1.picture 42x31 crop %}" class="mini" alt="Second playlist image"/>{% endif %}
-                                        {% if videos.2 %}<img src="{% thumbnail result.object.2.picture 42x31 crop %}" class="mini" alt="Third playlist image"/>{% endif %}
-                                    </div>
-                                </div>
-                                <div class="play-name-content">
-                                    <a href="{{ result.object.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:30 }}</a>
-                                </div>
-                                <div class="play-detail-content">
-                                    <div class="row text-center">
-                                        <div class="col-xs-6">
-                                            <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="playlist-content">
+                            {% with playlist=result.object videos=result.object.videos.playlist_order %}
+                                {% include 'profiles/partials/playlist.html' %}
+                            {% endwith %}
+                        </div>
                     {% else %}
                         {% if result.model_name = 'video' %}
                             {% with video=result.object %}
