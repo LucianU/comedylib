@@ -38,20 +38,22 @@
                             </div>
                     {% else %}
                         {% if result.model_name = 'video' %}
-                            <div class="col-xs-12 search-content">
-                                <div class="col-xs-3 search-pic-content">
-                                    <a href="{{ result.object.get_absolute_url }}">
-                                        <img src="{{ result.object.picture.url }}">
-                                    </a>
-                                    <p class="duration">{{ result.object.duration }}</p>
+                            {% with video=result.object %}
+                                <div class="col-xs-12 search-content">
+                                    <div class="col-xs-3 search-pic-content">
+                                        <a href="{{ video.get_absolute_url }}">
+                                            <img src="{{ video.picture.url }}">
+                                        </a>
+                                        <p class="duration">{{ video.duration }}</p>
+                                    </div>
+                                    <div class="col-xs-9 search-info-content">
+                                        <a class="title" href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                                        <a class="title-collection" href="{{ video.collection.get_absolute_url }}">{{ video.collection.name }}</a>
+                                        <p>{{ video.views }}</p><span>Views</span>
+                                        <p>{{ video.rating }} %</p><span>Rating</span>
+                                    </div>
                                 </div>
-                                <div class="col-xs-9 search-info-content">
-                                    <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                                    <a class="title-collection" href="{{ result.object.collection.get_absolute_url }}">{{ result.object.collection.name }}</a>
-                                    <p>{{ result.object.views }}</p><span>Views</span>
-                                    <p>{{ result.object.rating }} %</p><span>Rating</span>
-                                </div>
-                            </div>
+                            {% endwith %}
                         {% endif %}
                     {% endif %}
                 {% empty %}
