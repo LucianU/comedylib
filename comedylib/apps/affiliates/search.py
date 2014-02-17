@@ -1,4 +1,5 @@
 import random
+import urllib2
 
 from django.conf import settings
 from django.core.cache import cache
@@ -17,8 +18,12 @@ class AmazonSearcher(object):
     def search(self, no_of_results, keyword):
         # The results for "Video" and "DVD" seem to be the same, so I'll
         # use "Video"
-        raw_results = self.api.search_n(no_of_results, Keywords=keyword,
-                                        SearchIndex='Video')
+        try:
+            raw_results = self.api.search_n(no_of_results, Keywords=keyword,
+                                            SearchIndex='Video')
+        except urllib2.HTTPError:
+            return []
+
         return self._format(raw_results)
 
     def _passes_filter(self, result):
