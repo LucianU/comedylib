@@ -23,7 +23,7 @@ class AmazonSearcher(object):
 
     def _passes_filter(self, result):
         # We filter for products without a price, because it means that
-        # they unavailable
+        # they're unavailable
         if result.price_and_currency[0] == 'None':
             return False
         return True
