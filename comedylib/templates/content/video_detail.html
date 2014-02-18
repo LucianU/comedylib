@@ -8,8 +8,6 @@
 {% block title %}{{video.collection.name}}: {{ video.title }} | Comedylib{% endblock %}
 {% block content %}
 {% load thumbnail %}
-<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}mediaelement/build/mediaelementplayer.min.css" />
-<script type="text/javascript" src="{{ STATIC_URL }}mediaelement/build/mediaelement-and-player.min.js"></script>
 <div id="video_detail" class="row">
     <script>
         var pageAbsoluteURI = '{{ request.build_absolute_uri }}',
