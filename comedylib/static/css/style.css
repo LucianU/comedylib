@@ -1084,6 +1084,7 @@ a.coll-front-name-content.collection{
     color:#FFD573;
 }
 .play-detail-content{
+    position:relative;
     font-size:1.1rem;
     margin:2px 0 0;
     height:40px;
@@ -1103,6 +1104,7 @@ a.coll-front-name-content.collection{
     color:#63ADD0;
     padding:0px;
     text-align:left;
+    margin:0;
 }
 .play-detail-content span{
     text-transform:uppercase;
@@ -1117,6 +1119,12 @@ a.coll-front-name-content.collection{
     display: block;
     text-align: right;
 }
+.play-detail-content .bookmark, .play-detail-content .user {
+    position:absolute;
+    top:0;
+}
+.play-detail-content .bookmark{left:0.1rem;}
+.play-detail-content .user {right:0.1rem;}
 .toprated-section{
 
 }

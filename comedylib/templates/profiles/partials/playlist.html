@@ -16,12 +16,10 @@
     <a href="{{ videos.0.get_absolute_url }}?pl={{ playlist.id }}" title="{{ playlist.title }}">{{ playlist.title|truncatechars:30 }}</a>
 </div>
 <div class="play-detail-content">
-    <div class="row text-center">
-        <div class="col-xs-6">
-            <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
-        </div>
-        <div class="col-xs-6">
-            <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
-        </div> 
+    <div class="bookmark">
+        <span>Bookmarks</span> <p>{{ playlist.bookmarks_count }}</p>
     </div>
+    <div class="user">
+        <span class="user-header">User</span><a href="{{playlist.profile.get_absolute_url}}">{{ playlist.profile.user.username }}</a>
+    </div> 
 </div>
