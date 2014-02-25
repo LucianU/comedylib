@@ -808,7 +808,7 @@ a:hover.signup {
     margin: 0 auto;
     background:rgba(0,0,0,0.9);
 	max-width: 98.4rem;
-    text-align: justify;
+    text-align: left;
     padding:10px 15px;
 }
 .background{
@@ -1213,6 +1213,7 @@ a.categ-btn {
     margin-left:1rem;
 }
 .tags ul li {
+    text-align:left;
 }
 .tags ul li a{
 width:100%;
@@ -1417,6 +1418,9 @@ position: relative !important;
     color:#eee;
     margin:0;
     text-align: left;
+}
+.detail-sidebar h1{
+    text-align:center;
 }
 .detail-sidebar button { margin:0; }
 .detail-sidebar p.description-content { color:#333; }
