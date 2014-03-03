@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
 from comedylib.mixins import CreatedMixin
-from content.models import Video
+from content.models import Collection, Video
 
 
 class Profile(models.Model):
@@ -103,6 +103,21 @@ class Bookmark(models.Model):
 
     def __unicode__(self):
         return u"%s: %s" % (self.profile.user.username, self.post)
+
+
+class RelevantLink(models.Model):
+    collection = models.ForeignKey(Collection, related_name='relevant_links')
+    title = models.CharField(max_length=255)
+    # Using a CharField instead of an URL field, because we put
+    # relative paths in the field, which URLField doesn't accept
+    url = models.CharField(max_length=255)
+    order = models.IntegerField()
+
+    class Meta:
+        ordering = ['order']
+
+    def __unicode__(self):
+        return u"%s: %s" % (self.collection.name, self.title)
 
 
 @receiver(post_save, sender=User)
