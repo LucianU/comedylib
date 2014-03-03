@@ -21,7 +21,18 @@
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-
+            {% with relevant_links=collection.relevant_links.all %}
+                {% if relevant_links %}
+                    <div class="relevant-links">
+                        <h2>Relevant Links</h2>
+                        <ul>
+                            {% for link in relevant_links %}
+                                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div> <!-- relevant-links -->
+                {% endif %}
+            {% endwith %}
         </div>
         <div class="col-xs-12 col-md-8">
              <ul class="bookmarks">
