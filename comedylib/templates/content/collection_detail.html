@@ -24,10 +24,13 @@
             {% with relevant_links=collection.relevant_links.all %}
                 {% if relevant_links %}
                     <div class="relevant-links">
-                        <h2>Relevant Links</h2>
+                        <h6>Relevant Links</h6>
                         <ul>
                             {% for link in relevant_links %}
-                                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                <li>
+                                    <a href="{{ link.url }}">{{ link.title }} </a>
+                                    <button onclick="location.href='{{ link.url }}'">Watch</button>      
+                                </li>
                             {% endfor %}
                         </ul>
                     </div> <!-- relevant-links -->
