@@ -47,6 +47,8 @@ RAVEN_CONFIG = {
            'cb72c14a3a6c42bc9a6250c62f7dcb44@sentry.comedylib.com/3'
 }
 
+DEFAULT_FROM_EMAIL = 'noreply@comedylib.com'
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.comedylib.com'
 EMAIL_HOST_USER = 'feedback@comedylib.com'
