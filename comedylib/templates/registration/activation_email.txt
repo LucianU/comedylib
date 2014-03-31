@@ -1,0 +1,6 @@
+Click on the link below to activate your account:
+{% if request.is_secure %}https://{% else %}http://{% endif %}{{ site.domain }}{% url registration_activate activation_key %}
+
+Thanks again for registering on our site.
+
+The Comedylib Team
