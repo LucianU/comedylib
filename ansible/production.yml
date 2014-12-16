@@ -1,0 +1,13 @@
+---
+- hosts: production
+  gather_facts: false
+  remote_user: "{{ deployment_user }}"
+  roles:
+    - common
+    - memcached
+    - nginx
+    - postgres
+    - virtualenv
+    - site
+    - uwsgi
+    - supervisor

@@ -1,0 +1,30 @@
+---
+repo_name: "comedylib"
+repo_root: "/var/www/{{ repo_name }}"
+repo_url: "ssh://hg@bitbucket.org/lucianu/comedylib"
+repo_host: "bitbucket.org"
+
+app_user: "{{ repo_name }}"
+app_group: "{{ app_user }}"
+app_user_groups: www-data
+deployment_user: "lucian"
+domain_name: "comedylib.com"
+
+virtualenvs_path: "{{ repo_root | dirname }}/.virtualenvs"
+project_venv_path: "{{ virtualenvs_path }}/{{ repo_name }}"
+project_venv_bin_path: "{{ project_venv_path }}/bin"
+project_run_path: "/var/run/{{ repo_name }}"
+project_log_path: "/var/log/{{ repo_name }}"
+
+system_packages:
+  - build-essential
+  - git
+  - liblcms1-dev
+  - libfreetype6-dev
+  - libjpeg8-dev
+  - zlib1g-dev
+  - libxml2-dev
+  - libxslt1-dev
+  - python-dev
+  - python-pip
+  - python-psycopg2

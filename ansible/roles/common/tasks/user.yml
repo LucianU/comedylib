@@ -1,0 +1,5 @@
+---
+- name: create application user
+  user: name={{ app_user }} home={{ repo_root }} groups={{ app_user_groups }}
+        state=present
+  sudo: yes
