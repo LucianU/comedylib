@@ -2,3 +2,4 @@
 
 django-debug-toolbar
 git+https://github.com/streeter/johnny-panel.git#egg=johnny_panel
+sqlparse
