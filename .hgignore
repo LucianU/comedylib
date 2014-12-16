@@ -1,10 +1,27 @@
-syntax: regexp
-.*?~$
-.*.py[co]$
-media
-static_all
-comedylib/settings/local.py
-comedylib/whoosh_index/
-var/log/(?!.hgignore)
-var/run/(?!.hgignore)
+syntax: glob
 
+# Python bytecode:
+*.py[co]
+
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+*.swp
+*~
+
+# Local settings file:
+comedylib/settings/local.py
+
+# Sphinx docs:
+build
+
+# SQLite3 database files:
+*.db
+
+# Celerybeat scheduler file:
+celerybeat-schedule
+
+.vagrant
+static_all
+media
