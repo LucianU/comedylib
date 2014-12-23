@@ -1,6 +1,6 @@
 ---
 
-supervisor_config_file: "/usr/local/etc/supervisor/{{ repo_name }}/supervisor.conf"
+supervisor_config_file: "{{ configs_root }}/supervisor/{{ repo_name }}/supervisor.conf"
 supervisor_service_name: "{{ repo_name }}"
 supervisord_bin_path: "{{ project_venv_bin_path }}/supervisord"
 supervisorctl_bin_path: "{{ project_venv_bin_path }}/supervisorctl"

@@ -12,8 +12,9 @@ domain_name: "comedylib.com"
 virtualenvs_path: "{{ repo_root | dirname }}/.virtualenvs"
 project_venv_path: "{{ virtualenvs_path }}/{{ repo_name }}"
 project_venv_bin_path: "{{ project_venv_path }}/bin"
-project_run_path: "/var/run/{{ repo_name }}"
-project_log_path: "/var/log/{{ repo_name }}"
+project_run_path: "/var/run"
+project_log_path: "/var/log"
+configs_root: "/usr/local/etc"
 
 system_packages:
   - build-essential
