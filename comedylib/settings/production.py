@@ -3,6 +3,8 @@ Production settings
 """
 from comedylib.settings.common import *  # pylint: disable=W0614, W0401
 
+ENV = "production"
+
 DEBUG = False
 
 DATABASES['default'].update({

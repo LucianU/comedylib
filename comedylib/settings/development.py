@@ -3,6 +3,8 @@ Development settings
 """
 from comedylib.settings.common import *  # pylint: disable=W0614, W0401
 
+ENV = "development"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

@@ -3,6 +3,8 @@ Staging settings
 """
 from comedylib.settings.common import *  # pylint: disable=W0614, W0401
 
+ENV = "staging"
+
 DEBUG = False
 
 DATABASES['default'].update({
