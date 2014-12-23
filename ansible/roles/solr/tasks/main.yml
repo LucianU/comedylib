@@ -1,2 +1,14 @@
 ---
-# tasks file for solr
+- name: install solr-jetty
+  apt: name=solr-jetty state=present update_cache=yes
+  sudo: yes
+
+- name: copy over the jetty config
+  copy: src=jetty
+        dest=/etc/default/jetty
+  sudo: yes
+
+- name: copy over schema.xml
+  copy: src=schema.xml
+        dest=/etc/solr/conf
+  sudo: yes
