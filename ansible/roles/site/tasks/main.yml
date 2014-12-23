@@ -17,6 +17,7 @@
     - syncdb
     - migrate
     - collectstatic
+    - update_index
   sudo: yes
   sudo_user: "{{ app_user }}"
 
@@ -26,9 +27,7 @@
   sudo: yes
 
 - name: sync project code to repo root
-  # We ignore the "static/" dir
-  command: rsync -av {{ temp_dir }}/{{ repo_name }} {{ repo_root}}/
-            -f "- static/"
+  command: rsync -avz --delete {{ temp_dir }}/{{ repo_name }} {{ repo_root}}/
   when: ENV != "development"
   sudo: yes
 
