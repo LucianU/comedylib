@@ -1,11 +1,4 @@
 ---
-- name: create 'log' and 'run' dirs
-  file: path={{ item }} state=directory owner={{ app_user }}
-  with_items:
-    - "{{ project_log_path }}"
-    - "{{ project_run_path }}"
-  sudo: yes
-
 - name: clone project to /tmp
   git: repo={{ repo_url }} dest={{ temp_dir }}
   when: ENV != "development"
@@ -14,12 +7,6 @@
   pip: requirements={{ pip_requirements_file }}
        virtualenv={{ project_venv_path }}
   sudo: yes
-
-- name: make the site dir writeable to the owner group
-  file: path={{ repo_root }}/{{ repo_name }}
-        mode=0775
-        state=directory
-  when: ENV == "development"
 
 - name: run syncdb, migrate and collectstatic commands
   django_manage: command={{ item }} app_path={{ temp_dir }}
