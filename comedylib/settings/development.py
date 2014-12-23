@@ -25,6 +25,7 @@ INTERNAL_IPS = (
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.versions.VersionsPanel',
