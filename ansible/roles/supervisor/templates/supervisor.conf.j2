@@ -14,7 +14,7 @@ pidfile = {{ supervisor_pid_file }}
 user = {{ app_user }}
 
 [supervisorctl]
-serverurl = unix:/{{ supervisor_sock_file }}
+serverurl = unix://{{ supervisor_sock_file }}
 
 [unix_http_server]
 file = {{ supervisor_sock_file }}
