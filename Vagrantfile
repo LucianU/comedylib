@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "../comedylib", "/var/www/comedylib"
   config.ssh.private_key_path = ["~/.vagrant.d/insecure_private_key", "~/.ssh/id_rsa"]
+  config.ssh.insert_key = false
   config.ssh.forward_agent = true
 
   # Ansible provisioner.
@@ -21,5 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.limit = "development"
     ansible.host_key_checking = false
     ansible.verbose = "v"
+    ansible.raw_arguments = ["--timeout=100"]
   end
 end
