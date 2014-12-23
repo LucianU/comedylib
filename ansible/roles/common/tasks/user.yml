@@ -1,5 +1,6 @@
 ---
 - name: create application user
-  user: name={{ app_user }} home={{ repo_root }} groups={{ app_user_groups }}
+  user: name={{ app_user }} home={{ repo_root }}
         state=present
+  when: ENV != "development"
   sudo: yes

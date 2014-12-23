@@ -6,7 +6,6 @@ repo_host: "bitbucket.org"
 
 app_user: "{{ repo_name }}"
 app_group: "{{ app_user }}"
-app_user_groups: www-data
 deployment_user: "lucian"
 domain_name: "comedylib.com"
 
