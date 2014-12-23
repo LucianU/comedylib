@@ -44,3 +44,15 @@
             -f "- static/"
   when: ENV != "development"
   sudo: yes
+
+- name: create config dir
+  file: path="{{ newrelic_config_file | dirname }}" state=directory
+        owner={{ app_user }} group={{ app_group }}
+  sudo: yes
+
+- name: copy over the newrelic config
+  copy: src=newrelic.ini dest={{ newrelic_config_file }}
+        owner={{ app_user }} group={{ app_group }}
+  notify:
+    - restart supervisord
+  sudo: yes
