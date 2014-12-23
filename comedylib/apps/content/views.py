@@ -1,7 +1,6 @@
 import collections
 import hashlib
 import random
-from urllib2 import urlparse
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -76,9 +75,10 @@ class Home(TemplateView):
     def _get_featured(self):
         featured_inst = Featured.instance.get()
         featured = {}
-        for role_id, role_name in Collection.ROLE_CHOICES:
-            featured['feat_%s' % role_name] = getattr(featured_inst,
-                                                      role_name)
+        if featured_inst is not None:
+            for role_id, role_name in Collection.ROLE_CHOICES:
+                featured['feat_%s' % role_name] = getattr(featured_inst,
+                                                          role_name)
         return featured
 
 
