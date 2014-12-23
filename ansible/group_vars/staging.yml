@@ -6,6 +6,7 @@ update_apt_cache: yes
 temp_dir: /tmp/{{ repo_name }}
 django_settings_file: "{{ repo_name }}.settings.staging"
 pip_requirements_file: "{{ temp_dir }}/requirements/production.pip"
+repo_branch: dev
 
 # memcached settings
 memcached_max_memory_mb: 128
