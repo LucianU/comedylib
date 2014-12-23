@@ -1,6 +1,7 @@
 ---
 - name: clone project to /tmp
-  git: repo={{ repo_url }} dest={{ temp_dir }}
+  hg: repo={{ repo_url }} dest={{ temp_dir }}
+      revision={{ repo_branch }}
   when: ENV != "development"
 
 - name: install pip requirements
