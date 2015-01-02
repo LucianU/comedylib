@@ -28,3 +28,4 @@ system_packages:
   - python-dev
   - python-pip
   - python-psycopg2
+  - rabbitmq-server
