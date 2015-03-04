@@ -1,0 +1,14 @@
+---
+- name: install iptables
+  apt: name=iptables state=present
+  sudo: yes
+
+- name: copy iptables rules file
+  copy: src=iptables.rules dest=/etc/iptables.rules
+  notify:
+    - load iptables rules
+  sudo: yes
+
+- name: enable iptables rules at startup
+  copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=0754
+  sudo: yes
