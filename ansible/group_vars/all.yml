@@ -16,6 +16,7 @@ project_venv_bin_path: "{{ project_venv_path }}/bin"
 project_run_path: "/var/run"
 project_log_path: "/var/log"
 configs_root: "/usr/local/etc"
+newrelic_config_file: "{{ configs_root }}/newrelic/{{ repo_name }}/newrelic.ini"
 
 system_packages:
   - build-essential
