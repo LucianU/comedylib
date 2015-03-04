@@ -4,13 +4,17 @@
   sudo: yes
 
 - name: create config dir
-  file: path={{ supervisor_config_file | dirname }} state=directory
-        owner={{ app_user }} group={{ app_group }}
+  file: path="{{ supervisor_config_file | dirname }}"
+        owner={{ app_user }}
+        group={{ app_group }}
+        state=directory
   sudo: yes
 
 - name: generate config file
-  template: src=supervisor.conf.j2 dest={{ supervisor_config_file }}
-            owner={{ app_user }} group={{ app_group }}
+  template: src=supervisor.conf.j2
+            dest={{ supervisor_config_file }}
+            owner={{ app_user }}
+            group={{ app_group }}
   notify:
     - restart supervisord
   sudo: yes
