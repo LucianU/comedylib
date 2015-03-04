@@ -7,10 +7,6 @@
   sudo: yes
   tags: packages
 
-- name: start PostgreSQL
-  service: name=postgresql state=started enabled=yes
-  sudo: yes
-
 - name: create database role
   sudo: yes
   sudo_user: postgres
