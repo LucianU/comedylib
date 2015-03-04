@@ -4,23 +4,26 @@ autostart = true
 autorestart = true
 redirect_stderr = true
 stopsignal = QUIT
+user = {{ app_user }}
 
 {% if ENV != 'development' %}
 [program:celeryd]
 environment = DJANGO_SETTINGS_MODULE={{ django_settings_file }}
-command = python {{ repo_root }}/manage.py celery worker --concurrency=2 --app=comedylib.celery.config -l info
+command = python {{ repo_root }}/manage.py celery worker --concurrency=2 --app=comedylib.celery.config --pidfile={{ project_run_path }}/celeryd.pid -l info
 autorestart = true
 redirect_stderr = true
-stdout_logfile = /var/log/celeryd.log
+stdout_logfile = {{ project_log_path }}/celeryd.log
 priority = 2
+user = {{ app_user }}
 
 [program:celerybeat]
 environment = DJANGO_SETTINGS_MODULE={{ django_settings_file }}
-command = python {{ repo_root }}/manage.py celery beat --app=comedylib.celery.config --pidfile=/var/run/celerybeat.pid -s /var/run/celerybeat-schedule -l info
+command = python {{ repo_root }}/manage.py celery beat --app=comedylib.celery.config --pidfile={{ project_run_path }}/celerybeat.pid -s {{ project_run_path }}/celerybeat-schedule -l info
 autorestart = true
 redirect_stderr = true
-stdout_logfile = /var/log/celerybeat.log
+stdout_logfile = {{ project_log_path }}/celerybeat.log
 priority = 3
+user = {{ app_user }}
 {% endif %}
 
 [supervisord]
