@@ -4,6 +4,16 @@
       revision={{ repo_branch }}
   when: ENV != "development"
 
+# This is required because we run the manage.py commands as
+# the app user, so collectstatic needs to have the right permissions
+- name: make the app user the owner of the project dir
+  file: path={{ temp_dir }}/{{ repo_name }}
+        owner={{ app_user }}
+        group={{ app_group }}
+        recurse=yes
+        state=directory
+  sudo: yes
+
 - name: install pip requirements
   pip: requirements={{ pip_requirements_file }}
        virtualenv={{ project_venv_path }}
