@@ -25,6 +25,7 @@ system_packages:
   - zlib1g-dev
   - libxml2-dev
   - libxslt1-dev
+  - mercurial
   - python-dev
   - python-pip
   - python-psycopg2
