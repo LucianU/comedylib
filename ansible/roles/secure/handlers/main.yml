@@ -2,3 +2,7 @@
 - name: load iptables rules
   shell: iptables-restore < /etc/iptables.rules
   sudo: yes
+
+- name: restart ssh
+  service: name=ssh state=restarted
+  sudo: yes

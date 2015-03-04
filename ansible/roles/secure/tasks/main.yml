@@ -7,14 +7,14 @@
 - name: copy ssh public key to remote host
   authorized_key: user={{ remote_user }}
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  notify:
+    - restart ssh
   sudo: yes
 
 - name: copy sshd_config file to remote host
   file: src=sshd_config dest=/etc/ssh/ owner=root group=root mode=0644
-  sudo: yes
-
-- name: restart ssh
-  service: name=ssh state=restarted
+  notify:
+    - restart ssh
   sudo: yes
 
 - name: install fail2ban
