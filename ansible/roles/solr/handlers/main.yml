@@ -1,2 +1,4 @@
 ---
-# handlers file for solr
+- name: restart jetty
+  service: name=jetty state=restarted
+  sudo: yes
