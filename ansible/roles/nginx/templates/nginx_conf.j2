@@ -25,8 +25,8 @@ server {
         location /404.html {
             alias {{ nginx_templates_path }}/404.html;
         }
-        location /50x.html {
-            alias {{ nginx_templates_path }}/50x.html;
+        location /500.html {
+            alias {{ nginx_templates_path }}/500.html;
         }
     {% endif %}
     }
