@@ -4,16 +4,18 @@
         state=directory
   sudo: yes
 
+- include: user.yml
+
 - name: create dirs
   file: path={{ item }}
         owner={{ app_user }}
         group={{ app_group }}
+        mode=0777
         state=directory
   with_items:
     - "{{ project_log_path }}"
     - "{{ project_run_path }}"
   sudo: yes
 
-- include: user.yml
 - include: ssh_keys.yml
 - include: packages.yml
