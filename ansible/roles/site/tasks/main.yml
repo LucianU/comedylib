@@ -42,6 +42,11 @@
   when: ENV != "development"
   sudo: yes
 
+- name: delete the cloned project
+  file: path={{ temp_dir }}
+        state=absent
+  sudo: yes
+
 - name: create config dir
   file: path="{{ newrelic_config_file | dirname }}" state=directory
         owner={{ app_user }} group={{ app_group }}
