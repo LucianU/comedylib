@@ -26,18 +26,26 @@
         <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
         <!--[if !IE 7]><style type="text/css">#page {display:table;height:100%}</style><![endif]-->
     {% endcompress %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <!--  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script> -->
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <!-- <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>-->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     {% compress js %}
         <!--[if lt IE 9]>
             <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
         <![endif]-->
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.custom-scrollbar.js"></script>
-   <!-- <script type="text/javascript" src="{{ STATIC_URL }}mediaplayer/jwplayer.js" ></script>-->
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.custom-scrollbar.js"></script>
     {% endcompress %}
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38034418-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.type = 'text/javascript'; ga.async = true;
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
     </head>
 <body>
     <div id="fb-root"></div>
@@ -200,17 +208,6 @@
             <!--<script type="text/javascript" src="{{ STATIC_URL }}js/fancybox/source/jquery.fancybox.js"></script>-->
             <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
 
-            <script type="text/javascript">
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-38034418-1']);
-                _gaq.push(['_trackPageview']);
-                (function() {
-                    var ga = document.createElement('script');
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    ga.type = 'text/javascript'; ga.async = true;
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-            </script>
             <script type="text/javascript">
                 var csrftoken = $.cookie('csrftoken');
                 function csrfSafeMethod(method) {
