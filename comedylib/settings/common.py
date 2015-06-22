@@ -215,8 +215,7 @@ COMPRESS_JS_FILTERS = [
 
 # django-dbbackup settings
 DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
-DBBACKUP_TOKENS_FILEPATH = os.path.join(os.path.dirname(SITE_ROOT),
-                                        'var/run/dbbackup')
+DBBACKUP_TOKENS_FILEPATH = '/var/www/run/dbbackup'
 DBBACKUP_DROPBOX_APP_KEY = ''
 DBBACKUP_DROPBOX_APP_SECRET = ''
 DBBACKUP_DROPBOX_ACCESS_TYPE = 'dropbox'
