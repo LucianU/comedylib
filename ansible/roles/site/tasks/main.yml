@@ -45,6 +45,7 @@
 - name: delete the cloned project
   file: path={{ temp_dir }}
         state=absent
+  when: ENV != "development"
   sudo: yes
 
 - name: create config dir
