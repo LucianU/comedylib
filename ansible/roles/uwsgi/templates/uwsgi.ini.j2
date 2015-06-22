@@ -2,6 +2,8 @@
 socket = {{ uwsgi_socket }}
 master = true
 processes = 4
+# This is needed by the New Relic agent
+enable-threads = true
 max-requests = 1000
 harakiri = 30
 post-buffering = 8192
