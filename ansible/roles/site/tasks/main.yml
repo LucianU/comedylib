@@ -38,7 +38,8 @@
   sudo: yes
 
 - name: sync project code to repo root
-  command: rsync -avz --delete {{ temp_dir }}/{{ repo_name }} {{ repo_root}}/
+  command: rsync -avz --delete --exclude {{ temp_dir }}/media
+    {{ temp_dir }}/{{ repo_name }} {{ repo_root}}/
   when: ENV != "development"
   sudo: yes
 
