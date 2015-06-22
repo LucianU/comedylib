@@ -41,14 +41,14 @@ ALLOWED_HOSTS = [
     'django-dbbackup', # Used by the lib when sending traceback emails
 ]
 
-INSTALLED_APPS += (
-    'raven.contrib.django.raven_compat',
-)
+#INSTALLED_APPS += (
+#    'raven.contrib.django.raven_compat',
+#)
 
-RAVEN_CONFIG = {
-    'dsn': 'http://ba670bac2cac47dfbcf0b43e16715fa5:'
-           '983c2bca1e424413ae0ae808c58c81c7@sentry.comedylib.com/2'
-}
+#RAVEN_CONFIG = {
+#    'dsn': 'http://ba670bac2cac47dfbcf0b43e16715fa5:'
+#           '983c2bca1e424413ae0ae808c58c81c7@sentry.comedylib.com/2'
+#}
 
 DEFAULT_FROM_EMAIL = 'noreply@comedylib.com'
 
