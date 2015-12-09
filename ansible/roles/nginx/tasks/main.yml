@@ -6,7 +6,7 @@
 
 - name: create the nginx configuration file
   template: src=nginx_conf.j2
-            dest=/etc/nginx/sites-available/{{ repo_name }}
+            dest=/etc/nginx/sites-available/{{ domain_name }}.conf
   sudo: yes
   notify:
     - restart nginx
