@@ -19,8 +19,8 @@
     - restart nginx
 
 - name: enable application site
-  file: src=/etc/nginx/sites-available/{{ repo_name }}
-        dest=/etc/nginx/sites-enabled/{{ repo_name }}
+  file: src=/etc/nginx/sites-available/{{ domain_name }}.conf
+        dest=/etc/nginx/sites-enabled/{{ domain_name }}.conf
         state=link
   sudo: yes
   notify:
