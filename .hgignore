@@ -25,3 +25,4 @@ celerybeat-schedule
 .vagrant
 static_all
 media
+.idea
