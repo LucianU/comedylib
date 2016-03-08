@@ -1,5 +1,5 @@
 -r common.pip
 
-django-debug-toolbar
+django-debug-toolbar==1.0
 git+https://github.com/streeter/johnny-panel.git#egg=johnny_panel
 sqlparse
