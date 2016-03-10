@@ -2,6 +2,7 @@
 - hosts: staging
   gather_facts: false
   roles:
+    - ansible-locale
     - common
     - memcached
     - nginx
@@ -9,5 +10,5 @@
     - solr
     - virtualenv
     - site
-    - uwsgi
-    - supervisor
+    - ansible-celery
+    - ansible-uwsgi

@@ -58,5 +58,5 @@
   copy: src=newrelic.ini dest={{ newrelic_config_file }}
         owner={{ app_user }} group={{ app_group }}
   notify:
-    - restart supervisord
+    - restart uwsgi
   sudo: yes

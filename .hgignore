@@ -13,6 +13,9 @@ syntax: glob
 # Local settings file:
 comedylib/settings/local.py
 
+# External Ansible roles
+ansible/roles/ansible-*
+
 # Sphinx docs:
 build
 
