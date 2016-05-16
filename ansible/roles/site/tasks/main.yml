@@ -54,9 +54,14 @@
         owner={{ app_user }} group={{ app_group }}
   sudo: yes
 
-- name: copy over the newrelic config
-  copy: src=newrelic.ini dest={{ newrelic_config_file }}
+- name: create log dir
+  file: path={{ site_log_dir }} state=directory
         owner={{ app_user }} group={{ app_group }}
+  sudo: yes
+
+- name: copy over the newrelic config
+  template: src=newrelic.ini.j2 dest={{ newrelic_config_file }}
+            owner={{ app_user }} group={{ app_group }}
   notify:
     - restart uwsgi
   sudo: yes

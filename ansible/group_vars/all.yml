@@ -32,6 +32,7 @@ celery_work_dir: "{{ repo_root }}"
 
 configs_root: "/usr/local/etc"
 newrelic_config_file: "{{ configs_root }}/newrelic/{{ repo_name }}/newrelic.ini"
+site_log_dir: "/var/log/{{ repo_name }}"
 
 system_packages:
   - build-essential
