@@ -1,4 +1,5 @@
-# What is this?
+What is this?
+=============
 This is my first attempt at a business. It didn't go anywhere, so I
 decided to make the code public. Unfortunately, at the moment, I couldn't
 manage to convert the mercurial history to git, so the commits don't
