@@ -1,0 +1,27 @@
+---
+- name: install nginx
+  apt: name=nginx update_cache={{ update_apt_cache }} state=installed
+  sudo: yes
+  tags: packages
+
+- name: create the nginx configuration file
+  template: src=nginx_conf.j2
+            dest=/etc/nginx/sites-available/{{ domain_name }}.conf
+  sudo: yes
+  notify:
+    - restart nginx
+
+- name: disable default site
+  file: path=/etc/nginx/sites-enabled/default
+        state=absent
+  sudo: yes
+  notify:
+    - restart nginx
+
+- name: enable application site
+  file: src=/etc/nginx/sites-available/{{ domain_name }}.conf
+        dest=/etc/nginx/sites-enabled/{{ domain_name }}.conf
+        state=link
+  sudo: yes
+  notify:
+    - restart nginx

@@ -1,0 +1,25 @@
+---
+- name: create remote user
+  user: name={{ deployment_user }} password={{ deployment_user_pass }}
+        shell=/bin/bash groups=sudo state=present
+  sudo: yes
+
+- name: copy ssh public key to remote host
+  authorized_key: user={{ remote_user }}
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  notify:
+    - restart ssh
+  sudo: yes
+
+- name: copy sshd_config file to remote host
+  file: src=sshd_config dest=/etc/ssh/ owner=root group=root mode=0644
+  notify:
+    - restart ssh
+  sudo: yes
+
+- name: install fail2ban
+  apt: name=fail2ban state=present
+  sudo: yes
+
+- include: upgrades.yml
+- include: iptables.yml

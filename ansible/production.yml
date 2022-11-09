@@ -1,0 +1,14 @@
+---
+- hosts: production
+  gather_facts: false
+  roles:
+    - ansible-locale
+    - common
+    - memcached
+    - nginx
+    - postgres
+    - solr
+    - virtualenv
+    - site
+    - ansible-celery
+    - ansible-uwsgi

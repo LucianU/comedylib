@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Comedy Library: Playlists | Comedylib{% endblock %}
+{% block content %}
+<div class="row">
+    <ul class="col-xs-12 random-playlist">
+        {% for playlist in playlists %}
+            {% with videos=playlist.videos.playlist_order %}
+                <li class="playlist-content">
+                    {% include 'profiles/partials/playlist.html' %}
+                </li>
+            {% endwith %}
+        {% empty %}
+             <li><div class="alert alert-warning">No playlists found.</div></li>
+        {% endfor %}
+    </ul>
+    <div class="col-xs-12 album-pagination">
+        {% include "pagination.html" %}
+    </div>
+</div>
+{% endblock %}

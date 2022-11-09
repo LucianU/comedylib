@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}Comedy Library: Comedians, Series and Movies | Comedylib{% endblock %}
+
+{% block content %}
+
+<div class="background">
+    <!-- #featured -->
+
+    <div class="featured">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 container">
+            <a href="{{ feat_comedian.get_absolute_url }}">
+                <div class="ribbons ribbon_comedians"></div>
+                <p class="discover dis-comedian">Discover more...</p>
+                <div class="featured_content">
+                    <img src="{% thumbnail feat_comedian.picture 249x311 crop %}" alt="featured comedian {{feat_comedian.name}}"/>
+                    <div class="info">
+                         <h1>{{feat_comedian.name}}</h1>
+                        <p>{{ feat_comedian.description|truncatechars:140 }}</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 container">
+                <a href="{{ feat_show.get_absolute_url }}">
+                    <div class="ribbons ribbon_shows"></div>
+                    <p class="discover dis-show">Discover more...</p>
+                    <div class="featured_content">
+                        <img src="{% thumbnail feat_show.picture 249x311 crop %}" alt="featured show {{feat_show.name}}"/>
+                        <div class="info">
+                            <h1>{{feat_show.name}}</h1>
+                            <p>{{ feat_show.description|truncatechars:140 }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 container">
+            <a href="{{ feat_movie.get_absolute_url }}">
+                <div class="ribbons ribbon_movies"></div>
+                <p class="discover dis-movie">Discover more...</p>
+                <div class="featured_content">
+                    <img src="{% thumbnail feat_movie.picture 249x311 crop %}" alt="featured movie {{feat_movie.name}}"/>
+                    <div class="info">
+                        <h1>{{feat_movie.name}}</h1>
+                        <p>{{ feat_movie.description|truncatechars:140 }}</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Random playlists and Facebook box -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8 front-playlists">
+            <div class="colored-title">
+                    <p>Random <span>Playlists</span></p>
+            </div>
+            <ul class="random-playlist">
+            {% for playlist in playlists %}
+                {% with videos=playlist.videos.playlist_order %}
+                    <li class="playlist-content">
+                        {% include 'profiles/partials/playlist.html' %}
+                    </li>
+                {% endwith %}
+            {% empty %}
+                <li><div class="alert alert-warning">No playlists found.</div></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-4 col-md-4 hidden-xs">
+            <div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-width="311" data-height="410" data-colorscheme="dark" data-show-faces="true" show-border="false" data-stream="false" data-header="false"></div>
+        </div>
+        <div class="col-xs-12 visible-xs">
+            <div class="fb-like-box" data-href="https://www.facebook.com/pages/Comedy-Library/215266501939582" data-height="200" data-colorscheme="dark" data-show-faces="true" show-border="false" data-stream="false" data-header="false"></div>
+        </div>
+    </div>
+
+    <!-- Random videos-->
+
+    <div class="colored-title">
+        <p><span>Random </span>Videos</p>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 toprated-section">
+            <p class="head">Comedians</p>
+            <ul class="random-video">
+            {% for cvideo in comedian_videos %}
+                <li class="collection-front-content comedian-bkg">
+                    <a href="{{ cvideo.get_absolute_url }}" class="col-xs-4">
+                        <img src="{% thumbnail cvideo.picture 97x92 crop %}" alt="Comedian video image"/>
+                    </a>
+                    <div class="col-xs-8 info">
+                        <div class="coll-front-name-content">
+                            <a href="{{ cvideo.get_absolute_url }}" title="{{ cvideo.title}}">{{ cvideo.title|truncatechars:57 }}</a>
+                        </div> 
+                        <a class="coll-front-name-content collection" href="{{ cvideo.collection.get_absolute_url }}" title="{{ cvideo.collection.name }}">{{ cvideo.collection.name|truncatechars:26 }}</a>
+                        <div class="row details text-center">
+                            <div class="col-xs-4">
+                                <p>{{ cvideo.duration }}</p><span>Length</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ cvideo.views }}</p> <span>Views</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ cvideo.rating }}%</p>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 toprated-section">
+            <p class="head">Shows</p>
+            <ul class="random-video">
+            {% for svideo in show_videos %}
+                <li class="collection-front-content show-bkg">
+                    <a href="{{ svideo.get_absolute_url }}" class="col-xs-4">
+                        <img src="{% thumbnail svideo.picture 97x92 crop %}" alt="Show video image"/>
+                    </a>
+                    <div class="col-xs-8 info">
+                        <div class="coll-front-name-content">
+                            <a href="{{ svideo.get_absolute_url }}" title="{{ svideo.title}}">{{ svideo.title|truncatechars:57 }}</a>
+                        </div> 
+                        <a class="coll-front-name-content collection" href="{{ svideo.collection.get_absolute_url }}" title="{{ svideo.collection.name }}">{{ svideo.collection.name|truncatechars:26 }}</a>
+                        <div class="row details text-center">
+                            <div class="col-xs-4">
+                                <p>{{ svideo.duration }}</p> <span>Length</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ svideo.views }}</p> <span>Views</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ svideo.rating }}%</p>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>  
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 toprated-section">
+            <p class="head">Movies</p>
+            <ul class="random-video">
+            {% for mvideo in movie_videos %}
+                <li class="collection-front-content movie-bkg">
+                    <a href="{{ mvideo.get_absolute_url }}" class="col-xs-4">
+                        <img src="{% thumbnail mvideo.picture 97x92 crop %}" alt="Movie video image"/>
+                    </a>
+                    <div class="col-xs-8 info">
+                        <div class="coll-front-name-content">
+                            <a href="{{ mvideo.get_absolute_url }}" title="{{ mvideo.title}}">{{ mvideo.title|truncatechars:57 }}</a>
+                        </div> 
+                        <a class="coll-front-name-content collection" href="{{ mvideo.collection.get_absolute_url }}" title="{{ mvideo.collection.name }}">{{ mvideo.collection.name|truncatechars:26 }}</a>
+                        <div class="row details text-center">
+                            <div class="col-xs-4">
+                                <p>{{ mvideo.duration }}</p> <span>Length</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ mvideo.views }}</p> <span>Views</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>{{ mvideo.rating }}%</p>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

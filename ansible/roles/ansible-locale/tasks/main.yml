@@ -1,0 +1,14 @@
+---
+- name: generate en_US.UTF-8 locale
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  sudo: yes
+
+- name: install the locale file
+  copy:
+    src: locale
+    dest: /etc/default/locale
+  notify:
+    - run dpkg-reconfigure
+  sudo: yes

@@ -1,0 +1,15 @@
+---
+- name: start celeryd
+  service:
+    name: celeryd
+    state: started
+  become: yes
+  become_user: root
+
+- name: start celerybeat
+  service:
+    name: celerybeat
+    state: started
+  become: yes
+  become_user: root
+

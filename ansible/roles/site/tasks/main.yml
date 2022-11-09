@@ -1,0 +1,67 @@
+---
+- name: clone project to /tmp
+  hg: repo={{ repo_url }} dest={{ temp_dir }}
+      revision={{ repo_branch }}
+  when: ENV != "development"
+
+# This is required because we run the manage.py commands as
+# the app user, so collectstatic needs to have the right permissions
+- name: make the app user the owner of the project dir
+  file: path={{ temp_dir }}/{{ repo_name }}
+        owner={{ app_user }}
+        group={{ app_group }}
+        recurse=yes
+        state=directory
+  sudo: yes
+
+- name: install pip requirements
+  pip: requirements={{ pip_requirements_file }}
+       virtualenv={{ project_venv_path }}
+  sudo: yes
+
+- name: run syncdb, migrate and collectstatic commands
+  django_manage: command={{ item }} app_path={{ temp_dir }}
+                 settings={{ django_settings_file }}
+                 pythonpath={{ temp_dir }}
+                 virtualenv={{ project_venv_path }}
+  with_items:
+    - syncdb
+    - migrate
+    - collectstatic
+    - update_index
+  sudo: yes
+  sudo_user: "{{ app_user }}"
+
+- name: sync 'manage.py' to repo root
+  command: rsync -av {{ temp_dir }}/manage.py {{ repo_root }}/
+  when: ENV != "development"
+  sudo: yes
+
+- name: sync project code to repo root
+  command: rsync -avz --delete --exclude {{ repo_name }}/media
+    {{ temp_dir }}/{{ repo_name }} {{ repo_root}}/
+  when: ENV != "development"
+  sudo: yes
+
+- name: delete the cloned project
+  file: path={{ temp_dir }}
+        state=absent
+  when: ENV != "development"
+  sudo: yes
+
+- name: create config dir
+  file: path="{{ newrelic_config_file | dirname }}" state=directory
+        owner={{ app_user }} group={{ app_group }}
+  sudo: yes
+
+- name: create log dir
+  file: path={{ site_log_dir }} state=directory
+        owner={{ app_user }} group={{ app_group }}
+  sudo: yes
+
+- name: copy over the newrelic config
+  template: src=newrelic.ini.j2 dest={{ newrelic_config_file }}
+            owner={{ app_user }} group={{ app_group }}
+  notify:
+    - restart uwsgi
+  sudo: yes

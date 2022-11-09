@@ -1,0 +1,9 @@
+---
+- name: create /var/www
+  file: path=/var/www
+        state=directory
+  sudo: yes
+
+- include: user.yml
+- include: ssh_keys.yml
+- include: packages.yml

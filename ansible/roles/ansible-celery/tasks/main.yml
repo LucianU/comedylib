@@ -1,0 +1,39 @@
+- name: create celery user
+  user:
+    name: celery
+    state: present
+  become: yes
+  become_user: root
+
+- name: create working dir
+  file:
+    path: "{{ celery_work_dir }}"
+    state: directory
+    owner: celery
+    group: celery
+  become: yes
+  become_user: root
+
+- name: install celeryd and celerybeat init scripts
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/init.d/{{ item }}"
+    mode: 0755
+  with_items:
+    - celeryd
+    - celerybeat
+  become: yes
+  become_user: root
+
+- name: install celeryd and celerybeat config files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/default/{{ item }}"
+  with_items:
+    - celeryd
+    - celerybeat
+  notify:
+    - start celeryd
+    - start celerybeat
+  become: yes
+  become_user: root

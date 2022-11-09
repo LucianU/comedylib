@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Comedylib - {{collection.name}} Profile &amp; Videos{% endblock %}
+{% block content %}
+{% load thumbnail %}
+    <div class="row">
+        <div class="col-xs-12 col-md-4 detail-sidebar">
+            <img src="{% thumbnail collection.picture 300x200 crop %}" alt="{{ collection.name }} image"/>
+            <h1>{{ collection.name }}</h1>
+            <p>{{ collection.description|truncatechars:200 }}</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Read more</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">{{ collection.name }}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p class="description-content">{{ collection.description }}</p>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            {% with relevant_links=collection.relevant_links.all %}
+                {% if relevant_links %}
+                    <div class="relevant-links">
+                        <h6>Relevant Links</h6>
+                        <ul>
+                            {% for link in relevant_links %}
+                                <li>
+                                    <a href="{{ link.url }}">{{ link.title }} </a>
+                                    <button onclick="location.href='{{ link.url }}'">Watch</button>      
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div> <!-- relevant-links -->
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="col-xs-12 col-md-8">
+             <ul class="bookmarks">
+                {% for video in videos %}
+                   <li class="collection-content collection-detail">
+                        <div class="row">
+                            <a href="{{ video.get_absolute_url }}" class="col-xs-12">
+                                <img src="{% thumbnail video.picture 142x110 crop %}" alt="Video image"/>
+                            </a>
+                            <div class="col-xs-12 info">
+                                <div class="play-name-content coll-name-content">
+                                    <a href="{{ video.get_absolute_url }}" title="{{ video.title}}">{{ video.title|truncatechars:45 }}</a>
+                                </div> 
+                                <div class="row details text-center">
+                                    <div class="col-xs-4">
+                                        <p>{{ video.duration }}</p> <span>Length</span>
+                                    </div>
+                                    <div class="col-xs-4 nviews">
+                                        <p>{{ video.views }}</p> <span>Views</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p>{{ video.rating }}%</p>
+                                        <span>Rating</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                 {% empty %}
+                    <li><div class="alert alert-warning">There are no video files yet.</div></li>
+                {% endfor %}
+            </ul>
+            <div class="detail-pagination">
+                {% include "pagination.html" %}
+            </div>
+        </div><!-- end videos-->
+        
+    </div>
+{% endblock %}

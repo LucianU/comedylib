@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+{% load compress %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    {% block meta %}
+        <meta charset="UTF-8">
+        <meta name="robots" content="index, follow" />
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="comedylib.com" />
+        <meta name="keywords" content="online comedy movies, stand up comedy online, watch comedy movies online, tv shows episodes online, comedy central stand up, comedians, comedy series, comedy movies, movie database, film, stars" />
+        <meta name="description" content="Comedylib.com - A Library of Comedy Videos" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico">
+    {% endblock %}
+        <title>{% block title %}Comedylib, a place where people meet to discover comedians, series and movies{% endblock %}</title>
+
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="pingback" href="http://www.comedylib.com">
+        <link rel="prefetch" href="http://www.comedylib.com">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.custom-scrollbar.css" rel="stylesheet" />
+        <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
+        <!--[if !IE 7]><style type="text/css">#page {display:table;height:100%}</style><![endif]-->
+    {% endcompress %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    {% compress js %}
+        <!--[if lt IE 9]>
+            <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.custom-scrollbar.js"></script>
+    {% endcompress %}
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38034418-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.type = 'text/javascript'; ga.async = true;
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+<body>
+    <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId: '222979954499652',
+                    status: true,
+                    cookie: true,
+                    xfbml: true
+                });
+            };
+            (function() {
+                if (document.getElementById('facebook-jssdk')) {return;}
+                var firstScriptElement = document.getElementsByTagName('script')[0];
+                var facebookJS = document.createElement('script'); 
+                facebookJS.id = 'facebook-jssdk';
+                facebookJS.src = '//connect.facebook.net/en_US/all.js';
+                firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+            }());
+        </script>
+    <div id="page">
+        <header id="masthead" class="site-header" role="banner">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="titlecontent" href="/"><img src="{{ STATIC_URL }}img/logo.png" alt="Comedylib logo" title="Comedylib.com - Online Comedy Videos Database"/></a>
+                </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url content:comedians %}">Comedians</a></li>
+                        <li><a href="{% url content:shows %}">Shows</a></li>
+                        <li><a href="{% url content:movies %}">Movies</a></li>
+                        <li class="end"><a href="{% url content:playlists %}">Playlists</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li>
+                            <div class="row">
+                                <div class="welcome visible-xs col-xs-6 col-xs-offset-3">
+                                {% if user.profile.picture %}
+                                    {% load thumbnail %}
+                                    <img src="{% thumbnail user.profile.picture 45x35 crop %}" alt="User image"/><p>Hi, <span class="username">{{ user.username }} </p>
+                                {% else %}
+                                    <img src="{{ STATIC_URL }}img/logo.jpg" alt="User default image"/><p>Hi, <span>{{ user.username }} </span></p>
+                                {% endif %}
+                                </div>
+                            </div>
+                             <div class="row visible-xs user-menu-xs">
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url own_home %}"><span class="glyphicon glyphicon-user"></span>Profile</a></div>
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url settings %}"><span class="glyphicon glyphicon-wrench"></span>Settings</a></div>
+                                <div class="col-xs-4"><a role="menuitem" tabindex="-1" href="{% url accounts_logout %}"class="logout"><span class="glyphicon glyphicon-log-out"></span>Log out</a></div>
+                            </div>
+                        </li>
+                        {% else %}
+                            <li class="visible-xs"><a id="login-btn" href="{% url accounts_login %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                    <div id="search">
+                        <form role="search" method="get" class="search-form" action="{% url haystack_search %}">
+                            {{ search_form.non_field_errors }}
+                            {% for field in search_form %}
+                                <div class="fieldWrapper">
+                                    {{ field.errors }}
+                                    <label>
+                                        <span class="screen-reader-text">Search for:</span>
+                                        <input type="search" class="search-field" placeholder="Search …" value="" name="q" id="id_q" title="Search for:">
+                                    </label>
+                                    </div>
+                            {% endfor %}
+                        </form>
+                    </div> <!--end search-->
+                    <ul class="nav navbar-nav navbar-right">
+                       {% if request.user.is_authenticated %}
+                        <li>
+                            <div class="welcome hidden-xs">
+                                <a href="#" id="dropdownMenu" data-toggle="dropdown">
+                                    <div>
+                                        {% if user.profile.picture %}
+                                            {% load thumbnail %}
+                                            <img src="{% thumbnail user.profile.picture 45x35 crop %}"><p>Hi, <span class="username">{{ user.username }} </span><b class="caret"></b></p>
+                                        {% else %}
+                                            <img src="{{ STATIC_URL }}img/logo.jpg"><p>Hi, <span>{{ user.username }} </span><b class="caret"></b></p>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url own_home %}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url settings %}"><span class="glyphicon glyphicon-wrench"></span>Settings</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url accounts_logout %}"><span class="glyphicon glyphicon-log-out"></span>Log out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li>
+                            <div class="welcome hidden-xs">
+                                <a id="login-btn" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                                <ul class="dropdown-menu keep_open">
+                                    {% include "registration/logindrop.html" %}
+                                </ul>
+                            </div>
+                        </li>
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $(document).on('click', '.dropdown-menu', function (e) {
+                                    $(this).hasClass('keep_open') && e.stopPropagation(); // This replace if conditional.
+                                }); 
+                            });
+                        </script>
+                        {% endif %}
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+            <div class="bread-container">
+                <ol class="breadcrumb">
+                    {% for breadcrumb in request.breadcrumbs %}
+                        {% if not forloop.last %}
+                            <li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a></li>
+                        {% else %}
+                            <li class="active">{{ breadcrumb.name }}</li> 
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+        </header><!-- #masthead -->
+        <main id="content" class="site-main" role="main">
+            {% block content %}
+            {% endblock %}
+        </main><!-- #main -->
+    </div><!-- #page -->
+    <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+            <ul class="navfooter">
+                <li><a href="{% url flatpages:about %}">About</a></li>
+                <li><a href="{% url flatpages:terms %}">Terms</a></li>
+                <li><a href="{% url flatpages:privacy %}">Privacy</a></li>
+                <li><a href="{% url contact_form %}">Send Feedback</a></li>
+                <li><a href="{% url flatpages:ads %}">Advertising</a></li>
+            </ul>   
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+    {% block js %}
+            <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+            {% compress js %}
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.expander.js" ></script> 
+            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+            <script type="text/javascript">
+                var csrftoken = $.cookie('csrftoken');
+                function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+                $.ajaxSetup({
+                    crossDomain: false, // obviates need for sameOrigin test
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type)) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+            </script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+                /// CLOSE login MENU 
+                  var loginmenuclosed = true;
+                  function closeLoginMenu() { 
+                      $('.dropdown-login').animate({ left: '-90%' }, 0 );
+                      loginmenuclosed = true;
+                  }
+                  $('a.navbarbutton').click(function(e) { 
+                         if(loginmenuclosed) {
+                         $('.dropdown-login').css('left','0');
+                         $('.container').css({'left':'90%', 'position':'absolute'});
+                         loginmenuclosed = false;
+                         }else{
+                         $('.dropdown-login').css('left','-90%');
+                         $('.container').css({'left': '0', 'position':'auto'});
+                         loginmenuclosed = true;
+                         }
+                         e.preventDefault();
+                      });
+                      $('.container').click(function(){
+                        if(!loginmenuclosed) {
+                          $('.dropdown-login').css('left','-90%');
+                          loginmenuclosed = true;
+                           $('.container').css({'left': '0', 'position':'auto'});
+                        }
+                      });
+                });
+            </script>
+            {% block extra_js %}{% endblock %}
+            {% endcompress %}
+        {% endblock %}
+
+</body>
+</html>

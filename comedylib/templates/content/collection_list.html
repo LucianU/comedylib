@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Comedy Library: {{ collection_list.0.get_role_display|title }}s | Comedylib{% endblock %}
+{% block content %}
+{% load thumbnail %}
+<div class="row" id="coll-container">
+    <a href="#" class="categ-btn">Categories</a>
+    <div class="col-xs-12 col-md-3 tags">
+        <nav class="navbar navbar-default navbar-categ" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle categories</span>
+                    <span>Categories</span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <h1 class="hidden-xs">Categories</h1>
+                <form action="." method="get" >
+                    <fieldset id="actions"> 
+                        <input type="submit" id="filter" value="Filter" class="tag-filter visible-xs">
+                    </fieldset>
+                    <fieldset id="inputs"> 
+                        {{ categs_form.as_p}}
+                    </fieldset>
+                    <fieldset id="actions"> 
+                        <input type="submit" id="filter" value="Filter" class="tag-filter">
+                    </fieldset>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <ul class="collection-list">
+            {% for collection in collection_list %}
+            <li class="collection-item">
+                <a href="{{ collection.get_absolute_url }}" title="{{ collection.name}}">
+                    <img src="{% thumbnail collection.picture 167x211 crop %}" alt="{{ collection.name}} image"/>
+                    <div class="collection-item-info">
+                        <p class="name">{{ collection.name|truncatechars:50 }}</p>
+                        {% with videos=collection.videos.count %}
+                        <p class="plural">{{ videos }} video{{ videos|pluralize }}</p>
+                        {% endwith %}
+                        <p>{{ collection.rating }} % out of {{collection.votes}} votes</p>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+            <li class="album-pagination">
+                {% include "pagination.html" %}
+            </li>    
+        </ul>
+    </div>
+</div>
+{% endblock %}

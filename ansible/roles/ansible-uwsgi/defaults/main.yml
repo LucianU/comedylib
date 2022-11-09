@@ -1,0 +1,4 @@
+---
+uwsgi_app_config: uwsgi.ini.j2
+uwsgi_module: "{{ uwsgi_app_name }}.wsgi"
+uwsgi_socket: /run/uwsgi/app/{{ uwsgi_app_name }}/socket
