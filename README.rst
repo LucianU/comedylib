@@ -8,6 +8,7 @@ appear here.
 This is a Django site that run in production for several years with no issues.
 
 It uses:
+
 - PostgreSQL as a database
 - Memcached for caching
 - Celery for asynchronous task processing
