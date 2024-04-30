@@ -5,9 +5,15 @@ decided to make the code public. Unfortunately, at the moment, I couldn't
 manage to convert the mercurial history to git, so the commits don't
 appear here.
 
-A kickass comedy library
+This is a Django site that run in production for several years with no issues.
 
-Dependencies
+It uses:
+- PostgreSQL as a database
+- Memcached for caching
+- Celery for asynchronous task processing
+
+
+Libs
 ============
 #. ubuntu 12.04
 
@@ -23,10 +29,3 @@ Dependencies
 #. libfreetype6-dev
 #. liblcms1-dev
 
-
-TODO
-====
-- Put in install and deployment instructions
-- Make sure pillow is installed with support for popular
-  image formats like JPEG.
-- Make some features for initial data useful in development
